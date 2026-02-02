@@ -1,410 +1,821 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
-  <script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-38169590-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-
-  <head>
-    <meta charset="utf-8">
-    <title>M-PAX&middot; Group</title>
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="" />
-    <meta name="keywords" content="Android, logbook, report, trainee, anaesthetics, consultant, anaesthetists" />
-
-    <!-- Le styles -->
-    <link href="./css/bootstrap.css" rel="stylesheet">
-    <link href="./css/bootstrap-responsive.css" rel="stylesheet">
+    <meta name="description" content="M-PAX Group - Professional medical apps and educational games for healthcare and children">
+    <meta name="keywords" content="medical apps, logbook, anaesthetics, ICU, educational games, Log4AS, LogICU, Yuppy, TouchTouch">
+    <title>M-PAX Group | Medical Apps & Educational Games</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* GLOBAL STYLES
-    -------------------------------------------------- */
-    /* Padding below the footer and lighter body text */
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2563eb;
+            --accent-color: #3b82f6;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
 
-    body {
-      padding-bottom: 40px;
-      color: #5a5a5a;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
 
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
 
-    /* CUSTOMIZE THE NAVBAR
-    -------------------------------------------------- */
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
 
-    /* Special class on .container surrounding .navbar, used for positioning it into place. */
-    .navbar-wrapper {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 10;
-      margin-top: 20px;
-      margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
-    }
-    .navbar-wrapper .navbar {
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
 
-    }
+        .logo span {
+            color: var(--secondary-color);
+        }
 
-    /* Remove border and change up box shadow for more contrast */
-    .navbar .navbar-inner {
-      border: 0;
-      -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.25);
-         -moz-box-shadow: 0 2px 10px rgba(0,0,0,.25);
-              box-shadow: 0 2px 10px rgba(0,0,0,.25);
-    }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
 
-    /* Downsize the brand/project name a bit */
-    .navbar .brand {
-      padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
-      font-size: 16px;
-      font-weight: bold;
-      text-shadow: 0 -1px 0 rgba(0,0,0,.5);
-    }
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+            position: relative;
+        }
 
-    /* Navbar links: increase padding for taller navbar */
-    .navbar .nav > li > a {
-      padding: 15px 20px;
-    }
+        .nav-menu a:hover {
+            color: var(--secondary-color);
+        }
 
-    /* Offset the responsive button for proper vertical alignment */
-    .navbar .btn-navbar {
-      margin-top: 10px;
-    }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: width 0.2s ease;
+        }
 
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
 
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
 
-    /* CUSTOMIZE THE NAVBAR
-    -------------------------------------------------- */
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #dbeafe 100%);
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
 
-    /* Carousel base class */
-    .carousel {
-      margin-bottom: 60px;
-    }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233b82f6' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
 
-    .carousel .container {
-      position: relative;
-      z-index: 9;
-    }
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
 
-    .carousel-control {
-      height: 80px;
-      margin-top: 0;
-      font-size: 120px;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4);
-      background-color: transparent;
-      border: 0;
-    }
+        .hero-icon {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 2rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+        }
 
-    .carousel .item {
-      height: 500px;
-    }
-    .carousel img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      height: 500px;
-    }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+            line-height: 1.2;
+        }
 
-    .carousel-caption {
-      background-color: transparent;
-      position: static;
-      max-width: 550px;
-      padding: 0 20px;
-      margin-top: 200px;
-    }
-    .carousel-caption h1,
-    .carousel-caption .lead {
-      margin: 0;
-      line-height: 1.25;
-      color: #fff;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4);
-    }
-    .carousel-caption .btn {
-      margin-top: 10px;
-    }
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
+        .hero-cta {
+            display: inline-flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-    /* MARKETING CONTENT
-    -------------------------------------------------- */
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+            box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39);
+        }
 
-    /* Center align the text within the three columns below the carousel */
-    .marketing .span4 {
-      text-align: center;
-    }
-    .marketing h2 {
-      font-weight: normal;
-    }
-    .marketing .span4 p {
-      margin-left: 10px;
-      margin-right: 10px;
-    }
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.23);
+        }
 
+        .btn-secondary {
+            background: white;
+            color: var(--text-dark);
+            border: 2px solid var(--border-color);
+        }
 
-    /* Featurettes
-    ------------------------- */
+        .btn-secondary:hover {
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
 
-    .featurette-divider {
-      margin: 60px 0; /* Space out the Bootstrap <hr> more */
-    }
-    .featurette {
-      padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
-      overflow: hidden; /* Vertically center images part 2: clear their floats. */
-    }
-    .featurette-image {
-      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
-    }
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+        }
 
-    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
-    .featurette-image.pull-left {
-      margin-right: 40px;
-    }
-    .featurette-image.pull-right {
-      margin-left: 40px;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    /* Thin out the marketing headings */
-    .featurette-heading {
-      font-size: 50px;
-      font-weight: 300;
-      line-height: 1;
-      letter-spacing: -1px;
-    }
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
 
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
 
+        .section-header p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-    /* RESPONSIVE CSS
-    -------------------------------------------------- */
+        /* Apps Grid */
+        .apps-section {
+            background: var(--bg-white);
+        }
 
-    @media (max-width: 979px) {
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
 
-      .container.navbar-wrapper {
-        margin-bottom: 0;
-        width: auto;
-      }
-      .navbar-inner {
-        border-radius: 0;
-        margin: -20px 0;
-      }
+        .app-card {
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
 
-      .carousel .item {
-        height: 500px;
-      }
-      .carousel img {
-        width: auto;
-        height: 500px;
-      }
+        .app-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
 
-      .featurette {
-        height: auto;
-        padding: 0;
-      }
-      .featurette-image.pull-left,
-      .featurette-image.pull-right {
-        display: block;
-        float: none;
-        max-width: 40%;
-        margin: 0 auto 20px;
-      }
-    }
+        .app-card-content {
+            padding: 1.5rem;
+        }
 
+        .app-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
 
-    @media (max-width: 767px) {
+        .app-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+        }
 
-      .navbar-inner {
-        margin: -20px;
-      }
+        .app-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 0;
+        }
 
-      .carousel {
-        margin-left: -20px;
-        margin-right: -20px;
-      }
-      .carousel .container {
+        .app-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
 
-      }
-      .carousel .item {
-        height: 300px;
-      }
-      .carousel img {
-        height: 300px;
-      }
-      .carousel-caption {
-        width: 65%;
-        padding: 0 70px;
-        margin-top: 100px;
-      }
-      .carousel-caption h1 {
-        font-size: 30px;
-      }
-      .carousel-caption .lead,
-      .carousel-caption .btn {
-        font-size: 18px;
-      }
+        .app-card-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
 
-      .marketing .span4 + .span4 {
-        margin-top: 40px;
-      }
+        .tag {
+            padding: 0.25rem 0.75rem;
+            background: #dbeafe;
+            color: var(--secondary-color);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
 
-      .featurette-heading {
-        font-size: 30px;
-      }
-      .featurette .lead {
-        font-size: 18px;
-        line-height: 1.5;
-      }
+        .app-card-links {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
 
-    }
+        .app-link {
+            padding: 0.5rem 1rem;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .app-link:hover {
+            background: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+
+        /* Features Section */
+        .features-section {
+            background: var(--bg-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* About Section */
+        .about-section {
+            background: var(--bg-white);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .stat-item h4 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #94a3b8;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        .back-to-top {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .back-to-top:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--border-color);
+                box-shadow: var(--shadow-md);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Utility Classes */
+        .hidden {
+            opacity: 0;
+        }
     </style>
-
-
-    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
-    <link href="./css/app.css" rel="stylesheet" type="text/css">
-    <link href="./css/stylesheet.css" rel="stylesheet" type="text/css"> 
-    <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="./css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
-    <link href="./css/styles.css" rel="stylesheet" type="text/css">
-    <link href="./css/media-queries.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="./css/jquery.fancybox-1.3.4.css" media="screen">
-
-
-    <script type="text/javascript">var switchTo5x=true;</script>
-    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-    <script type="text/javascript">stLight.options({publisher: "57fb8661-61b6-49cf-a824-046103e8ccda", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
-
-  </head>
-
-  <body>
-
-      <!-- TOP MENU NAVIGATION -->
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-    
-        <a class="brand pull-left" href="index.html">
-        M-PAX
-        </a>
-    
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-      
-        <div class="nav-collapse collapse">
-          <ul id="nav-list" class="nav pull-right">
-            <li class="active"><a href="#home">Home</a></li>
-             <li><a href="#log4as">Log4AS</a></li>
-             <li><a href="#logicu">LogICU</a></li>
-             <li><a href="#yuppy">Yuppy</a></li>
-             <li><a href="#touchtouch">Touch</a></li>
-             <li><a href="mailto:contact@m-pax.net">Contact</a></li>
-            <li><a href="#about">About</a></li>
-          </ul>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">M<span>-</span>PAX</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#apps">Apps</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="mailto:contact@m-pax.net">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
         </div>
-      
-      </div>
-    </div>
-  </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <img src="./img/icon/mpax-blue.png" alt="M-PAX Logo" class="hero-icon">
+            <h1>M-PAX Group</h1>
+            <p class="hero-subtitle">Professional medical logbook applications designed for healthcare professionals in training. Trusted by doctors in hospitals across the UK and Australia.</p>
+            <div class="hero-cta">
+                <a href="#apps" class="btn btn-primary">Explore Our Apps</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
 
-    <div style="margin-top: 50px;">
-      <p align="center"> <img src="./img/icon/mpax-blue.png"> <p>
-    </div> 
+    <!-- Apps Section -->
+    <section class="apps-section" id="apps">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Applications</h2>
+                <p>Professional medical logbook applications designed for healthcare professionals in training</p>
+            </div>
+            
+            <div class="apps-grid">
+                <!-- Log4AS Card -->
+                <div class="app-card">
+                    <div class="app-card-content">
+                        <div class="app-card-header">
+                            <img src="./img/icon/log4as-icon-full.jpg" alt="Log4AS Icon" class="app-icon">
+                            <h3>Log4AS</h3>
+                        </div>
+                        <div class="app-card-tags">
+                            <span class="tag">Medical</span>
+                            <span class="tag">Android</span>
+                            <span class="tag">iOS</span>
+                        </div>
+                        <p>Professional logbook for anaesthetists. Track operations, resuscitation, and procedural data. Generate reports for trainees and consultants.</p>
+                        <div class="app-card-links">
+                            <a href="log4as.html" class="app-link">Android Version</a>
+                            <a href="ios-log4as.html" class="app-link">iOS Version</a>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- LogICU Card -->
+                <div class="app-card">
+                    <div class="app-card-content">
+                        <div class="app-card-header">
+                            <img src="./img/icon/logicu-icon-full.png" alt="LogICU Icon" class="app-icon">
+                            <h3>LogICU</h3>
+                        </div>
+                        <div class="app-card-tags">
+                            <span class="tag">Medical</span>
+                            <span class="tag">Android</span>
+                            <span class="tag">iOS</span>
+                        </div>
+                        <p>Comprehensive ICU logbook for intensive care training. Record patient data, support details, and procedures on your mobile device.</p>
+                        <div class="app-card-links">
+                            <a href="logicu.html" class="app-link">Android Version</a>
+                            <a href="ios-logicu.html" class="app-link">iOS Version</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Our Apps</h2>
+                <p>Built with healthcare professionals and families in mind</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <h3>Hospital Tested</h3>
+                    <p>All medical apps are rigorously tested by consultant doctors and trainees in multiple hospitals across the UK and Australia.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile First</h3>
+                    <p>Designed specifically for mobile devices with intuitive interfaces that work seamlessly on smartphones and tablets.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h3>Professional Reports</h3>
+                    <p>Generate required reports easily. Export and print data in formats accepted by medical training programs.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure & Private</h3>
+                    <p>Your data stays on your device. No cloud storage required. Full control over your medical records and information.</p>
+                </div>
+                
 
-    <div class="container marketing">
-      
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Regular Updates</h3>
+                    <p>Continuous improvements and updates based on user feedback and evolving medical training requirements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <!-- START THE FEATURETTES -->
-      <hr class="featurette-divider"> 
-      <div class="featurette" id="log4as">
-       <a href="log4as.html"> <img class="featurette-image pull-right" src="./img/icon/log4as-icon-full.jpg"> </a>
-       <a href="ios-log4as.html"> <img class="featurette-image pull-right" src="./img/icon/ios-log4as-icon-full.jpg"> </a>
-        <h2 class="featurette-heading"> <span class="muted">Log4AS: Logbook for Anaesthetists</span></h2>
-        <p class="lead">The Log4AS App has been designed to produce the reports for those training in anaesthetics and consultant anaesthetists. The App allows you to collect operation, resuscitation, and procedural data on your Android mobile device and to print the required reports. The App has been tested by consultant and trainee anaesthetics in several hospitals in the UK and Australia.</p>
-      </div>
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About M-PAX</h2>
+            </div>
+            
+            <div class="about-content">
+                <p>M-PAX Group specializes in developing professional applications for healthcare professionals and educational games for children. Our medical apps, including Log4AS and LogICU, are designed to simplify the documentation process for doctors in training.</p>
+                <p>With years of experience working closely with medical professionals in the UK and Australia, we understand the unique challenges faced by trainees and consultants. Our solutions are practical, user-friendly, and designed to meet real-world needs.</p>
 
-      <hr class="featurette-divider">
+                
 
-      <div class="featurette" id="logicu">
-        <a href="logicu.html"> <img class="featurette-image pull-left" src="./img/icon/logicu-icon-full.png"> </a>
-        <h2 class="featurette-heading"><a href="logicu.html">LogICU</a> <span class="muted">: Intensive Care Logbook</span></h2>
-        <p class="lead">The LogICU App has been designed to produce the reports for doctors training in Intensive Care Units (ICU). The App allows you to collect patient, support and procedural data on your Android mobile device and to print the required reports. The App has been tested by consultant and trainees in ICU in several hospitals in the UK and Australia.</p>
-      </div> 
-      <hr class="featurette-divider">
-       <div class="featurette" id="yuppy">
-        <a href="https://studietto.com/yuppy/educational-games-for-children"><img class="featurette-image pull-left" src="./img/icon/yuppy.png"> </a></a>
-        <h2 class="featurette-heading"><a href="https://studietto.com/yuppy/educational-games-for-children">Yuppy</a><span class="muted">: Games for 3+ year olds</span></h2>
-        <p class="lead">As a good parent, you want your children to play and have fun, but learn and grow as well. And maybe relax a bit while they do so, right? Yuppy is a collection of educational mini-games that combine all those things.</p>
-      </div> 
-      <hr class="featurette-divider">
+            </div>
+        </div>
+    </section>
 
-         <div class="featurette" id="touchtouch">
-        <a href="touchtouch.html"> <img class="featurette-image pull-left" src="./img/icon/touchtouch-icon-full.png"> </a>
-        <h2 class="featurette-heading"><a href="touchtouch.html">TouchTouch</a> <span class="muted">: Fun for infants</span></h2>
-        <p class="lead">TouchTouch provides an interactive way for babies and newborns with visual and auditory stimulation. With TouchTouch, you can calm or amuse your baby by animated object and sound effect. Meanwhile, your baby can enjoy the touch fun.</p>
-      </div> 
-      <hr class="featurette-divider">
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Medical Apps</h4>
+                <a href="log4as.html">Log4AS for Android</a>
+                <a href="ios-log4as.html">Log4AS for iOS</a>
+                <a href="logicu.html">LogICU for Android</a>
+                <a href="ios-logicu.html">LogICU for iOS</a>
+            </div>
+            
 
-      <!-- /END THE FEATURETTES -->
+            
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="support/privacy.html">Privacy Policy</a>
+                <a href="support/privacy-policy.html">Terms of Service</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <a href="mailto:contact@m-pax.net">contact@m-pax.net</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 M-PAX Group. All rights reserved.</p>
+            <a href="#" class="back-to-top">Back to Top ↑</a>
+        </div>
+    </footer>
 
-       <div align="center">
-          <span class='st_sharethis_hcount' displayText='ShareThis'></span>
-          <span class='st_facebook_hcount' displayText='Facebook'></span>
-          <span class='st_twitter_hcount' displayText='Tweet'></span>
-          <span class='st_googleplus_hcount' displayText='Google +'></span>
-          <span class='st_pinterest_hcount' displayText='Pinterest'></span>
-          <span class='st_email_hcount' displayText='Email'></span>
-      </div> 
-       
-      
-      <!-- FOOTER -->
-      <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2012-2019 M-PAX</p>
-      </footer>
-
-    </div><!-- /.container -->
-
-
-
-  <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./js/jquery.js"></script>
-    <script src="./js/bootstrap-transition.js"></script>
-    <script src="./js/bootstrap-alert.js"></script>
-    <script src="./js/bootstrap-modal.js"></script>
-    <script src="./js/bootstrap-dropdown.js"></script>
-    <script src="./js/bootstrap-scrollspy.js"></script>
-    <script src="./js/bootstrap-tab.js"></script>
-    <script src="./js/bootstrap-tooltip.js"></script>
-    <script src="./js/bootstrap-popover.js"></script>
-    <script src="./js/bootstrap-button.js"></script>
-    <script src="./js/bootstrap-collapse.js"></script>
-    <script src="./js/bootstrap-carousel.js"></script>
-    <script src="./js/bootstrap-typeahead.js"></script>
     <script>
-      !function ($) {
-        $(function(){
-          // carousel demo
-          $('#myCarousel').carousel()
-        })
-      }(window.jQuery)
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Close mobile menu when clicking a link
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    entry.target.classList.remove('hidden');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.app-card, .feature-item').forEach(el => {
+            el.classList.add('hidden');
+            observer.observe(el);
+        });
+
+        // Navbar background on scroll
+        const navbar = document.querySelector('.navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+            
+            lastScroll = currentScroll;
+        });
     </script>
-  </body>
+</body>
 </html>

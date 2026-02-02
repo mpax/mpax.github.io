@@ -1,250 +1,669 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8"/>
-	<meta name="apple-itunes-app" content="app-id=987244449"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Log4AS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-itunes-app" content="app-id=987244449">
+    <meta name="description" content="Log4AS - Professional logbook for anaesthetists on iOS">
+    <meta name="keywords" content="Log4AS, iOS, iPhone, logbook, anaesthetics, anaesthetist, medical app">
+    <title>Log4AS - Logbook for Anaesthetists | iOS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-	<style data-strip-on-export>
-	[contentEditable] {
-		outline: none;
-	}
-	#controls {
-		position: fixed;
-		padding: 10px;
-		top: 0px;
-		left: 0px;
-		right: 0px;
-		text-align: right;
-		z-index: 10;
-	}
-	#controls button {
-		appearance: none;
-		-webkit-appearance: none;
-		-moz-appearance: none;
-		-ms-appearance: none;
-		color: black;
-		background-color: white;
-		padding: 0.5em;
-		font-weight: bold;
-		border: none;
-		box-shadow: 0px 0px 3px gray;
-	}
-	#controls button:hover {
-		background-color: #eee;
-	}
-	</style>
-	
-	
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2563eb;
+            --accent-color: #3b82f6;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
 
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+        html {
+            scroll-behavior: smooth;
+        }
 
-<style>
-@import url(http://fonts.googleapis.com/css?family=Raleway);
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
 
-html, body, #content {
-	margin: 0px;
-	height: 100%;
-	font-family: sans-serif;
-	font-weight: lighter;
-	color: #79B5D8;
-	background-color: #f7f7f7;
-	text-align: center;
-	line-height: 1.4;
-}
-#splash {
-	height: 100%;
-	width: 100%;
-	display: table;
-	table-layout: fixed;
-	max-width: 700px;
-	margin: auto;
-	position: relative;
-}
-@media screen and (min-width: 700px) {
-	#splash > div {
-		display: table-cell;
-		vertical-align: middle;
-		padding: 1em;
-		height: 100%;
-	}
-	#splash #left {
-		text-align: right;
-	}
-	#splash #right {
-		text-align: left;
-	}
-	#splash .iphone {
-		width: 288px;
-		height: 576px;
-	}
-	#screenshots img {
-		max-width: 200px;
-	}
-	#like-container {
-		position: absolute;
-		top: 100%;
-		right: 20px;
-		margin-top: -50px;
-	}
-}
-#chevron {
-	position: absolute;
-	left: 50%;
-	top: 100%;
-	margin-top: -2em;
-	color: #5e7d9a;
-	opacity: 0.5;
-	margin-left: -0.5em;
-}
-@media screen and (max-width: 700px) {
-	#chevron {
-		display: none;
-	}
-	#splash .iphone {
-		width: 192px;
-		height: 384px;
-		display: inline-block;
-	}
-	#splash #left {
-		padding: 10px;
-	}
-	#screenshots img {
-		max-width: 100px;
-	}
-	#splash .appstore {
-		display: none;
-	}
-}
-img.appstore {
-	max-width: 140px;
-}
-.iphone {
-	background-size: contain;
-	position: relative;
-	width: 720px;
-	height: 1440px;
-}
-.iphone img {
-	position: absolute;
-	top: 17.9%;
-	left: 14%;
-	width: 73%;
-}
-h1, h2, h3, h4, h5, h6 {
-	font-family: "Raleway", sans-serif;
-	font-weight: normal;
-}
-#icon-row {
-	margin: 30px;
-	margin-top: 40px;
-	margin-bottom: 80px;
-	border-bottom: 1px solid rgba(0,0,0,0.3);
-	position: relative;
-}
-#icon-row #icon-container {
-	position: absolute;
-	width: 80px;
-	height: 80px;
-	left: 50%;
-	top: 50%;
-	margin-left: -50px;
-	margin-top: -50px;
-	border: 10px solid #f7f7f7;
-}
-#icon-row img {
-	width: 100%;
-	border-radius: 19px;
-	box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
-}
-#description {
-	margin: auto;
-	width: 90%;
-	max-width: 600px;
-}
-#screenshots {
-	margin-bottom: 2em;
-}
-#screenshots img {
-	border: 1px solid white;
-	box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
-	margin: 1em;
-}
-#description {
-	white-space: pre-wrap;
-}
-#stars {
-	text-align: center;
-	font-style: italic;
-	font-size: small;
-}
-#stars span {
-	display: block;
-	font-size: 30px;
-	font-style: normal;
-}
-#attribution {
-	font-size: small;
-	padding: 2em;
-}
-#attribution a {
-	color: #5e7d9a;
-}
-</style>
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
 
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
 
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: width 0.2s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: auto;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #dbeafe 100%);
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .features-list li::before {
+            content: '★';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: #dbeafe;
+            color: var(--secondary-color);
+            border-radius: 50%;
+            font-size: 0.875rem;
+        }
+
+        .download-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .app-store-btn img {
+            height: 50px;
+            transition: transform 0.2s ease;
+        }
+
+        .app-store-btn:hover img {
+            transform: scale(1.05);
+        }
+
+        .platform-note {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            background: white;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .platform-note a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+
+        /* Icon Section */
+        .icon-section {
+            background: var(--bg-white);
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .app-icon-large {
+            width: 120px;
+            height: 120px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Screenshots Section */
+        .screenshots-section {
+            background: var(--bg-light);
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .screenshot-item {
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .screenshot-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Description Section */
+        .description-section {
+            background: var(--bg-white);
+        }
+
+        .description-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .description-content p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-radius: var(--radius);
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .feature-text h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .feature-text p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        .back-to-top {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .back-to-top:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--border-color);
+                box-shadow: var(--shadow-md);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-content {
+                order: 2;
+                text-align: center;
+            }
+
+            .hero-image {
+                order: 1;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .screenshots-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .footer-content,
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .download-section {
+                justify-content: center;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-<div id='content'>
-<div id='chevron' class='fa fa-chevron-down'></div>
-<div id='splash'>
-	<div id='left'>
-		<h1>Log4AS</h1>
-		<p>Log4AS is a simple logbook for professional anaesthetists, which provides an intuitive user interface and key word suggestion for fast record entry.</p>
-		<a href="http://itunes.apple.com/app/log4as/id987244449?ls=1&mt=8&amp;uo=4">
-			<img class='appstore' src='./img/app-store.svg'>
-		</a>
-		<p>You can find the Android version <a href="log4as.html"> here </a>
-		<p><a href="mailto:contact@m-pax.net">Contact us with feedbacks and suggestions</a></p>
-	</div>
-	<div id='right'>
-		<div class='iphone'>
-			<img src='./img/ios-log4as/home.png'/>
-		</div>
-	</div>
-</div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">M<span>-</span>PAX</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#screenshots">Screenshots</a></li>
+                <li><a href="./support/ios-log4as.html">FAQ</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </nav>
 
-<div id='icon-row'>
-	<div id='icon-container'>
-		<img src='./img/icon/ios-log4as-icon-full.jpg'/>
-	</div>
-</div>
+    <!-- Hero Section -->
+    <section class="hero" id="overview">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Log4AS</h1>
+                <p class="hero-subtitle">Logbook for Anaesthetists</p>
+                <p class="hero-description">
+                    A simple and intuitive logbook for professional anaesthetists on iOS. Features keyword suggestions for fast record entry and captures all required information for your operations.
+                </p>
+                <ul class="features-list">
+                    <li>Intuitive data entry, view, and search</li>
+                    <li>Completed report and summary generation</li>
+                    <li>Easy import from other systems</li>
+                    <li>Easy local and online backup</li>
+                </ul>
+                <div class="download-section">
+                    <a href="http://itunes.apple.com/app/log4as/id987244449?ls=1&mt=8" class="app-store-btn" target="_blank">
+                        <img src="./img/app-store.svg" alt="Download on the App Store">
+                    </a>
+                    <div class="platform-note">
+                        Also available on <a href="log4as.html">Android</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="./img/ios-log4as/home.png" alt="Log4AS iOS App">
+            </div>
+        </div>
+    </section>
 
-<div id='screenshots'>
-		<img src='./img/ios-log4as/s-1.jpg'/>
-		<img src='./img/ios-log4as/s-2.jpg'/>
-		<img src='./img/ios-log4as/s-3.jpg'/>
-		<img src='./img/ios-log4as/s-4.jpg'/>
-</div>
-<p id='description'>
-Log4AS is a simple logbook, which provides an intuitive user interface and key word suggestion for fast record entry. It can capture all the required information in an operation and is helpful for professional anaesthetists worldwide. 
+    <!-- Icon Section -->
+    <section class="icon-section">
+        <div class="container">
+            <img src="./img/icon/ios-log4as-icon-full.jpg" alt="Log4AS App Icon" class="app-icon-large">
+        </div>
+    </section>
 
-★ Intuitive data entry, view, and search 
-★ Completed report/summary generation
-★ Easy import from other systems  
-★ Easy local and online backup </p>
+    <!-- Screenshots Section -->
+    <section class="screenshots-section" id="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2>Screenshots</h2>
+                <p>Explore the Log4AS iOS interface</p>
+            </div>
+            <div class="screenshots-grid">
+                <div class="screenshot-item">
+                    <img src="./img/ios-log4as/s-1.jpg" alt="Log4AS Screenshot 1">
+                </div>
+                <div class="screenshot-item">
+                    <img src="./img/ios-log4as/s-2.jpg" alt="Log4AS Screenshot 2">
+                </div>
+                <div class="screenshot-item">
+                    <img src="./img/ios-log4as/s-3.jpg" alt="Log4AS Screenshot 3">
+                </div>
+                <div class="screenshot-item">
+                    <img src="./img/ios-log4as/s-4.jpg" alt="Log4AS Screenshot 4">
+                </div>
+            </div>
+        </div>
+    </section>
 
-<p>
-	<a href='http://itunes.apple.com/app/log4as/id987244449?ls=1&mt=8&amp;uo=4'><img class='appstore' src='./img/app-store.svg' alt='Download on the Apple App Store'/></a>
-</p>
-<p>
-	<a href='./support/ios-log4as.html'><img class='appstore' src='./img/h-square.png' alt='FAQ'/></a>
-</p>
-<p id='copyright'>&copy; 2012-2016 <a href='https://m-pax.net'>M-PAX group </a> </p>
+    <!-- Description Section -->
+    <section class="description-section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Features</h2>
+                <p>Everything you need for professional record keeping</p>
+            </div>
+            <div class="description-content">
+                <p>Log4AS is a simple logbook that provides an intuitive user interface and keyword suggestion for fast record entry. It can capture all the required information in an operation and is helpful for professional anaesthetists worldwide.</p>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <span class="feature-icon">📱</span>
+                        <div class="feature-text">
+                            <h3>Intuitive Interface</h3>
+                            <p>Clean and easy-to-use design optimized for iOS</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🔍</span>
+                        <div class="feature-text">
+                            <h3>Smart Search</h3>
+                            <p>Quickly find records with powerful search capabilities</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📊</span>
+                        <div class="feature-text">
+                            <h3>Report Generation</h3>
+                            <p>Create comprehensive reports and summaries</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">☁️</span>
+                        <div class="feature-text">
+                            <h3>Cloud Backup</h3>
+                            <p>Secure local and online backup options</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 3rem;">
+                    <a href="http://itunes.apple.com/app/log4as/id987244449?ls=1&mt=8" class="app-store-btn" target="_blank">
+                        <img src="./img/app-store.svg" alt="Download on the App Store" style="height: 50px;">
+                    </a>
+                    <p style="margin-top: 1rem;">
+                        <a href="./support/ios-log4as.html" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--secondary-color); text-decoration: none; font-weight: 600;">
+                            <span style="font-size: 1.25rem;">❓</span> View FAQ
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-</div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="log4as.html">Android Version</a>
+                <a href="logicu.html">LogICU</a>
+                <a href="mailto:contact@m-pax.net">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 M-PAX Group. All rights reserved.</p>
+            <a href="#" class="back-to-top">Back to Top ↑</a>
+        </div>
+    </footer>
 
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Close mobile menu when clicking a link
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,80 +1,507 @@
-<!doctype html>
-<html lang="en" class="no-js">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LogICU FAQ - Frequently asked questions for LogICU iOS app">
+    <meta name="keywords" content="LogICU, iOS, FAQ, help, support, ICU, medical app">
+    <title>LogICU FAQ | M-PAX Support</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2563eb;
+            --accent-color: #3b82f6;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
 
-	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
-	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
-	<script src="js/modernizr.js"></script> <!-- Modernizr -->
-	<title>LogICU FAQ</title>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: width 0.2s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 3rem;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #dbeafe 100%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-category {
+            margin-bottom: 3rem;
+        }
+
+        .faq-category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--secondary-color);
+            display: inline-block;
+        }
+
+        .faq-item {
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: background 0.2s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-light);
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            transition: transform 0.2s ease;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .faq-answer-content ol {
+            margin-left: 1.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .faq-answer-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-answer-content a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .faq-answer-content a:hover {
+            text-decoration: underline;
+        }
+
+        /* Back Link */
+        .back-section {
+            padding: 2rem;
+            text-align: center;
+            background: var(--bg-white);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: var(--radius-sm);
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--border-color);
+                box-shadow: var(--shadow-md);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem 2rem;
+            }
+
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .faq-section {
+                padding: 2rem 1rem;
+            }
+
+            .faq-category-title {
+                font-size: 1.25rem;
+            }
+
+            .footer-content,
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-<header>
-	<h1>LogICU FAQ</h1>
-</header>
-<section class="cd-faq">
-	<ul class="cd-faq-categories">
-		<li><a class="selected" href="#basics">Import/Export</a></li>
-		<li><a href="#config">Configuration</a></li>
-	</ul> <!-- cd-faq-categories -->
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">M<span>-</span>PAX</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../logicu.html">LogICU Android</a></li>
+                <li><a href="mailto:contact@m-pax.net">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </nav>
 
-	<div class="cd-faq-items">
-		<ul id="basics" class="cd-faq-group">
-			<li class="cd-faq-title"><h2>Import/Export</h2></li>
-			<li>
-				<a class="cd-faq-trigger" href="#0">How do I import my backup record?</a>
-				<div class="cd-faq-content">
-					<p>
-						<ol>
-							<li>1. Send your backup CSV file to your iPhone through email. Right now, only LogICU backup CSV file support</li> 
-							<li>2. Click the CSV file and select Open in LogICU</li>
-							<li>3. When you import the record, you can select to keep or delete all the records already stored in the device</li>  
-						</ol>
-					</p>
-				</div> <!-- cd-faq-content -->
-			</li>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>LogICU FAQ</h1>
+        <p>Frequently asked questions and support information</p>
+    </section>
 
-			<li>
-				<a class="cd-faq-trigger" href="#0">How do I export my record?</a>
-				<div class="cd-faq-content">
-					<p>Go to Setting -> Export CSV via Email </p>
-				</div> <!-- cd-faq-content -->
-			</li>
-		</ul> <!-- cd-faq-group -->
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <!-- Import/Export Category -->
+        <div class="faq-category">
+            <h2 class="faq-category-title">Import / Export</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    How do I import my backup record?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <ol>
+                            <li>Send your backup CSV file to your iPhone through email. Right now, only LogICU backup CSV files are supported.</li>
+                            <li>Click the CSV file and select "Open in LogICU"</li>
+                            <li>When you import the record, you can select to keep or delete all the records already stored in the device</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
 
+            <div class="faq-item">
+                <div class="faq-question">
+                    How do I export my record?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Go to <strong>Settings → Export CSV via Email</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<ul id="config" class="cd-faq-group">
-			<li class="cd-faq-title"><h2>Configuration</h2></li>
-			<li>
-				<a class="cd-faq-trigger" href="#0">How do I configure the report header?</a>
-				<div class="cd-faq-content">
-					<p>Go to Setting -> User section: inpur your name, grade and trust</p>
-				</div> <!-- cd-faq-content -->
-			</li>
+        <!-- Configuration Category -->
+        <div class="faq-category">
+            <h2 class="faq-category-title">Configuration</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    How do I configure the report header?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Go to <strong>Settings → User section</strong>: input your name, grade and trust</p>
+                    </div>
+                </div>
+            </div>
 
-			<li>
-				<a class="cd-faq-trigger" href="#0">How do I configure the quick search?</a>
-				<div class="cd-faq-content">
-					<p>Go to Setting -> Search section: select the keyword you want to use for quick search. Right now, Involvement, Assessment, Diagnosis, Comments, Patient ID and Hospital ID are supported </p>
-				</div> <!-- cd-faq-content -->
-			</li>
+            <div class="faq-item">
+                <div class="faq-question">
+                    How do I configure the quick search?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Go to <strong>Settings → Search section</strong>: select the keyword you want to use for quick search. Right now, Involvement, Assessment, Diagnosis, Comments, Patient ID and Hospital ID are supported.</p>
+                    </div>
+                </div>
+            </div>
 
-			<li>
-				<a class="cd-faq-trigger" href="#0">How do I configure the keyword suggestion?</a>
-				<div class="cd-faq-content">
-					<p>Go to setting -> Data section: </p>
-				</div> <!-- cd-faq-content -->
-			</li>
-		</ul> <!-- cd-faq-group -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    How do I configure the keyword suggestion?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Go to <strong>Settings → Data section</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-	</div> <!-- cd-faq-items -->
-	<a href="#0" class="cd-close-panel">Close</a>
-</section> <!-- cd-faq -->
-<script src="js/jquery-2.1.1.js"></script>
-<script src="js/jquery.mobile.custom.min.js"></script>
-<script src="js/main.js"></script> <!-- Resource jQuery -->
+    <!-- Back Section -->
+    <section class="back-section">
+        <a href="../logicu.html" class="back-link">
+            ← Back to LogICU
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="../index.html">Home</a>
+                <a href="../logicu.html">LogICU</a>
+                <a href="../log4as.html">Log4AS</a>
+                <a href="mailto:contact@m-pax.net">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 M-PAX Group. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Close mobile menu when clicking a link
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+            });
+        });
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                // Close other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+    </script>
 </body>
 </html>
