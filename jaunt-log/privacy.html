@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Privacy Policy — Jaunt Log</title>
+<meta name="description" content="Privacy Policy for Jaunt Log — a local-first iPhone app. How your photos, location and journey data are handled.">
+<meta name="theme-color" content="#1B3A26">
+<link rel="canonical" href="https://m-pax.net/jaunt-log/privacy.html">
+<link rel="icon" type="image/png" sizes="32x32" href="images/branding/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/branding/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/branding/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Privacy Policy — Jaunt Log">
+<meta property="og:description" content="How Jaunt Log handles your data — local-first, no account, on-device processing.">
+<meta property="og:image" content="https://m-pax.net/jaunt-log/images/branding/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --forest:#1B3A26;--forest-deep:#0F2018;--moss:#3C5C37;
+  --brass:#C8A96E;--brass-soft:#E8D5B7;
+  --parchment:#F5F0E6;--parchment-warm:#EDE6D3;
+  --surface:#FFFFFF;--surface-2:#F9F6EF;
+  --ink:#1A241E;--ink-2:#5E6E62;--ink-3:#8A9A8E;
+  --border:#E0D9C4;--max:760px;
+}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--parchment);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--forest);text-underline-offset:3px}
+a:hover{color:var(--forest-deep)}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+@media(min-width:768px){.wrap{padding:0 32px}}
+.mono{font-family:"JetBrains Mono",monospace}
+nav{position:sticky;top:0;z-index:10;background:rgba(245,240,230,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:var(--max);margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+@media(min-width:768px){.nav-inner{padding:12px 32px}}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--forest)}
+.brand-mark{width:32px;height:32px;border-radius:9px;overflow:hidden;background:var(--forest);display:grid;place-items:center;flex-shrink:0}
+.brand-mark img{width:100%;height:100%;object-fit:cover}
+.brand-wordmark{font-family:"Instrument Serif",Georgia,serif;font-size:17px;letter-spacing:-.02em}
+.brand-wordmark span{font-style:italic;color:var(--moss)}
+.btn{font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);text-decoration:none;color:var(--forest);display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--forest);transform:translateY(-1px)}
+.btn-primary{background:var(--forest);color:#fff;border-color:var(--forest)}
+.btn-primary:hover{background:var(--forest-deep)}
+header{padding:40px 0 24px;border-bottom:1px solid var(--border)}
+h1{font-family:"Instrument Serif",Georgia,serif;font-size:36px;font-weight:400;letter-spacing:-.03em;color:var(--forest);line-height:1}
+h1 em{font-style:italic;color:var(--moss)}
+.subtitle{margin-top:10px;color:var(--ink-2);font-size:15px;max-width:60ch}
+.meta{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;color:var(--ink-3)}
+.meta span{background:var(--surface);border:1px solid var(--border);padding:5px 10px;border-radius:999px;font-weight:600;color:var(--forest)}
+.meta .plain{background:transparent;border:0;padding:0;color:var(--ink-3);font-family:"JetBrains Mono",monospace}
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px;margin:20px 0}
+.toc strong{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.toc ol{margin:8px 0 0 18px;font-size:13.5px;color:var(--ink-2);line-height:1.9}
+.toc a{color:var(--forest);text-decoration:none}
+.toc a:hover{text-decoration:underline}
+main{padding:32px 0 48px}
+h2{font-size:18px;font-weight:700;letter-spacing:-.01em;color:var(--forest);margin:32px 0 8px;padding-top:8px;border-top:1px solid var(--border)}
+h2:first-of-type{border-top:0;margin-top:8px}
+h3{font-size:14px;font-weight:700;color:var(--forest);margin:18px 0 6px}
+p,li{font-size:14.5px;color:var(--ink-2)}
+p{margin:8px 0}
+ul,ol{margin:8px 0 8px 20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;margin:16px 0}
+.card strong{color:var(--forest)}
+.note{font-size:12.5px;color:var(--ink-3);background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:12px;margin:12px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding:8px 10px;border-bottom:2px solid var(--border);background:var(--surface-2)}
+td{padding:10px;border-bottom:1px solid var(--border);color:var(--ink-2);vertical-align:top}
+td:first-child{font-weight:600;color:var(--forest);white-space:nowrap}
+footer{padding:28px 0;border-top:1px solid var(--border);font-size:12.5px;color:var(--ink-3);background:var(--surface)}
+.footer-links{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+.footer-links a{color:var(--ink-2);text-decoration:none}
+.footer-links a:hover{color:var(--forest)}
+</style>
+</head>
+<body>
+<nav aria-label="Primary">
+  <div class="nav-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <a href="../index.html" class="btn" aria-label="Back to M-PAX site">← M-PAX</a>
+      <a class="brand" href="index.html" aria-label="Jaunt Log home">
+        <span class="brand-mark"><img src="images/branding/icon.png" alt="" width="32" height="32" loading="eager"></span>
+        <span class="brand-wordmark">Jaunt <span>Log</span></span>
+      </a>
+    </div>
+    <a class="btn btn-primary" href="index.html">Back to Jaunt Log</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <p class="mono" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--moss);font-weight:700">Privacy Policy</p>
+    <h1>Your journeys <em>belong to you.</em></h1>
+    <p class="subtitle">Jaunt Log is a local-first iPhone app. This policy explains what data Jaunt Log processes, where it is stored, and your choices. It is intended for App Store review and for users.</p>
+    <div class="meta">
+      <span>Effective 31 August 2026</span>
+      <span>Version 1.0</span>
+      <span class="plain">Contact: <a href="mailto:contact@m-pax.net">contact@m-pax.net</a></span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="card" style="border-left:3px solid var(--forest)">
+      <strong>Summary</strong>
+      <p style="margin-top:6px">Jaunt Log does not require a Jaunt Log account and does not operate a central server that stores your personal location history, photos or journal notes. Your logbook is primarily stored on your device. Photos are analysed on-device where applicable, and an offline place catalogue is used so your coordinates do not need to be sent to a place-data provider to recognise a visit. This summary does not replace the details below.</p>
+    </div>
+
+    <nav class="toc" aria-label="Table of contents">
+      <strong>On this page</strong>
+      <ol>
+        <li><a href="#who">Who we are</a></li>
+        <li><a href="#overview">Overview &amp; scope</a></li>
+        <li><a href="#data-we-process">Information Jaunt Log processes</a></li>
+        <li><a href="#photos">Photos</a></li>
+        <li><a href="#location">Location</a></li>
+        <li><a href="#notifications">Notifications</a></li>
+        <li><a href="#storage">On-device storage &amp; offline catalogue</a></li>
+        <li><a href="#account">No account required</a></li>
+        <li><a href="#third-parties">Third-party services &amp; websites</a></li>
+        <li><a href="#sharing">Data sharing</a></li>
+        <li><a href="#retention">Retention &amp; deletion</a></li>
+        <li><a href="#legal-bases">Legal bases (UK / EEA)</a></li>
+        <li><a href="#children">Children</a></li>
+        <li><a href="#rights">Your rights</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#changes">Changes to this policy</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="who">1. Who we are</h2>
+    <p>Jaunt Log is published by M-PAX Group. For privacy enquiries, contact <a href="mailto:contact@m-pax.net">contact@m-pax.net</a>.</p>
+    <p class="note">Placeholder: replace with legal entity name and postal address before final publication if required for your jurisdiction.</p>
+
+    <h2 id="overview">2. Overview &amp; scope</h2>
+    <p>This policy describes how Jaunt Log handles information when you use the iOS app and when you visit this website. The app is local-first: core features work without a Jaunt Log backend. Some system services (e.g. map tiles, Apple platform services) may involve network requests as described below.</p>
+    <p>We do not make claims such as “we collect absolutely nothing” or “nothing ever leaves your device” unless that is literally true for every enabled feature. Where a feature may use the network, it is disclosed here and in the in-app Privacy screen, which should always be treated as the authoritative description for the shipped build.</p>
+
+    <h2 id="data-we-process">3. Information Jaunt Log processes</h2>
+    <p>Jaunt Log processes the following only to provide the features you choose to use:</p>
+    <table>
+      <thead><tr><th>Category</th><th>Examples</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>Visit &amp; journal data</td><td>Places visited, dates, notes, favourites</td><td>Build your personal logbook; show progress and history</td></tr>
+        <tr><td>Location</td><td>Coordinates used to match visits</td><td>Recognise places, support arrival notices (if enabled)</td></tr>
+        <tr><td>Photo metadata</td><td>Date, location embedded in your photos (where available)</td><td>Rediscover past visits from your existing library (on-device, optional)</td></tr>
+        <tr><td>App data</td><td>Preferences, discovery history</td><td>Remember your settings and what has been discovered</td></tr>
+      </tbody>
+    </table>
+    <p>All of the above is primarily stored on your device. See §7 and §10.</p>
+
+    <h2 id="photos">4. Photos</h2>
+    <p>If you grant Photo Library access, Jaunt Log can scan for photos that contain geographic information (date and location) to suggest past visits. Scanning is performed on-device via PhotoKit where applicable. Original photos remain in your Photos library; Jaunt Log does not need to upload your entire library to a Jaunt Log server to provide this feature, and it does not upload your images to a Jaunt Log server.</p>
+    <p>Jaunt Log uses only the minimum information necessary to associate a photo with a place — typically location and date/time. Access is optional. You can grant limited, full, or no access and change it anytime in <span class="mono">Settings → Privacy &amp; Security → Photos</span>. If you deny access, photo-based rediscovery is unavailable; the rest of the app still works.</p>
+    <p>Manage permission: <a href="https://support.apple.com/en-gb/guide/iphone/iph3d7e6c43a/ios" target="_blank" rel="noopener">Apple — Control access to your photos</a>.</p>
+
+    <h2 id="location">5. Location</h2>
+    <p>Location access is optional and used only to recognise places you visit and, if you enable them, to provide arrival notifications for places you choose to track. Jaunt Log is designed to recognise meaningful visits rather than maintain an unnecessary record of every movement.</p>
+    <h3>Permission choices</h3>
+    <ul>
+      <li><strong>Never / Off</strong> — visits are not recognised automatically; manual logging and photo discovery still work.</li>
+      <li><strong>While Using the App</strong> (recommended) — recognised while you use Jaunt Log.</li>
+      <li><strong>Always</strong> — only needed for optional background arrival notifications when the app isn’t open; not always required.</li>
+    </ul>
+    <p>Change anytime in <span class="mono">Settings → Privacy &amp; Security → Location Services → Jaunt Log</span>. See <a href="https://support.apple.com/en-gb/guide/iphone/iph3dd5f9be/ios" target="_blank" rel="noopener">Apple — Location controls</a>.</p>
+
+    <h2 id="notifications">6. Notifications</h2>
+    <p>If you enable notifications, Jaunt Log may send local iOS notifications when you arrive at a place you’ve chosen. These are generated on your device and are not a mechanism for sending your location to a Jaunt Log server. Disable in <span class="mono">Settings → Notifications → Jaunt Log</span>.</p>
+
+    <h2 id="storage">7. On-device storage &amp; offline catalogue</h2>
+    <p>Your journal — visits, notes, favourites and progress — is stored locally on your device using SwiftData and a local spatial index (SQLite / R-Tree). No Jaunt Log backend is required for core use.</p>
+    <p>Jaunt Log includes a bundled offline catalogue of places and geographic boundaries (which may be derived from open/public datasets such as OpenStreetMap, Wikidata and UK government open geographic data). Matching a coordinate to a place happens on your device, so your location does not need to be sent to those data providers simply because Jaunt Log uses their public data.</p>
+    <p>Map imagery (MapKit tiles) and some place-detail links, if loaded, may require network requests to Apple or to the linked website. Those requests are governed by the respective provider’s privacy policy.</p>
+
+    <h2 id="account">8. No account required</h2>
+    <p>Jaunt Log does not require you to create a Jaunt Log account or social profile. There is no Jaunt Log-hosted profile containing your location history or photo library.</p>
+
+    <h2 id="third-parties">9. Third-party services &amp; websites</h2>
+    <h3>Apple platform services</h3>
+    <p>Jaunt Log uses Apple frameworks: PhotoKit, Core Location, MapKit and SwiftData. Their use is subject to Apple’s privacy policy and your device settings.</p>
+    <h3>Place data sources</h3>
+    <p>The offline catalogue may include data from:</p>
+    <ul>
+      <li><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> © OpenStreetMap contributors, <a href="https://opendatacommons.org/licenses/odbl/" target="_blank" rel="noopener">ODbL</a></li>
+      <li>Wikidata (CC0)</li>
+      <li>UK government open geographic data (Open Government Licence where applicable)</li>
+    </ul>
+    <p>We use plain text attribution and do not reproduce trademarked logos without permission. These datasets describe public geography; they do not receive your personal journey data.</p>
+    <h3>Websites you choose to open</h3>
+    <p>If you tap a link to an official place website, Jaunt Log opens it in Apple’s browser (SafariViewController). That site has its own privacy policy. Jaunt Log does not control third-party sites.</p>
+
+    <h2 id="sharing">10. Data sharing</h2>
+    <p>We do not sell your location history, photographs or journal to third parties and we do not build advertising profiles from your journeys.</p>
+    <p>We share data only as follows:</p>
+    <ul>
+      <li><strong>On your device</strong> — processing stays local wherever possible.</li>
+      <li><strong>With service providers you interact with via the OS</strong> — e.g. Apple (MapKit tiles, PhotoKit, Core Location) as governed by Apple and your settings.</li>
+      <li><strong>With websites you explicitly choose to visit</strong> — subject to their policies.</li>
+      <li><strong>As required by law</strong> — if legally obliged.</li>
+    </ul>
+
+    <h2 id="retention">11. Retention &amp; deletion</h2>
+    <p>Your logbook is retained on your device until you delete it:</p>
+    <ul>
+      <li>Delete a single visit, note or saved place in the app.</li>
+      <li>Clear imported/discovered records in Settings.</li>
+      <li>Delete all local Jaunt Log data via in-app Settings, or by deleting the app (which removes its local container on that device).</li>
+    </ul>
+    <p>We cannot delete data from systems we do not control (e.g. a third-party website you visited). Have the final wording reviewed against the shipped build before publication.</p>
+
+    <h2 id="legal-bases">12. Legal bases (UK / EEA)</h2>
+    <p>Where UK GDPR / EU GDPR applies, we process on-device journal data to perform the contract (provide the app you requested) and on the basis of your consent where you grant optional permissions (Photos, Location, Notifications). You may withdraw consent by changing the permission in iOS Settings; this does not affect prior processing.</p>
+
+    <h2 id="children">13. Children</h2>
+    <p>Jaunt Log does not knowingly collect personal information from children for advertising or profiling and does not use location for ads. If a child uses the app on a family device, the same local-first protections apply. Guardians should use Apple’s Screen Time and Family Sharing controls. Ensure the App Store age rating is appropriate and have this section legally reviewed.</p>
+
+    <h2 id="rights">14. Your rights</h2>
+    <p>Depending on your jurisdiction, you may have rights to access, correct, delete or restrict processing of your information, and to object or withdraw consent. Because your journal is primarily on your device, you can directly access and delete it in the app. To exercise other rights, contact <a href="mailto:contact@m-pax.net">contact@m-pax.net</a>.</p>
+    <p>UK users may also lodge a complaint with the <a href="https://ico.org.uk/" target="_blank" rel="noopener">Information Commissioner’s Office (ICO)</a>.</p>
+
+    <h2 id="security">15. Security</h2>
+    <p>We design Jaunt Log to minimise collection and to keep processing on-device. No method is 100% secure. We avoid claims such as “100% secure” and instead describe the actual measures: local storage, OS-controlled permissions, and use of Apple’s platform security.</p>
+
+    <h2 id="changes">16. Changes to this policy</h2>
+    <p>We may update this policy to reflect app changes or legal requirements. The “Effective” date at the top will be updated and, where appropriate, we will note changes in release notes or in-app.</p>
+
+    <h2 id="contact">17. Contact</h2>
+    <p>Questions or requests: <a href="mailto:contact@m-pax.net">contact@m-pax.net</a></p>
+    <p class="note">This page is a product privacy policy and does not constitute legal advice. Have it reviewed by qualified counsel for the jurisdictions where Jaunt Log is distributed, including UK GDPR if offered in the UK.</p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center">
+      <span>© 2026 Jaunt Log • <a href="index.html">Jaunt Log Home</a> • <a href="../index.html">M-PAX Home</a></span>
+      <span><a href="index.html">Back to Jaunt Log ↑</a></span>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="index.html#explore">Explore</a>
+      <a href="mailto:contact@m-pax.net">contact@m-pax.net</a>
+    </div>
+    <p style="margin-top:12px">App Store privacy link: <span class="mono">https://m-pax.net/jaunt-log/privacy.html</span> — use this URL in App Store Connect → Privacy Policy.</p>
+  </div>
+</footer>
+</body>
+</html>

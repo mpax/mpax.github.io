@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Jaunt Log — Explore Outside. Record the Journey.</title>
+<meta name="description" content="Jaunt Log is your personal outdoor journey log for discovering, recording and remembering the places you've explored. For iPhone.">
+<meta name="keywords" content="Jaunt Log, outdoor, hiking, heritage, National Parks, travel journal, map, iPhone app">
+<meta name="author" content="Jaunt Log">
+<meta name="theme-color" content="#1B3A26">
+<link rel="canonical" href="https://m-pax.net/jaunt-log/">
+<link rel="icon" type="image/png" sizes="32x32" href="images/branding/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/branding/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/branding/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m-pax.net/jaunt-log/">
+<meta property="og:title" content="Jaunt Log — Explore Outside. Record the Journey.">
+<meta property="og:description" content="A personal logbook for the places you've explored. Discover, record and remember — on iPhone.">
+<meta property="og:image" content="https://m-pax.net/jaunt-log/images/branding/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jaunt Log — Explore Outside. Record the Journey.">
+<meta name="twitter:description" content="A personal logbook for the places you've explored. Your adventures, mapped.">
+<meta name="twitter:image" content="https://m-pax.net/jaunt-log/images/branding/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --forest:#1B3A26;
+  --forest-deep:#0F2018;
+  --forest-2:#2D4A32;
+  --moss:#3C5C37;
+  --moss-muted:#6B8C6B;
+  --sage:#9CAF88;
+  --sage-light:#E6EBD8;
+  --brass:#C8A96E;
+  --brass-strong:#B9945B;
+  --brass-soft:#E8D5B7;
+  --parchment:#F5F0E6;
+  --parchment-warm:#EDE6D3;
+  --parchment-deep:#E8E0C8;
+  --surface:#FFFFFF;
+  --surface-2:#F9F6EF;
+  --ink:#1A241E;
+  --ink-2:#5E6E62;
+  --ink-3:#8A9A8E;
+  --border:#E0D9C4;
+  --border-strong:#D4CAB0;
+  --radius-sm:12px;
+  --radius:20px;
+  --radius-lg:28px;
+  --radius-pill:999px;
+  --shadow-sm:0 1px 3px rgba(27,58,38,.08),0 1px 2px rgba(27,58,38,.06);
+  --shadow:0 8px 24px rgba(27,58,38,.08),0 4px 8px rgba(27,58,38,.06);
+  --shadow-lg:0 24px 48px rgba(15,32,24,.14),0 12px 24px rgba(15,32,24,.08);
+  --max:1160px;
+  --nav-h:68px;
+}
+html{scroll-behavior:smooth;scrollbar-gutter:stable}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{
+  font-family:Inter, -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+  color:var(--ink);
+  background:var(--parchment);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{color:inherit}
+img{max-width:100%;display:block}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--brass-strong);outline-offset:3px}
+.skip{
+  position:absolute;left:-9999px;top:12px;z-index:9999;
+  background:var(--forest);color:#fff;padding:10px 16px;border-radius:8px;font-weight:600
+}
+.skip:focus{left:12px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.mono{font-family:"JetBrains Mono", ui-monospace, monospace}
+.serif{font-family:"Instrument Serif", Georgia, serif}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+@media(min-width:768px){.wrap{padding:0 32px}}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--moss);background:rgba(60,92,55,.08);
+  border:1px solid rgba(60,92,55,.12);padding:6px 10px;border-radius:999px
+}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--moss)}
+.display{
+  font-family:"Instrument Serif", Georgia, serif;
+  font-weight:400;line-height:.95;letter-spacing:-.03em;
+}
+.dots{
+  display:inline-block;width:4px;height:4px;background:var(--brass);border-radius:50%;margin:0 6px;vertical-align:middle;transform:translateY(-1px)
+}
+
+nav{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  height:var(--nav-h);
+  background:rgba(245,240,230,.84);
+  backdrop-filter:blur(16px) saturate(1.2);
+  -webkit-backdrop-filter:blur(16px) saturate(1.2);
+  border-bottom:1px solid rgba(224,217,196,.7);
+  transition:height .2s, background .2s, box-shadow .2s;
+}
+nav.scrolled{height:60px;background:rgba(255,255,255,.92);box-shadow:0 1px 0 rgba(27,58,38,.06),0 4px 16px rgba(27,58,38,.06)}
+.nav-inner{max-width:var(--max);margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+@media(min-width:768px){.nav-inner{padding:0 32px}}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand-mark{
+  width:36px;height:36px;border-radius:10px;overflow:hidden;
+  box-shadow:0 2px 8px rgba(27,58,38,.18);flex-shrink:0;background:var(--forest);
+  display:grid;place-items:center;
+}
+.brand-mark img{width:100%;height:100%;object-fit:cover}
+.brand-wordmark{
+  font-family:"Instrument Serif", Georgia, serif;
+  font-size:19px;letter-spacing:-.02em;line-height:1;color:var(--forest);font-weight:400
+}
+.brand-wordmark span{font-style:italic;font-weight:400;color:var(--moss)}
+.nav-links{display:none;align-items:center;gap:28px;list-style:none}
+@media(min-width:860px){.nav-links{display:flex}}
+.nav-links a{
+  text-decoration:none;font-size:13.5px;font-weight:500;
+  color:var(--ink-2);letter-spacing:.01em;position:relative;padding:4px 0
+}
+.nav-links a:hover{color:var(--forest)}
+.nav-links a::after{
+  content:"";position:absolute;left:0;right:0;bottom:-4px;height:1.5px;
+  background:var(--forest);transform:scaleX(0);transform-origin:left;transition:transform .2s
+}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{display:flex;align-items:center;gap:12px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-size:14px;font-weight:600;letter-spacing:.01em;
+  padding:11px 18px;border-radius:999px;text-decoration:none;
+  border:1px solid transparent;cursor:pointer;white-space:nowrap;
+  transition:transform .15s, box-shadow .15s, background .15s, color .15s, border-color .15s
+}
+.btn:active{transform:scale(.98)}
+.btn-primary{
+  background:var(--forest);color:#fff;
+  box-shadow:0 4px 14px rgba(27,58,38,.22);
+}
+.btn-primary:hover{background:var(--forest-deep);box-shadow:0 6px 20px rgba(27,58,38,.28);transform:translateY(-1px)}
+.btn-secondary{
+  background:var(--surface);color:var(--forest);
+  border-color:var(--border);box-shadow:var(--shadow-sm)
+}
+.btn-secondary:hover{border-color:var(--border-strong);transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn-ghost{background:transparent;color:var(--forest);border-color:rgba(27,58,38,.14)}
+.btn-ghost:hover{background:rgba(27,58,38,.06)}
+.btn-sm{padding:8px 14px;font-size:13px}
+.app-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:#000;color:#fff;border-radius:10px;padding:8px 14px 8px 12px;
+  text-decoration:none;line-height:1;transition:transform .15s, opacity .15s
+}
+.app-badge:hover{transform:translateY(-1px);opacity:.92}
+.app-badge small{font-size:9px;letter-spacing:.06em;text-transform:uppercase;opacity:.8;font-weight:500}
+.app-badge strong{font-size:15px;font-weight:600;letter-spacing:-.02em}
+.mobile-toggle{
+  display:grid;place-items:center;width:40px;height:40px;border-radius:999px;
+  border:1px solid var(--border);background:var(--surface);color:var(--forest);cursor:pointer
+}
+@media(min-width:860px){.mobile-toggle{display:none}}
+.mobile-panel{
+  display:none;position:fixed;inset:var(--nav-h) 0 auto 0;
+  background:rgba(255,255,255,.98);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);padding:16px 24px 24px;z-index:49
+}
+.mobile-panel.open{display:block}
+.mobile-panel a{display:block;padding:14px 0;text-decoration:none;color:var(--ink);font-weight:500;border-bottom:1px solid var(--border)}
+.mobile-panel a:last-child{border-bottom:0}
+
+.hero{
+  position:relative;overflow:hidden;
+  background:var(--parchment);
+  padding:calc(var(--nav-h) + 36px) 0 48px;
+}
+@media(min-width:960px){.hero{padding:calc(var(--nav-h) + 56px) 0 72px}}
+.hero-bg{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+}
+.hero-bg svg{position:absolute;inset:0;width:100%;height:100%;opacity:.22}
+.hero-bg::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(800px 600px at 70% 20%, rgba(200,169,110,.14), transparent 60%),
+    radial-gradient(700px 500px at 10% 80%, rgba(60,92,55,.06), transparent 60%);
+}
+.hero-grid{
+  position:relative;z-index:1;
+  display:grid;gap:40px;align-items:center;
+}
+@media(min-width:960px){.hero-grid{grid-template-columns:1.05fr .95fr;gap:48px}}
+.hero-copy{max-width:560px}
+.hero h1{
+  font-family:"Instrument Serif", Georgia, serif;
+  font-size:clamp(38px, 6vw, 64px);
+  font-weight:400;line-height:.92;letter-spacing:-.04em;color:var(--forest);
+  margin:18px 0 16px;
+}
+.hero h1 em{font-style:italic;color:var(--moss);font-weight:400}
+.hero-lead{
+  font-size:clamp(16px, 2.2vw, 18px);
+  line-height:1.6;color:var(--ink-2);max-width:44ch;
+  margin-bottom:28px;
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:22px}
+.hero-meta{
+  display:flex;flex-wrap:wrap;gap:16px;align-items:center;
+  font-size:12.5px;color:var(--ink-3);border-top:1px solid var(--border);padding-top:18px;margin-top:4px
+}
+.hero-meta span{display:inline-flex;align-items:center;gap:6px}
+.hero-meta svg{opacity:.6}
+.hero-coord{
+  display:none;font-family:"JetBrains Mono", monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-top:18px;gap:16px
+}
+@media(min-width:960px){.hero-coord{display:flex}}
+.device-wrap{position:relative;display:grid;place-items:center;padding:12px}
+@media(min-width:960px){.device-wrap{padding:8px 0 8px 24px}}
+.device{
+  position:relative;width:min(320px, 86vw);aspect-ratio: 308/632;
+  background:#0B1510;border-radius:48px;padding:12px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.2) inset,
+    0 0 0 1px rgba(27,58,38,.12),
+    0 20px 60px rgba(15,32,24,.28), 0 8px 24px rgba(15,32,24,.18);
+  transform:rotate(-.6deg);
+}
+@media(min-width:960px){.device{width:340px}}
+.device::before{
+  content:"";position:absolute;left:50%;top:12px;transform:translateX(-50%);
+  width:88px;height:26px;background:#0B1510;border-radius:0 0 16px 16px;z-index:2
+}
+.device-screen{
+  width:100%;height:100%;background:#F8F6F0;border-radius:38px;overflow:hidden;
+  position:relative;display:flex;flex-direction:column;
+  border:1px solid rgba(0,0,0,.06)
+}
+.screen-map{
+  flex:1;position:relative;background:#E9E6DC;overflow:hidden
+}
+.map-grid{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(rgba(27,58,38,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27,58,38,.06) 1px, transparent 1px);
+  background-size:28px 28px;
+  opacity:.6
+}
+.map-contour{
+  position:absolute;inset:-20px;opacity:.18
+}
+.map-contour svg{width:100%;height:100%}
+.route-path{
+  fill:none;stroke:#1B3A26;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420;opacity:.9
+}
+.route-path.animate{animation:draw 1.8s cubic-bezier(.4,0,.2,1) forwards .6s}
+@keyframes draw{to{stroke-dashoffset:0}}
+.pin{
+  position:absolute;width:28px;height:28px;border-radius:50%;
+  background:var(--surface);border:2px solid var(--forest);
+  display:grid;place-items:center;box-shadow:0 4px 12px rgba(27,58,38,.22);
+  transform:translate(-50%,-50%) scale(0);animation:pop .5s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+.pin::after{content:"";width:8px;height:8px;background:var(--forest);border-radius:50%}
+.pin.visited{background:var(--forest);border-color:var(--forest)}
+.pin.visited::after{background:var(--brass)}
+.pin:nth-child(1){left:34%;top:28%;animation-delay:.9s}
+.pin:nth-child(2){left:58%;top:22%;animation-delay:1s}
+.pin:nth-child(3){left:72%;top:38%;animation-delay:1.1s}
+.pin:nth-child(4){left:48%;top:52%;animation-delay:1.2s}
+.pin:nth-child(5){left:62%;top:66%;animation-delay:1.3s}
+.pin:nth-child(6){left:28%;top:62%;animation-delay:1.4s}
+@keyframes pop{to{transform:translate(-50%,-50%) scale(1)}}
+@media(prefers-reduced-motion:reduce){.route-path{stroke-dashoffset:0}.pin{transform:translate(-50%,-50%) scale(1);animation:none}}
+.statusbar{
+  height:44px;display:flex;align-items:center;justify-content:space-between;
+  padding:14px 22px 0;font-size:11px;font-weight:600;color:var(--forest);letter-spacing:.02em
+}
+.statusbar span:last-child{display:flex;align-items:center;gap:4px}
+.searchbar{
+  margin:8px 14px 10px;background:var(--surface);border:1px solid var(--border);
+  border-radius:999px;padding:9px 12px;display:flex;align-items:center;gap:8px;
+  font-size:13px;color:var(--ink-3);box-shadow:var(--shadow-sm)
+}
+.searchbar strong{color:var(--forest);font-weight:600}
+.chips{display:flex;gap:6px;padding:0 14px 10px;overflow:hidden}
+.chip{font-size:11px;font-weight:600;padding:5px 9px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink-2);white-space:nowrap}
+.chip.active{background:var(--forest);color:#fff;border-color:var(--forest)}
+.place-row{
+  margin:0 14px;display:flex;gap:10px;align-items:center;
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:10px;box-shadow:var(--shadow-sm)
+}
+.place-thumb{width:44px;height:44px;border-radius:11px;background:var(--parchment-warm);overflow:hidden;flex-shrink:0;display:grid;place-items:center;font-size:18px}
+.place-meta{flex:1;min-width:0}
+.place-meta strong{display:block;font-size:12.5px;font-weight:600;color:var(--forest);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.place-meta span{font-size:11px;color:var(--ink-3)}
+.badge-dot{width:22px;height:22px;border-radius:50%;background:var(--brass);display:grid;place-items:center;color:#fff;font-size:10px;font-weight:700;flex-shrink:0}
+.tabbar{
+  height:54px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-around;
+  background:rgba(255,255,255,.96);backdrop-filter:blur(12px);font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)
+}
+.tabbar span{display:flex;flex-direction:column;align-items:center;gap:3px}
+.tabbar .active{color:var(--forest)}
+.hero-card-float{
+  position:absolute;right:-6px;bottom:18px;
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:12px 14px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:10px;
+  font-size:12px;transform:rotate(1.2deg);max-width:220px
+}
+@media(max-width:959px){.hero-card-float{display:none}}
+.hero-card-float strong{font-size:13px;color:var(--forest);display:block}
+.hero-card-float small{color:var(--ink-3);font-size:11px}
+@media(prefers-reduced-motion:no-preference){
+  .device{animation:float 6s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:rotate(-.6deg) translateY(0)}50%{transform:rotate(-.2deg) translateY(-6px)}}
+}
+
+.section{padding:72px 0;position:relative}
+@media(min-width:768px){.section{padding:88px 0}}
+.section-parchment{background:var(--parchment)}
+.section-white{background:var(--surface)}
+.section-forest{background:var(--forest);color:#E8EDE8}
+.section-cream{background:var(--surface-2)}
+.section h2{
+  font-family:"Instrument Serif", Georgia, serif;
+  font-weight:400;line-height:.95;letter-spacing:-.03em
+}
+.section h2 em{font-style:italic;font-weight:400}
+.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--moss);margin-bottom:12px}
+.rule{height:1px;background:var(--border);margin:0}
+.prose{color:var(--ink-2);font-size:15.5px;line-height:1.7}
+.prose strong{color:var(--ink);font-weight:600}
+
+.value-grid{display:grid;gap:22px;margin-top:40px}
+@media(min-width:760px){.value-grid{grid-template-columns:repeat(3,1fr);gap:24px}}
+.value-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  padding:24px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden
+}
+.value-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg, var(--forest), var(--brass));opacity:.9
+}
+.value-icon{
+  width:40px;height:40px;border-radius:12px;background:var(--parchment);border:1px solid var(--border);
+  display:grid;place-items:center;margin-bottom:16px;color:var(--forest)
+}
+.value-card h3{font-size:16px;font-weight:700;letter-spacing:-.02em;color:var(--forest);margin-bottom:8px}
+.value-card p{font-size:14px;line-height:1.6;color:var(--ink-2)}
+.value-card small{
+  display:inline-flex;align-items:center;gap:6px;margin-top:14px;
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--moss)
+}
+
+.split{display:grid;gap:40px;align-items:center}
+@media(min-width:900px){.split{grid-template-columns:1.02fr .98fr;gap:56px}}
+@media(min-width:900px){.split.reverse > *:first-child{order:2}.split.reverse > *:last-child{order:1}}
+.split-media{position:relative}
+.phone-stack{position:relative;display:grid;place-items:center;padding:8px}
+.phone-stack .device{transform:none}
+.phone-stack .device:nth-child(2){position:absolute;right:8%;top:6%;transform:rotate(3deg) scale(.92);opacity:.9;box-shadow:0 16px 40px rgba(15,32,24,.18)}
+@media(max-width:899px){.phone-stack .device:nth-child(2){display:none}}
+.frame-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  padding:18px;box-shadow:var(--shadow);overflow:hidden
+}
+.frame-card header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:14px
+}
+.frame-card header strong{font-size:13px;letter-spacing:-.01em;color:var(--forest)}
+.frame-card header span{font-size:11px;color:var(--ink-3);font-family:"JetBrains Mono",monospace}
+.journey-list{display:grid;gap:10px}
+.journey-item{
+  display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;
+  padding:12px;border:1px solid var(--border);border-radius:14px;background:var(--surface-2)
+}
+.journey-item:first-child{background:var(--surface);border-color:var(--border-strong);box-shadow:var(--shadow-sm)}
+.ji-icon{width:44px;height:44px;border-radius:12px;background:var(--parchment);border:1px solid var(--border);display:grid;place-items:center;color:var(--forest);font-size:16px}
+.ji-title{font-size:13px;font-weight:600;color:var(--forest);line-height:1.3}
+.ji-sub{font-size:11.5px;color:var(--ink-3);margin-top:2px}
+.ji-meta{text-align:right}
+.ji-date{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--moss)}
+.ji-dot{width:8px;height:8px;border-radius:50%;background:var(--brass);display:inline-block;margin-left:6px}
+
+.photo-diagram{
+  background:var(--forest);color:#E8EDE8;border-radius:24px;padding:28px;
+  position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.08)
+}
+@media(min-width:768px){.photo-diagram{padding:36px}}
+.photo-diagram::before{
+  content:"";position:absolute;inset:0;opacity:.08;
+  background:
+    linear-gradient(rgba(255,255,255,.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.4) 1px, transparent 1px);
+  background-size:32px 32px;
+}
+.photo-diagram>*{position:relative}
+.diagram-row{display:grid;gap:14px;align-items:center;margin-top:20px}
+@media(min-width:640px){.diagram-row{grid-template-columns:1fr auto 1fr auto 1fr}}
+.diagram-box{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;padding:16px;text-align:center;backdrop-filter:blur(8px)
+}
+.diagram-box strong{font-size:13px;display:block;margin-bottom:4px}
+.diagram-box span{font-size:12px;opacity:.7;line-height:1.5}
+.diagram-arrow{
+  display:grid;place-items:center;color:var(--brass);font-size:18px;transform:rotate(90deg)
+}
+@media(min-width:640px){.diagram-arrow{transform:none}}
+.photo-points{display:grid;gap:14px;margin-top:24px}
+@media(min-width:700px){.photo-points{grid-template-columns:repeat(3,1fr)}}
+.photo-point{
+  display:flex;gap:12px;align-items:flex-start;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px
+}
+.photo-point i{
+  width:32px;height:32px;border-radius:10px;background:rgba(200,169,110,.2);border:1px solid rgba(200,169,110,.3);
+  display:grid;place-items:center;flex-shrink:0;color:var(--brass-soft)
+}
+
+.badges{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:640px){.badges{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){.badges{grid-template-columns:repeat(6,1fr)}}
+.badge{
+  background:var(--surface);border:1px solid var(--border);border-radius:18px;
+  padding:16px 12px;text-align:center;box-shadow:var(--shadow-sm);
+  transition:transform .15s, box-shadow .15s
+}
+.badge:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.badge.unlocked{border-color:rgba(200,169,110,.5);background:linear-gradient(180deg, #fff, #FFFBF2)}
+.badge-icon{
+  width:48px;height:48px;border-radius:50%;margin:0 auto 10px;
+  display:grid;place-items:center;font-size:20px;
+  background:var(--parchment);border:1px solid var(--border);color:var(--ink-3)
+}
+.badge.unlocked .badge-icon{background:var(--forest);color:var(--brass-soft);border-color:var(--forest);box-shadow:0 6px 16px rgba(27,58,38,.22)}
+.badge strong{font-size:12px;font-weight:700;color:var(--forest);display:block;line-height:1.2}
+.badge span{font-size:11px;color:var(--ink-3);line-height:1.4;display:block;margin-top:4px}
+.badge small{
+  display:inline-flex;margin-top:8px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 8px;border-radius:999px;background:rgba(60,92,55,.08);color:var(--moss);border:1px solid rgba(60,92,55,.12)
+}
+.badge.unlocked small{background:var(--brass);color:#fff;border-color:var(--brass)}
+.progress-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+.progress-stat{
+  background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px 16px;text-align:center
+}
+.progress-stat strong{font-family:"Instrument Serif", Georgia, serif;font-size:28px;font-weight:400;color:var(--forest);line-height:1}
+.progress-stat span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--ink-3);display:block;margin-top:6px}
+.ring{--p:68;width:88px;height:88px;border-radius:50%;display:grid;place-items:center;position:relative;margin:0 auto}
+.ring::before{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(var(--forest) calc(var(--p)*1%), var(--parchment-deep) 0);
+  mask:radial-gradient(circle 30px at 50% 50%, transparent 30px, #000 31px);
+  -webkit-mask:radial-gradient(circle 30px at 50% 50%, transparent 30px, #000 31px);
+}
+.ring strong{position:relative;font-family:"Instrument Serif", Georgia, serif;font-size:22px;color:var(--forest)}
+
+.privacy-visual{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:22px;
+  box-shadow:var(--shadow-sm);position:relative;overflow:hidden
+}
+.privacy-visual::before{
+  content:"";position:absolute;inset:0;opacity:.04;
+  background:
+    linear-gradient(var(--forest) 1px, transparent 1px),
+    linear-gradient(90deg, var(--forest) 1px, transparent 1px);
+  background-size:22px 22px;
+}
+.privacy-grid{position:relative;display:grid;gap:14px}
+@media(min-width:560px){.privacy-grid{grid-template-columns:1fr auto 1fr}}
+.pv-col{display:grid;gap:10px;align-content:start}
+.pv-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink-3);text-align:center}
+.pv-card{
+  background:var(--parchment);border:1px solid var(--border);border-radius:14px;
+  padding:12px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;color:var(--forest)
+}
+.pv-card i{width:32px;height:32px;border-radius:10px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0}
+.pv-center{
+  display:grid;place-items:center;gap:10px;padding:10px 0
+}
+.pv-phone{
+  width:100%;background:var(--forest);color:#fff;border-radius:16px;padding:16px;text-align:center;
+  box-shadow:0 8px 20px rgba(27,58,38,.24)
+}
+.pv-phone strong{font-family:"Instrument Serif", Georgia, serif;font-size:18px;font-weight:400;display:block}
+.pv-phone span{font-size:11px;opacity:.8}
+.pv-arrows{display:flex;flex-direction:column;gap:6px;align-items:center;color:var(--moss)}
+@media(min-width:560px){.pv-arrows{flex-direction:row}}
+.trust-grid{display:grid;gap:14px;margin-top:28px}
+@media(min-width:720px){.trust-grid{grid-template-columns:repeat(4,1fr)}}
+.trust-card{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;padding:18px;backdrop-filter:blur(8px)
+}
+.trust-card strong{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-soft);display:block;margin-bottom:8px}
+.trust-card p{font-size:13px;line-height:1.6;opacity:.82}
+.trust-card p strong{font-size:13px;letter-spacing:0;text-transform:none;color:#fff;display:inline}
+
+.steps{display:grid;gap:16px;margin-top:32px;counter-reset:step}
+@media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr);gap:18px}}
+.step{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  padding:24px;position:relative;overflow:hidden;box-shadow:var(--shadow-sm)
+}
+.step::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--border)
+}
+.step:first-child::before{background:var(--forest)}
+.step:nth-child(2)::before{background:var(--brass)}
+.step:nth-child(3)::before{background:var(--moss)}
+.step-num{
+  font-family:"Instrument Serif", Georgia, serif;font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);display:flex;align-items:center;gap:10px;margin-bottom:14px
+}
+.step-num::before{
+  counter-increment:step;content:"0" counter(step);
+  width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  background:var(--parchment);border:1px solid var(--border);font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;color:var(--forest)
+}
+.step h3{font-family:"Instrument Serif", Georgia, serif;font-size:22px;font-weight:400;color:var(--forest);margin-bottom:8px}
+.step p{font-size:14px;line-height:1.6;color:var(--ink-2)}
+.step .arrow{margin-top:16px;color:var(--moss);display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;text-decoration:none}
+.categories{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.cat{
+  font-size:12px;font-weight:600;padding:7px 12px;border-radius:999px;
+  background:var(--surface);border:1px solid var(--border);color:var(--ink-2);
+  display:inline-flex;align-items:center;gap:6px
+}
+.cat i{width:6px;height:6px;border-radius:50%;background:var(--moss);display:inline-block}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+
+.cta{
+  background:var(--forest);color:#E8EDE8;position:relative;overflow:hidden;
+  border-top:1px solid rgba(255,255,255,.06)
+}
+.cta::before{
+  content:"";position:absolute;inset:0;opacity:.10;
+  background:
+    radial-gradient(600px 400px at 20% 0%, rgba(200,169,110,.4), transparent 60%),
+    radial-gradient(800px 600px at 90% 100%, rgba(156,175,136,.35), transparent 60%);
+}
+.cta::after{
+  content:"";position:absolute;inset:0;opacity:.06;
+  background:
+    linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
+  background-size:40px 40px;
+}
+.cta-inner{position:relative;text-align:center;max-width:720px;margin:0 auto;padding:24px 0}
+.cta h2{font-family:"Instrument Serif", Georgia, serif;font-size:clamp(32px, 5vw, 52px);font-weight:400;line-height:.95;letter-spacing:-.03em;color:#fff;margin-bottom:14px}
+.cta h2 em{font-style:italic;color:var(--brass-soft)}
+.cta p{font-size:16px;line-height:1.6;opacity:.8;max-width:52ch;margin:0 auto 28px}
+.cta-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.cta .btn-primary{background:#fff;color:var(--forest);box-shadow:0 8px 20px rgba(0,0,0,.18)}
+.cta .btn-primary:hover{background:var(--parchment);color:var(--forest-deep)}
+.cta-note{margin-top:18px;font-size:12px;opacity:.6}
+.cta-note a{color:var(--brass-soft);text-underline-offset:3px}
+
+footer{background:var(--forest-deep);color:#A8B5AB;padding:48px 0 32px;border-top:1px solid rgba(255,255,255,.06)}
+.footer-grid{display:grid;gap:32px}
+@media(min-width:900px){.footer-grid{grid-template-columns:1.4fr .7fr .7fr .9fr}}
+.footer-brand{display:flex;gap:12px;align-items:flex-start}
+.footer-brand-mark{width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0;background:#fff;padding:2px}
+.footer-brand-mark img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+.footer-brand h3{font-family:"Instrument Serif", Georgia, serif;font-size:18px;font-weight:400;color:#fff;letter-spacing:-.02em}
+.footer-brand p{font-size:13px;line-height:1.6;opacity:.7;margin-top:6px;max-width:32ch}
+.footer-col h4{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#fff;opacity:.9;margin-bottom:14px}
+.footer-col a{display:block;font-size:13.5px;color:#A8B5AB;text-decoration:none;padding:5px 0}
+.footer-col a:hover{color:#fff}
+.footer-bottom{
+  margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);
+  display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;
+  font-size:12.5px;color:#7A8E80
+}
+.footer-bottom a{color:#A8B5AB;text-decoration:none}
+.footer-bottom a:hover{color:#fff}
+.attr{font-size:11.5px;opacity:.6;line-height:1.6}
+.attr a{color:#A8B5AB;text-decoration:underline;text-underline-offset:3px}
+.toast{
+  position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(80px);
+  background:var(--forest);color:#fff;padding:12px 18px;border-radius:999px;
+  font-size:13px;font-weight:600;box-shadow:var(--shadow-lg);opacity:0;transition:transform .3s, opacity .3s;z-index:60;pointer-events:none
+}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.waitlist{
+  display:flex;gap:8px;max-width:420px;margin:18px auto 0;flex-wrap:wrap;justify-content:center
+}
+.waitlist input{
+  flex:1;min-width:220px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+  border-radius:999px;padding:12px 16px;color:#fff;font-size:14px;outline:none
+}
+.waitlist input::placeholder{color:rgba(255,255,255,.6)}
+.waitlist input:focus{border-color:rgba(200,169,110,.6);background:rgba(255,255,255,.14)}
+.waitlist button{
+  background:#fff;color:var(--forest);border:0;border-radius:999px;padding:12px 20px;font-weight:700;font-size:14px;cursor:pointer;white-space:nowrap
+}
+.waitlist button:hover{background:var(--parchment)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav id="nav" aria-label="Primary">
+  <div class="nav-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <a href="../index.html" aria-label="Back to M-PAX home" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--ink-3);text-decoration:none;border:1px solid var(--border);background:var(--surface);padding:6px 10px;border-radius:999px;white-space:nowrap">← M-PAX</a>
+      <a class="brand" href="index.html" aria-label="Jaunt Log home">
+        <span class="brand-mark" aria-hidden="true"><img src="images/branding/icon.png" alt="" width="36" height="36" loading="eager"></span>
+        <span class="brand-wordmark">Jaunt <span>Log</span></span>
+      </a>
+    </div>
+    <ul class="nav-links" role="list">
+      <li><a href="#explore">Explore</a></li>
+      <li><a href="#history">History</a></li>
+      <li><a href="#photos">Photos</a></li>
+      <li><a href="#progress">Progress</a></li>
+      <li><a href="#privacy">Privacy</a></li>
+      <li><a href="#how">How it works</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn-primary btn-sm" href="mailto:contact@m-pax.net">Contact</a>
+      <button class="mobile-toggle" id="menuBtn" aria-expanded="false" aria-controls="mobilePanel" aria-label="Open menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-panel" id="mobilePanel" hidden>
+  <a href="#explore">Explore</a>
+  <a href="#history">History</a>
+  <a href="#photos">Photos</a>
+  <a href="#progress">Progress</a>
+  <a href="#privacy">Privacy</a>
+  <a href="#how">How it works</a>
+  <a href="mailto:contact@m-pax.net" style="color:var(--forest);font-weight:700">Contact</a>
+</div>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-bg" aria-hidden="true">
+      <svg viewBox="0 0 1200 800" preserveAspectRatio="none" role="presentation">
+        <defs>
+          <pattern id="contour" width="120" height="120" patternUnits="userSpaceOnUse" patternTransform="rotate(8)">
+            <path d="M0 40 Q30 20 60 40 T120 40" fill="none" stroke="#1B3A26" stroke-width=".7" opacity=".28"/>
+            <path d="M0 70 Q30 50 60 70 T120 70" fill="none" stroke="#1B3A26" stroke-width=".6" opacity=".18"/>
+            <path d="M0 100 Q30 80 60 100 T120 100" fill="none" stroke="#1B3A26" stroke-width=".5" opacity=".12"/>
+          </pattern>
+        </defs>
+        <rect width="1200" height="800" fill="url(#contour)"/>
+        <g opacity=".14" stroke="#1B3A26" stroke-width=".6" fill="none">
+          <path d="M-40 520 Q300 480 560 520 T1240 500"/>
+          <path d="M-40 560 Q300 520 560 560 T1240 540"/>
+          <path d="M-40 600 Q300 560 560 600 T1240 580"/>
+        </g>
+        <g font-family="JetBrains Mono, monospace" font-size="9" fill="#5E6E62" opacity=".22">
+          <text x="48" y="28">51°30'26"N — 0°07'39"W</text>
+          <text x="980" y="760">50°43'N 1°58'W</text>
+          <text x="48" y="760">OS Grid • SU 422 112</text>
+        </g>
+      </svg>
+    </div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">A personal logbook for iPhone</span>
+          <h1 id="hero-title">Explore <em>outside.</em><br>Record the<br>journey.</h1>
+          <p class="hero-lead">A personal logbook for the places you’ve explored — from coastal paths and country estates to national parks and quiet villages. Your adventures become a story you can look back on.</p>
+          <div class="hero-actions">
+            <span class="app-badge" aria-label="Coming soon on the App Store" style="cursor:default">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.7 17.3c-.4.6-.9 1.2-1.5 1.6-.5.4-1.1.6-1.9.6-.6 0-1.1-.1-1.6-.4-.4-.3-.8-.4-1.3-.4-.5 0-.9.1-1.3.4-.4.3-.9.4-1.5.4-.7 0-1.3-.2-1.9-.6-.6-.4-1.1-1-1.5-1.7-1-1.6-1.6-3.3-1.6-5 0-1 .3-1.9.8-2.7.5-.8 1.2-1.4 2-1.9.6-.4 1.3-.6 2-.6.6 0 1.1.2 1.6.5.4.3.7.4 1 .4.3 0 .7-.1 1.1-.4.6-.4 1.2-.6 1.9-.6.7 0 1.4.2 2 .6-.1.1-.2.2-.3.3-.6.6-1 1.3-1 2.1 0 .8.3 1.5.9 2.1.6.6 1.3.9 2.2 1 0 .4-.1.9-.2 1.3-.2.8-.6 1.6-1.2 2.4zM12.5 6.2c0-.6.2-1.2.6-1.7.4-.5 1-.9 1.7-1.1-.1.7-.4 1.3-.9 1.8-.4.5-1 .9-1.6 1.1 0-.1 0-.1.2-.1z"/></svg>
+              <span><small>Coming soon on the</small><strong>App Store</strong></span>
+            </span>
+            <a class="btn btn-secondary" href="#explore">Explore Jaunt Log <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero-meta" aria-label="Highlights">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg> Local-first &amp; private</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 14a4 4 0 0 0 8 0"/><circle cx="12" cy="9" r="1.5"/></svg> Photo discovery on-device</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6h18M3 12h18M3 18h18"/></svg> Offline place data</span>
+          </div>
+          <div class="hero-coord" aria-hidden="true">
+            <span>— 51.5072° N, 0.1276° W</span><span>Trail 14 — 09:42</span><span>OS Explorer 1:25k</span>
+          </div>
+        </div>
+
+        <div class="device-wrap" aria-hidden="true">
+          <div class="device">
+            <div class="device-screen">
+              <div class="statusbar"><span>09:41</span><span><svg width="14" height="10" viewBox="0 0 24 14" fill="none"><rect x="1" y="3" width="18" height="8" rx="2" stroke="#1B3A26" stroke-width="1.2"/><rect x="3" y="5" width="12" height="4" rx="1" fill="#1B3A26"/><rect x="20" y="5" width="2" height="4" rx="1" fill="#1B3A26"/></svg> 87%</span></div>
+              <div class="searchbar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5E6E62" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></svg> <span>Search places — <strong>Lyme, Peak, Cornwall…</strong></span></div>
+              <div class="chips"><span class="chip active">All</span><span class="chip">Heritage</span><span class="chip">Nature</span><span class="chip">National Parks</span></div>
+              <div class="screen-map">
+                <div class="map-grid"></div>
+                <div class="map-contour">
+                  <svg viewBox="0 0 320 260" preserveAspectRatio="none">
+                    <path d="M -10 80 Q80 60 140 80 T330 70" fill="none" stroke="#1B3A26" stroke-width="1.1" opacity=".24"/>
+                    <path d="M -10 110 Q80 90 140 110 T330 100" fill="none" stroke="#1B3A26" stroke-width=".9" opacity=".16"/>
+                    <path d="M -10 140 Q80 120 140 140 T330 130" fill="none" stroke="#1B3A26" stroke-width=".8" opacity=".12"/>
+                    <path d="M -10 170 Q80 150 140 170 T330 160" fill="none" stroke="#1B3A26" stroke-width=".7" opacity=".10"/>
+                    <path id="route" class="route-path" d="M 78 78 C 110 62, 138 68, 166 74 C 188 80, 212 96, 204 122 C 196 148, 150 176, 118 188"/>
+                  </svg>
+                </div>
+                <div class="pin visited" title="Visited"></div>
+                <div class="pin" title="Unvisited"></div>
+                <div class="pin visited" title="Visited"></div>
+                <div class="pin visited" title="Visited"></div>
+                <div class="pin" title="Unvisited"></div>
+                <div class="pin visited" title="Visited"></div>
+                <div style="position:absolute;left:48%;top:52%;transform:translate(-50%,-50%);pointer-events:none">
+                  <div style="background:var(--forest);color:#fff;font-size:10px;font-weight:700;padding:5px 8px;border-radius:999px;box-shadow:0 4px 12px rgba(27,58,38,.3);white-space:nowrap">You are here • 3 places nearby</div>
+                </div>
+              </div>
+              <div style="padding:10px 14px 10px;background:var(--surface)">
+                <div class="place-row">
+                  <div class="place-thumb" aria-hidden="true">🏛</div>
+                  <div class="place-meta"><strong>Stourhead Gardens</strong><span>Heritage • 0.4 mi • Visited 12 Apr</span></div>
+                  <div class="badge-dot">✓</div>
+                </div>
+                <div style="display:flex;gap:8px;margin-top:8px">
+                  <span style="flex:1;background:var(--forest);color:#fff;text-align:center;padding:8px;border-radius:999px;font-size:12px;font-weight:600">Log jaunt</span>
+                  <span style="background:var(--surface-2);border:1px solid var(--border);padding:8px 12px;border-radius:999px;font-size:12px;font-weight:600;color:var(--forest)">Details</span>
+                </div>
+              </div>
+              <div class="tabbar" aria-hidden="true">
+                <span class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-5H9v5H4a1 1 0 0 1-1-1V9.5Z"/></svg>Explore</span>
+                <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 7v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>History</span>
+                <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>Progress</span>
+                <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 1-2 0 1.7 1.7 0 0 0-1-.6 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 9 15a1.7 1.7 0 0 0 .6-1 1.7 1.7 0 0 1 0-2 1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 13 6.6c.35.2.75.3 1 .6a1.7 1.7 0 0 1 2 0c.25-.3.65-.4 1-.6A1.7 1.7 0 0 0 18.87 6l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 21 10.7c-.2.35-.4.7-.6 1a1.7 1.7 0 0 1 0 2c.2.3.4.65.6 1Z"/></svg>Settings</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-card-float" role="note" aria-label="Example journey">
+            <span style="width:36px;height:36px;border-radius:10px;background:var(--parchment);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0">📍</span>
+            <span><strong>14 places • 3 counties</strong><small>Your map grows with every jaunt</small></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white" aria-labelledby="value-title">
+    <div class="wrap">
+      <div style="max-width:640px">
+        <p class="kicker">Why Jaunt Log</p>
+        <h2 id="value-title" style="font-size:clamp(32px,4.5vw,44px);color:var(--forest)">Every place <em>has a story.</em><br>Keep yours.</h2>
+        <p class="prose" style="margin-top:14px">Jaunt Log turns visited places into a personal geographic history — not a social feed, not a checklist for strangers. A quiet, accurate record of where you’ve been and what it meant.</p>
+      </div>
+      <div class="value-grid">
+        <article class="value-card reveal">
+          <div class="value-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/><path d="M8 11h6"/></svg></div>
+          <h3>Discover</h3>
+          <p>Find heritage sites, national parks, nature reserves, gardens and towns worth exploring — with offline maps that work even without signal.</p>
+          <small><span aria-hidden="true">—</span> Explore nearby &amp; beyond</small>
+        </article>
+        <article class="value-card reveal">
+          <div class="value-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M9 18h6"/><path d="M9 12h6"/></svg></div>
+          <h3>Record</h3>
+          <p>Keep a personal record of where you’ve been — visits, dates, notes and photos — stored privately on your iPhone.</p>
+          <small><span aria-hidden="true">—</span> A logbook, not a timeline</small>
+        </article>
+        <article class="value-card reveal">
+          <div class="value-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 14c1.5-1.6 2-3.3 1.5-5a6 6 0 0 0-5-4.5 6 6 0 0 0-7 4.5c-.5 1.7 .1 3.4 1.5 5L12 21l7-7Z"/><circle cx="12" cy="11" r="2.2"/></svg></div>
+          <h3>Remember</h3>
+          <p>See your journeys, visits and memories come together over time — a map that grows richer with every season.</p>
+          <small><span aria-hidden="true">—</span> Look back, wander further</small>
+        </article>
+      </div>
+      <div class="categories" aria-label="Place categories">
+        <span class="cat"><i style="background:#3C5C37"></i> Heritage</span>
+        <span class="cat"><i style="background:#2D5A3A"></i> National Parks</span>
+        <span class="cat"><i style="background:#6B8C6B"></i> Nature</span>
+        <span class="cat"><i style="background:#9CAF88"></i> Gardens</span>
+        <span class="cat"><i style="background:#B9945B"></i> Museums</span>
+        <span class="cat"><i style="background:#8B8680"></i> Towns</span>
+        <span class="cat"><i style="background:#5E6E62"></i> Landmarks</span>
+        <span class="cat"><i style="background:#C8A96E"></i> Regions</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="explore" class="section section-parchment" aria-labelledby="explore-title">
+    <div class="wrap">
+      <div class="split">
+        <div class="split-media">
+          <div class="phone-stack" aria-hidden="true">
+            <div class="device" style="width:300px">
+              <div class="device-screen">
+                <div class="statusbar"><span>09:41</span><span>● ● ●</span></div>
+                <div style="padding:14px 14px 8px">
+                  <div style="display:flex;align-items:center;justify-content:space-between">
+                    <strong style="font-family:Instrument Serif,serif;font-size:18px;color:var(--forest)">Explore</strong>
+                    <span style="font-size:11px;color:var(--ink-3);font-family:JetBrains Mono,monospace">ST 760 400</span>
+                  </div>
+                  <div style="margin-top:10px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:10px;display:flex;gap:10px;align-items:center">
+                    <span style="width:34px;height:34px;border-radius:10px;background:var(--parchment);display:grid;place-items:center">🌿</span>
+                    <span style="flex:1"><strong style="font-size:12px;color:var(--forest);display:block">Dorset • 42 places</strong><span style="font-size:11px;color:var(--ink-3)">18 visited • 43% explored</span></span>
+                    <span style="width:32px;height:32px;border-radius:50%;border:3px solid var(--parchment-deep);border-top-color:var(--forest);display:grid;place-items:center;font-size:10px;font-weight:700;color:var(--forest)">43%</span>
+                  </div>
+                </div>
+                <div class="screen-map" style="margin:0 14px;border-radius:16px;border:1px solid var(--border);overflow:hidden;min-height:180px">
+                  <div class="map-grid"></div>
+                  <svg viewBox="0 0 300 180" style="position:absolute;inset:0;width:100%;height:100%;opacity:.18"><path d="M0 60 Q100 40 160 60 T300 50" fill="none" stroke="#1B3A26" stroke-width="1"/><path d="M0 90 Q100 70 160 90 T300 80" fill="none" stroke="#1B3A26" stroke-width=".8"/><path d="M0 120 Q100 100 160 120 T300 110" fill="none" stroke="#1B3A26" stroke-width=".7"/></svg>
+                  <div style="position:absolute;left:24%;top:30%;width:10px;height:10px;background:var(--forest);border:2px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.2)"></div>
+                  <div style="position:absolute;left:58%;top:42%;width:10px;height:10px;background:var(--brass);border:2px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.2)"></div>
+                  <div style="position:absolute;left:72%;top:64%;width:10px;height:10px;background:var(--forest);border:2px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.2)"></div>
+                  <div style="position:absolute;left:36%;top:68%;width:8px;height:8px;background:#fff;border:2px solid var(--ink-3);border-radius:50%"></div>
+                  <div style="position:absolute;bottom:8px;left:8px;background:rgba(255,255,255,.92);border:1px solid var(--border);padding:5px 8px;border-radius:999px;font-size:10px;font-weight:600;color:var(--forest)">○ Unvisited  ● Visited  ◐ Nearby</div>
+                </div>
+                <div style="padding:10px 14px 12px;display:grid;gap:8px">
+                  <div style="display:flex;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:8px">
+                    <span style="width:36px;height:36px;border-radius:9px;background:var(--parchment);display:grid;place-items:center;font-size:14px">🏰</span>
+                    <span style="flex:1"><strong style="font-size:12px;color:var(--forest)">Corfe Castle</strong><span style="font-size:11px;color:var(--ink-3);display:block">Heritage • 2.1 mi</span></span><span style="font-size:11px;font-weight:700;color:var(--moss)">Visit →</span>
+                  </div>
+                  <div style="display:flex;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:8px">
+                    <span style="width:36px;height:36px;border-radius:9px;background:var(--parchment);display:grid;place-items:center;font-size:14px">🌊</span>
+                    <span style="flex:1"><strong style="font-size:12px;color:var(--forest)">Lulworth Cove</strong><span style="font-size:11px;color:var(--ink-3);display:block">Nature • 4.8 mi • Visited</span></span><span style="width:18px;height:18px;border-radius:50%;background:var(--forest);color:#fff;display:grid;place-items:center;font-size:10px">✓</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="kicker">Explore</p>
+          <h2 id="explore-title" style="font-size:clamp(28px,4vw,40px);color:var(--forest)">Your adventures, <em>mapped.</em></h2>
+          <p class="prose" style="margin-top:12px">Open Jaunt Log and see the landscape around you — heritage, national parks, nature, gardens, towns and landmarks — with clear visited / unvisited states and offline place data that doesn’t need a live signal to be useful.</p>
+          <ul style="list-style:none;display:grid;gap:12px;margin-top:20px">
+            <li style="display:flex;gap:12px;align-items:flex-start"><span style="width:28px;height:28px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0;color:var(--forest)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z"/></svg></span><span style="font-size:14px;line-height:1.6;color:var(--ink-2)"><strong style="color:var(--forest)">Visited places, geographic progress</strong> — see counties and regions fill in as you wander.</span></li>
+            <li style="display:flex;gap:12px;align-items:flex-start"><span style="width:28px;height:28px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0;color:var(--forest)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18"/></svg></span><span style="font-size:14px;line-height:1.6;color:var(--ink-2)"><strong style="color:var(--forest)">Place categories</strong> — heritage, national parks, nature, gardens, museums and more, each with its own visual language.</span></li>
+            <li style="display:flex;gap:12px;align-items:flex-start"><span style="width:28px;height:28px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0;color:var(--forest)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><span style="font-size:14px;line-height:1.6;color:var(--ink-2)"><strong style="color:var(--forest)">Maps, quietly accurate</strong> — built with offline spatial data (including OpenStreetMap) for reliable place recognition.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="history" class="section section-white" aria-labelledby="history-title">
+    <div class="wrap">
+      <div class="split reverse">
+        <div class="split-media">
+          <div class="frame-card" role="img" aria-label="History journal preview">
+            <header>
+              <strong style="font-family:Instrument Serif,serif;font-size:16px">History</strong>
+              <span>42 jaunts • 2024—2026</span>
+            </header>
+            <div class="journey-list">
+              <div class="journey-item">
+                <div class="ji-icon">🏛</div>
+                <div><div class="ji-title">Kingston Lacy <span class="ji-dot" aria-hidden="true"></span></div><div class="ji-sub">Dorset • Heritage • with photos • ±18 m</div></div>
+                <div class="ji-meta"><div class="ji-date">12 Apr 2026</div><div style="font-size:11px;color:var(--ink-3)">09:42 • sunny</div></div>
+              </div>
+              <div class="journey-item">
+                <div class="ji-icon">🌊</div>
+                <div><div class="ji-title">Lulworth Cove &amp; Durdle Door</div><div class="ji-sub">Dorset • Nature • 2 photos</div></div>
+                <div class="ji-meta"><div class="ji-date">29 Mar 2026</div><div style="font-size:11px;color:var(--ink-3)">Coastal path</div></div>
+              </div>
+              <div class="journey-item">
+                <div class="ji-icon">🌳</div>
+                <div><div class="ji-title">New Forest National Park</div><div class="ji-sub">Hampshire • National Park • family walk</div></div>
+                <div class="ji-meta"><div class="ji-date">16 Mar 2026</div><div style="font-size:11px;color:var(--ink-3)">Afternoon</div></div>
+              </div>
+              <div class="journey-item">
+                <div class="ji-icon">🏡</div>
+                <div><div class="ji-title">Lacock Abbey</div><div class="ji-sub">Wiltshire • Historic Property</div></div>
+                <div class="ji-meta"><div class="ji-date">02 Mar 2026</div><div style="font-size:11px;color:var(--ink-3)">Discovered via photos</div></div>
+              </div>
+            </div>
+            <div style="margin-top:14px;background:var(--parchment);border:1px dashed var(--border-strong);border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center">
+              <span style="width:32px;height:32px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center">🖋</span>
+              <span style="font-size:12.5px;line-height:1.5;color:var(--ink-2)"><strong style="color:var(--forest)">Personal notes</strong> — “Heathland still winter-brown, skylarks already up. Tea in the village.”</span>
+            </div>
+          </div>
+          <p style="text-align:center;margin-top:10px;font-size:11px;color:var(--ink-3);font-family:JetBrains Mono,monospace">Logbook view — date • place • journey • memories</p>
+        </div>
+        <div>
+          <p class="kicker">Journal</p>
+          <h2 id="history-title" style="font-size:clamp(28px,4vw,40px);color:var(--forest)">Your journey, <em>not just a list</em> of places.</h2>
+          <p class="prose" style="margin-top:12px">Jaunt Log turns visits into a personal journey log — chronological, geographic, and quietly yours. Each entry keeps its date, place, journey context and memories together, like a field journal you don’t have to remember to write.</p>
+          <div style="margin-top:20px;display:grid;gap:10px">
+            <div style="display:flex;gap:12px;align-items:center;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:12px">
+              <span style="width:36px;height:36px;border-radius:10px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center">📅</span>
+              <span style="font-size:13px;color:var(--ink-2)"><strong style="color:var(--forest)">Date &amp; place, together</strong><br><span style="font-size:12.5px;color:var(--ink-3)">No spreadsheet — a logbook. Chronological, browsable, personal.</span></span>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:12px">
+              <span style="width:36px;height:36px;border-radius:10px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center">📸</span>
+              <span style="font-size:13px;color:var(--ink-2)"><strong style="color:var(--forest)">Photos &amp; notes, connected</strong><br><span style="font-size:12.5px;color:var(--ink-3)">Link images and words to the place they belong.</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="photos" class="section section-forest" aria-labelledby="photos-title">
+    <div class="wrap">
+      <div style="max-width:680px">
+        <p class="kicker" style="color:var(--brass-soft)">Photo discovery</p>
+        <h2 id="photos-title" style="font-size:clamp(28px,4.5vw,42px);color:#fff">Your photos <em style="color:var(--brass-soft)">remember</em> where you’ve been.</h2>
+        <p style="margin-top:12px;font-size:15.5px;line-height:1.7;opacity:.82">Jaunt Log can use supported photo metadata already on your iPhone to help discover past visits from your existing library — so you don’t have to manually enter every place you’ve ever explored.</p>
+      </div>
+
+      <div class="photo-diagram" style="margin-top:28px">
+        <div class="mono" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.6">On-device • Private • No upload</div>
+        <div class="diagram-row">
+          <div class="diagram-box">
+            <div style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.1);display:grid;place-items:center;margin:0 auto 8px">🖼</div>
+            <strong>Your Photos</strong>
+            <span>Dates &amp; location already stored with your images</span>
+          </div>
+          <div class="diagram-arrow">→</div>
+          <div class="diagram-box" style="background:rgba(200,169,110,.18);border-color:rgba(200,169,110,.3)">
+            <div style="width:36px;height:36px;border-radius:10px;background:var(--forest);display:grid;place-items:center;margin:0 auto 8px;color:var(--brass-soft)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M12 11V7a4 4 0 0 1 4-4h2"/><circle cx="12" cy="15" r="2"/></svg></div>
+            <strong>Jaunt Log</strong>
+            <span>Analyses metadata on your iPhone</span>
+          </div>
+          <div class="diagram-arrow">→</div>
+          <div class="diagram-box">
+            <div style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.1);display:grid;place-items:center;margin:0 auto 8px">📍</div>
+            <strong>Past visits found</strong>
+            <span>Dates, places &amp; journeys suggested for you to confirm</span>
+          </div>
+        </div>
+        <p style="margin-top:16px;font-size:12px;opacity:.6;line-height:1.6">Photo analysis happens on your device where applicable. Original photos stay in your Photos library. No Jaunt Log account or server upload is required to use photo discovery. Availability depends on photos that contain supported date and location metadata.</p>
+      </div>
+
+      <div class="photo-points">
+        <div class="photo-point">
+          <i><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></i>
+          <span style="font-size:13px;line-height:1.6"><strong style="color:#fff">Dates recovered</strong><br><span style="opacity:.75">Rediscover when you were there — even years ago.</span></span>
+        </div>
+        <div class="photo-point">
+          <i><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z"/></svg></i>
+          <span style="font-size:13px;line-height:1.6"><strong style="color:#fff">Location from metadata</strong><br><span style="opacity:.75">Uses location information already stored with your photos, where available.</span></span>
+        </div>
+        <div class="photo-point">
+          <i><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22s7-4 7-10a7 7 0 0 0-14 0c0 6 7 10 7 10Z"/><circle cx="12" cy="11" r="2"/></svg></i>
+          <span style="font-size:13px;line-height:1.6"><strong style="color:#fff">You stay in control</strong><br><span style="opacity:.75">Review and confirm — nothing is logged without you.</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="progress" class="section section-parchment" aria-labelledby="progress-title">
+    <div class="wrap">
+      <div style="display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:end">
+        <div style="max-width:560px">
+          <p class="kicker">Progress</p>
+          <h2 id="progress-title" style="font-size:clamp(28px,4vw,40px);color:var(--forest)">See how far <em>you’ve wandered.</em></h2>
+          <p class="prose" style="margin-top:10px">Collect experiences, not cartoon rewards. See visited counts, regional completion and gentle milestones — a mature sense of progress that rewards curiosity.</p>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <div class="ring" style="--p:43" aria-label="43 percent of places visited"><strong>43%</strong></div>
+          <div style="font-size:12px;line-height:1.5;color:var(--ink-2)"><strong style="color:var(--forest);font-size:14px">Dorset</strong><br>18 of 42 places<br><span style="color:var(--moss);font-weight:600">Keep exploring →</span></div>
+        </div>
+      </div>
+
+      <div class="progress-stats" aria-label="Progress statistics">
+        <div class="progress-stat"><strong>47</strong><span>Places visited</span></div>
+        <div class="progress-stat"><strong>6</strong><span>Categories</span></div>
+        <div class="progress-stat"><strong>3</strong><span>Counties</span></div>
+      </div>
+
+      <div style="margin-top:28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <h3 style="font-family:Instrument Serif,serif;font-size:18px;font-weight:400;color:var(--forest)">Badges — earned by exploring</h3>
+        <span style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--ink-3)">Mature • understated • no trademarks</span>
+      </div>
+      <div class="badges" style="margin-top:14px">
+        <div class="badge unlocked">
+          <div class="badge-icon">⚑</div>
+          <strong>First Jaunt</strong><span>Log your first visit</span><small>Unlocked</small>
+        </div>
+        <div class="badge unlocked">
+          <div class="badge-icon">◈</div>
+          <strong>Trail Starter</strong><span>Visit 5 unique places</span><small>Unlocked</small>
+        </div>
+        <div class="badge unlocked">
+          <div class="badge-icon">◎</div>
+          <strong>Park Pioneer</strong><span>First National Park</span><small>Unlocked</small>
+        </div>
+        <div class="badge">
+          <div class="badge-icon">✿</div>
+          <strong>Garden Wanderer</strong><span>Visit 5 gardens</span><small>3 / 5</small>
+        </div>
+        <div class="badge">
+          <div class="badge-icon">▣</div>
+          <strong>Heritage Keeper</strong><span>Visit 10 heritage sites</span><small>6 / 10</small>
+        </div>
+        <div class="badge">
+          <div class="badge-icon">⬢</div>
+          <strong>Region Complete</strong><span>Explore every place in a region</span><small>Locked</small>
+        </div>
+      </div>
+      <p style="margin-top:12px;font-size:11px;color:var(--ink-3);font-family:JetBrains Mono,monospace">Badges shown are real examples from the app (First Jaunt, Trail Starter, Park Pioneer, Garden Wanderer, Heritage Keeper, Region Complete). No invented achievements are displayed.</p>
+
+      <div style="margin-top:24px;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px;display:grid;gap:14px">
+        <div style="display:grid;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px"><span style="font-weight:600;color:var(--forest)">Heritage</span><span style="color:var(--ink-3)">6 / 14 • 43%</span></div>
+          <div style="height:8px;background:var(--parchment);border-radius:999px;overflow:hidden;border:1px solid var(--border)"><div style="width:43%;height:100%;background:var(--forest);border-radius:999px"></div></div>
+        </div>
+        <div style="display:grid;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px"><span style="font-weight:600;color:var(--forest)">National Parks</span><span style="color:var(--ink-3)">2 / 5 • 40%</span></div>
+          <div style="height:8px;background:var(--parchment);border-radius:999px;overflow:hidden;border:1px solid var(--border)"><div style="width:40%;height:100%;background:var(--moss);border-radius:999px"></div></div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="font-size:11px;font-weight:600;padding:6px 10px;border-radius:999px;background:var(--parchment);border:1px solid var(--border);color:var(--ink-2)">Nature 8/12</span>
+          <span style="font-size:11px;font-weight:600;padding:6px 10px;border-radius:999px;background:var(--parchment);border:1px solid var(--border);color:var(--ink-2)">Museums 3/7</span>
+          <span style="font-size:11px;font-weight:600;padding:6px 10px;border-radius:999px;background:var(--forest);border:1px solid var(--forest);color:#fff">Gardens 3/5</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="privacy" class="section section-forest" aria-labelledby="privacy-title">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <p class="kicker" style="color:var(--brass-soft)">Privacy</p>
+          <h2 id="privacy-title" style="font-size:clamp(28px,4.5vw,42px);color:#fff">Your journeys <em style="color:var(--brass-soft)">are yours.</em></h2>
+          <p style="margin-top:10px;font-size:15.5px;line-height:1.7;opacity:.82">Jaunt Log is designed around your personal data, not around collecting it. Your history is primarily managed on your device — no social profile, no account required, no advertising-focused tracking experience.</p>
+
+          <div style="margin-top:22px;display:grid;gap:12px">
+            <div style="display:flex;gap:12px;align-items:flex-start"><span style="width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:grid;place-items:center;flex-shrink:0">◉</span><span style="font-size:13.5px;line-height:1.6"><strong style="color:#fff">Local-first</strong><br><span style="opacity:.75">Jaunts, notes and progress are stored locally using SwiftData and an offline spatial index. No Jaunt Log backend is required to use the app.</span></span></div>
+            <div style="display:flex;gap:12px;align-items:flex-start"><span style="width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:grid;place-items:center;flex-shrink:0">⬡</span><span style="font-size:13.5px;line-height:1.6"><strong style="color:#fff">Photos stay with you</strong><br><span style="opacity:.75">When you allow photo access, Jaunt Log reads supported date and location metadata on-device. Originals remain in your Photos library and are not sent to a Jaunt Log server.</span></span></div>
+            <div style="display:flex;gap:12px;align-items:flex-start"><span style="width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:grid;place-items:center;flex-shrink:0">⬔</span><span style="font-size:13.5px;line-height:1.6"><strong style="color:#fff">No account required</strong><br><span style="opacity:.75">Start exploring without creating another online profile.</span></span></div>
+          </div>
+          <p style="margin-top:16px;font-size:12px;opacity:.55;line-height:1.6">We don’t claim “nothing ever leaves your device.” For example, map tiles and optional diagnostics may involve network requests as described in the app’s Privacy screen. See the in-app Privacy section for the accurate, current wording.</p>
+        </div>
+        <div class="split-media">
+          <div class="privacy-visual" aria-hidden="true">
+            <div class="privacy-grid">
+              <div class="pv-col">
+                <div class="pv-label">On your iPhone</div>
+                <div class="pv-card"><i>🖼</i> Photos</div>
+                <div class="pv-card"><i>◎</i> Location</div>
+                <div class="pv-card"><i>✎</i> Your notes</div>
+              </div>
+              <div class="pv-center">
+                <div class="pv-arrows"><span>→</span><span>→</span><span>→</span></div>
+                <div class="pv-phone"><strong>Jaunt Log</strong><span>Private logbook</span></div>
+                <div style="font-size:11px;color:var(--ink-3);text-align:center;font-weight:600">Your journey stays personal.</div>
+              </div>
+              <div class="pv-col">
+                <div class="pv-label">Stays local</div>
+                <div class="pv-card"><i>⬢</i> Offline places</div>
+                <div class="pv-card"><i>▣</i> SwiftData</div>
+                <div class="pv-card"><i>⬣</i> Spatial index</div>
+              </div>
+            </div>
+          </div>
+          <div class="trust-grid">
+            <div class="trust-card">
+              <strong>Local-first</strong>
+              <p>Your journey is primarily managed on your device.</p>
+            </div>
+            <div class="trust-card">
+              <strong>Photo discovery</strong>
+              <p>Use supported photo metadata to help discover past visits.</p>
+            </div>
+            <div class="trust-card">
+              <strong>Offline place data</strong>
+              <p>Geographic information can be available without a live backend.</p>
+            </div>
+            <div class="trust-card">
+              <strong>No account required</strong>
+              <p>Start exploring without creating another online profile.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section section-white" aria-labelledby="how-title">
+    <div class="wrap">
+      <div style="max-width:640px">
+        <p class="kicker">How it works</p>
+        <h2 id="how-title" style="font-size:clamp(28px,4vw,40px);color:var(--forest)">Explore. <em>Record.</em> Look back.</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-num">Explore</div>
+          <h3>Visit somewhere worth remembering.</h3>
+          <p>Walk the coast, wander a garden, step into a historic hall. Jaunt Log quietly recognises where you are — using on-device location and offline place data.</p>
+          <a class="arrow" href="#explore">See places nearby <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">Jaunt Log</div>
+          <h3>Record the place and your journey.</h3>
+          <p>Confirm a jaunt, add a note, keep a photo. Or let your existing photo library help rediscover visits you never logged — all reviewed by you.</p>
+          <a class="arrow" href="#photos">How photo discovery works <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">Look back</div>
+          <h3>Build your personal map of everywhere you’ve explored.</h3>
+          <p>History, progress and badges grow together — a geographic journal that deepens every season, stored privately on your iPhone.</p>
+          <a class="arrow" href="#progress">See progress <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div style="margin-top:18px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--ink-3)">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--brass);display:inline-block"></span>
+        No social feed. No public profile. A quiet companion for people who like going somewhere.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer role="contentinfo">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-mark"><img src="images/branding/icon.png" alt="" width="40" height="40" loading="lazy"></div>
+        <div>
+          <h3>Jaunt Log</h3>
+          <p>Explore outside.<br>Record the journey.<br>Remember the place.</p>
+          <p style="margin-top:10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.5;font-family:JetBrains Mono,monospace">© 2026 Jaunt Log</p>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>App</h4>
+        <a href="#explore">Explore</a>
+        <a href="#history">History</a>
+        <a href="#progress">Progress</a>
+        <a href="#how">How it works</a>
+      </div>
+      <div class="footer-col">
+        <h4>Information</h4>
+        <a href="privacy.html">Privacy</a>
+        <a href="#" id="licensesLink">Licenses</a>
+        <a href="mailto:contact@m-pax.net">Contact</a>
+        <a href="#photos">Photo discovery</a>
+      </div>
+      <div class="footer-col">
+        <h4>Notes</h4>
+        <p style="font-size:13px;line-height:1.6;opacity:.7">Jaunt Log is an independent iPhone app. No affiliation with, or endorsement by, the National Trust or other organisations is implied. Place names and categories are generic.</p>
+        <p class="attr" style="margin-top:12px">Place data includes information from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors, <a href="https://opendatacommons.org/licenses/odbl/" target="_blank" rel="noopener">ODbL</a>. Offline spatial data is bundled for on-device matching.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Jaunt Log • Made for the outdoors. <a href="../index.html">M-PAX Home</a> • <a href="privacy.html">Privacy</a> • <a href="mailto:contact@m-pax.net">contact@m-pax.net</a></span>
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const nav=document.getElementById('nav');
+const menuBtn=document.getElementById('menuBtn');
+const panel=document.getElementById('mobilePanel');
+const toast=document.getElementById('toast');
+let ticking=false;
+addEventListener('scroll',()=>{
+  if(!ticking){requestAnimationFrame(()=>{
+    nav.classList.toggle('scrolled', scrollY>12);
+    ticking=false;
+  });ticking=true}
+},{passive:true});
+function setMenu(open){
+  menuBtn.setAttribute('aria-expanded', String(open));
+  panel.hidden=!open;
+  panel.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-label', open?'Close menu':'Open menu');
+  menuBtn.innerHTML=open
+    ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6 18 18M18 6 6 18"/></svg>'
+    : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+}
+menuBtn.addEventListener('click',()=> setMenu(panel.hidden));
+panel.querySelectorAll('a').forEach(a=> a.addEventListener('click',()=> setMenu(false)));
+addEventListener('keydown',e=>{ if(e.key==='Escape' && !panel.hidden) setMenu(false)});
+function showToast(msg){
+  toast.textContent=msg;
+  toast.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t=setTimeout(()=> toast.classList.remove('show'), 2600);
+}
+document.getElementById('licensesLink')?.addEventListener('click',e=>{
+  e.preventDefault();
+  showToast('Licenses page coming soon — see in-app Settings → Licenses.');
+});
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href');
+    if(id.length>1){
+      const t=document.querySelector(id);
+      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); history.pushState(null,'',id); }
+    }
+  });
+});
+const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!prefersReduced){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(ent=>{
+      if(ent.isIntersecting){ ent.target.classList.add('in'); io.unobserve(ent.target); }
+    });
+ },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+  requestAnimationFrame(()=>{
+    const rp=document.getElementById('route');
+    if(rp) rp.classList.add('animate');
+  });
+}else{
+  document.querySelectorAll('.reveal').forEach(el=> el.classList.add('in'));
+}
+</script>
+</body>
+</html>
