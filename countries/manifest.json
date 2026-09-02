@@ -17,6 +17,14 @@
       "databaseSizeBytes": 57344,
       "placeCount": 47,
       "datasetVersion": "2026.2"
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "databaseURL": "https://m-pax.net/countries/FR.sqlite",
+      "databaseSizeBytes": 57344,
+      "placeCount": 54,
+      "datasetVersion": "2026.2"
     }
   ]
 }
