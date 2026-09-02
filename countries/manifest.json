@@ -5,7 +5,7 @@
     {
       "code": "GB",
       "name": "United Kingdom",
-      "databaseURL": "https://mpax.github.io/countries/GB.sqlite",
+      "databaseURL": "https://m-pax.net/countries/GB.sqlite",
       "databaseSizeBytes": 1236992,
       "placeCount": 2731,
       "datasetVersion": "2026.2"
@@ -13,7 +13,7 @@
     {
       "code": "US",
       "name": "United States",
-      "databaseURL": "https://mpax.github.io/countries/US.sqlite",
+      "databaseURL": "https://m-pax.net/countries/US.sqlite",
       "databaseSizeBytes": 57344,
       "placeCount": 47,
       "datasetVersion": "2026.2"
