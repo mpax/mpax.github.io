@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "generatedAt": "2026-09-02T00:00:00Z",
+  "countries": [
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "databaseURL": "https://mpax.github.io/countries/GB.sqlite",
+      "databaseSizeBytes": 1236992,
+      "placeCount": 2731,
+      "datasetVersion": "2026.2"
+    },
+    {
+      "code": "US",
+      "name": "United States",
+      "databaseURL": "https://mpax.github.io/countries/US.sqlite",
+      "databaseSizeBytes": 57344,
+      "placeCount": 47,
+      "datasetVersion": "2026.2"
+    }
+  ]
+}
