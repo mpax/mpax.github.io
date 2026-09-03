@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-02T00:00:00Z",
+  "generatedAt": "2026-09-03T00:00:00Z",
   "countries": [
     {
       "code": "GB",
@@ -14,16 +14,16 @@
       "code": "US",
       "name": "United States",
       "databaseURL": "https://m-pax.net/countries/US.sqlite",
-      "databaseSizeBytes": 57344,
-      "placeCount": 47,
+      "databaseSizeBytes": 1081344,
+      "placeCount": 3000,
       "datasetVersion": "2026.2"
     },
     {
       "code": "FR",
       "name": "France",
       "databaseURL": "https://m-pax.net/countries/FR.sqlite",
-      "databaseSizeBytes": 94208,
-      "placeCount": 225,
+      "databaseSizeBytes": 1089536,
+      "placeCount": 3000,
       "datasetVersion": "2026.2"
     }
   ]
