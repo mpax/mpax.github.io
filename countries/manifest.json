@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-03T00:00:00Z",
+  "generatedAt": "2026-09-04T00:00:00Z",
   "countries": [
     {
       "code": "GB",
       "name": "United Kingdom",
       "databaseURL": "https://m-pax.net/countries/GB.sqlite",
-      "databaseSizeBytes": 1236992,
-      "placeCount": 2731,
+      "databaseSizeBytes": 1409024,
+      "placeCount": 4000,
       "datasetVersion": "2026.2"
     },
     {
@@ -23,6 +23,22 @@
       "name": "France",
       "databaseURL": "https://m-pax.net/countries/FR.sqlite",
       "databaseSizeBytes": 1089536,
+      "placeCount": 3000,
+      "datasetVersion": "2026.2"
+    },
+    {
+      "code": "CN",
+      "name": "China",
+      "databaseURL": "https://m-pax.net/countries/CN.sqlite",
+      "databaseSizeBytes": 1060864,
+      "placeCount": 3000,
+      "datasetVersion": "2026.2"
+    },
+    {
+      "code": "ES",
+      "name": "Spain",
+      "databaseURL": "https://m-pax.net/countries/ES.sqlite",
+      "databaseSizeBytes": 1097728,
       "placeCount": 3000,
       "datasetVersion": "2026.2"
     }
