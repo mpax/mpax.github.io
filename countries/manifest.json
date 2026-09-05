@@ -8,7 +8,7 @@
       "databaseURL": "https://m-pax.net/countries/GB.sqlite",
       "databaseSizeBytes": 1409024,
       "placeCount": 4000,
-      "datasetVersion": "2026.2"
+      "datasetVersion": "2026.3"
     },
     {
       "code": "US",
@@ -16,7 +16,7 @@
       "databaseURL": "https://m-pax.net/countries/US.sqlite",
       "databaseSizeBytes": 1081344,
       "placeCount": 3000,
-      "datasetVersion": "2026.2"
+      "datasetVersion": "2026.3"
     },
     {
       "code": "FR",
@@ -24,7 +24,7 @@
       "databaseURL": "https://m-pax.net/countries/FR.sqlite",
       "databaseSizeBytes": 1089536,
       "placeCount": 3000,
-      "datasetVersion": "2026.2"
+      "datasetVersion": "2026.3"
     },
     {
       "code": "CN",
@@ -32,7 +32,7 @@
       "databaseURL": "https://m-pax.net/countries/CN.sqlite",
       "databaseSizeBytes": 1060864,
       "placeCount": 3000,
-      "datasetVersion": "2026.2"
+      "datasetVersion": "2026.3"
     },
     {
       "code": "ES",
@@ -40,7 +40,7 @@
       "databaseURL": "https://m-pax.net/countries/ES.sqlite",
       "databaseSizeBytes": 1097728,
       "placeCount": 3000,
-      "datasetVersion": "2026.2"
+      "datasetVersion": "2026.3"
     }
   ]
 }
