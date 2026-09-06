@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "packs": [
+    {
+      "id": "global",
+      "countryCode": null,
+      "version": "1.0",
+      "url": "https://m-pax.net/badges/global.json"
+    },
+    {
+      "id": "FR",
+      "countryCode": "FR",
+      "version": "1.0",
+      "url": "https://m-pax.net/badges/FR.json"
+    }
+  ]
+}

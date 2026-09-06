@@ -1,0 +1,8 @@
+{
+  "id": "FR",
+  "version": "1.0",
+  "badges": [
+    { "id": "museum_10", "title": "Conservateur", "description": "Visit 10 museums in France", "icon": "building.columns.fill", "emoji": "🏛️", "category": "specializations", "rule": { "type": "categoryPlacesVisited", "category": "museum", "country": "FR", "count": 10 } },
+    { "id": "chateau_5", "title": "Châtelain", "description": "Visit 5 historic properties in France", "icon": "house.fill", "emoji": "🏰", "category": "specializations", "rule": { "type": "categoryPlacesVisited", "category": "historicProperty", "country": "FR", "count": 5 } }
+  ]
+}

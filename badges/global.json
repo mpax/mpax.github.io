@@ -1,0 +1,25 @@
+{
+  "id": "global",
+  "version": "1.0",
+  "badges": [
+    { "id": "first_jaunt", "title": "First Jaunt", "description": "Log your first visit", "icon": "flag.fill", "category": "exploration", "rule": { "type": "uniquePlacesVisited", "count": 1 } },
+    { "id": "explorer_5", "title": "Trail Starter", "description": "Visit 5 unique places", "icon": "map.fill", "category": "exploration", "rule": { "type": "uniquePlacesVisited", "count": 5 } },
+    { "id": "explorer_10", "title": "Explorer", "description": "Visit 10 unique places", "icon": "binoculars.fill", "category": "exploration", "rule": { "type": "uniquePlacesVisited", "count": 10 } },
+    { "id": "explorer_25", "title": "Adventurer", "description": "Visit 25 unique places", "icon": "mountain.2.fill", "category": "exploration", "rule": { "type": "uniquePlacesVisited", "count": 25 } },
+    { "id": "explorer_50", "title": "Voyager", "description": "Visit 50 unique places", "icon": "globe.europe.africa.fill", "category": "exploration", "rule": { "type": "uniquePlacesVisited", "count": 50 } },
+    { "id": "explorer_100", "title": "Pathfinder", "description": "Visit 100 unique places", "icon": "star.circle.fill", "category": "exploration", "rule": { "type": "uniquePlacesVisited", "count": 100 } },
+    { "id": "first_national_park", "title": "Park Pioneer", "description": "Visit your first National Park", "icon": "tree.fill", "category": "specializations", "rule": { "type": "categoryPlacesVisited", "category": "nationalPark", "count": 1 } },
+    { "id": "first_historic_property", "title": "Historic Debut", "description": "Visit your first historic property", "icon": "house.fill", "category": "specializations", "rule": { "type": "categoryPlacesVisited", "category": "historicProperty", "count": 1 } },
+    { "id": "landmark_10", "title": "Landmark Explorer", "description": "Visit 10 landmarks", "icon": "eye.fill", "category": "specializations", "rule": { "type": "categoryPlacesVisited", "category": "landmark", "count": 10 } },
+    { "id": "nature_10", "title": "Nature Enthusiast", "description": "Visit 10 nature spots", "icon": "leaf.circle.fill", "category": "specializations", "rule": { "type": "categoryPlacesVisited", "category": "nature", "count": 10 } },
+    { "id": "historic_property_10", "title": "Estate Explorer", "description": "Visit 10 historic properties", "icon": "scroll.fill", "category": "specializations", "rule": { "type": "categoryPlacesVisited", "category": "historicProperty", "count": 10 } },
+    { "id": "heritage_10", "title": "Heritage Keeper", "description": "Visit 10 heritage sites", "icon": "building.columns.fill", "category": "specializations", "rule": { "type": "categoryPlacesVisited", "category": "heritage", "count": 10 } },
+    { "id": "garden_5", "title": "Garden Wanderer", "description": "Visit 5 gardens", "icon": "leaf.fill", "category": "specializations", "rule": { "type": "categoryPlacesVisited", "category": "garden", "count": 5 } },
+    { "id": "museum_5", "title": "Curator", "description": "Visit 5 museums", "icon": "building.columns", "category": "specializations", "rule": { "type": "categoryPlacesVisited", "category": "museum", "count": 5 } },
+    { "id": "jaunts_10", "title": "Frequent Jaunter", "description": "Log 10 jaunts", "icon": "clock.arrow.circlepath", "category": "dedication", "rule": { "type": "totalJaunts", "count": 10 } },
+    { "id": "jaunts_50", "title": "Dedicated Explorer", "description": "Log 50 jaunts", "icon": "clock.fill", "category": "dedication", "rule": { "type": "totalJaunts", "count": 50 } },
+    { "id": "country_1", "title": "New Horizons", "description": "Have jaunts in 1 country", "icon": "airplane", "category": "mastery", "rule": { "type": "countriesVisited", "count": 1 } },
+    { "id": "country_3", "title": "World Wanderer", "description": "Have jaunts in 3 countries", "icon": "globe", "category": "mastery", "rule": { "type": "countriesVisited", "count": 3 } },
+    { "id": "country_5", "title": "Global Citizen", "description": "Have jaunts in 5 countries", "icon": "crown.fill", "category": "mastery", "rule": { "type": "countriesVisited", "count": 5 } }
+  ]
+}
