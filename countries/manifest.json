@@ -41,6 +41,14 @@
       "databaseSizeBytes": 1097728,
       "placeCount": 3000,
       "datasetVersion": "2026.3"
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "databaseURL": "https://m-pax.net/countries/DE.sqlite",
+      "databaseSizeBytes": 8028160,
+      "placeCount": 20000,
+      "datasetVersion": "2026.3"
     }
   ]
 }
