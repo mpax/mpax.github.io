@@ -49,6 +49,14 @@
       "databaseSizeBytes": 8028160,
       "placeCount": 20000,
       "datasetVersion": "2026.3"
+    },
+    {
+      "code": "IT",
+      "name": "Italy",
+      "databaseURL": "https://m-pax.net/countries/IT.sqlite",
+      "databaseSizeBytes": 3215360,
+      "placeCount": 8000,
+      "datasetVersion": "2026.3"
     }
   ]
 }
