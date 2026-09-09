@@ -14,8 +14,8 @@
       "code": "US",
       "name": "United States",
       "databaseURL": "https://m-pax.net/countries/US.sqlite",
-      "databaseSizeBytes": 1081344,
-      "placeCount": 3000,
+      "databaseSizeBytes": 9338880,
+      "placeCount": 25000,
       "datasetVersion": "2026.3"
     },
     {
