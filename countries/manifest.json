@@ -57,6 +57,14 @@
       "databaseSizeBytes": 3215360,
       "placeCount": 8000,
       "datasetVersion": "2026.3"
+    },
+    {
+      "code": "JP",
+      "name": "Japan",
+      "databaseURL": "https://m-pax.net/countries/JP.sqlite",
+      "databaseSizeBytes": 3047424,
+      "placeCount": 8000,
+      "datasetVersion": "2026.3"
     }
   ]
 }
