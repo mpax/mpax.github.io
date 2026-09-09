@@ -38,8 +38,8 @@
       "code": "ES",
       "name": "Spain",
       "databaseURL": "https://m-pax.net/countries/ES.sqlite",
-      "databaseSizeBytes": 1097728,
-      "placeCount": 3000,
+      "databaseSizeBytes": 2928640,
+      "placeCount": 8000,
       "datasetVersion": "2026.3"
     },
     {
