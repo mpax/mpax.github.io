@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>HomeLesson — One App for the Whole of Home Education</title>
+<meta name="description" content="HomeLesson is a calm, on-device home-education planner, tracker and evidence logbook. One-tap session timer, weekly timetable with offline reminders, parent-tracked topic confidence, guided GCSE maths path and LA-ready PDF portfolio. No account, no cloud. For iPhone and iPad.">
+<meta name="keywords" content="HomeLesson, home education, homeschool planner, GCSE maths, study timer, timetable, learning log, LA portfolio, iPhone app, iPad app">
+<meta name="author" content="HomeLesson">
+<meta name="theme-color" content="#2C467E">
+<link rel="canonical" href="https://m-pax.net/homelesson/">
+<link rel="icon" type="image/png" sizes="32x32" href="images/branding/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/branding/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/branding/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m-pax.net/homelesson/">
+<meta property="og:title" content="HomeLesson — One App for the Whole of Home Education">
+<meta property="og:description" content="Plan the term, run the school day, capture evidence and produce an LA-ready record — for every subject. Guided GCSE maths path included. On-device, private by default.">
+<meta property="og:image" content="https://m-pax.net/homelesson/images/branding/og-image.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HomeLesson — One App for the Whole of Home Education">
+<meta name="twitter:description" content="One-tap session timer, timetable with offline reminders, parent-tracked confidence and LA-ready PDF — all on your device.">
+<meta name="twitter:image" content="https://m-pax.net/homelesson/images/branding/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --deep:#2C467E;
+  --deep-2:#22375F;
+  --deep-ink:#1A2A4A;
+  --brand:#3A5BA0;
+  --brand-soft:#5B7CC2;
+  --amber:#D9963B;
+  --amber-deep:#B57A25;
+  --amber-soft:#F7E8CF;
+  --leaf:#4E7C4E;
+  --leaf-soft:#E4EDDF;
+  --clay:#B8473D;
+  --paper:#FAF7F1;
+  --paper-warm:#F2EDE2;
+  --paper-deep:#E9E1D1;
+  --surface:#FFFEFB;
+  --surface-2:#F5F0E6;
+  --ink:#22303C;
+  --ink-2:#5A6B7A;
+  --ink-3:#8A97A3;
+  --border:#E5DED2;
+  --border-strong:#D3C9B4;
+  --radius-sm:12px;
+  --radius:20px;
+  --radius-lg:28px;
+  --radius-pill:999px;
+  --shadow-sm:0 1px 3px rgba(34,48,60,.08),0 1px 2px rgba(34,48,60,.06);
+  --shadow:0 8px 24px rgba(34,48,60,.08),0 4px 8px rgba(34,48,60,.06);
+  --shadow-lg:0 24px 48px rgba(26,42,74,.18),0 12px 24px rgba(26,42,74,.10);
+  --max:1160px;
+  --nav-h:68px;
+}
+html{scroll-behavior:smooth;scrollbar-gutter:stable}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{
+  font-family:Inter, -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{color:inherit}
+img{max-width:100%;display:block}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--amber-deep);outline-offset:3px}
+.skip{
+  position:absolute;left:-9999px;top:12px;z-index:9999;
+  background:var(--deep);color:#fff;padding:10px 16px;border-radius:8px;font-weight:600
+}
+.skip:focus{left:12px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.mono{font-family:"JetBrains Mono", ui-monospace, monospace}
+.serif{font-family:"Instrument Serif", Georgia, serif}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+@media(min-width:768px){.wrap{padding:0 32px}}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--brand);background:rgba(58,91,160,.08);
+  border:1px solid rgba(58,91,160,.16);padding:6px 10px;border-radius:999px
+}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--amber)}
+.display{
+  font-family:"Instrument Serif", Georgia, serif;
+  font-weight:400;line-height:.95;letter-spacing:-.03em;
+}
+
+nav{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  height:var(--nav-h);
+  background:rgba(250,247,241,.86);
+  backdrop-filter:blur(16px) saturate(1.2);
+  -webkit-backdrop-filter:blur(16px) saturate(1.2);
+  border-bottom:1px solid rgba(229,222,210,.9);
+  transition:height .2s, background .2s, box-shadow .2s;
+}
+nav.scrolled{height:60px;background:rgba(255,254,251,.94);box-shadow:0 1px 0 rgba(34,48,60,.06),0 4px 16px rgba(34,48,60,.06)}
+.nav-inner{max-width:var(--max);margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+@media(min-width:768px){.nav-inner{padding:0 32px}}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand-mark{
+  width:36px;height:36px;border-radius:10px;overflow:hidden;
+  box-shadow:0 2px 8px rgba(26,42,74,.25);flex-shrink:0;background:var(--deep-ink);
+  display:grid;place-items:center;
+}
+.brand-mark img{width:100%;height:100%;object-fit:cover}
+.brand-wordmark{
+  font-family:"Instrument Serif", Georgia, serif;
+  font-size:19px;letter-spacing:-.02em;line-height:1;color:var(--deep);font-weight:400
+}
+.brand-wordmark span{font-style:italic;font-weight:400;color:var(--brand)}
+.nav-links{display:none;align-items:center;gap:26px;list-style:none}
+@media(min-width:900px){.nav-links{display:flex}}
+.nav-links a{
+  text-decoration:none;font-size:13.5px;font-weight:500;
+  color:var(--ink-2);letter-spacing:.01em;position:relative;padding:4px 0
+}
+.nav-links a:hover{color:var(--deep)}
+.nav-links a::after{
+  content:"";position:absolute;left:0;right:0;bottom:-4px;height:1.5px;
+  background:var(--deep);transform:scaleX(0);transform-origin:left;transition:transform .2s
+}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{display:flex;align-items:center;gap:12px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-size:14px;font-weight:600;letter-spacing:.01em;
+  padding:11px 18px;border-radius:999px;text-decoration:none;
+  border:1px solid transparent;cursor:pointer;white-space:nowrap;
+  transition:transform .15s, box-shadow .15s, background .15s, color .15s, border-color .15s
+}
+.btn:active{transform:scale(.98)}
+.btn-amber{
+  background:var(--amber);color:#22303C;
+  box-shadow:0 4px 14px rgba(217,150,59,.35);
+}
+.btn-amber:hover{background:var(--amber-deep);color:#fff;box-shadow:0 6px 20px rgba(217,150,59,.4);transform:translateY(-1px)}
+.btn-deep{
+  background:var(--deep);color:#fff;
+  box-shadow:0 4px 14px rgba(44,70,126,.26);
+}
+.btn-deep:hover{background:var(--deep-2);transform:translateY(-1px)}
+.btn-secondary{
+  background:var(--surface);color:var(--deep);
+  border-color:var(--border);box-shadow:var(--shadow-sm)
+}
+.btn-secondary:hover{border-color:var(--border-strong);transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn-sm{padding:8px 14px;font-size:13px}
+.app-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:#000;color:#fff;border-radius:10px;padding:8px 14px 8px 12px;
+  text-decoration:none;line-height:1;transition:transform .15s, opacity .15s
+}
+.app-badge:hover{transform:translateY(-1px);opacity:.92}
+.app-badge small{font-size:9px;letter-spacing:.06em;text-transform:uppercase;opacity:.8;font-weight:500}
+.app-badge strong{font-size:15px;font-weight:600;letter-spacing:-.02em}
+.mobile-toggle{
+  display:grid;place-items:center;width:40px;height:40px;border-radius:999px;
+  border:1px solid var(--border);background:var(--surface);color:var(--deep);cursor:pointer
+}
+@media(min-width:900px){.mobile-toggle{display:none}}
+.mobile-panel{
+  display:none;position:fixed;inset:var(--nav-h) 0 auto 0;
+  background:rgba(255,254,251,.98);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);padding:16px 24px 24px;z-index:49
+}
+.mobile-panel.open{display:block}
+.mobile-panel a{display:block;padding:14px 0;text-decoration:none;color:var(--ink);font-weight:500;border-bottom:1px solid var(--border)}
+.mobile-panel a:last-child{border-bottom:0}
+
+.hero{
+  position:relative;overflow:hidden;
+  background:var(--paper);
+  padding:calc(var(--nav-h) + 36px) 0 48px;
+}
+@media(min-width:960px){.hero{padding:calc(var(--nav-h) + 56px) 0 72px}}
+.hero-bg{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+}
+.hero-bg svg{position:absolute;inset:0;width:100%;height:100%;opacity:.16}
+.hero-bg::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(800px 600px at 70% 20%, rgba(217,150,59,.12), transparent 60%),
+    radial-gradient(700px 500px at 10% 80%, rgba(58,91,160,.10), transparent 60%);
+}
+.hero-grid{
+  position:relative;z-index:1;
+  display:grid;gap:40px;align-items:center;
+}
+@media(min-width:960px){.hero-grid{grid-template-columns:1.05fr .95fr;gap:48px}}
+.hero-copy{max-width:580px}
+.hero h1{
+  font-family:"Instrument Serif", Georgia, serif;
+  font-size:clamp(38px, 6vw, 62px);
+  font-weight:400;line-height:.94;letter-spacing:-.04em;color:var(--deep-ink);
+  margin:18px 0 16px;
+}
+.hero h1 em{font-style:italic;color:var(--brand);font-weight:400}
+.hero-lead{
+  font-size:clamp(16px, 2.2vw, 18px);
+  line-height:1.6;color:var(--ink-2);max-width:46ch;
+  margin-bottom:12px;
+}
+.hero-note{
+  font-size:13px;line-height:1.6;color:var(--ink-3);max-width:54ch;margin-bottom:24px;
+}
+.hero-note strong{color:var(--ink-2)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:22px}
+.hero-meta{
+  display:flex;flex-wrap:wrap;gap:16px;align-items:center;
+  font-size:12.5px;color:var(--ink-3);border-top:1px solid var(--border);padding-top:18px;margin-top:4px
+}
+.hero-meta span{display:inline-flex;align-items:center;gap:6px}
+.hero-meta svg{opacity:.6}
+.hero-coord{
+  display:none;font-family:"JetBrains Mono", monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-top:18px;gap:16px
+}
+@media(min-width:960px){.hero-coord{display:flex}}
+.device-wrap{position:relative;display:grid;place-items:center;padding:12px}
+@media(min-width:960px){.device-wrap{padding:8px 0 8px 24px}}
+.device{
+  position:relative;width:min(320px, 86vw);aspect-ratio:9/19.3;
+  background:#1A2A4A;border-radius:48px;padding:12px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.2) inset,
+    0 0 0 1px rgba(34,48,60,.12),
+    0 20px 60px rgba(26,42,74,.3), 0 8px 24px rgba(26,42,74,.2);
+  transform:rotate(-.6deg);
+}
+@media(min-width:960px){.device{width:340px}}
+.device-screen{
+  width:100%;height:100%;background:#000;border-radius:38px;overflow:hidden;
+  position:relative;display:flex;flex-direction:column;
+  border:1px solid rgba(0,0,0,.06)
+}
+.device-screen img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.hero-card-float{
+  position:absolute;right:-6px;bottom:18px;
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:12px 14px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:10px;
+  font-size:12px;transform:rotate(1.2deg);max-width:240px;z-index:3
+}
+@media(max-width:959px){.hero-card-float{display:none}}
+.hero-card-float strong{font-size:13px;color:var(--deep);display:block}
+.hero-card-float small{color:var(--ink-3);font-size:11px}
+.hero-card-float2{
+  position:absolute;left:-8px;top:64px;
+  background:var(--deep);color:#fff;border-radius:14px;
+  padding:10px 12px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:8px;
+  font-size:11px;transform:rotate(-1.6deg);max-width:220px;z-index:3
+}
+@media(max-width:959px){.hero-card-float2{display:none}}
+@media(prefers-reduced-motion:no-preference){
+  .device{animation:float 6s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:rotate(-.6deg) translateY(0)}50%{transform:rotate(-.2deg) translateY(-6px)}}
+}
+
+.section{padding:72px 0;position:relative}
+@media(min-width:768px){.section{padding:88px 0}}
+.section-paper{background:var(--paper)}
+.section-white{background:var(--surface)}
+.section-cream{background:var(--surface-2)}
+.section-deep{background:var(--deep-ink);color:#E8E4D8}
+.section h2{
+  font-family:"Instrument Serif", Georgia, serif;
+  font-weight:400;line-height:.95;letter-spacing:-.03em
+}
+.section h2 em{font-style:italic;font-weight:400}
+.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--brand);margin-bottom:12px}
+.rule{height:1px;background:var(--border);margin:0}
+.prose{color:var(--ink-2);font-size:15.5px;line-height:1.7}
+.prose strong{color:var(--ink);font-weight:600}
+
+.value-grid{display:grid;gap:22px;margin-top:40px}
+@media(min-width:760px){.value-grid{grid-template-columns:repeat(3,1fr);gap:24px}}
+.value-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  padding:24px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden
+}
+.value-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg, var(--deep), var(--amber));opacity:.9
+}
+.value-icon{
+  width:40px;height:40px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border);
+  display:grid;place-items:center;margin-bottom:16px;color:var(--deep)
+}
+.value-card h3{font-size:16px;font-weight:700;letter-spacing:-.02em;color:var(--deep-ink);margin-bottom:8px}
+.value-card p{font-size:14px;line-height:1.6;color:var(--ink-2)}
+.value-card small{
+  display:inline-flex;align-items:center;gap:6px;margin-top:14px;
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--brand)
+}
+
+.split{display:grid;gap:40px;align-items:center}
+@media(min-width:900px){.split{grid-template-columns:1.02fr .98fr;gap:56px}}
+@media(min-width:900px){.split.reverse > *:first-child{order:2}.split.reverse > *:last-child{order:1}}
+.split-media{position:relative}
+.frame-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  padding:18px;box-shadow:var(--shadow);overflow:hidden
+}
+.frame-card header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:14px
+}
+.frame-card header strong{font-size:13px;letter-spacing:-.01em;color:var(--deep)}
+.frame-card header span{font-size:11px;color:var(--ink-3);font-family:"JetBrains Mono",monospace}
+.check-list{display:grid;gap:10px}
+.check-item{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:12px;border:1px solid var(--border);border-radius:14px;background:var(--surface-2)
+}
+.check-item:first-child{background:var(--surface);border-color:var(--border-strong);box-shadow:var(--shadow-sm)}
+.check-item .dot{width:28px;height:28px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0;color:var(--deep)}
+.chips-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip-subj{
+  font-size:12px;font-weight:600;padding:7px 12px;border-radius:999px;
+  background:var(--surface);border:1px solid var(--border);color:var(--ink-2);
+  display:inline-flex;align-items:center;gap:6px
+}
+.chip-subj i{width:6px;height:6px;border-radius:50%;background:var(--brand);display:inline-block}
+.chip-subj.on{background:var(--deep);border-color:var(--deep);color:#fff}
+.chip-subj.on i{background:var(--amber)}
+
+.dark-diagram{
+  background:rgba(255,255,255,.06);color:#E8E4D8;border-radius:24px;padding:28px;
+  position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.1)
+}
+@media(min-width:768px){.dark-diagram{padding:36px}}
+.dark-diagram::before{
+  content:"";position:absolute;inset:0;opacity:.07;
+  background:
+    linear-gradient(rgba(255,255,255,.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.4) 1px, transparent 1px);
+  background-size:32px 32px;
+}
+.dark-diagram>*{position:relative}
+.diagram-row{display:grid;gap:14px;align-items:center;margin-top:20px}
+@media(min-width:640px){.diagram-row{grid-template-columns:1fr auto 1fr auto 1fr}}
+.diagram-box{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;padding:16px;text-align:center;backdrop-filter:blur(8px)
+}
+.diagram-box strong{font-size:13px;display:block;margin-bottom:4px}
+.diagram-box span{font-size:12px;opacity:.72;line-height:1.5}
+.diagram-arrow{
+  display:grid;place-items:center;color:var(--amber);font-size:18px;transform:rotate(90deg)
+}
+@media(min-width:640px){.diagram-arrow{transform:none}}
+.strand-grid{display:grid;gap:14px;margin-top:24px}
+@media(min-width:700px){.strand-grid{grid-template-columns:repeat(5,1fr)}}
+.strand-card{
+  display:flex;gap:10px;align-items:flex-start;flex-direction:column;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px
+}
+.strand-card strong{font-size:12px;color:#fff}
+.strand-card span{font-size:11.5px;opacity:.72;line-height:1.5}
+.strand-card i{
+  width:30px;height:30px;border-radius:9px;background:rgba(217,150,59,.18);border:1px solid rgba(217,150,59,.32);
+  display:grid;place-items:center;flex-shrink:0;color:#F0D6A8;font-style:normal;font-size:14px
+}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+.stat{
+  background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px 16px;text-align:center
+}
+.stat strong{font-family:"Instrument Serif", Georgia, serif;font-size:28px;font-weight:400;color:var(--deep-ink);line-height:1}
+.stat strong.mono{font-family:"JetBrains Mono",monospace;font-size:22px;font-weight:600}
+.stat span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--ink-3);display:block;margin-top:6px}
+
+.privacy-visual{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:22px;
+  box-shadow:var(--shadow-sm);position:relative;overflow:hidden
+}
+.privacy-visual::before{
+  content:"";position:absolute;inset:0;opacity:.05;
+  background:
+    linear-gradient(var(--deep) 1px, transparent 1px),
+    linear-gradient(90deg, var(--deep) 1px, transparent 1px);
+  background-size:22px 22px;
+}
+.privacy-grid{position:relative;display:grid;gap:14px}
+@media(min-width:560px){.privacy-grid{grid-template-columns:1fr auto 1fr}}
+.pv-col{display:grid;gap:10px;align-content:start}
+.pv-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink-3);text-align:center}
+.pv-card{
+  background:var(--paper);border:1px solid var(--border);border-radius:14px;
+  padding:12px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;color:var(--deep-ink)
+}
+.pv-card i{width:32px;height:32px;border-radius:10px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0;font-style:normal}
+.pv-center{display:grid;place-items:center;gap:10px;padding:10px 0}
+.pv-phone{
+  width:100%;background:var(--deep);color:#fff;border-radius:16px;padding:16px;text-align:center;
+  box-shadow:0 8px 20px rgba(26,42,74,.24)
+}
+.pv-phone strong{font-family:"Instrument Serif", Georgia, serif;font-size:18px;font-weight:400;display:block}
+.pv-phone span{font-size:11px;opacity:.8}
+.trust-grid{display:grid;gap:14px;margin-top:28px}
+@media(min-width:720px){.trust-grid{grid-template-columns:repeat(4,1fr)}}
+.trust-card{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;padding:18px;backdrop-filter:blur(8px)
+}
+.trust-card strong{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#F0D6A8;display:block;margin-bottom:8px}
+.trust-card p{font-size:13px;line-height:1.6;opacity:.84}
+.trust-card p strong{font-size:13px;letter-spacing:0;text-transform:none;color:#fff;display:inline}
+
+.steps{display:grid;gap:16px;margin-top:32px;counter-reset:step}
+@media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr);gap:18px}}
+.step{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  padding:24px;position:relative;overflow:hidden;box-shadow:var(--shadow-sm)
+}
+.step::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--border)}
+.step:first-child::before{background:var(--amber)}
+.step:nth-child(2)::before{background:var(--deep)}
+.step:nth-child(3)::before{background:var(--leaf)}
+.step-num{
+  font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);display:flex;align-items:center;gap:10px;margin-bottom:14px;font-weight:600
+}
+.step-num::before{
+  counter-increment:step;content:"0" counter(step);
+  width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  background:var(--surface-2);border:1px solid var(--border);font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;color:var(--deep)
+}
+.step h3{font-family:"Instrument Serif", Georgia, serif;font-size:22px;font-weight:400;color:var(--deep-ink);margin-bottom:8px}
+.step p{font-size:14px;line-height:1.6;color:var(--ink-2)}
+.step .arrow{margin-top:16px;color:var(--brand);display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;text-decoration:none}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+
+.shots{display:grid;gap:14px;margin-top:28px}
+@media(min-width:760px){.shots{grid-template-columns:1fr 1fr;gap:18px}}
+.shot{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-sm)
+}
+.shot img{width:100%;height:auto;display:block;background:var(--surface-2)}
+.shot figcaption{padding:12px 16px;font-size:12px;color:var(--ink-3);border-top:1px solid var(--border);font-family:"JetBrains Mono",monospace}
+.shot figcaption strong{color:var(--deep)}
+
+.review-box{
+  background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px;margin-top:24px;
+  display:grid;gap:10px
+}
+@media(min-width:760px){.review-box{grid-template-columns:1fr 1fr;gap:20px}}
+.review-box h3{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin-bottom:6px}
+.review-box dl{display:grid;gap:8px;font-size:13px}
+.review-box dt{font-weight:700;color:var(--ink);font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase}
+.review-box dd{color:var(--ink-2);margin:0;line-height:1.6}
+.review-box dd a{color:var(--brand)}
+
+.cta{
+  background:var(--deep-ink);color:#E8E4D8;position:relative;overflow:hidden;
+  border-top:1px solid rgba(255,255,255,.06)
+}
+.cta::before{
+  content:"";position:absolute;inset:0;opacity:.10;
+  background:
+    radial-gradient(600px 400px at 20% 0%, rgba(217,150,59,.45), transparent 60%),
+    radial-gradient(800px 600px at 90% 100%, rgba(250,247,241,.3), transparent 60%);
+}
+.cta::after{
+  content:"";position:absolute;inset:0;opacity:.06;
+  background:
+    linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
+  background-size:40px 40px;
+}
+.cta-inner{position:relative;text-align:center;max-width:720px;margin:0 auto;padding:24px 0}
+.cta h2{font-family:"Instrument Serif", Georgia, serif;font-size:clamp(32px, 5vw, 52px);font-weight:400;line-height:.95;letter-spacing:-.03em;color:#fff;margin-bottom:14px}
+.cta h2 em{font-style:italic;color:#F0D6A8}
+.cta p{font-size:15px;line-height:1.7;opacity:.82;max-width:56ch;margin:0 auto 10px}
+.cta-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:22px}
+.cta .btn-amber{background:#fff;color:var(--deep-ink);box-shadow:0 8px 20px rgba(0,0,0,.18)}
+.cta .btn-amber:hover{background:var(--amber-soft);color:var(--deep-ink)}
+.cta-note{margin-top:18px;font-size:12px;opacity:.62;line-height:1.6}
+.cta-note a{color:#F0D6A8;text-underline-offset:3px}
+
+footer{background:#141F36;color:#9AA7BD;padding:48px 0 32px;border-top:1px solid rgba(255,255,255,.06)}
+.footer-grid{display:grid;gap:32px}
+@media(min-width:900px){.footer-grid{grid-template-columns:1.4fr .7fr .7fr .9fr}}
+.footer-brand{display:flex;gap:12px;align-items:flex-start}
+.footer-brand-mark{width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0;background:#fff;padding:0}
+.footer-brand-mark img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+.footer-brand h3{font-family:"Instrument Serif", Georgia, serif;font-size:18px;font-weight:400;color:#fff;letter-spacing:-.02em}
+.footer-brand p{font-size:13px;line-height:1.6;opacity:.7;margin-top:6px;max-width:34ch}
+.footer-col h4{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#fff;opacity:.9;margin-bottom:14px}
+.footer-col a{display:block;font-size:13.5px;color:#9AA7BD;text-decoration:none;padding:5px 0}
+.footer-col a:hover{color:#fff}
+.footer-bottom{
+  margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);
+  display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;
+  font-size:12.5px;color:#6E7E96
+}
+.footer-bottom a{color:#9AA7BD;text-decoration:none}
+.footer-bottom a:hover{color:#fff}
+.limit{font-size:12px;opacity:.62;line-height:1.6}
+.limit a{color:#9AA7BD;text-decoration:underline;text-underline-offset:3px}
+.toast{
+  position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(80px);
+  background:var(--deep-ink);color:#fff;padding:12px 18px;border-radius:999px;
+  font-size:13px;font-weight:600;box-shadow:var(--shadow-lg);opacity:0;transition:transform .3s, opacity .3s;z-index:60;pointer-events:none;max-width:calc(100vw - 48px);text-align:center
+}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav id="nav" aria-label="Primary">
+  <div class="nav-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <a href="../index.html" aria-label="Back to M-PAX home" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--ink-3);text-decoration:none;border:1px solid var(--border);background:var(--surface);padding:6px 10px;border-radius:999px;white-space:nowrap">← M-PAX</a>
+      <a class="brand" href="index.html" aria-label="HomeLesson home">
+        <span class="brand-mark" aria-hidden="true"><img src="images/branding/icon.png" alt="" width="36" height="36" loading="eager"></span>
+        <span class="brand-wordmark">Home<em style="font-style:italic;color:var(--brand)">Lesson</em></span>
+      </a>
+    </div>
+    <ul class="nav-links" role="list">
+      <li><a href="#timer">Timer</a></li>
+      <li><a href="#subjects">Subjects</a></li>
+      <li><a href="#guided">Guided maths</a></li>
+      <li><a href="#records">Records</a></li>
+      <li><a href="#privacy">Privacy</a></li>
+      <li><a href="#how">How it works</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn-deep btn-sm" href="mailto:contact@m-pax.net">Contact</a>
+      <button class="mobile-toggle" id="menuBtn" aria-expanded="false" aria-controls="mobilePanel" aria-label="Open menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-panel" id="mobilePanel" hidden>
+  <a href="#timer">Timer</a>
+  <a href="#subjects">Subjects</a>
+  <a href="#guided">Guided maths</a>
+  <a href="#records">Records</a>
+  <a href="#privacy">Privacy</a>
+  <a href="#how">How it works</a>
+  <a href="mailto:contact@m-pax.net" style="color:var(--deep);font-weight:700">Contact</a>
+</div>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-bg" aria-hidden="true">
+      <svg viewBox="0 0 1200 800" preserveAspectRatio="none" role="presentation">
+        <defs>
+          <pattern id="hlgrid" width="120" height="120" patternUnits="userSpaceOnUse" patternTransform="rotate(4)">
+            <circle cx="30" cy="40" r="1.4" fill="#2C467E" opacity=".5"/>
+            <circle cx="60" cy="70" r="1.1" fill="#2C467E" opacity=".35"/>
+            <circle cx="95" cy="36" r="1" fill="#D9963B" opacity=".45"/>
+          </pattern>
+        </defs>
+        <rect width="1200" height="800" fill="url(#hlgrid)"/>
+        <g opacity=".12" stroke="#2C467E" stroke-width=".7" fill="none">
+          <path d="M-40 520 Q300 480 560 520 T1240 500"/>
+          <path d="M-40 560 Q300 520 560 560 T1240 540"/>
+          <path d="M-40 600 Q300 560 560 600 T1240 580"/>
+        </g>
+        <g font-family="JetBrains Mono, monospace" font-size="9" fill="#5A6B7A" opacity=".35">
+          <text x="48" y="28">ON THIS DEVICE — NO ACCOUNT — NO CLOUD</text>
+          <text x="980" y="760">MM:SS • ABSOLUTE-DATE TIMER</text>
+          <text x="48" y="760">iPHONE + iPAD • iOS 17+</text>
+        </g>
+      </svg>
+    </div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Home-education planner &amp; evidence log • iPhone + iPad</span>
+          <h1 id="hero-title">One app for the whole of <em>home education.</em></h1>
+          <p class="hero-lead">HomeLesson helps a home-educating parent plan the term, run the school day, capture evidence of learning, and produce a local-authority-ready record — for every subject, not just one.</p>
+          <p class="hero-note"><strong>Local-first privacy:</strong> records stay private unless you export them. No account, no cloud sync, no analytics. <strong>The parent is the teacher</strong> — confidence is tracked by parent, never a grade, prediction or assessment.</p>
+          <div class="hero-actions">
+            <span class="app-badge" aria-label="Coming soon on the App Store" style="cursor:default">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.7 17.3c-.4.6-.9 1.2-1.5 1.6-.5.4-1.1.6-1.9.6-.6 0-1.1-.1-1.6-.4-.4-.3-.8-.4-1.3-.4-.5 0-.9.1-1.3.4-.4.3-.9.4-1.5.4-.7 0-1.3-.2-1.9-.6-.6-.4-1.1-1-1.5-1.7-1-1.6-1.6-3.3-1.6-5 0-1 .3-1.9.8-2.7.5-.8 1.2-1.4 2-1.9.6-.4 1.3-.6 2-.6.6 0 1.1.2 1.6.5.4.3.7.4 1 .4.3 0 .7-.1 1.1-.4.6-.4 1.2-.6 1.9-.6.7 0 1.4.2 2 .6-.1.1-.2.2-.3.3-.6.6-1 1.3-1 2.1 0 .8.3 1.5.9 2.1.6.6 1.3.9 2.2 1 0 .4-.1.9-.2 1.3-.2.8-.6 1.6-1.2 2.4zM12.5 6.2c0-.6.2-1.2.6-1.7.4-.5 1-.9 1.7-1.1-.1.7-.4 1.3-.9 1.8-.4.5-1 .9-1.6 1.1 0-.1 0-.1.2-.1z"/></svg>
+              <span><small>Coming soon on the</small><strong>App Store</strong></span>
+            </span>
+            <a class="btn btn-secondary" href="#timer">See how it works <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero-meta" aria-label="Highlights">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> On this device — no account</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> One-tap timer + reminders</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg> LA-ready PDF portfolio</span>
+          </div>
+          <div class="hero-coord" aria-hidden="true">
+            <span>— 27 subjects • 618 topics • 11 option groups</span><span>Airplane-mode ready</span><span>iOS 17+</span>
+          </div>
+        </div>
+
+        <div class="device-wrap">
+          <div class="device">
+            <div class="device-screen">
+              <img src="images/screenshots/iphone-01-today.png" alt="HomeLesson Today screen — Start session timer, today's schedule and recent sessions" loading="eager" fetchpriority="high">
+            </div>
+          </div>
+          <div class="hero-card-float2" role="note" aria-label="Timer note">⏱ One tap — survives lock &amp; relaunch</div>
+          <div class="hero-card-float" role="note" aria-label="Privacy note">
+            <span style="width:36px;height:36px;border-radius:10px;background:var(--surface-2);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0">🔒</span>
+            <span><strong>Saved on this device</strong><small>No account • works in Airplane Mode</small></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white" aria-labelledby="value-title">
+    <div class="wrap">
+      <div style="max-width:660px">
+        <p class="kicker">Why HomeLesson</p>
+        <h2 id="value-title" style="font-size:clamp(32px,4.5vw,44px);color:var(--deep-ink)">Calm, reliable, <em>honest.</em></h2>
+        <p class="prose" style="margin-top:14px">Five promises, stated up front in the app: one app for all home education; proof without paperwork; know what&rsquo;s covered; a guided GCSE maths path; reliable and private. The app organises and evidences learning — it never claims to assess your child or replace your judgement.</p>
+      </div>
+      <div class="value-grid">
+        <article class="value-card reveal">
+          <div class="value-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5"/><path d="M9 2h6"/></svg></div>
+          <h3>Run the day in one tap</h3>
+          <p>A large session timer on Today. Start time is persisted before anything changes on screen, so elapsed time survives backgrounding, lock, termination and relaunch. Then attach topics, photos and a note.</p>
+          <small><span aria-hidden="true">—</span> No pause • no silent loss</small>
+        </article>
+        <article class="value-card reveal">
+          <div class="value-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M9 18h4"/></svg></div>
+          <h3>Know what&rsquo;s covered</h3>
+          <p>Every subject gets required-topic checklists (27 subjects, 618 topics) plus your own custom topics. Confidence is tapped by you — not started, learning, confident — and option picks are handled as picks, never a flat list.</p>
+          <small><span aria-hidden="true">—</span> Tracked by parent, not a grade</small>
+        </article>
+        <article class="value-card reveal">
+          <div class="value-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg></div>
+          <h3>Proof without paperwork</h3>
+          <p>The learning record and LA-ready portfolio are by-products of normal daily use. Pick a child and date range, toggle sections, preview the PDF and share through the system share sheet.</p>
+          <small><span aria-hidden="true">—</span> You stay in control</small>
+        </article>
+      </div>
+      <div class="chips-row" aria-label="Example subjects">
+        <span class="chip-subj on"><i></i>Maths · Guided</span>
+        <span class="chip-subj"><i></i>English</span>
+        <span class="chip-subj"><i></i>Science</span>
+        <span class="chip-subj"><i></i>Biology</span>
+        <span class="chip-subj"><i></i>History</span>
+        <span class="chip-subj"><i></i>Geography</span>
+        <span class="chip-subj"><i></i>French</span>
+        <span class="chip-subj"><i></i>+ 20 more</span>
+      </div>
+      <p style="margin-top:12px;font-size:12px;color:var(--ink-3)">Guided and self-planned subjects are visibly different in the app. A self-planned subject never implies curriculum coverage it does not have.</p>
+    </div>
+  </section>
+
+  <section id="timer" class="section section-cream" aria-labelledby="timer-title">
+    <div class="wrap">
+      <div class="split">
+        <div class="split-media">
+          <div class="frame-card" role="img" aria-label="Session timer behaviour preview: start, run anywhere, stop and capture">
+            <header>
+              <strong style="font-family:Instrument Serif,serif;font-size:16px">One-tap session timer</strong>
+              <span>mm:ss • absolute dates</span>
+            </header>
+            <div class="check-list">
+              <div class="check-item">
+                <span class="dot" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg></span>
+                <span style="font-size:13px;color:var(--ink-2)"><strong style="color:var(--deep-ink)">Tap Start — saved first</strong><br><span style="font-size:12.5px;color:var(--ink-3)">Start time, child and draft are persisted before the button changes. Double-start is prevented; a banner shows the active timer everywhere.</span></span>
+              </div>
+              <div class="check-item">
+                <span class="dot" aria-hidden="true">🔒</span>
+                <span style="font-size:13px;color:var(--ink-2)"><strong style="color:var(--deep-ink)">Keeps running everywhere</strong><br><span style="font-size:12.5px;color:var(--ink-3)">Background, lock, termination, reboot — elapsed is recomputed from the saved start date. A 12-hour guard catches sessions left running.</span></span>
+              </div>
+              <div class="check-item">
+                <span class="dot" aria-hidden="true">✓</span>
+                <span style="font-size:13px;color:var(--ink-2)"><strong style="color:var(--deep-ink)">Tap Stop — then capture</strong><br><span style="font-size:12.5px;color:var(--ink-3)">Exact end time and duration are written first. Then: subject, topics covered, a short note and photos of the work.</span></span>
+              </div>
+              <div class="check-item">
+                <span class="dot" aria-hidden="true">↩</span>
+                <span style="font-size:13px;color:var(--ink-2)"><strong style="color:var(--deep-ink)">Honest edge cases</strong><br><span style="font-size:12.5px;color:var(--ink-3)">Cancelling an accidental start creates no session. Timetable reminders are local and work offline.</span></span>
+              </div>
+            </div>
+            <div style="margin-top:14px;background:var(--amber-soft);border:1px solid var(--border);border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center">
+              <span class="mono" style="font-size:20px;font-weight:600;color:var(--deep-ink)">00:00</span>
+              <span style="font-size:12.5px;line-height:1.5;color:var(--ink-2)"><strong style="color:var(--deep-ink)">Fixed-width timer</strong> — layout never shifts while counting. VoiceOver announces state, not every second.</span>
+            </div>
+          </div>
+          <p style="text-align:center;margin-top:10px;font-size:11px;color:var(--ink-3);font-family:JetBrains Mono,monospace">Amber Start control • per-child • 144 pt minimum</p>
+        </div>
+        <div>
+          <p class="kicker">Session timer + timetable</p>
+          <h2 id="timer-title" style="font-size:clamp(28px,4vw,40px);color:var(--deep-ink)">Start timing <em>this session now.</em></h2>
+          <p class="prose" style="margin-top:12px">No navigation, no form, no decisions when learning starts. The timer is the source of truth — absolute start and end dates — so the duration survives anything iOS does to the app. Today also shows the week&rsquo;s schedule and recent sessions, so evidence builds itself as you log.</p>
+          <ul style="list-style:none;display:grid;gap:12px;margin-top:20px">
+            <li style="display:flex;gap:12px;align-items:flex-start"><span style="width:28px;height:28px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0;color:var(--deep)">✓</span><span style="font-size:14px;line-height:1.6;color:var(--ink-2)"><strong style="color:var(--deep-ink)">Weekly timetable, per child</strong> — terms, a Monday–Sunday grid and slot editor. Subject is prefilled from the timetable when a slot matches now.</span></li>
+            <li style="display:flex;gap:12px;align-items:flex-start"><span style="width:28px;height:28px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0;color:var(--deep)">✓</span><span style="font-size:14px;line-height:1.6;color:var(--ink-2)"><strong style="color:var(--deep-ink)">Local reminders, offline</strong> — up to 8 rolling reminders per slot with stable IDs, rebuilt on edit. Permission is asked only after you enable a reminder, never at first launch.</span></li>
+            <li style="display:flex;gap:12px;align-items:flex-start"><span style="width:28px;height:28px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0;color:var(--deep)">✓</span><span style="font-size:14px;line-height:1.6;color:var(--ink-2)"><strong style="color:var(--deep-ink)">Evidence without effort</strong> — session notes and photos of handwritten work attach in seconds; the session appears in history, hours and attendance immediately.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="shots">
+        <figure class="shot">
+          <img src="images/screenshots/iphone-01-today.png" alt="HomeLesson Today screen on iPhone — Start session hero, today's schedule, recent sessions" loading="lazy">
+          <figcaption><strong>Today • iPhone</strong> — one-tap timer, schedule, recent sessions</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="images/screenshots/ipad-01-today.png" alt="HomeLesson Today screen on iPad — sidebar navigation with child switcher" loading="lazy">
+          <figcaption><strong>Today • iPad</strong> — native sidebar, shared state with iPhone</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="subjects" class="section section-white" aria-labelledby="subjects-title">
+    <div class="wrap">
+      <div class="split reverse">
+        <div class="split-media">
+          <div class="frame-card" role="img" aria-label="Subject coverage preview: required topics with parent-tapped confidence">
+            <header>
+              <strong style="font-family:Instrument Serif,serif;font-size:16px">All subjects, honestly covered</strong>
+              <span>27 · 618 · 11 picks</span>
+            </header>
+            <div class="check-list">
+              <div class="check-item">
+                <span class="dot mono" style="font-size:11px;font-weight:700" aria-hidden="true">27</span>
+                <span style="font-size:13px;color:var(--ink-2)"><strong style="color:var(--deep-ink)">Required checklists per subject</strong> — generated from a single documented source, grouped exactly as the spec groups them.<br><span style="font-size:12px;color:var(--ink-3)">Maths, English, Science preloaded; add your own subjects anytime.</span></span>
+              </div>
+              <div class="check-item">
+                <span class="dot mono" style="font-size:11px;font-weight:700" aria-hidden="true">◐</span>
+                <span style="font-size:13px;color:var(--ink-2)"><strong style="color:var(--deep-ink)">Confidence, tapped by you</strong> — not started / learning / confident pills, plus last-3-checks derivation where checks exist.<br><span style="font-size:12px;color:var(--ink-3)">Your tap always wins. Never a grade or prediction.</span></span>
+              </div>
+              <div class="check-item">
+                <span class="dot mono" style="font-size:11px;font-weight:700" aria-hidden="true">⚖</span>
+                <span style="font-size:13px;color:var(--ink-2)"><strong style="color:var(--deep-ink)">Option picks handled</strong> — History, Geography, RS and Art choice groups render as “Pick N — rule” badges.<br><span style="font-size:12px;color:var(--ink-3)">Pick only the options your child studies.</span></span>
+              </div>
+              <div class="check-item">
+                <span class="dot mono" style="font-size:11px;font-weight:700" aria-hidden="true">🔗</span>
+                <span style="font-size:13px;color:var(--ink-2)"><strong style="color:var(--deep-ink)">Custom topics + resource links</strong> — rename, recolour, add or remove subjects; link the resources you actually use.<br><span style="font-size:12px;color:var(--ink-3)">Every other subject gets first-class planning tools.</span></span>
+              </div>
+            </div>
+            <div style="margin-top:14px;background:var(--paper);border:1px dashed var(--border-strong);border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center">
+              <span style="width:32px;height:32px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center">📊</span>
+              <span style="font-size:12.5px;line-height:1.5;color:var(--ink-2)"><strong style="color:var(--deep-ink)">Progress dashboard</strong> — hours per subject, mastery overview and maths progress per child, with text summaries alongside every chart.</span>
+            </div>
+          </div>
+          <p style="text-align:center;margin-top:10px;font-size:11px;color:var(--ink-3);font-family:JetBrains Mono,monospace">Dots never stand alone — shape + label, VoiceOver-safe</p>
+        </div>
+        <div>
+          <p class="kicker">Subjects &amp; progress</p>
+          <h2 id="subjects-title" style="font-size:clamp(28px,4vw,40px);color:var(--deep-ink)">Every subject. <em>What&rsquo;s covered.</em></h2>
+          <p class="prose" style="margin-top:12px">Create profiles for multiple children, define any number of subjects, and see hours, coverage and confidence per child. Attendance and hours are derived from the sessions you actually logged — half-open ranges, no double counting.</p>
+          <div style="margin-top:20px;display:grid;gap:10px">
+            <div style="display:flex;gap:12px;align-items:center;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:12px">
+              <span style="width:36px;height:36px;border-radius:10px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center">👨‍👩‍👧</span>
+              <span style="font-size:13px;color:var(--ink-2)"><strong style="color:var(--deep-ink)">Multiple children, one switcher</strong><br><span style="font-size:12.5px;color:var(--ink-3)">A prominent child control on Today, Progress and Records. Archive without deleting history.</span></span>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:12px">
+              <span style="width:36px;height:36px;border-radius:10px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center">🖼</span>
+              <span style="font-size:13px;color:var(--ink-2)"><strong style="color:var(--deep-ink)">Media stays intact</strong><br><span style="font-size:12.5px;color:var(--ink-3)">Sandbox photo storage with hashing and downsampling. A failed attachment never loses the session.</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="shots">
+        <figure class="shot">
+          <img src="images/screenshots/iphone-03-subjects.png" alt="HomeLesson Subjects screen on iPhone — subject list with hours and confidence" loading="lazy">
+          <figcaption><strong>Subjects • iPhone</strong> — 27 subjects, hours + confidence per child</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="images/screenshots/iphone-02-topics.png" alt="HomeLesson topic detail on iPhone — required topics with confidence pills and option picks" loading="lazy">
+          <figcaption><strong>Topics • iPhone</strong> — tap the pill to cycle confidence</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="guided" class="section section-deep" aria-labelledby="guided-title">
+    <div class="wrap">
+      <div style="max-width:680px">
+        <p class="kicker" style="color:#F0D6A8">Guided path #1</p>
+        <h2 id="guided-title" style="font-size:clamp(28px,4.5vw,42px);color:#fff">GCSE maths, <em style="color:#F0D6A8">step by step.</em></h2>
+        <p style="margin-top:12px;font-size:15.5px;line-height:1.7;opacity:.84">Ordered, exam-board-tagged topics (Edexcel, AQA, OCR) with summaries, worked examples as numbered steps, and understanding checks that are question-first: reveal the answer, then record correct, incorrect or skipped. Resumes where your child left off — and a parent who prefers their own approach can ignore the path and use Maths as a self-planned subject.</p>
+      </div>
+
+      <div class="dark-diagram" style="margin-top:28px">
+        <div class="mono" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.6">Bundled content • validated on load • never crashes on bad data</div>
+        <div class="diagram-row">
+          <div class="diagram-box">
+            <div style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.1);display:grid;place-items:center;margin:0 auto 8px">📖</div>
+            <strong>Summary + steps</strong>
+            <span>Each topic: what it covers, then a worked example</span>
+          </div>
+          <div class="diagram-arrow">→</div>
+          <div class="diagram-box" style="background:rgba(217,150,59,.18);border-color:rgba(217,150,59,.38)">
+            <div style="width:36px;height:36px;border-radius:10px;background:var(--amber);display:grid;place-items:center;margin:0 auto 8px;color:#22303C"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2Z"/></svg></div>
+            <strong>Question first</strong>
+            <span>Tap to reveal, then mark correct / incorrect / skipped</span>
+          </div>
+          <div class="diagram-arrow">→</div>
+          <div class="diagram-box">
+            <div style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.1);display:grid;place-items:center;margin:0 auto 8px">◐</div>
+            <strong>Confidence updates</strong>
+            <span>Dots update immediately; next topic offered</span>
+          </div>
+        </div>
+
+        <div class="strand-grid">
+          <div class="strand-card"><i>🔢</i><strong>Number</strong><span>Place value → fractions → standard form</span></div>
+          <div class="strand-card"><i>𝑥</i><strong>Algebra</strong><span>Expressions → equations → quadratics</span></div>
+          <div class="strand-card"><i>⚖</i><strong>Ratio &amp; proportion</strong><span>Percentages → growth → rates</span></div>
+          <div class="strand-card"><i>📐</i><strong>Geometry &amp; measures</strong><span>Angles → area → Pythagoras</span></div>
+          <div class="strand-card"><i>📊</i><strong>Stats &amp; probability</strong><span>Averages → charts → probability</span></div>
+        </div>
+      </div>
+      <p style="margin-top:16px;font-size:12px;opacity:.6;line-height:1.6">Boards ⊆ {Edexcel, AQA, OCR}. Content is data, not code — pluggable, so subject #2 can be added later without rework. Content upgrades never delete topics that have sessions, attempts or mastery.</p>
+    </div>
+  </section>
+
+  <section id="records" class="section section-cream" aria-labelledby="records-title">
+    <div class="wrap">
+      <div style="display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:end">
+        <div style="max-width:600px">
+          <p class="kicker">Records &amp; portfolio</p>
+          <h2 id="records-title" style="font-size:clamp(28px,4vw,40px);color:var(--deep-ink)">Proof without <em>paperwork.</em></h2>
+          <p class="prose" style="margin-top:10px">Choose a child and date range, toggle what goes in, preview the A4 portfolio side-by-side on iPad, then share through the system share sheet. Hours, coverage, work samples and session notes — generated from an immutable snapshot, so the screen, the PDF and the numbers can&rsquo;t diverge.</p>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="width:88px;height:88px;border-radius:20px;background:var(--deep);display:grid;place-items:center;color:#fff;text-align:center" aria-label="Portfolio example">
+            <span><span class="mono" style="font-size:20px;font-weight:600">PDF</span><br><span style="font-size:10px;opacity:.75">A4</span></span>
+          </div>
+          <div style="font-size:12px;line-height:1.5;color:var(--ink-2)"><strong style="color:var(--deep-ink);font-size:14px">Council-ready</strong><br>Active days · sessions · hours<br><span style="color:var(--brand);font-weight:600">Preview → share → clean up</span></div>
+        </div>
+      </div>
+
+      <div class="stats" aria-label="Portfolio statistics example">
+        <div class="stat"><strong class="mono">11</strong><span>Active days</span></div>
+        <div class="stat"><strong class="mono">12</strong><span>Sessions</span></div>
+        <div class="stat"><strong class="mono">8.3</strong><span>Hours</span></div>
+      </div>
+
+      <div style="margin-top:18px;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px;display:grid;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+          <h3 style="font-family:Instrument Serif,serif;font-size:18px;font-weight:400;color:var(--deep-ink)">LA portfolio — what&rsquo;s inside</h3>
+          <span class="mono" style="font-size:11px;color:var(--ink-3)">A4 • paginated • footer on every page</span>
+        </div>
+        <div style="display:grid;gap:8px;font-size:13px;color:var(--ink-2)">
+          <div style="display:flex;gap:10px;align-items:center"><span style="color:var(--leaf)">✓</span> Child, date range and generation date; hours-per-subject table</div>
+          <div style="display:flex;gap:10px;align-items:center"><span style="color:var(--leaf)">✓</span> Topic-coverage tables with confidence status</div>
+          <div style="display:flex;gap:10px;align-items:center"><span style="color:var(--leaf)">✓</span> Work-sample pages with captions and dates</div>
+          <div style="display:flex;gap:10px;align-items:center"><span style="color:var(--leaf)">✓</span> Session notes, attendance summary, JSON backup alongside</div>
+        </div>
+        <p style="font-size:12px;color:var(--ink-3);border-top:1px solid var(--border);padding-top:12px">Footer on every page: <em>“Parent-recorded home-education log. Generated from the parent&rsquo;s own records. This is not an assessment by any awarding body or local authority.”</em> No grades, predictions or assessments — ever.</p>
+      </div>
+
+      <div class="shots">
+        <figure class="shot">
+          <img src="images/screenshots/iphone-04-records.png" alt="HomeLesson Records screen on iPhone — period picker, stats, sections and LA portfolio builder" loading="lazy">
+          <figcaption><strong>Records • iPhone</strong> — period, sections, LA portfolio</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="images/screenshots/ipad-04-records.png" alt="HomeLesson Records screen on iPad — portfolio builder with live preview" loading="lazy">
+          <figcaption><strong>Records • iPad</strong> — live PDF preview side-by-side</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="privacy" class="section section-deep" aria-labelledby="privacy-title">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <p class="kicker" style="color:#F0D6A8">Privacy</p>
+          <h2 id="privacy-title" style="font-size:clamp(28px,4.5vw,42px);color:#fff">Your records <em style="color:#F0D6A8">stay with you.</em></h2>
+          <p style="margin-top:10px;font-size:15.5px;line-height:1.7;opacity:.84">Records stay private unless you export them. HomeLesson has no account and no cloud service and does not automatically send information to anyone. No analytics, no ads, no tracking, no network calls. Everything works in Airplane Mode.</p>
+
+          <div style="margin-top:22px;display:grid;gap:12px">
+            <div style="display:flex;gap:12px;align-items:flex-start"><span style="width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:grid;place-items:center;flex-shrink:0">◉</span><span style="font-size:13.5px;line-height:1.6"><strong style="color:#fff">On this device</strong><br><span style="opacity:.75">SwiftData records + protected media storage. If you delete the app without exporting a backup, records and photos may be lost — the app tells you this and nudges you to back up.</span></span></div>
+            <div style="display:flex;gap:12px;align-items:flex-start"><span style="width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:grid;place-items:center;flex-shrink:0">⬡</span><span style="font-size:13.5px;line-height:1.6"><strong style="color:#fff">You choose when data leaves</strong><br><span style="opacity:.75">Only via Export or Share you tap — a PDF you send the council, a JSON backup you keep. Only share what you intend the recipient to receive.</span></span></div>
+            <div style="display:flex;gap:12px;align-items:flex-start"><span style="width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:grid;place-items:center;flex-shrink:0">⬔</span><span style="font-size:13.5px;line-height:1.6"><strong style="color:#fff">Children&rsquo;s records, parent-held</strong><br><span style="opacity:.75">No child accounts, no ads, no profiling, no social features. A parent creates and holds the logbook on their own device. See the full policy for the App Store review details.</span></span></div>
+          </div>
+          <p style="margin-top:16px;font-size:12px;opacity:.6;line-height:1.6">The in-app Settings → About &amp; privacy screen shows the same wording as this site. See the <a href="privacy.html" style="color:#F0D6A8">full Privacy Policy</a> for App Store review and details.</p>
+          <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn btn-amber" href="privacy.html" style="background:#fff;color:var(--deep-ink)">Read Privacy Policy</a>
+            <a class="btn" href="mailto:contact@m-pax.net" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.2)">contact@m-pax.net</a>
+          </div>
+        </div>
+        <div class="split-media">
+          <div class="privacy-visual" aria-hidden="true">
+            <div class="privacy-grid">
+              <div class="pv-col">
+                <div class="pv-label">On your device</div>
+                <div class="pv-card"><i>⏱</i> Sessions</div>
+                <div class="pv-card"><i>◐</i> Confidence</div>
+                <div class="pv-card"><i>🖼</i> Work photos</div>
+              </div>
+              <div class="pv-center">
+                <div style="display:flex;gap:6px;align-items:center;color:var(--brand);font-weight:700">→ → →</div>
+                <div class="pv-phone"><strong>HomeLesson</strong><span>Private learning log</span></div>
+                <div style="font-size:11px;color:var(--ink-3);text-align:center;font-weight:600">Nothing leaves unless you share it.</div>
+              </div>
+              <div class="pv-col">
+                <div class="pv-label">Stays local</div>
+                <div class="pv-card"><i>⬢</i> SwiftData</div>
+                <div class="pv-card"><i>▣</i> Protected files</div>
+                <div class="pv-card"><i>⬣</i> No backend</div>
+              </div>
+            </div>
+          </div>
+          <div class="trust-grid">
+            <div class="trust-card">
+              <strong>No account</strong>
+              <p>Start with just your child&rsquo;s name. No login, no profile.</p>
+            </div>
+            <div class="trust-card">
+              <strong>No analytics</strong>
+              <p>No Firebase, no ads, no remote fonts, no network layer.</p>
+            </div>
+            <div class="trust-card">
+              <strong>Airplane-mode ready</strong>
+              <p>Timer, timetable, reminders, portfolio and backup all work offline.</p>
+            </div>
+            <div class="trust-card">
+              <strong>Your backup</strong>
+              <p>JSON export + media package. Validated merge or typed-confirm replace.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section section-white" aria-labelledby="how-title">
+    <div class="wrap">
+      <div style="max-width:640px">
+        <p class="kicker">How it works</p>
+        <h2 id="how-title" style="font-size:clamp(28px,4vw,40px);color:var(--deep-ink)">Plan. <em>Time.</em> Prove it.</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-num">Plan it</div>
+          <h3>Add a child, pick subjects, set the week.</h3>
+          <p>Five promises, first child, core subjects with checklists, first term, weekly timetable. Notification permission comes later — only when you enable a reminder.</p>
+          <a class="arrow" href="#subjects">About subjects <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">Time it</div>
+          <h3>One tap the second learning starts.</h3>
+          <p>Hit Start session on Today. Stop the same way, then attach topics, a note and photos. Or walk through the guided GCSE maths path topic by topic.</p>
+          <a class="arrow" href="#timer">About the timer <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">Prove it</div>
+          <h3>Bring a clean record to the council.</h3>
+          <p>Pick a child and date range, preview the portfolio, generate the PDF and share via the system sheet. Hours, coverage and attendance included.</p>
+          <a class="arrow" href="#records">About records <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div style="margin-top:18px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--ink-3)">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--amber);display:inline-block"></span>
+        Tracked by parent — never a grade, prediction or assessment. No accounts, no sync, no AI tutoring, no auto-marking.
+      </div>
+
+      <div class="review-box" aria-label="App Store review information">
+        <div>
+          <h3>For App Store review</h3>
+          <dl>
+            <dt>Support URL</dt>
+            <dd><a href="https://m-pax.net/homelesson/">https://m-pax.net/homelesson/</a></dd>
+            <dt>Privacy Policy URL</dt>
+            <dd><a href="https://m-pax.net/homelesson/privacy.html">https://m-pax.net/homelesson/privacy.html</a></dd>
+            <dt>Contact</dt>
+            <dd><a href="mailto:contact@m-pax.net">contact@m-pax.net</a></dd>
+          </dl>
+        </div>
+        <div>
+          <h3>Demo &amp; build</h3>
+          <dl>
+            <dt>Bundle ID</dt>
+            <dd class="mono">net.m-pax.HomeClass</dd>
+            <dt>Version</dt>
+            <dd>1.0 (build 1) · iOS / iPadOS 17+ · iPhone + iPad</dd>
+            <dt>Login needed</dt>
+            <dd>No. Launch → onboarding → add a child → Today. Works in Airplane Mode.</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta" aria-labelledby="cta-title">
+    <div class="wrap">
+      <div class="cta-inner">
+        <h2 id="cta-title">For the next council enquiry, <em>bring the record.</em></h2>
+        <p>HomeLesson is coming soon to the App Store for iPhone and iPad (iOS 17+). Local-first, accessible with VoiceOver and large text, calm in dark mode — and honest about what it is: a planner, tracker and evidence logbook, never an assessment.</p>
+        <div class="cta-actions">
+          <span class="app-badge" aria-label="Coming soon on the App Store" style="cursor:default;background:#fff;color:#000">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.7 17.3c-.4.6-.9 1.2-1.5 1.6-.5.4-1.1.6-1.9.6-.6 0-1.1-.1-1.6-.4-.4-.3-.8-.4-1.3-.4-.5 0-.9.1-1.3.4-.4.3-.9.4-1.5.4-.7 0-1.3-.2-1.9-.6-.6-.4-1.1-1-1.5-1.7-1-1.6-1.6-3.3-1.6-5 0-1 .3-1.9.8-2.7.5-.8 1.2-1.4 2-1.9.6-.4 1.3-.6 2-.6.6 0 1.1.2 1.6.5.4.3.7.4 1 .4.3 0 .7-.1 1.1-.4.6-.4 1.2-.6 1.9-.6.7 0 1.4.2 2 .6-.1.1-.2.2-.3.3-.6.6-1 1.3-1 2.1 0 .8.3 1.5.9 2.1.6.6 1.3.9 2.2 1 0 .4-.1.9-.2 1.3-.2.8-.6 1.6-1.2 2.4zM12.5 6.2c0-.6.2-1.2.6-1.7.4-.5 1-.9 1.7-1.1-.1.7-.4 1.3-.9 1.8-.4.5-1 .9-1.6 1.1 0-.1 0-.1.2-.1z"/></svg>
+            <span><small>Coming soon on the</small><strong>App Store</strong></span>
+          </span>
+          <a class="btn btn-amber" href="mailto:contact@m-pax.net?subject=HomeLesson%20—%20notify%20me">Notify me →</a>
+        </div>
+        <p class="cta-note">Questions? <a href="mailto:contact@m-pax.net">contact@m-pax.net</a> • <a href="privacy.html">Privacy Policy</a> • Parent-recorded log. This page is not an assessment by any awarding body or local authority.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer role="contentinfo">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-mark"><img src="images/branding/icon.png" alt="" width="40" height="40" loading="lazy"></div>
+        <div>
+          <h3>HomeLesson</h3>
+          <p>One app for the whole<br>of home education.<br>Plan, track, evidence.</p>
+          <p style="margin-top:10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.5;font-family:JetBrains Mono,monospace">© 2026 HomeLesson</p>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>App</h4>
+        <a href="#timer">Timer</a>
+        <a href="#subjects">Subjects</a>
+        <a href="#guided">Guided maths</a>
+        <a href="#records">Records</a>
+      </div>
+      <div class="footer-col">
+        <h4>Information</h4>
+        <a href="privacy.html">Privacy</a>
+        <a href="#" id="licensesLink">Licenses</a>
+        <a href="mailto:contact@m-pax.net">Contact</a>
+        <a href="#how">How it works</a>
+      </div>
+      <div class="footer-col">
+        <h4>Notes</h4>
+        <p style="font-size:13px;line-height:1.6;opacity:.7">HomeLesson is an independent iPhone + iPad app. A planner, tracker and evidence logbook — it never grades, predicts or assesses, and replaces neither the parent&rsquo;s judgement nor any official body.</p>
+        <p class="limit" style="margin-top:12px">Records stay on your device except when you export or share. See <a href="privacy.html">Privacy Policy</a>.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 HomeLesson • Made for calm school days. <a href="../index.html">M-PAX Home</a> • <a href="privacy.html">Privacy</a> • <a href="mailto:contact@m-pax.net">contact@m-pax.net</a></span>
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const nav=document.getElementById('nav');
+const menuBtn=document.getElementById('menuBtn');
+const panel=document.getElementById('mobilePanel');
+const toast=document.getElementById('toast');
+let ticking=false;
+addEventListener('scroll',()=>{
+  if(!ticking){requestAnimationFrame(()=>{
+    nav.classList.toggle('scrolled', scrollY>12);
+    ticking=false;
+  });ticking=true}
+},{passive:true});
+function setMenu(open){
+  menuBtn.setAttribute('aria-expanded', String(open));
+  panel.hidden=!open;
+  panel.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-label', open?'Close menu':'Open menu');
+  menuBtn.innerHTML=open
+    ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6 18 18M18 6 6 18"/></svg>'
+    : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+}
+menuBtn.addEventListener('click',()=> setMenu(panel.hidden));
+panel.querySelectorAll('a').forEach(a=> a.addEventListener('click',()=> setMenu(false)));
+addEventListener('keydown',e=>{ if(e.key==='Escape' && !panel.hidden) setMenu(false)});
+function showToast(msg){
+  toast.textContent=msg;
+  toast.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t=setTimeout(()=> toast.classList.remove('show'), 2600);
+}
+document.getElementById('licensesLink')?.addEventListener('click',e=>{
+  e.preventDefault();
+  showToast('Licenses page coming soon — see in-app Settings → About.');
+});
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href');
+    if(id.length>1){
+      const t=document.querySelector(id);
+      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); history.pushState(null,'',id); }
+    }
+  });
+});
+const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!prefersReduced){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(ent=>{
+      if(ent.isIntersecting){ ent.target.classList.add('in'); io.unobserve(ent.target); }
+    });
+ },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+}else{
+  document.querySelectorAll('.reveal').forEach(el=> el.classList.add('in'));
+}
+</script>
+</body>
+</html>

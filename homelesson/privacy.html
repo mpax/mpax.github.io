@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Privacy Policy — HomeLesson</title>
+<meta name="description" content="Privacy Policy for HomeLesson — a local-first iPhone and iPad home-education planner, tracker and evidence logbook. How your children's learning records are handled.">
+<meta name="theme-color" content="#2C467E">
+<link rel="canonical" href="https://m-pax.net/homelesson/privacy.html">
+<link rel="icon" type="image/png" sizes="32x32" href="images/branding/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/branding/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/branding/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Privacy Policy — HomeLesson">
+<meta property="og:description" content="How HomeLesson handles your data — local-first, no account, on-device only. You choose when to export or share.">
+<meta property="og:image" content="https://m-pax.net/homelesson/images/branding/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --deep:#2C467E;--deep-2:#22375F;
+  --brand:#3A5BA0;
+  --amber:#D9963B;--amber-deep:#B57A25;
+  --leaf:#4E7C4E;
+  --paper:#FAF7F1;--paper-warm:#F2EDE2;
+  --surface:#FFFEFB;--surface-2:#F5F0E6;
+  --ink:#22303C;--ink-2:#5A6B7A;--ink-3:#8A97A3;
+  --border:#E5DED2;--max:760px;
+}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--deep);text-underline-offset:3px}
+a:hover{color:var(--deep-2)}
+:focus-visible{outline:2px solid var(--amber-deep);outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+@media(min-width:768px){.wrap{padding:0 32px}}
+.mono{font-family:"JetBrains Mono",monospace}
+nav{position:sticky;top:0;z-index:10;background:rgba(250,247,241,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:var(--max);margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+@media(min-width:768px){.nav-inner{padding:12px 32px}}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--deep)}
+.brand-mark{width:32px;height:32px;border-radius:9px;overflow:hidden;background:var(--deep);display:grid;place-items:center;flex-shrink:0}
+.brand-mark img{width:100%;height:100%;object-fit:cover}
+.brand-wordmark{font-family:"Instrument Serif",Georgia,serif;font-size:17px;letter-spacing:-.02em}
+.brand-wordmark span{font-style:italic;color:var(--brand)}
+.btn{font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);text-decoration:none;color:var(--deep);display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--deep);transform:translateY(-1px)}
+.btn-primary{background:var(--amber);color:#22303C;border-color:var(--amber)}
+.btn-primary:hover{background:var(--amber-deep);color:#fff}
+header{padding:40px 0 24px;border-bottom:1px solid var(--border)}
+h1{font-family:"Instrument Serif",Georgia,serif;font-size:36px;font-weight:400;letter-spacing:-.03em;color:var(--deep);line-height:1}
+h1 em{font-style:italic;color:var(--brand)}
+.subtitle{margin-top:10px;color:var(--ink-2);font-size:15px;max-width:62ch}
+.meta{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;color:var(--ink-3)}
+.meta span{background:var(--surface);border:1px solid var(--border);padding:5px 10px;border-radius:999px;font-weight:600;color:var(--deep)}
+.meta .plain{background:transparent;border:0;padding:0;color:var(--ink-3);font-family:"JetBrains Mono",monospace}
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px;margin:20px 0}
+.toc strong{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.toc ol{margin:8px 0 0 18px;font-size:13.5px;color:var(--ink-2);line-height:1.9}
+.toc a{color:var(--deep);text-decoration:none}
+.toc a:hover{text-decoration:underline}
+main{padding:32px 0 48px}
+h2{font-size:18px;font-weight:700;letter-spacing:-.01em;color:var(--deep);margin:32px 0 8px;padding-top:8px;border-top:1px solid var(--border)}
+h2:first-of-type{border-top:0;margin-top:8px}
+h3{font-size:14px;font-weight:700;color:var(--deep);margin:18px 0 6px}
+p,li{font-size:14.5px;color:var(--ink-2)}
+p{margin:8px 0}
+ul,ol{margin:8px 0 8px 20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;margin:16px 0}
+.card strong{color:var(--deep)}
+.note{font-size:12.5px;color:var(--ink-3);background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:12px;margin:12px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding:8px 10px;border-bottom:2px solid var(--border);background:var(--surface-2)}
+td{padding:10px;border-bottom:1px solid var(--border);color:var(--ink-2);vertical-align:top}
+td:first-child{font-weight:600;color:var(--deep);white-space:nowrap}
+footer{padding:28px 0;border-top:1px solid var(--border);font-size:12.5px;color:var(--ink-3);background:var(--surface)}
+.footer-links{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+.footer-links a{color:var(--ink-2);text-decoration:none}
+.footer-links a:hover{color:var(--deep)}
+</style>
+</head>
+<body>
+<nav aria-label="Primary">
+  <div class="nav-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <a href="../index.html" class="btn" aria-label="Back to M-PAX site">← M-PAX</a>
+      <a class="brand" href="index.html" aria-label="HomeLesson home">
+        <span class="brand-mark"><img src="images/branding/icon.png" alt="" width="32" height="32" loading="eager"></span>
+        <span class="brand-wordmark">Home<span>Lesson</span></span>
+      </a>
+    </div>
+    <a class="btn btn-primary" href="index.html">Back to HomeLesson</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <p class="mono" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);font-weight:700">Privacy Policy</p>
+    <h1>Your records <em>stay with you.</em></h1>
+    <p class="subtitle">HomeLesson is a local-first iPhone and iPad app for planning home education, tracking sessions and evidencing learning. This policy explains what data HomeLesson processes, where it is stored, and your choices. It is intended for App Store review and for users.</p>
+    <div class="meta">
+      <span>Effective 19 September 2026</span>
+      <span>Version 1.0</span>
+      <span class="plain">Contact: <a href="mailto:contact@m-pax.net">contact@m-pax.net</a></span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="card" style="border-left:3px solid var(--deep)">
+      <strong>Summary</strong>
+      <p style="margin-top:6px">Records stay private unless you export them. HomeLesson does not require an account and does not operate a central server that stores your children&rsquo;s learning records. Your logbook — children, subjects, topics, sessions, notes, photos and timetables — is stored on your device. There is no analytics, advertising, tracking or network service layer. Information leaves your device only when you tap Export or Share. This summary does not replace the details below.</p>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--amber);background:var(--surface)">
+      <strong>Education limitation</strong>
+      <p style="margin-top:6px">Parent-recorded home-education log. Generated from the parent&rsquo;s own records. This is not an assessment by any awarding body or local authority.</p>
+      <p>HomeLesson is a planner, tracker and evidence logbook. It does not grade, predict, assess or examine. Confidence (not started / learning / confident) is tracked by the parent — never a grade, prediction or assessment. The same footer appears on every page of every generated PDF portfolio, and the same limitation appears in onboarding, topic screens and Settings.</p>
+    </div>
+
+    <nav class="toc" aria-label="Table of contents">
+      <strong>On this page</strong>
+      <ol>
+        <li><a href="#who">Who we are</a></li>
+        <li><a href="#overview">Overview &amp; scope</a></li>
+        <li><a href="#data-we-process">Information HomeLesson processes</a></li>
+        <li><a href="#media">Photos of work</a></li>
+        <li><a href="#notifications">Timetable reminders (notifications)</a></li>
+        <li><a href="#storage">On-device storage &amp; offline operation</a></li>
+        <li><a href="#account">No account required</a></li>
+        <li><a href="#third-parties">Third-party services &amp; Apple frameworks</a></li>
+        <li><a href="#sharing">Data sharing — only when you tap Share</a></li>
+        <li><a href="#retention">Retention &amp; deletion</a></li>
+        <li><a href="#legal-bases">Legal bases (UK / EEA)</a></li>
+        <li><a href="#children">Children</a></li>
+        <li><a href="#rights">Your rights</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#education">Education limitation</a></li>
+        <li><a href="#review">App Store review information</a></li>
+        <li><a href="#changes">Changes to this policy</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="who">1. Who we are</h2>
+    <p>HomeLesson is published by M-PAX Group. For privacy enquiries, contact <a href="mailto:contact@m-pax.net">contact@m-pax.net</a>.</p>
+
+    <h2 id="overview">2. Overview &amp; scope</h2>
+    <p>This policy describes how HomeLesson handles information when you use the iOS / iPadOS app and when you visit this website. The app is local-first: all core features — child profiles, subjects and topics, guided GCSE maths path, session timer, timetable and reminders, progress, attendance, portfolio PDF, backup — work without a backend and without a network connection, including in Airplane Mode.</p>
+    <p>We do not make claims such as &ldquo;nothing ever leaves your device&rdquo; without qualification. Records stay on your device <em>except</em> when you choose to export or share them — at that point a copy is sent wherever you choose (e.g. Files, Mail, AirDrop, your local authority). That moment is disclosed in the app and in §9 below. The in-app Settings → About &amp; privacy screen should always be treated as the authoritative description for the shipped build.</p>
+
+    <h2 id="data-we-process">3. Information HomeLesson processes</h2>
+    <p>HomeLesson processes the following only to provide the features you choose to use. All of it is stored on your device (§6):</p>
+    <table>
+      <thead><tr><th>Category</th><th>Examples</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>Child profiles</td><td>Name, year group or date of birth (optional), photo (optional)</td><td>Identify whose plan, sessions and portfolio you are viewing</td></tr>
+        <tr><td>Subjects &amp; topics</td><td>Subject names and colours, required-topic checklists, custom topics, resource links, confidence (not started / learning / confident)</td><td>Show coverage and mastery overview per child</td></tr>
+        <tr><td>Guided-path activity</td><td>Topics visited, worked-example progress, check answers (correct / incorrect / skipped), resume position</td><td>Resume the GCSE maths path; derive confidence from checks</td></tr>
+        <tr><td>Study sessions</td><td>Start / end times, duration, subject, topics covered, short notes</td><td>Build the learning record; derive hours and attendance</td></tr>
+        <tr><td>Terms &amp; timetable</td><td>Term names and dates, weekly slots, reminder preferences</td><td>Show the week&rsquo;s schedule; schedule local reminders</td></tr>
+        <tr><td>Media attachments</td><td>Photos of handwritten work you attach, filenames, sizes, hashes</td><td>Keep visual evidence alongside sessions; include in portfolios you generate</td></tr>
+        <tr><td>Portfolio choices</td><td>Selected child, date range, section toggles</td><td>Generate the PDF you asked for</td></tr>
+        <tr><td>App data</td><td>Preferences (e.g. appearance), selected child/tab, backup-health state</td><td>Remember your settings</td></tr>
+      </tbody>
+    </table>
+    <p>HomeLesson does not collect analytics, identifiers for advertising, location history, contacts, or health data from any other app or device. There is no account profile, no social graph and no advertising profile. Guided-path content (GCSE maths topics, required-topic checklists) ships inside the app bundle; it is data, not tracking.</p>
+
+    <h2 id="media">4. Photos of work</h2>
+    <p>Attaching photos is optional. When you choose a photo, HomeLesson uses the system photo picker (PhotosPicker / PHPicker) to import a copy into its private sandbox (<span class="mono">Application Support/Media/</span>) with iOS file protection and downsampling. Only metadata (filename, type, size, hash) is stored in the database; the bytes live as protected files.</p>
+    <ul>
+      <li><strong>No broad library access needed</strong> — the picker does not require full Photo Library permission. Camera capture, if used, asks for camera permission only after you tap a camera action.</li>
+      <li><strong>Limits</strong> — images are downsampled for storage; a failed attachment never loses the session.</li>
+      <li><strong>Portfolios</strong> — work samples appear in the PDF only if you leave that section toggled on.</li>
+      <li><strong>Missing files</strong> — if a file is unavailable, the session is preserved and the attachment is marked unavailable.</li>
+    </ul>
+
+    <h2 id="notifications">5. Timetable reminders (notifications)</h2>
+    <p>Timetable reminders are <strong>local notifications scheduled on your device</strong> — they work without a backend and in Airplane Mode once scheduled.</p>
+    <ul>
+      <li>Permission is requested <strong>only after</strong> you enable a reminder on a timetable slot — never at first launch — with an in-app explanation first.</li>
+      <li>If you deny permission, slots are kept and shown with reminders off, plus an Open Settings action.</li>
+      <li>Up to 8 rolling reminders per slot use stable IDs and are rebuilt when you edit the timetable.</li>
+      <li>Disable anytime in <span class="mono">Settings → Notifications → HomeLesson</span>.</li>
+    </ul>
+
+    <h2 id="storage">6. On-device storage &amp; offline operation</h2>
+    <p>Your logbook is stored locally on your device using SwiftData (structured records) and protected app storage (photos). No backend is required for any core feature. If you delete the app without exporting a backup, your records and photos may be lost — the app tells you this during onboarding and in Settings, and shows a backup-health indicator with a 14-day warning.</p>
+    <p>Backups are files <em>you</em> create: a versioned JSON envelope with stable IDs and relationship IDs, optionally with a staged media directory (&ldquo;Export with media&rdquo;). A structured-only export is always labelled as such before export. Imports are validated before anything is written; Replace requires typed confirmation and creates a verified safety backup first.</p>
+
+    <h2 id="account">7. No account required</h2>
+    <p>HomeLesson does not require you to create an account or social profile. There is no hosted profile containing your children&rsquo;s learning history. Anyone else can only see data if you send them an exported file.</p>
+
+    <h2 id="third-parties">8. Third-party services &amp; Apple frameworks</h2>
+    <h3>Apple platform services</h3>
+    <p>HomeLesson uses Apple frameworks only: SwiftUI, SwiftData, UserNotifications, PDFKit / Quick Look, PhotosUI / PHPicker, CryptoKit. Their use is subject to Apple&rsquo;s privacy policy and your device settings. No Firebase, Supabase, analytics, ads, remote fonts, third-party SDKs or AI services are included, and the app contains no network service layer by construction.</p>
+    <h3>No place-data or map providers</h3>
+    <p>HomeLesson performs no place lookup and sends no coordinates to any provider. There is no map tile loading and no location tracking.</p>
+    <h3>Websites you choose to open</h3>
+    <p>This website and any links you tap (e.g. Apple support articles, resource links you saved) are governed by their own policies. Exported files you send via Mail, Messages, AirDrop or Files are governed by those services and recipients.</p>
+
+    <h2 id="sharing">9. Data sharing — only when you tap Share</h2>
+    <p>We do not sell your children&rsquo;s learning records or photos to third parties and we do not build advertising profiles from them.</p>
+    <p>We share data only as follows:</p>
+    <ul>
+      <li><strong>On your device</strong> — processing stays local wherever possible.</li>
+      <li><strong>When you export or share</strong> — PDFs and JSON backups are written to a temporary directory and presented in the system share sheet with explicit filenames. At that point a copy leaves your device to wherever you send it (for example your local authority). Only share files you intend the recipient to receive.</li>
+      <li><strong>As required by law</strong> — if legally obliged.</li>
+    </ul>
+    <p class="note">App Store Connect privacy details: Data collected — none. No analytics, identifiers, tracking domains or network calls. The privacy manifest declares no tracking (<span class="mono">NSPrivacyTracking = false</span>) and an empty collected-data-types array.</p>
+
+    <h2 id="retention">10. Retention &amp; deletion</h2>
+    <p>Your logbook is retained on your device until you delete it:</p>
+    <ul>
+      <li>Delete a single session, subject, topic or photo in the app (with confirmation where destructive).</li>
+      <li>Edit a record — corrections update the stored values.</li>
+      <li>Archive a child without deleting their history, or delete all local data in Settings (typed confirmation), or delete the app (which removes its local container on that device).</li>
+      <li>Restore merges or replaces from a backup file you supply; Replace is typed-confirmation and safety-backup-gated, and migrations never delete the store on failure.</li>
+    </ul>
+    <p>We cannot delete copies you already shared (e.g. a PDF you emailed to your council). Have the final wording reviewed against the shipped build before publication.</p>
+
+    <h2 id="legal-bases">11. Legal bases (UK / EEA)</h2>
+    <p>Where UK GDPR / EU GDPR applies, we process on-device logbook data to perform the contract (provide the app you requested) and on the basis of your consent where you grant optional permissions (Notifications, Camera, Photo picker selection). You may withdraw consent by changing the permission in iOS Settings; this does not affect prior processing. Because processing is local, withdrawing consent simply disables the dependent feature.</p>
+
+    <h2 id="children">12. Children</h2>
+    <p>HomeLesson is a tool for the <strong>parent</strong>, who creates and holds the learning logbook on their own device. Key points for App Store review and for families:</p>
+    <ul>
+      <li><strong>No child accounts.</strong> Children do not sign in, do not create profiles of themselves, and cannot share with each other. An older child may follow the guided maths path semi-independently on the parent&rsquo;s device, with the parent reviewing confidence and the record.</li>
+      <li><strong>No ads, profiling or social features.</strong> HomeLesson contains no advertising, no analytics-based profiling, no leaderboards, no forums, no messaging and no public sharing of children&rsquo;s work.</li>
+      <li><strong>Parent-held records.</strong> A child&rsquo;s name, year group or birth date, session notes and work photos are entered by the parent and stored on the parent&rsquo;s device. They leave the device only when the parent exports or shares a file.</li>
+      <li><strong>Parental consent and control.</strong> The parent decides what is recorded, what goes into a portfolio (section toggles), and who receives it. Deleting the app or clearing data in Settings removes the local records from that device.</li>
+      <li><strong>Device-level protections.</strong> Guardians should use Apple&rsquo;s Screen Time, Family Sharing and photo-access controls on the device the child uses.</li>
+    </ul>
+    <p>Ensure the App Store age rating reflects a parent-held utility with user-entered photos, and have this section legally reviewed for COPPA, UK Age Appropriate Design Code and EU GDPR-K obligations in your launch jurisdictions.</p>
+
+    <h2 id="rights">13. Your rights</h2>
+    <p>Depending on your jurisdiction, you may have rights to access, correct, delete or restrict processing of your information, and to object or withdraw consent. Because your logbook is on your device, you can directly access, correct, export and delete it in the app (children, subjects, sessions, timetables, Backup &amp; restore, Settings). To exercise other rights, contact <a href="mailto:contact@m-pax.net">contact@m-pax.net</a>.</p>
+    <p>UK users may also lodge a complaint with the <a href="https://ico.org.uk/" target="_blank" rel="noopener">Information Commissioner&rsquo;s Office (ICO)</a>.</p>
+
+    <h2 id="security">14. Security</h2>
+    <p>We design HomeLesson to minimise collection and keep processing on-device: SwiftData + iOS Data Protection for stored files, OS-controlled permissions requested in context, Apple platform security, and no network attack surface. No method is 100% secure, so we avoid claims such as &ldquo;100% secure&rdquo; and instead describe these actual measures. The app never logs your children&rsquo;s details, notes or filenames.</p>
+
+    <h2 id="education">15. Education limitation</h2>
+    <p>HomeLesson is a planner, tracker and evidence logbook. It does not grade, predict, assess or examine; it does not auto-mark handwriting, calculate predicted grades, or replace the parent&rsquo;s judgement, a tutor, a school, an exam board or a local authority. Confidence options (not started / learning / confident) are the parent&rsquo;s own tracking, not attainment grades. Guided-path checks (correct / incorrect / skipped) record practice, not assessment outcomes. Required-topic checklists organise what has been covered; they are not a claim of curriculum approval or exam-board endorsement.</p>
+    <p>This limitation appears in onboarding, topic screens, the progress dashboard, portfolio footers and About — and in App Store metadata and screenshots, which match the actual local-only behaviour.</p>
+
+    <h2 id="review">16. App Store review information</h2>
+    <table>
+      <thead><tr><th style="width:220px">Item</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>App name</td><td>HomeLesson</td></tr>
+        <tr><td>Bundle ID</td><td class="mono">net.m-pax.HomeClass</td></tr>
+        <tr><td>Version</td><td>1.0 (build 1) · iOS / iPadOS 17+ · iPhone + iPad (universal)</td></tr>
+        <tr><td>Support URL</td><td><a href="https://m-pax.net/homelesson/">https://m-pax.net/homelesson/</a></td></tr>
+        <tr><td>Privacy Policy URL</td><td><a href="https://m-pax.net/homelesson/privacy.html">https://m-pax.net/homelesson/privacy.html</a></td></tr>
+        <tr><td>Login required</td><td>No. Launch → onboarding → add a child → Today. Works in Airplane Mode.</td></tr>
+        <tr><td>Data collected</td><td>None (App Store Connect). No tracking.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="changes">17. Changes to this policy</h2>
+    <p>We may update this policy to reflect app changes or legal requirements. The &ldquo;Effective&rdquo; date at the top will be updated and, where appropriate, we will note changes in release notes or in-app.</p>
+
+    <h2 id="contact">18. Contact</h2>
+    <p>Questions or requests: <a href="mailto:contact@m-pax.net">contact@m-pax.net</a></p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center">
+      <span>© 2026 HomeLesson • <a href="index.html">HomeLesson Home</a> • <a href="../index.html">M-PAX Home</a></span>
+      <span><a href="index.html">Back to HomeLesson ↑</a></span>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="index.html#timer">Timer</a>
+      <a href="index.html#privacy">Privacy</a>
+      <a href="mailto:contact@m-pax.net">contact@m-pax.net</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -19,7 +19,7 @@ Deployed on GitHub Pages under `m-pax.net/jaunt-log/` (the `mpax.github.io/jaunt
 | What | Where |
 |------|-------|
 | **Product copy** | `index.html` — search for section headings (`Every place has a story`, `Your adventures, mapped`, etc.) |
-| **App Store URL** | `index.html` — `id="appStoreBtn"` → set `data-href="https://apps.apple.com/…"` and update the `href`. Remove the toast fallback once live. Remove mail waitlist if not needed. |
+| **App Store URL** | `index.html` — hero `.app-badge` links to `https://apps.apple.com/gb/app/jaunt-log/id6807119071` (live since launch). |
 | **Waitlist / email** | `index.html` — `<form id="waitlist">` posts nowhere currently (toast only). Wire to your form provider (Formspark, Formspree, Mailchimp, etc.) or a backend endpoint. |
 | **Contact email** | Search `contact@m-pax.net` in `index.html` and `privacy.html` |
 | **Legal links** | Footer in `index.html` — `#licensesLink` shows toast; replace with real `licenses.html` when ready. `privacy.html` is the privacy page (mirrors in-app wording). |
@@ -68,7 +68,7 @@ Title, description, OG/Twitter, canonical and favicon are set in `<head>`. OG im
 
 ## Checklist before launch
 
-- [ ] Set real App Store URL on `#appStoreBtn`
+- [x] Set real App Store URL on hero `.app-badge` (live: `https://apps.apple.com/gb/app/jaunt-log/id6807119071`)
 - [ ] Replace CSS placeholder phones with real screenshots
 - [ ] Add real outdoor photography if used (license-checked)
 - [ ] Update contact email / legal links
