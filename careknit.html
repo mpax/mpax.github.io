@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CareKnit - One shared care circle for your family. Medication logs, appointments, visits, handovers and documents.">
+    <meta name="keywords" content="CareKnit, family caregiving, medication log, care circle, elderly care, handover notes, iOS">
+    <title>CareKnit – Care that feels connected | iOS</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --teal: #014456;
+            --teal-pressed: #003744;
+            --amber: #E3941F;
+            --amber-pressed: #C97D10;
+            --paper: #EEF5F3;
+            --surface: #FFFDF8;
+            --ink: #073E4C;
+            --ink-2: #45636C;
+            --divider: #C9D9D9;
+            --text-dark: #073E4C;
+            --text-light: #45636C;
+            --bg-light: #EEF5F3;
+            --bg-white: #ffffff;
+            --border-color: #C9D9D9;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius: 16px;
+            --radius-sm: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+            display: flex; justify-content: space-between; align-items: center; height: 70px;
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--teal); text-decoration: none; letter-spacing: -0.5px; }
+        .logo span { color: var(--amber); }
+        .nav-menu { display: flex; list-style: none; gap: 2rem; }
+        .nav-menu a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 0.95rem; position: relative; }
+        .nav-menu a:hover { color: var(--amber); }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-dark); }
+
+        .hero { padding: 8rem 2rem 4rem; background: linear-gradient(135deg, #EEF5F3 0%, #FFFDF8 55%, #FDEBCB 100%); }
+        .hero-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .hero-content h1 { font-size: 3rem; font-weight: 800; color: var(--teal); margin-bottom: 0.5rem; letter-spacing: -1px; }
+        .version-badge { display: inline-block; background: var(--teal); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; font-weight: 600; margin-bottom: 1rem; }
+        .coming-soon-badge { display: inline-block; background: var(--amber); color: #073E4C; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; font-weight: 700; margin-bottom: 1rem; margin-left: 0.5rem; }
+        .hero-subtitle { font-size: 1.35rem; color: var(--teal); font-weight: 600; margin-bottom: 1rem; }
+        .hero-description { font-size: 1.05rem; color: var(--text-light); margin-bottom: 1.75rem; line-height: 1.7; }
+        .features-list { list-style: none; margin-bottom: 2rem; }
+        .features-list li { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-dark); font-size: 0.98rem; }
+        .features-list li::before {
+            content: '✓'; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+            width: 24px; height: 24px; background: #FDEBCB; color: var(--amber-pressed);
+            border-radius: 50%; font-size: 0.875rem; font-weight: 700; margin-top: 2px;
+        }
+        .download-section { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+        .app-badge { display: inline-flex; align-items: center; gap: 10px; background: #000; color: #fff; border-radius: 10px; padding: 8px 14px 8px 12px; text-decoration: none; line-height: 1; }
+        .app-badge small { font-size: 9px; letter-spacing: .06em; text-transform: uppercase; opacity: .8; font-weight: 500; display: block; }
+        .app-badge strong { font-size: 15px; font-weight: 600; letter-spacing: -.02em; display: block; }
+        .platform-note { width: 100%; margin-top: 1rem; padding: 0.75rem 1rem; background: white; border-radius: var(--radius-sm); font-size: 0.9rem; color: var(--text-light); border: 1px solid var(--border-color); }
+        .hero-image { display: flex; justify-content: center; align-items: center; }
+        .hero-image img { max-width: 280px; width: 100%; height: auto; border-radius: 28px; box-shadow: var(--shadow-lg); }
+
+        section { padding: 4rem 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h2 { font-size: 2rem; font-weight: 700; color: var(--teal); margin-bottom: 0.5rem; }
+        .section-header p { font-size: 1rem; color: var(--text-light); max-width: 720px; margin: 0 auto; }
+
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .feature-card { background: var(--surface); padding: 1.75rem; border-radius: var(--radius); border: 1px solid var(--border-color); border-top: 4px solid var(--amber); }
+        .feature-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--teal); margin-bottom: 0.6rem; }
+        .feature-card p { color: var(--text-light); font-size: 0.95rem; }
+
+        .detail-section { background: var(--bg-white); }
+        .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .detail-card { background: var(--bg-light); padding: 2rem; border-radius: var(--radius); border: 1px solid var(--border-color); }
+        .detail-card h3 { font-size: 1.2rem; font-weight: 700; color: var(--teal); margin-bottom: 1rem; }
+        .detail-card p, .detail-card li { color: var(--text-light); font-size: 0.95rem; }
+        .detail-card ul { margin-left: 1.2rem; margin-top: 0.5rem; }
+        .detail-card li { margin-bottom: 0.4rem; }
+
+        .disclaimer-box { background: var(--bg-light); border-left: 4px solid var(--amber); padding: 1.25rem 1.5rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-top: 2rem; }
+        .disclaimer-box p { color: var(--text-dark); font-size: 0.95rem; }
+
+        .help-section { background: var(--bg-white); }
+        .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .help-card { background: var(--bg-light); padding: 2rem; border-radius: var(--radius); border: 1px solid var(--border-color); }
+        .help-card h3 { font-size: 1.25rem; font-weight: 700; color: var(--teal); margin-bottom: 1rem; }
+        .help-card p { color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: var(--amber); color: #073E4C; text-decoration: none; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem; border: none; cursor: pointer; }
+        .btn:hover { background: var(--amber-pressed); color: #fff; }
+        .btn-secondary { background: var(--teal); color: white; }
+        .btn-secondary:hover { background: var(--teal-pressed); }
+
+        .review-box { background: #FFFDF8; border: 1px dashed var(--amber); border-radius: var(--radius); padding: 1.75rem 2rem; margin-top: 2rem; }
+        .review-box h3 { color: var(--teal); margin-bottom: 0.75rem; }
+        .review-box ol { margin-left: 1.3rem; color: var(--text-light); font-size: 0.95rem; }
+        .review-box li { margin-bottom: 0.5rem; }
+        .review-box code { background: #EEF5F3; padding: 1px 6px; border-radius: 6px; font-size: 0.85em; }
+
+        footer { background: var(--teal); color: white; padding: 3rem 2rem 2rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { color: #C9D9D9; text-decoration: none; font-size: 0.9rem; }
+        .footer-links a:hover { color: white; }
+        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 2rem; border-top: 1px solid #0B4650; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .footer-bottom p { color: #C9D9D9; font-size: 0.875rem; }
+        .back-to-top { color: #C9D9D9; text-decoration: none; font-size: 0.875rem; }
+        .back-to-top:hover { color: white; }
+
+        @media (max-width: 900px) {
+            .detail-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-menu { display: none; position: absolute; top: 70px; left: 0; right: 0; background: white; flex-direction: column; padding: 1rem 2rem; gap: 1rem; border-bottom: 1px solid var(--border-color); box-shadow: var(--shadow-md); }
+            .nav-menu.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .hero { padding: 6rem 1.5rem 3rem; }
+            .hero-container { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-content { order: 2; }
+            .hero-image { order: 1; }
+            .hero-content h1 { font-size: 2rem; }
+            section { padding: 3rem 1.5rem; }
+            .footer-content, .footer-bottom { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">M<span>-</span>PAX</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#subscription">Subscription</a></li>
+                <li><a href="#support">Support</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">☰</button>
+        </div>
+    </nav>
+
+    <section class="hero" id="overview">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="version-badge">Version 1.0 · iOS &amp; iPadOS 17+</span><span class="coming-soon-badge">Coming soon to the App Store</span>
+                <h1>CareKnit</h1>
+                <p class="hero-subtitle">Care that feels connected.</p>
+                <p class="hero-description">
+                    One shared care circle for your family: medication logs, appointments, visits,
+                    handover notes and essential documents — so everyone knows what happened and what comes next.
+                    The organiser subscribes; invited relatives join free with their Apple&nbsp;ID. No CareKnit account, no developer server.
+                </p>
+                <ul class="features-list">
+                    <li><span><strong>Today</strong> — next medication or appointment, pinned handover, one-tap Quick&nbsp;Log (dose, visit, handover, appointment)</span></li>
+                    <li><span><strong>Care</strong> — medications with schedules &amp; history, essential details, up to 10 key documents (PDF / JPEG / PNG / HEIC)</span></li>
+                    <li><span><strong>Calendar</strong> — agenda &amp; month views for appointments and planned visits</span></li>
+                    <li><span><strong>Circle</strong> — invite family via Apple sharing, sync status, export (PDF/CSV), optional iCloud Drive backup</span></li>
+                    <li><span><strong>Offline-first &amp; calm</strong> — log in under 10 seconds with no connection; “Waiting to sync”, never “live” promises; records stay visible &amp; exportable even if the subscription ends</span></li>
+                </ul>
+                <div class="download-section">
+                    <span class="app-badge" aria-label="Coming soon on the App Store">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.7 17.3c-.4.6-.9 1.2-1.5 1.6-.5.4-1.1.6-1.9.6-.6 0-1.1-.1-1.6-.4-.4-.3-.8-.4-1.3-.4-.5 0-.9.1-1.3.4-.4.3-.9.4-1.5.4-.7 0-1.3-.2-1.9-.6-.6-.4-1.1-1-1.5-1.7-1-1.6-1.6-3.3-1.6-5 0-1 .3-1.9.8-2.7.5-.8 1.2-1.4 2-1.9.6-.4 1.3-.6 2-.6.6 0 1.1.2 1.6.5.4.3.7.4 1 .4.3 0 .7-.1 1.1-.4.6-.4 1.2-.6 1.9-.6.7 0 1.4.2 2 .6-.1.1-.2.2-.3.3-.6.6-1 1.3-1 2.1 0 .8.3 1.5.9 2.1.6.6 1.3.9 2.2 1 0 .4-.1.9-.2 1.3-.2.8-.6 1.6-1.2 2.4zM12.5 6.2c0-.6.2-1.2.6-1.7.4-.5 1-.9 1.7-1.1-.1.7-.4 1.3-.9 1.8-.4.5-1 .9-1.6 1.1 0-.1 0-.1.2-.1z"/></svg>
+                        <span><small>Coming soon on the</small><strong>App Store</strong></span>
+                    </span>
+                    <a href="support/privacy-policy-careknit.html" class="btn btn-secondary">Privacy Policy</a>
+                    <a href="mailto:contact@m-pax.net?subject=CareKnit%20Support" class="btn">Contact Support</a>
+                    <div class="platform-note">
+                        iPhone &amp; iPad · iOS/iPadOS 17+ · iCloud sign-in required to create or join a shared circle · CloudKit &amp; iCloud Drive usage counts toward the organiser&rsquo;s Apple storage.
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="./img/icon/careknit-icon.png" alt="CareKnit app icon — amber home and heart in a deep-teal ring">
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Everything the circle needs, nothing it doesn&rsquo;t</h2>
+                <p>CareKnit records and coordinates. It does not diagnose, interpret symptoms, check doses, or replace professional care.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>📋 Today</h3>
+                    <p>Greeting, next scheduled item with Mark&nbsp;as&nbsp;given / Missed / reschedule, latest pinned handover, and a chronological timeline with filters, search and pull-to-refresh.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💊 Care</h3>
+                    <p>Medications with multiple daily times &amp; weekday patterns, refill tracking, archive (never silent delete), essential details with allergies first, and a document checklist for LPA, care plans and GP proxies.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📅 Calendar</h3>
+                    <p>Agenda + month views, assignment (“I&rsquo;ll take this”), preparation &amp; outcome notes, quick visits that convert from planned to completed without duplicates. Optional explicit Add&nbsp;to&nbsp;Calendar.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>👨‍👩‍👧 Circle</h3>
+                    <p>Invite up to 4 relatives through Apple&rsquo;s sharing sheet, manage sharing, see sync status (“Up&nbsp;to&nbsp;date / Waiting&nbsp;to&nbsp;sync / Offline”), export PDF/CSV, back up weekly to iCloud Drive, and leave / archive / delete with dignity.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔒 Private by design</h3>
+                    <p>No developer backend, no accounts, no analytics or ad SDKs, no tracking. Data lives on your devices and in your own iCloud (CloudKit). Optional Face&nbsp;ID lock; redacted diagnostics you review before sharing.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔔 Gentle reminders</h3>
+                    <p>Local medication &amp; appointment reminders you opt into, quiet hours (default 21:00–08:00), and neutral shared-update notes. Scheduled prompts say “reminder”, never “alert”; overdue items say “Not recorded”, never auto-“missed”.</p>
+                </div>
+            </div>
+            <div class="disclaimer-box">
+                <p><strong>Medical disclaimer:</strong> CareKnit is for recording and coordinating care. It does not provide medical advice, check medicines or doses, or replace professional care. Follow the instructions from the person&rsquo;s GP, pharmacist or care team. CareKnit is not an emergency service. For urgent help, contact local emergency services.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="detail-section" id="subscription">
+        <div class="container">
+            <div class="section-header">
+                <h2>One subscription covers the whole family</h2>
+                <p>Simple, Apple-handled billing. Members never pay extra for the circle.</p>
+            </div>
+            <div class="detail-grid">
+                <div class="detail-card">
+                    <h3>💳 CareKnit Circle subscription</h3>
+                    <ul>
+                        <li>Group: <strong>CareKnit Circle</strong> — Annual (best value) + Monthly options</li>
+                        <li><strong>14-day introductory trial</strong> (Apple eligibility applies; price, trial and renewal terms are shown in-app from the App Store — never hard-coded)</li>
+                        <li>Payment charged to your Apple&nbsp;ID at confirmation; renews automatically unless cancelled ≥24h before period end</li>
+                        <li>Manage / cancel in iPhone Settings → Apple&nbsp;ID → Subscriptions, or via the in-app “Manage Subscription” link</li>
+                        <li>Restore Purchases supported; “Awaiting approval” state for Ask&nbsp;to&nbsp;Buy</li>
+                        <li>If the subscription ends: everyone keeps <strong>read, search, download &amp; export</strong>; only new shared writes pause until renewal</li>
+                    </ul>
+                </div>
+                <div class="detail-card">
+                    <h3>📄 Terms &amp; privacy</h3>
+                    <p>Use of CareKnit is governed by Apple&rsquo;s Standard Licensed Application EULA:</p>
+                    <p style="margin-top:0.5rem;"><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Apple Standard EULA</a><br>
+                    <a href="support/privacy-policy-careknit.html">CareKnit Privacy Policy</a></p>
+                    <p style="margin-top:1rem;">Developer: M-PAX Group · <a href="mailto:contact@m-pax.net">contact@m-pax.net</a><br>
+                    Support: <a href="mailto:contact@m-pax.net?subject=CareKnit%20Support">contact@m-pax.net</a> · This page: <code>m-pax.net/careknit.html</code></p>
+                </div>
+            </div>
+
+            <div class="review-box" id="app-review">
+                <h3>🔍 For App Store Review</h3>
+                <ol>
+                    <li><strong>No login required.</strong> There is no developer account — tap <em>Create a care circle</em> on first launch. No demo credentials needed.</li>
+                    <li><strong>To test family sharing:</strong> Circle → <em>Invite family</em> opens Apple&rsquo;s <code>UICloudSharingController</code>; accept the invite on a second device signed into a <em>different</em> Apple&nbsp;ID (iCloud required). Members enter a display name; no purchase screen appears while the organiser lease is valid.</li>
+                    <li><strong>Subscriptions:</strong> sandbox / StoreKit configuration (<code>careknit.yearly</code>, <code>careknit.monthly</code>, group <code>22406830</code>) with 14-day trial; paywall shows StoreKit prices, Restore, Manage, Privacy &amp; Terms links and a Close option.</li>
+                    <li><strong>Permissions:</strong> camera only when scanning a document / adding a photo; notifications only after enabling a real reminder; no location, contacts, HealthKit or tracking.</li>
+                    <li><strong>Safety:</strong> full medical disclaimer in onboarding, About, exports and above; medication editor notes “records supplied instructions only — does not check medicines, doses or interactions”.</li>
+                    <li><strong>Privacy:</strong> no third-party network traffic; CloudKit private/shared DB only; public DB unused; share public permission <code>.none</code>; manifest declares no tracking / no collected data types.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="help-section" id="support">
+        <div class="container">
+            <div class="section-header">
+                <h2>Help &amp; Support</h2>
+                <p>Guides for sharing, offline logging, sync status, subscription, export, storage and leaving a circle are built into the app (Circle → Help). For anything else, reach us below.</p>
+            </div>
+            <div class="help-grid">
+                <div class="help-card">
+                    <h3>🔒 Privacy Policy</h3>
+                    <p>No developer server, no accounts, no analytics. Your records stay on your devices and in your Apple iCloud.</p>
+                    <a href="support/privacy-policy-careknit.html" class="btn btn-secondary">View Privacy Policy</a>
+                </div>
+                <div class="help-card">
+                    <h3>📄 Terms of Use (EULA)</h3>
+                    <p>CareKnit uses Apple&rsquo;s Standard Licensed Application End User License Agreement.</p>
+                    <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" class="btn btn-secondary" target="_blank" rel="noopener">View Apple Standard EULA</a>
+                </div>
+                <div class="help-card">
+                    <h3>💬 Contact</h3>
+                    <p>Questions, suggestions, or found a bug? Privacy requests (export / delete guidance)? We&rsquo;d love to hear from you.</p>
+                    <a href="mailto:contact@m-pax.net?subject=CareKnit%20Support" class="btn">contact@m-pax.net</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="log4as.html">Log4AS</a>
+                <a href="logicu.html">LogICU</a>
+                <a href="pooldoc.html">Pool Doc</a>
+                <a href="wiresmith.html">WireSmith</a>
+                <a href="support/privacy-policy-careknit.html">Privacy Policy</a>
+                <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Terms (EULA)</a>
+                <a href="mailto:contact@m-pax.net">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 M-PAX Group. All rights reserved. · CareKnit is for recording and coordinating care; it is not a medical device or an emergency service.</p>
+            <a href="#" class="back-to-top">Back to Top ↑</a>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+            });
+        });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.length > 1) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

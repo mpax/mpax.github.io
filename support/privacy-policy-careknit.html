@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/modernizr.js"></script>
+	<title>Privacy Policy - CareKnit</title>
+	<style>
+		.privacy-content {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+		.privacy-content h2 {
+			color: #014456;
+			margin-top: 30px;
+			margin-bottom: 10px;
+		}
+		.privacy-content p {
+			line-height: 1.6;
+			margin-bottom: 15px;
+		}
+		.privacy-content ul {
+			margin-left: 20px;
+			margin-bottom: 15px;
+		}
+		.privacy-content li {
+			line-height: 1.6;
+			margin-bottom: 8px;
+		}
+		.app-icon {
+			display: block;
+			margin: 30px auto 20px;
+			width: 72px;
+			height: 72px;
+			border-radius: 16px;
+		}
+		.disclaimer-box {
+			background-color: #EEF5F3;
+			border-left: 4px solid #E3941F;
+			padding: 15px 20px;
+			margin: 20px 0;
+		}
+		.disclaimer-box p {
+			margin-bottom: 10px;
+		}
+		.disclaimer-box p:last-child {
+			margin-bottom: 0;
+		}
+		.summary-table {
+			width: 100%;
+			border-collapse: collapse;
+			margin: 15px 0 20px;
+			font-size: 0.95em;
+		}
+		.summary-table th, .summary-table td {
+			text-align: left;
+			padding: 10px 12px;
+			border-bottom: 1px solid #C9D9D9;
+			vertical-align: top;
+		}
+		.summary-table th {
+			background: #EEF5F3;
+			color: #014456;
+		}
+	</style>
+</head>
+<body>
+<header>
+	<h1>Privacy Policy</h1>
+	<p>CareKnit</p>
+</header>
+<div class="privacy-content">
+	<img src="../img/icon/careknit-icon-72.png" alt="CareKnit" class="app-icon">
+
+	<p><strong>Effective Date: September 23, 2026</strong></p>
+	<p><strong>Developer: M-PAX Group</strong> &middot; <strong>App: CareKnit</strong> (iOS / iPadOS, Bundle ID <code>net.m-pax.careknit</code>)</p>
+
+	<p>CareKnit helps a family keep one shared record for an ageing relative&rsquo;s day: medication logs, appointments, visits, handovers and essential documents. It is designed so that <strong>we, the developer, do not operate a server, do not create accounts, and do not receive your family&rsquo;s care data</strong>.</p>
+
+	<div class="disclaimer-box">
+		<p><strong>Short version:</strong></p>
+		<ul>
+			<li>No developer account, no developer database, no advertising SDK, no analytics SDK, no tracking.</li>
+			<li>Your records stay on your devices and in <strong>your own Apple iCloud</strong> (CloudKit + optional iCloud Drive backup).</li>
+			<li>Shared circles sync directly between family members through Apple&rsquo;s CloudKit sharing. We cannot see that data.</li>
+			<li>Payments are handled entirely by Apple (StoreKit / App Store).</li>
+		</ul>
+	</div>
+
+	<h2>1. Data we (the developer) collect</h2>
+	<p><strong>We collect nothing automatically.</strong> CareKnit contains no third-party analytics, crash-reporting SDKs, advertising SDKs, session replay, or fingerprinting. We do not sell personal data and we do not share personal data with data brokers.</p>
+	<p>The only personal information we ever receive is what you choose to send us yourself, for example if you email <a href="mailto:contact@m-pax.net">contact@m-pax.net</a> for support. We use such messages only to answer you, and we delete them on request.</p>
+
+	<h2>2. Data you enter in the app &mdash; where it lives</h2>
+	<p>Anything your circle records (care recipient name and reference notes, medications, schedules, dose logs, appointments, visits, handovers, documents, member display names) is stored in two places, both under your control:</p>
+	<ul>
+		<li><strong>On your device</strong> &mdash; a local cache (SwiftData store + app files under Application Support) protected by iOS file protection. Sensitive document files use stricter protection where compatible with background upload.</li>
+		<li><strong>In your Apple iCloud</strong> &mdash; the organiser&rsquo;s private CloudKit database (custom zone <code>CareKnitCircle-&lt;id&gt;</code> in container <code>iCloud.net.m-pax.careknit</code>), shared with invited relatives through Apple&rsquo;s zone-wide <code>CKShare</code> (public permission: none; participants: read/write). An optional weekly backup (<code>.careknitbackup</code>) can be saved by the organiser to the app&rsquo;s own iCloud Drive folder.</li>
+	</ul>
+	<p>Sync is offline-first: a log is saved on the device immediately (&ldquo;Waiting to sync&rdquo;) and uploaded to CloudKit when connectivity allows. Apple processes CloudKit and iCloud Drive data under your Apple services relationship and your iCloud storage quota &mdash; please see Apple&rsquo;s Privacy Policy for Apple&rsquo;s handling.</p>
+
+	<table class="summary-table">
+		<tr><th>Category</th><th>Examples</th><th>Stored where</th></tr>
+		<tr><td>Care content you enter</td><td>Names, notes, medications, logs, appointments, visits, handovers, document files</td><td>Your device + your iCloud (CloudKit shared zone). Never on a developer server.</td></tr>
+		<tr><td>Circle membership</td><td>Member display names, roles, CloudKit share participants</td><td>Your device + your iCloud shared zone. Apple is the access-control source of truth.</td></tr>
+		<tr><td>Device-private settings</td><td>Reminder choices, quiet hours, appearance, onboarding progress, sync tokens, diagnostics you choose to copy</td><td>Your device only. Never synced.</td></tr>
+		<tr><td>Purchases</td><td>Subscription status, product IDs</td><td>Apple App Store / StoreKit. The organiser&rsquo;s device mirrors a short-lived entitlement lease into the shared zone so members can ride free; clients validate that the lease was written by the share owner.</td></tr>
+	</table>
+
+	<h2>3. Data minimisation</h2>
+	<p>CareKnit deliberately does <strong>not</strong> ask for date of birth, NHS number, home address, precise location, contacts upload, HealthKit data, or photo-library access. Document import uses the system scanner / file picker / photo picker only. Medication records keep exactly the spelling your family typed &mdash; there is no drug database, interaction checker, or medical interpretation.</p>
+
+	<h2>4. Device permissions</h2>
+	<ul>
+		<li><strong>Camera</strong> (<code>NSCameraUsageDescription</code>: &ldquo;Scan a care document or add a profile photo.&rdquo;) &mdash; used only when you scan a document or add a photo. Images stay on your device / your iCloud.</li>
+		<li><strong>Notifications</strong> &mdash; requested only after you enable a real medication or appointment reminder. Reminders are local notifications scheduled on-device; shared-activity updates come from Apple silent pushes and are shown only if you allow them and quiet hours permit. No care content is used for marketing.</li>
+		<li><strong>Calendar (optional)</strong> &mdash; only if you explicitly tap &ldquo;Add to Calendar&rdquo; (EventKit). CareKnit reminders work without it.</li>
+		<li><strong>iCloud / CloudKit</strong> &mdash; required to create or join a shared circle. If you are signed out, the local cache stays readable but shared writes are blocked with an explanation.</li>
+	</ul>
+
+	<h2>5. Sharing with family</h2>
+	<p>Invitations use Apple&rsquo;s system sharing sheet (Messages, Mail, WhatsApp, copy link). Joining requires an Apple ID signed into iCloud &mdash; no CareKnit account is created. Everyone in the circle can see updates attributed by display name (timeline snapshots preserve the name shown when the action occurred). Removed members lose future access; their historical attribution remains. Never share your invite link publicly.</p>
+
+	<h2>6. Purchases &amp; subscriptions</h2>
+	<p>CareKnit offers one auto-renewable subscription group (&ldquo;CareKnit Circle&rdquo;) with annual and monthly options and a 14-day introductory trial (Apple eligibility applies). Payment, renewal, cancellation, and refunds are handled by Apple. Prices, trial eligibility, and renewal terms shown in the app come from the App Store. The organiser subscribes; invited relatives join free while the organiser&rsquo;s entitlement lease is valid. If the subscription lapses, everyone keeps read, search, download, and export access &mdash; only new shared writes are blocked.</p>
+	<p>Use of the app is governed by Apple&rsquo;s Standard Licensed Application End User License Agreement: <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a>.</p>
+
+	<h2>7. What we do NOT do</h2>
+	<ul>
+		<li>No tracking across apps or websites (App Tracking Transparency: not requested; <code>NSPrivacyTracking = false</code>).</li>
+		<li>No third-party SDK network traffic in v1.0 &mdash; only Apple services (CloudKit, CloudKit Push, StoreKit, App Store).</li>
+		<li>No diagnosis, dosage advice, emergency, location-tracking, or clinician-messaging features.</li>
+		<li>No sale of personal data and no use of care content for advertising.</li>
+	</ul>
+
+	<h2>8. Apple privacy labels &amp; manifest (for App Store review)</h2>
+	<p>Our <code>PrivacyInfo.xcprivacy</code> declares no collected data types and no tracking. Required-reason APIs used: file timestamps (<code>C617.1</code>) and user defaults (<code>CA92.1</code>). App Privacy &ldquo;Data Not Collected&rdquo; applies to the developer; user-entered care content is stored by the user in Apple iCloud at the user&rsquo;s direction and is not collected by the developer. Purchase handling is via Apple Commerce.</p>
+
+	<h2>9. Retention, export &amp; deletion (your control)</h2>
+	<ul>
+		<li><strong>Export anytime:</strong> Circle &rarr; Export offers filtered timeline PDF / CSV and document copies &mdash; available even in read-only mode.</li>
+		<li><strong>Leave:</strong> a member can leave from Circle settings; future access stops.</li>
+		<li><strong>Archive:</strong> stops reminders and new writes, keeps records visible (subscription must be cancelled separately in Apple Settings).</li>
+		<li><strong>Delete permanently:</strong> organiser-typed confirmation, optional full export first, then the CloudKit zone is revoked/deleted and local files cleared. Deleting the circle does not cancel Apple billing &mdash; manage that in Apple Settings &rarr; Subscriptions.</li>
+		<li><strong>Uninstalling</strong> removes the on-device cache; the iCloud copy remains until the circle is deleted or iCloud data is removed by the account holder.</li>
+	</ul>
+	<p>Because there is no developer account or database, privacy access/deletion requests are fulfilled by these in-app steps. If you need help, email us and we will walk you through them.</p>
+
+	<h2>10. Security</h2>
+	<p>Records are protected by iOS file protection and Apple&rsquo;s CloudKit transport/storage protections. An optional Face ID / Touch ID app lock (off by default) covers the UI and background snapshots but does not additionally encrypt CloudKit records. Logs and diagnostics redact names, notes, filenames, CloudKit identifiers, and share URLs. Temporary export files are deleted after sharing or on next launch.</p>
+
+	<h2>11. Medical &amp; legal disclaimer</h2>
+	<div class="disclaimer-box">
+		<p>CareKnit is for recording and coordinating care. It does not provide medical advice, check medicines or doses, or replace professional care. Follow the instructions from the person&rsquo;s GP, pharmacist or care team. CareKnit is not an emergency service. For urgent help, contact local emergency services.</p>
+		<p>The document checklist (&ldquo;You may want to keep a copy here&rdquo;) is for organisation only and is not legal or medical advice.</p>
+	</div>
+
+	<h2>12. Children</h2>
+	<p>CareKnit coordinates care for an ageing relative and is intended for adult family organisers and members. We do not knowingly collect children&rsquo;s data as a developer; any names a family chooses to record are stored only on their devices / their iCloud as described above.</p>
+
+	<h2>13. Changes to this policy</h2>
+	<p>If privacy practices change (e.g. a future optional analytics feature), this page will be updated with a new effective date, and the app&rsquo;s privacy manifest / App Privacy labels will be updated before release. Material changes will also be noted in release notes.</p>
+
+	<h2>14. Contact</h2>
+	<p>Developer: M-PAX Group.<br>Privacy / support: <a href="mailto:contact@m-pax.net">contact@m-pax.net</a><br>Support page: <a href="https://m-pax.net/careknit.html">https://m-pax.net/careknit.html</a></p>
+	<p>If you are in the UK/EU and have a data-protection question, include &ldquo;CareKnit privacy&rdquo; in the subject line and we will respond. Since we hold no developer-side account data, most requests are resolved with the in-app export / leave / delete steps in section 9.</p>
+</div>
+</body>
+</html>
