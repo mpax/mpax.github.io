@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Log4Tutor – Tutor Session Log. Log each session in seconds, send parents a polished summary, and turn sessions into per-term invoices. On-device, no account, no tracking.">
+    <meta name="keywords" content="Log4Tutor, tutor app, tutoring, session log, parent summaries, tutoring invoices, private tutor, iOS">
+    <title>Log4Tutor – Log sessions, update parents, bill per term | iOS</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy: #232E4D;
+            --navy-pressed: #1A2340;
+            --indigo: #4F46E5;
+            --indigo-pressed: #4338CA;
+            --amber: #E8A33D;
+            --amber-pressed: #C97D10;
+            --paper: #EFF1FA;
+            --surface: #FFFDF8;
+            --ink: #232E4D;
+            --ink-2: #4A5578;
+            --divider: #D8DEEF;
+            --text-dark: #232E4D;
+            --text-light: #4A5578;
+            --bg-light: #EFF1FA;
+            --bg-white: #ffffff;
+            --border-color: #D8DEEF;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius: 16px;
+            --radius-sm: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+            display: flex; justify-content: space-between; align-items: center; height: 70px;
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--navy); text-decoration: none; letter-spacing: -0.5px; }
+        .logo span { color: var(--indigo); }
+        .nav-menu { display: flex; list-style: none; gap: 2rem; }
+        .nav-menu a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 0.95rem; position: relative; }
+        .nav-menu a:hover { color: var(--indigo); }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-dark); }
+
+        .hero { padding: 8rem 2rem 4rem; background: linear-gradient(135deg, #EFF1FA 0%, #FFFDF8 55%, #FDEBCB 100%); }
+        .hero-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .hero-content h1 { font-size: 3rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; letter-spacing: -1px; }
+        .version-badge { display: inline-block; background: var(--navy); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; font-weight: 600; margin-bottom: 1rem; }
+        .coming-soon-badge { display: inline-block; background: var(--amber); color: #232E4D; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; font-weight: 700; margin-bottom: 1rem; margin-left: 0.5rem; }
+        .hero-subtitle { font-size: 1.35rem; color: var(--navy); font-weight: 600; margin-bottom: 1rem; }
+        .hero-description { font-size: 1.05rem; color: var(--text-light); margin-bottom: 1.75rem; line-height: 1.7; }
+        .features-list { list-style: none; margin-bottom: 2rem; }
+        .features-list li { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-dark); font-size: 0.98rem; }
+        .features-list li::before {
+            content: '✓'; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+            width: 24px; height: 24px; background: #E0E4FA; color: var(--indigo-pressed);
+            border-radius: 50%; font-size: 0.875rem; font-weight: 700; margin-top: 2px;
+        }
+        .download-section { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+        .app-badge { display: inline-flex; align-items: center; gap: 10px; background: #000; color: #fff; border-radius: 10px; padding: 8px 14px 8px 12px; text-decoration: none; line-height: 1; }
+        .app-badge small { font-size: 9px; letter-spacing: .06em; text-transform: uppercase; opacity: .8; font-weight: 500; display: block; }
+        .app-badge strong { font-size: 15px; font-weight: 600; letter-spacing: -.02em; display: block; }
+        .platform-note { width: 100%; margin-top: 1rem; padding: 0.75rem 1rem; background: white; border-radius: var(--radius-sm); font-size: 0.9rem; color: var(--text-light); border: 1px solid var(--border-color); }
+        .hero-image { display: flex; justify-content: center; align-items: center; }
+        .hero-image img { max-width: 280px; width: 100%; height: auto; border-radius: 28px; box-shadow: var(--shadow-lg); }
+
+        section { padding: 4rem 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h2 { font-size: 2rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+        .section-header p { font-size: 1rem; color: var(--text-light); max-width: 720px; margin: 0 auto; }
+
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .feature-card { background: var(--surface); padding: 1.75rem; border-radius: var(--radius); border: 1px solid var(--border-color); border-top: 4px solid var(--indigo); }
+        .feature-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 0.6rem; }
+        .feature-card p { color: var(--text-light); font-size: 0.95rem; }
+
+        .screenshots-section { background: var(--bg-white); }
+        .screenshots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+        .screenshot-item { border-radius: var(--radius-sm); overflow: hidden; box-shadow: var(--shadow-md); transition: all 0.3s ease; background: var(--bg-light); }
+        .screenshot-item:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+        .screenshot-item img { width: 100%; height: auto; display: block; }
+        .screenshot-item figcaption { padding: 0.6rem 0.9rem; font-size: 0.85rem; color: var(--text-light); }
+
+        .honest-box { background: var(--bg-light); border-left: 4px solid var(--indigo); padding: 1.25rem 1.5rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-top: 2rem; }
+        .honest-box p { color: var(--text-dark); font-size: 0.95rem; }
+        .honest-box ul { margin-left: 1.2rem; margin-top: 0.5rem; color: var(--text-dark); font-size: 0.95rem; }
+        .honest-box li { margin-bottom: 0.35rem; }
+
+        .help-section { background: var(--bg-white); }
+        .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .help-card { background: var(--bg-light); padding: 2rem; border-radius: var(--radius); border: 1px solid var(--border-color); }
+        .help-card h3 { font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 1rem; }
+        .help-card p { color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: var(--indigo); color: white; text-decoration: none; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem; border: none; cursor: pointer; }
+        .btn:hover { background: var(--indigo-pressed); color: #fff; }
+        .btn-secondary { background: var(--navy); color: white; }
+        .btn-secondary:hover { background: var(--navy-pressed); }
+        .btn-amber { background: var(--amber); color: #232E4D; }
+        .btn-amber:hover { background: var(--amber-pressed); color: #fff; }
+
+        footer { background: var(--navy); color: white; padding: 3rem 2rem 2rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { color: #C3CBE4; text-decoration: none; font-size: 0.9rem; }
+        .footer-links a:hover { color: white; }
+        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 2rem; border-top: 1px solid #35406B; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .footer-bottom p { color: #C3CBE4; font-size: 0.875rem; }
+        .back-to-top { color: #C3CBE4; text-decoration: none; font-size: 0.875rem; }
+        .back-to-top:hover { color: white; }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; position: absolute; top: 70px; left: 0; right: 0; background: white; flex-direction: column; padding: 1rem 2rem; gap: 1rem; border-bottom: 1px solid var(--border-color); box-shadow: var(--shadow-md); }
+            .nav-menu.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .hero { padding: 6rem 1.5rem 3rem; }
+            .hero-container { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-content { order: 2; }
+            .hero-image { order: 1; }
+            .hero-content h1 { font-size: 2rem; }
+            section { padding: 3rem 1.5rem; }
+            .footer-content, .footer-bottom { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">M<span>-</span>PAX</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#screenshots">Screenshots</a></li>
+                <li><a href="#support">Support</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">☰</button>
+        </div>
+    </nav>
+
+    <section class="hero" id="overview">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="version-badge">Version 1.0 · iOS 17+ · iPhone</span><span class="coming-soon-badge">Coming soon to the App Store</span>
+                <h1>Log4Tutor</h1>
+                <p class="hero-subtitle">Log sessions, update parents, bill per term — in seconds.</p>
+                <p class="hero-description">
+                    Tutor Session Log gives a private tutor one fast record for their teaching business:
+                    log each session in under 10 seconds, send the parent a polished summary the same day,
+                    and turn logged sessions into per-term invoices with simple paid/unpaid tracking.
+                    Single tutor, no accounts, no developer server — your data stays on your device and in your own iCloud&nbsp;Drive.
+                </p>
+                <ul class="features-list">
+                    <li><span><strong>Today</strong> — upcoming sessions, one-tap “Log session”, and a Needs-attention list (unbilled sessions, overdue invoices, unsent summaries)</span></li>
+                    <li><span><strong>Students &amp; Log</strong> — student records with rates and usual durations; chronological session history with fee shown as rate × duration, editable with a “Custom fee” badge</span></li>
+                    <li><span><strong>Parent summaries</strong> — branded draft generated from a token template, freely editable, then shared via your own WhatsApp / SMS / email; channel recorded</span></li>
+                    <li><span><strong>Invoices</strong> — one invoice per family per term (e.g. <em>AUT26-001</em>), outstanding dashboard, mark-paid with date &amp; method, void/reopen audit trail, PDF + copyable term statement</span></li>
+                    <li><span><strong>Private by design</strong> — offline-first, on-device records, automatic backup to your iCloud Drive, full export anytime. No analytics, no ads, no tracking</span></li>
+                </ul>
+                <div class="download-section">
+                    <span class="app-badge" aria-label="Coming soon on the App Store">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.7 17.3c-.4.6-.9 1.2-1.5 1.6-.5.4-1.1.6-1.9.6-.6 0-1.1-.1-1.6-.4-.4-.3-.8-.4-1.3-.4-.5 0-.9.1-1.3.4-.4.3-.9.4-1.5.4-.7 0-1.3-.2-1.9-.6-.6-.4-1.1-1-1.5-1.7-1-1.6-1.6-3.3-1.6-5 0-1 .3-1.9.8-2.7.5-.8 1.2-1.4 2-1.9.6-.4 1.3-.6 2-.6.6 0 1.1.2 1.6.5.4.3.7.4 1 .4.3 0 .7-.1 1.1-.4.6-.4 1.2-.6 1.9-.6.7 0 1.4.2 2 .6-.1.1-.2.2-.3.3-.6.6-1 1.3-1 2.1 0 .8.3 1.5.9 2.1.6.6 1.3.9 2.2 1 0 .4-.1.9-.2 1.3-.2.8-.6 1.6-1.2 2.4zM12.5 6.2c0-.6.2-1.2.6-1.7.4-.5 1-.9 1.7-1.1-.1.7-.4 1.3-.9 1.8-.4.5-1 .9-1.6 1.1 0-.1 0-.1.2-.1z"/></svg>
+                        <span><small>Coming soon on the</small><strong>App Store</strong></span>
+                    </span>
+                    <a href="support/privacy-policy-log4tutor.html" class="btn btn-secondary">Privacy Policy</a>
+                    <a href="mailto:contact@m-pax.net?subject=Log4Tutor%20Support" class="btn">Contact Support</a>
+                    <div class="platform-note">
+                        iPhone · iOS 17+ · Single currency per install (device locale, e.g. GBP) · Backups live in your own iCloud Drive and count toward your Apple storage.
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="./img/icon/log4tutor-icon.png" alt="Log4Tutor app icon — hourglass with falling amber sand on deep navy">
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>One record: log → share → bill</h2>
+                <p>The app never moves money — it records what happened and what is owed. Parents pay you directly; the app records payments you received elsewhere.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>⏱️ Ten seconds to log</h3>
+                    <p>The session form opens with the student, today's date and the usual duration pre-filled. Confirm, add topics, tap Save — fee auto-computed as hourly rate × duration, rounded to the penny.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💬 Parent summaries</h3>
+                    <p>Warm, branded drafts (topics, 1–5 star understanding, your signature, optional “Sent via” footer). Edit freely before sharing through WhatsApp, SMS or email — no parent login, no portal.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🧾 Per-term family invoices</h3>
+                    <p>Siblings on one invoice as separate line items. Sequential numbers per term (AUT26-001…), editable due dates (default +7 days), PDF invoices and copyable term statements.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Outstanding dashboard</h3>
+                    <p>“Outstanding: £X across N families”, overdue-first. Mark paid with date and method (bank transfer / cash / other). Paid invoices lock line items and linked sessions until voided or reopened.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📤 Export everything</h3>
+                    <p>Sessions CSV, invoices CSV, per-session calendar files (.ics), and a full JSON export — always available. Your exit path, built in.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔒 On-device &amp; calm</h3>
+                    <p>Local session reminders (default 30 min, quiet hours 21:00–08:00), overdue nudges at most once per 7 days, and automatic iCloud Drive backups (last 5 kept) with a clear health indicator.</p>
+                </div>
+            </div>
+            <div class="honest-box">
+                <p><strong>Honest labelling — what Log4Tutor is not:</strong></p>
+                <ul>
+                    <li>Not a payment processor — “Mark paid” records money you already received elsewhere.</li>
+                    <li>Not calendar sync — “Add to calendar” downloads a calendar (.ics) file.</li>
+                    <li>Not parent messaging — summaries go out through your own WhatsApp / SMS / email via the share sheet.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="screenshots-section" id="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2>Screenshots</h2>
+                <p>Today, session history, the parent summary draft, and the outstanding dashboard</p>
+            </div>
+            <div class="screenshots-grid">
+                <figure class="screenshot-item">
+                    <img src="./img/screenshot/log4tutor/01-today.png" alt="Log4Tutor Today screen — upcoming sessions and Log session button" loading="lazy">
+                    <figcaption>Today — up next &amp; quick log</figcaption>
+                </figure>
+                <figure class="screenshot-item">
+                    <img src="./img/screenshot/log4tutor/02-sessions.png" alt="Log4Tutor Sessions list — chronological session history" loading="lazy">
+                    <figcaption>Sessions — history</figcaption>
+                </figure>
+                <figure class="screenshot-item">
+                    <img src="./img/screenshot/log4tutor/03-summary.png" alt="Log4Tutor parent summary draft — editable branded text, share via WhatsApp, SMS or email" loading="lazy">
+                    <figcaption>Summary draft — updates that write themselves</figcaption>
+                </figure>
+                <figure class="screenshot-item">
+                    <img src="./img/screenshot/log4tutor/04-invoices.png" alt="Log4Tutor Invoices — outstanding £175 across 2 families, overdue and paid states" loading="lazy">
+                    <figcaption>Invoices — know who owes what</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <section class="help-section" id="support">
+        <div class="container">
+            <div class="section-header">
+                <h2>Help &amp; Support</h2>
+                <p>Onboarding, backup health, template editing and export guides are built into the app (More → About / Settings). For anything else, reach us below.</p>
+            </div>
+            <div class="help-grid">
+                <div class="help-card">
+                    <h3>🔒 Privacy Policy</h3>
+                    <p>No developer server, no accounts, no analytics. Your records stay on your device and in your own iCloud Drive.</p>
+                    <a href="support/privacy-policy-log4tutor.html" class="btn btn-secondary">View Privacy Policy</a>
+                </div>
+                <div class="help-card">
+                    <h3>📄 Terms of Use (EULA)</h3>
+                    <p>Log4Tutor uses Apple&rsquo;s Standard Licensed Application End User License Agreement.</p>
+                    <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" class="btn btn-secondary" target="_blank" rel="noopener">View Apple Standard EULA</a>
+                </div>
+                <div class="help-card">
+                    <h3>💬 Contact</h3>
+                    <p>Questions, suggestions, found a bug, or need help with backup / restore / export? We&rsquo;d love to hear from you.</p>
+                    <a href="mailto:contact@m-pax.net?subject=Log4Tutor%20Support" class="btn">contact@m-pax.net</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="log4as.html">Log4AS</a>
+                <a href="logicu.html">LogICU</a>
+                <a href="pooldoc.html">Pool Doc</a>
+                <a href="wiresmith.html">WireSmith</a>
+                <a href="careknit.html">CareKnit</a>
+                <a href="support/privacy-policy-log4tutor.html">Privacy Policy</a>
+                <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Terms (EULA)</a>
+                <a href="mailto:contact@m-pax.net">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 M-PAX Group. All rights reserved. · Log4Tutor records sessions and payments received elsewhere; it never processes money.</p>
+            <a href="#" class="back-to-top">Back to Top ↑</a>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+            });
+        });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.length > 1) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

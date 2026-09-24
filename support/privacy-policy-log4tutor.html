@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/modernizr.js"></script>
+	<title>Privacy Policy - Log4Tutor</title>
+	<style>
+		.privacy-content {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+		.privacy-content h2 {
+			color: #232E4D;
+			margin-top: 30px;
+			margin-bottom: 10px;
+		}
+		.privacy-content p {
+			line-height: 1.6;
+			margin-bottom: 15px;
+		}
+		.privacy-content ul, .privacy-content ol {
+			margin-left: 20px;
+			margin-bottom: 15px;
+		}
+		.privacy-content li {
+			line-height: 1.6;
+			margin-bottom: 8px;
+		}
+		.privacy-content a {
+			color: #4F46E5;
+		}
+		.privacy-content code {
+			background: #EFF1FA;
+			padding: 1px 6px;
+			border-radius: 6px;
+			font-size: 0.85em;
+		}
+		.app-icon {
+			display: block;
+			margin: 30px auto 20px;
+			width: 72px;
+			height: 72px;
+			border-radius: 16px;
+		}
+		.disclaimer-box {
+			background-color: #EFF1FA;
+			border-left: 4px solid #4F46E5;
+			padding: 15px 20px;
+			margin: 20px 0;
+		}
+		.disclaimer-box p {
+			margin-bottom: 10px;
+		}
+		.disclaimer-box p:last-child {
+			margin-bottom: 0;
+		}
+		.summary-table {
+			width: 100%;
+			border-collapse: collapse;
+			margin: 15px 0 20px;
+			font-size: 0.95em;
+		}
+		.summary-table th, .summary-table td {
+			text-align: left;
+			padding: 10px 12px;
+			border-bottom: 1px solid #D8DEEF;
+			vertical-align: top;
+		}
+		.summary-table th {
+			background: #EFF1FA;
+			color: #232E4D;
+		}
+	</style>
+</head>
+<body>
+<header>
+	<h1>Privacy Policy</h1>
+	<p>Log4Tutor (Tutor Session Log)</p>
+</header>
+<div class="privacy-content">
+	<img src="../img/icon/log4tutor-icon-72.png" alt="Log4Tutor" class="app-icon">
+
+	<p><strong>Effective Date: September 24, 2026</strong></p>
+	<p><strong>Developer: M-PAX Group</strong> &middot; <strong>App: Log4Tutor</strong> (iOS, iPhone, iOS 17+, Bundle ID <code>net.m-pax.Log4Tutor</code>)</p>
+
+	<p>Log4Tutor gives a private tutor one fast record for their teaching business: log each session in seconds, send the parent a polished summary, and turn logged sessions into per-term invoices. It is designed so that <strong>we, the developer, do not operate a server, do not create accounts, and do not receive your tutoring records</strong>.</p>
+
+	<div class="disclaimer-box">
+		<p><strong>Short version:</strong></p>
+		<ul>
+			<li>No developer account, no developer database, no advertising SDK, no analytics SDK, no tracking.</li>
+			<li>Your records stay on your device and in <strong>your own Apple iCloud Drive</strong> (automatic backups to the app&rsquo;s own folder, last 5 kept).</li>
+			<li>Parent contact details and summaries leave the device only when <strong>you</strong> tap Share (your own WhatsApp / SMS / email) or Export.</li>
+			<li>Payments are recorded manually and handled entirely outside the app; App Store purchases are handled entirely by Apple (StoreKit / App Store).</li>
+		</ul>
+	</div>
+
+	<h2>1. Data we (the developer) collect</h2>
+	<p><strong>We collect nothing automatically.</strong> Log4Tutor contains no third-party analytics, crash-reporting SDKs, advertising SDKs, session replay, or fingerprinting. We do not sell personal data and we do not share personal data with data brokers.</p>
+	<p>The only personal information we ever receive is what you choose to send us yourself, for example if you email <a href="mailto:contact@m-pax.net">contact@m-pax.net</a> for support. We use such messages only to answer you, and we delete them on request.</p>
+
+	<h2>2. Data you enter in the app &mdash; where it lives</h2>
+	<p>Anything you record (tutor and business names, signature, student names, subjects, rates, parent names and contact details, session topics, ratings, notes, terms, invoices, summaries, settings) is stored in two places, both under your control:</p>
+	<ul>
+		<li><strong>On your device</strong> &mdash; the on-device database (SwiftData store in Application Support) protected by iOS file protection. Every feature works offline.</li>
+		<li><strong>In your Apple iCloud Drive</strong> &mdash; automatic timestamped backup archives (<code>TutorSessionLog-Backup-YYYYMMDD-HHmmss.tzbak</code>: full record export in JSON plus a manifest with app version, schema version, record counts and checksum) in the app&rsquo;s own folder (<code>Documents/Tutor Session Log/Backups</code>), keeping the <strong>5 most recent</strong>. Backups count toward your Apple storage quota. If iCloud is unavailable, backups fall back to local Application Support.</li>
+	</ul>
+	<p>Apple processes iCloud Drive data under your Apple services relationship &mdash; please see Apple&rsquo;s Privacy Policy for Apple&rsquo;s handling. There is no CloudKit database, no developer backend, and no cross-device sync beyond your own iCloud Drive backup/restore.</p>
+
+	<table class="summary-table">
+		<tr><th>Category</th><th>Examples</th><th>Stored where</th></tr>
+		<tr><td>Tutoring content you enter</td><td>Student names, subjects, rates, parent names/phones/emails, session topics, ratings, notes, terms, invoices, summaries</td><td>Your device + your iCloud Drive backups. Never on a developer server.</td></tr>
+		<tr><td>Device-private settings</td><td>Currency, due-day defaults, reminder lead time, quiet hours, template text, footer toggle, appearance, diagnostics you choose to copy</td><td>Your device only (backed up as part of your archive). Never synced anywhere else.</td></tr>
+		<tr><td>Purchases</td><td>One-time-unlock entitlement status</td><td>Apple App Store / StoreKit; the device keeps a local unlocked flag. Payment, records and refunds are Apple&rsquo;s.</td></tr>
+	</table>
+
+	<h2>3. Data minimisation</h2>
+	<p>Log4Tutor deliberately does <strong>not</strong> ask for precise location, contacts upload, HealthKit data, or photo-library access. Student and parent details are exactly what you typed &mdash; there is no enrichment, matching, or profiling. In-app diagnostics (“Copy diagnostics”) contain only app/iOS/schema versions, record counts and backup status &mdash; no names or contact details.</p>
+
+	<h2>4. Device permissions</h2>
+	<ul>
+		<li><strong>Notifications</strong> &mdash; requested only in context (e.g. when you enable session reminders), preceded by an in-app explainer. Reminders are <strong>local notifications scheduled on-device</strong>: session reminders (default 30 minutes before, shifted to quiet-hours end if they fall inside quiet hours, default 21:00–08:00) and overdue-invoice nudges (at most one per invoice per 7 days, 09:00 local). Denying permission keeps all records usable; the app shows a “Notifications off” row linking to system Settings instead of re-prompting.</li>
+		<li><strong>iCloud Drive</strong> &mdash; used only for the automatic backups described in section 2 (plus manual Back up now / Restore). No iCloud backup, no restore; local data stays readable.</li>
+		<li><strong>Contacts, Photos, Calendar, Location</strong> &mdash; not requested. Parent details are typed by you. “Add to calendar” generates a calendar (<code>.ics</code>) <strong>file</strong> opened in the share sheet &mdash; it is a download, never calendar sync (no EventKit, no calendar access).</li>
+	</ul>
+
+	<h2>5. Sharing with parents (you send; the app never sends itself)</h2>
+	<p>Log4Tutor has no parent accounts, no parent portal, and no in-app messaging. Parent communication happens only through <strong>your explicit share-sheet actions</strong>: session summaries via your WhatsApp/SMS/email, invoice PDFs, CSV exports, <code>.ics</code> files, and the full JSON export. Nothing is transmitted anywhere by the app except through those actions you initiate.</p>
+
+	<h2>6. Purchases</h2>
+	<p>Log4Tutor offers one StoreKit 2 non-consumable one-time unlock (<code>tutorsessionlog.pro.unlock</code>): the first <strong>20 logged sessions are free</strong> with full features, then unlimited logging requires the single purchase. The exact price shown in the app comes from the App Store &mdash; it is never hard-coded. Payment, renewal records and refunds are handled by Apple, with a Restore Purchases button in the app. If you do not purchase, only <em>new</em> session logging is gated: existing sessions stay viewable, searchable, summarisable, invoicable and exportable, free, forever.</p>
+	<p>Use of the app is governed by Apple&rsquo;s Standard Licensed Application End User License Agreement: <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a>.</p>
+
+	<h2>7. What we do NOT do</h2>
+	<ul>
+		<li>No tracking across apps or websites (App Tracking Transparency: not requested).</li>
+		<li>No third-party SDK network traffic &mdash; only Apple services the user chooses (iCloud Drive backup, StoreKit / App Store).</li>
+		<li>No payment processing: “Mark paid” records a payment you already received elsewhere (bank transfer, cash). The app never handles money.</li>
+		<li>No calendar sync, no parent messaging inside the app, no multi-tutor accounts.</li>
+		<li>No sale of personal data and no use of tutoring content for advertising.</li>
+	</ul>
+
+	<h2>8. Apple privacy labels &amp; manifest (for App Store review)</h2>
+	<p>App Privacy: <strong>Data Not Collected</strong> applies to the developer. User-entered tutoring content is stored by the user on-device and in the user&rsquo;s own iCloud Drive at the user&rsquo;s direction and is not collected by the developer. Purchase handling is via Apple Commerce (StoreKit). The app declares no tracking and includes no third-party SDKs.</p>
+
+	<h2>9. Retention, export &amp; deletion (your control)</h2>
+	<ul>
+		<li><strong>Export anytime:</strong> More &rarr; Export offers Sessions CSV, Invoices CSV, per-session <code>.ics</code> files and “Export everything” (JSON of all records + CSVs) &mdash; available even without purchase.</li>
+		<li><strong>Correct:</strong> edit students, sessions, terms and unpaid invoices freely; paid invoices are immutable until you explicitly Reopen (back to unpaid, audit-noted) or Void (sessions return to ready-to-invoice). Editing a session on an unpaid invoice updates that invoice&rsquo;s line item and total with a notice.</li>
+		<li><strong>Delete:</strong> delete sessions (with stated invoice consequence), archive students instead of deleting where history exists, void invoices for the audit trail. “Delete all data” requires double confirmation and offers an export first.</li>
+		<li><strong>Uninstalling</strong> removes the on-device records; your iCloud Drive backup archives remain until you (the account holder) remove them.</li>
+		<li><strong>Restore:</strong> on first launch after reinstall, if backup archives exist in the iCloud Drive folder, the app offers “Restore from backup” (listed by date with record counts), replacing local data only after explicit confirmation.</li>
+	</ul>
+	<p>Because there is no developer account or database, privacy access/deletion requests are fulfilled by these in-app steps. If you need help, email us and we will walk you through them.</p>
+
+	<h2>10. Security</h2>
+	<p>Records are protected by iOS file protection and Apple&rsquo;s iCloud Drive transport/storage protections. Money is computed with decimal arithmetic (never floating-point) and paid-invoice immutability is enforced in the app&rsquo;s service layer, not just the UI. Logs and diagnostics redact names, notes and contact details. Temporary export files are deleted after sharing or on next launch.</p>
+
+	<h2>11. Records &amp; money disclaimer</h2>
+	<div class="disclaimer-box">
+		<p>Log4Tutor is a record-keeping and communication aid: it records what happened and what is owed. It does not move money, does not sync calendars, and does not message parents itself. “Mark paid” records a payment you received directly (bank transfer, cash). Fee figures derive from rate × duration as shown in the app; bank details are intentionally not stored &mdash; communicate them to parents yourself.</p>
+	</div>
+
+	<h2>12. Children</h2>
+	<p>Log4Tutor is intended for adult private tutors. We do not knowingly collect children&rsquo;s data as a developer; any student names a tutor chooses to record are stored only on the tutor&rsquo;s device / the tutor&rsquo;s iCloud Drive as described above.</p>
+
+	<h2>13. Changes to this policy</h2>
+	<p>If privacy practices change (e.g. a future optional analytics feature), this page will be updated with a new effective date, and the app&rsquo;s privacy manifest / App Privacy labels will be updated before release. Material changes will also be noted in release notes.</p>
+
+	<h2>14. Contact</h2>
+	<p>Developer: M-PAX Group.<br>Privacy / support: <a href="mailto:contact@m-pax.net">contact@m-pax.net</a><br>Support page: <a href="https://m-pax.net/log4tutor.html">https://m-pax.net/log4tutor.html</a></p>
+	<p>If you are in the UK/EU and have a data-protection question, include &ldquo;Log4Tutor privacy&rdquo; in the subject line and we will respond. Since we hold no developer-side account data, most requests are resolved with the in-app export / delete steps in section 9.</p>
+</div>
+</body>
+</html>
