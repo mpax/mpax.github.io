@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/modernizr.js"></script>
+	<title>Privacy Policy - Log4Surg</title>
+	<style>
+		.privacy-content {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+		.privacy-content h2 {
+			color: #1B2F44;
+			margin-top: 30px;
+			margin-bottom: 10px;
+		}
+		.privacy-content p {
+			line-height: 1.6;
+			margin-bottom: 15px;
+		}
+		.privacy-content ul, .privacy-content ol {
+			margin-left: 20px;
+			margin-bottom: 15px;
+		}
+		.privacy-content li {
+			line-height: 1.6;
+			margin-bottom: 8px;
+		}
+		.privacy-content a {
+			color: #0C7486;
+		}
+		.privacy-content code {
+			background: #EFF2F5;
+			padding: 1px 6px;
+			border-radius: 6px;
+			font-size: 0.85em;
+		}
+		.app-icon {
+			display: block;
+			margin: 30px auto 20px;
+			width: 72px;
+			height: 72px;
+			border-radius: 16px;
+		}
+		.disclaimer-box {
+			background-color: #EFF2F5;
+			border-left: 4px solid #0C7486;
+			padding: 15px 20px;
+			margin: 20px 0;
+		}
+		.disclaimer-box p {
+			margin-bottom: 10px;
+		}
+		.disclaimer-box p:last-child {
+			margin-bottom: 0;
+		}
+		.summary-table {
+			width: 100%;
+			border-collapse: collapse;
+			margin: 15px 0 20px;
+			font-size: 0.95em;
+		}
+		.summary-table th, .summary-table td {
+			text-align: left;
+			padding: 10px 12px;
+			border-bottom: 1px solid #D5DEE6;
+			vertical-align: top;
+		}
+		.summary-table th {
+			background: #EFF2F5;
+			color: #1B2F44;
+		}
+	</style>
+</head>
+<body>
+<header>
+	<h1>Privacy Policy</h1>
+	<p>Log4Surg (UK Surgical Logbook)</p>
+</header>
+<div class="privacy-content">
+	<img src="../img/icon/log4surg-icon-72.png" alt="Log4Surg" class="app-icon">
+
+	<p><strong>Effective Date: September 27, 2026</strong></p>
+	<p><strong>Developer: M-PAX Group</strong> &middot; <strong>App: Log4Surg</strong> (iOS, iPhone, iOS 17+, Bundle ID <code>net.m-pax.Log4Surg</code>)</p>
+
+	<p>Log4Surg is an offline-first operative logbook for UK surgical trainees: fast case entry with exact UK role terminology, ARCP-ready SAC and consolidation reports, validation tracking, and PDF/CSV export. It is designed so that <strong>we, the developer, do not operate a server, do not create accounts, and do not receive your logbook</strong>.</p>
+
+	<div class="disclaimer-box">
+		<p><strong>Short version:</strong></p>
+		<ul>
+			<li>No developer account, no developer database, no advertising SDK, no analytics SDK, no tracking.</li>
+			<li><strong>No patient names — by design.</strong> The app has no field for patient names, addresses, NHS numbers or photos, and the database schema has no such columns. Permitted identifiers are <strong>hospital number and patient date of birth only</strong>.</li>
+			<li>Your logbook stays on your device and in <strong>your own Apple iCloud Drive</strong> (automatic backups to the app&rsquo;s own folder).</li>
+			<li>Reports and case data leave the device only when <strong>you</strong> tap Share, Export or Print.</li>
+			<li>The trainee is the <strong>data controller</strong> for their logbook; the app processes everything on-device and transmits nothing by itself.</li>
+		</ul>
+	</div>
+
+	<h2>1. Data we (the developer) collect</h2>
+	<p><strong>We collect nothing automatically.</strong> Log4Surg contains no third-party analytics, crash-reporting SDKs, advertising SDKs, session replay, or fingerprinting. Crash diagnostics are Apple-only. We do not sell personal data and we do not share personal data with data brokers.</p>
+	<p>The only personal information we ever receive is what you choose to send us yourself, for example if you email <a href="mailto:contact@m-pax.net">contact@m-pax.net</a> for support. We use such messages only to answer you, and we delete them on request. A “Copy diagnostics” button in the app&rsquo;s About screen copies only app version, iOS version, dictionary version and case count — never case contents — for you to paste into a support email if you wish.</p>
+
+	<h2>2. Data you enter in the app &mdash; where it lives</h2>
+	<p>Anything you record (trainee name, grade, specialty, deanery, programme/NTN, GMC number, placements, hospitals, consultants/supervisors and their GMC numbers, procedures, roles, urgency flags, operation parts, hospital numbers, patient dates of birth, notes, validation status, settings) is stored in two places, both under your control:</p>
+	<ul>
+		<li><strong>On your device</strong> &mdash; the on-device database (SwiftData store) protected by iOS complete file protection (<code>NSFileProtectionComplete</code>); sensitive fields (hospital number, patient date of birth, notes) are additionally encrypted with a key held in the Secure Enclave / keychain. Every feature works offline, including in airplane mode.</li>
+		<li><strong>In your Apple iCloud Drive</strong> &mdash; automatic backups of the logbook to the app&rsquo;s own iCloud Drive folder (your private iCloud, no developer server), plus manual “Export full backup” to Files. Backups count toward your Apple storage quota. If no successful backup exists for more than 14 days, the app shows a non-blocking backup-health reminder.</li>
+	</ul>
+	<p>Apple processes iCloud Drive data under your Apple services relationship &mdash; please see Apple&rsquo;s Privacy Policy for Apple&rsquo;s handling. There is no developer backend, and no cross-device sync beyond your own iCloud Drive backup/restore. Deleting the app deletes the on-device data; your iCloud Drive backup archives remain until you (the account holder) remove them.</p>
+	<p><strong>Restore</strong> replaces current data from an iCloud Drive backup only after explicit confirmation, and only after a final local backup is taken.</p>
+
+	<table class="summary-table">
+		<tr><th>Category</th><th>Examples</th><th>Stored where</th></tr>
+		<tr><td>Logbook content you enter</td><td>Procedures, roles (O/A/S-TS/S-TU/P/T), urgency, hospitals, consultants, placements, hospital numbers, patient dates of birth, notes, validation status</td><td>Your device + your iCloud Drive backups. Never on a developer server.</td></tr>
+		<tr><td>Trainee details you enter</td><td>Name, grade, specialty, deanery, programme/NTN, GMC number, ARCP date</td><td>Your device (+ included in backups and report headers you export). Never on a developer server.</td></tr>
+		<tr><td>Device-private settings</td><td>Appearance, app lock &amp; PIN settings, notification choices, indicative-number targets, favourites</td><td>Your device only (backed up as part of your archive). Never synced anywhere else.</td></tr>
+		<tr><td>Data the app refuses to store</td><td>Patient names, addresses, NHS numbers, photos</td><td>Nowhere — no such fields or columns exist. CSV import rejects identifier-like columns (e.g. “patient_name”) with an explanation instead of importing them.</td></tr>
+	</table>
+
+	<h2>3. Anonymisation guardrails (structural, not just policy)</h2>
+	<ul>
+		<li>There is <strong>no field</strong> for patient name, address, NHS number or photo anywhere in case entry, and none in the data schema.</li>
+		<li>The Notes field shows a persistent inline warning (“Never enter patient names or anything that could identify a patient — hospital number and date of birth only”). On save, a lightweight check flags common name patterns and asks for confirmation — a nudge, not a guarantee.</li>
+		<li>Exported PDFs/CSVs contain only permitted fields. A share-safe export mode strips hospital number and date of birth for anything shown publicly (e.g. screenshots).</li>
+		<li>Simulation must not be logged: the entry screen notes “Log real cases only — simulation doesn&rsquo;t belong in your logbook.”</li>
+	</ul>
+
+	<h2>4. Data minimisation</h2>
+	<p>Log4Surg deliberately does <strong>not</strong> ask for precise location, contacts upload, HealthKit data, or photo-library access. Logbook content is exactly what you typed &mdash; there is no enrichment, matching, or profiling. Reports are computed live on-device from your cases by a single aggregation function; nothing is uploaded for computation.</p>
+
+	<h2>5. Device permissions</h2>
+	<ul>
+		<li><strong>Face ID / Touch ID &amp; passcode</strong> &mdash; the optional app lock (with 6-digit PIN fallback, and an optional PIN gate for the Cases tab) protects records on your device. Biometric data never leaves the device and is handled entirely by iOS; the app only learns whether authentication succeeded.</li>
+		<li><strong>Notifications</strong> &mdash; all notifications are <strong>local and scheduled on-device</strong>: validation nudges (a supervisor with &gt; 25 unvalidated cases, or any case unvalidated for &gt; 30 days), an ARCP-prep reminder 6 weeks before your set ARCP date, and backup-health reminders. They are opt-in (validation nudges excepted as described in-app), and denying permission keeps all records fully usable.</li>
+		<li><strong>iCloud Drive</strong> &mdash; used only for the automatic backups and restore described in section 2. No iCloud backup, no restore; local data stays readable.</li>
+		<li><strong>Contacts, Photos, Calendar, Location, HealthKit</strong> &mdash; not requested.</li>
+	</ul>
+
+	<h2>6. Sharing and export (you send; the app never sends itself)</h2>
+	<p>Log4Surg has no accounts, no messaging and no server upload. Case data and reports leave the device only through <strong>your explicit actions</strong>: the iOS share sheet (PDF reports, grouped-summary CSV, raw-cases CSV, full backup files), Print, or Save to Files. Nothing is transmitted anywhere by the app except through those actions you initiate.</p>
+	<p>A warning is shown before exporting raw cases: “This file contains hospital numbers and patient dates of birth.” PDFs carry an anonymisation footer (“Contains hospital numbers and dates of birth only — no patient names”).</p>
+	<p><strong>Request-validation messages</strong> (per case, per consultant, or bulk) are composed in-app listing unvalidated cases — the app does not email silently; you send the message yourself.</p>
+
+	<h2>7. CSV import</h2>
+	<p>Import accepts the app&rsquo;s own raw-cases CSV (round-trip) and an eLogbook-export mapping flow (pick file → map each column → preview 5 rows → import). Imports map only permitted columns; identifier-like columns are rejected with an explanation, future dates are rejected, and duplicates (same date + procedure + hospital number + date of birth) are offered as skip/review. Every imported case is tagged as a CSV import and starts unvalidated.</p>
+
+	<h2>8. Relationship to elogbook.org, ISCP, JCST and GMC</h2>
+	<p>Log4Surg is an independent companion tool. It does not sync with elogbook.org (no public API exists), does not write to ISCP, and is not affiliated with or endorsed by elogbook.org, ISCP, JCST or the GMC. It does not record WBAs (CBD / CEX / DOPS / PBA / MSF — those live in ISCP) and never claims OPCS-4 compatibility.</p>
+
+	<h2>9. Purchases</h2>
+	<p>The first release of Log4Surg contains <strong>no in-app purchase and no subscription</strong>: case entry, reports and export are fully available. If a future monetisation model is introduced, this policy and the App Privacy labels will be updated before release. Whatever model is chosen, records already logged will stay viewable and exportable.</p>
+	<p>Use of the app is governed by Apple&rsquo;s Standard Licensed Application End User License Agreement: <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a>.</p>
+
+	<h2>10. What we do NOT do</h2>
+	<ul>
+		<li>No tracking across apps or websites (App Tracking Transparency: not requested).</li>
+		<li>No third-party SDK network traffic &mdash; only Apple services the user chooses (iCloud Drive backup, App Store).</li>
+		<li>No accounts, no sign-in, no backend storage of logbooks.</li>
+		<li>No usage analytics and no advertising.</li>
+		<li>No sale of personal data and no use of logbook content for advertising.</li>
+		<li>No clinical decision-making: the app stores training records and computes report counts; it does not diagnose, triage or advise on patient care.</li>
+	</ul>
+
+	<h2>11. Apple privacy labels &amp; manifest (for App Store review)</h2>
+	<p>App Privacy: <strong>Data Not Collected</strong> applies to the developer. User-entered logbook content is stored by the user on-device and in the user&rsquo;s own iCloud Drive at the user&rsquo;s direction and is not collected by the developer. The app declares no tracking and includes no third-party SDKs. The app&rsquo;s privacy manifest reflects this.</p>
+	<p>Notes for review: the app stores medical <em>training</em> records (operative experience), not patient-care data, and contains no patient names by design. Any “sign-in” or “passcode” in the app is the local app lock (Face ID / Touch ID with PIN fallback), not an account. All features work fully offline; no demo account or test server is needed.</p>
+
+	<h2>12. Retention, export &amp; deletion (your control)</h2>
+	<ul>
+		<li><strong>Export anytime:</strong> Reports tab and More &rarr; Data offer grouped-summary CSV, raw-cases CSV, report PDFs (with Print / Save to Files / Share), and full backup export.</li>
+		<li><strong>Correct:</strong> edit or delete cases freely (including validated ones, matching eLogbook behaviour). Editing a validated case marks it unvalidated again so validation must be re-requested, never silently kept.</li>
+		<li><strong>Delete:</strong> case deletion requires confirmation; “Reset all data” requires typing the trainee&rsquo;s surname and offers an export first. Uninstalling removes on-device records; iCloud Drive backups remain until you remove them.</li>
+	</ul>
+	<p>Because there is no developer account or database, privacy access/deletion requests are fulfilled by these in-app steps. If you need help, email us and we will walk you through them.</p>
+
+	<h2>13. Security</h2>
+	<p>Records are protected by iOS complete file protection, with sensitive fields additionally encrypted via a Secure Enclave / keychain key. The app lock engages on backgrounding after a configurable interval (default 60 seconds). Temporary export files are deleted after sharing or on next launch. Report numbers are produced by one audited on-device computation — the generation timestamp, scope, filters, dictionary version and case count are printed on every report so any number can be traced back.</p>
+
+	<h2>14. Children</h2>
+	<p>Log4Surg is intended for adult surgical trainees. We do not knowingly collect children&rsquo;s data as a developer; any hospital numbers or dates of birth a trainee chooses to record are stored only on the trainee&rsquo;s device / the trainee&rsquo;s iCloud Drive as described above, and patient names cannot be recorded at all.</p>
+
+	<h2>15. Changes to this policy</h2>
+	<p>If privacy practices change (e.g. a future optional purchase or analytics feature), this page will be updated with a new effective date, and the app&rsquo;s privacy manifest / App Privacy labels will be updated before release. Material changes will also be noted in release notes.</p>
+
+	<h2>16. Contact</h2>
+	<p>Developer: M-PAX Group.<br>Privacy / support: <a href="mailto:contact@m-pax.net">contact@m-pax.net</a><br>Support page: <a href="https://m-pax.net/log4surg.html">https://m-pax.net/log4surg.html</a></p>
+	<p>If you are in the UK/EU and have a data-protection question, include &ldquo;Log4Surg privacy&rdquo; in the subject line and we will respond. Since we hold no developer-side account data, most requests are resolved with the in-app export / delete steps in section 12. The trainee remains the data controller for their logbook.</p>
+</div>
+</body>
+</html>
