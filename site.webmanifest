@@ -1,0 +1,27 @@
+{
+  "name": "M-PAX Group",
+  "short_name": "M-PAX",
+  "description": "Simple, private logbooks for work and life. Every M-PAX app runs on-device with no account and no tracking.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1a365d",
+  "icons": [
+    {
+      "src": "img/mpax-icon/mpax-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/mpax-icon/mpax-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "img/mpax-icon/mpax-stacked-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ]
+}
