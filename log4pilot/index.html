@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Log4Pilot — Know you're current, at a glance</title>
+<meta name="description" content="Log4Pilot is one fast, legally faithful logbook for student and GA pilots. Log a flight in seconds, see FAA and FCL currency from your own entries, and generate proof-ready reports. On-device, offline-first, no account. For iPhone.">
+<meta name="keywords" content="Log4Pilot, pilot logbook, FAA Part 61, EASA Part-FCL, UK Part-FCL, FCL.050, FAA 8710, flight currency, SEP revalidation, GA pilot, iPhone app">
+<meta name="author" content="Log4Pilot">
+<meta name="theme-color" content="#0A3442">
+<link rel="canonical" href="https://m-pax.net/log4pilot/">
+<link rel="icon" type="image/png" sizes="32x32" href="images/branding/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/branding/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/branding/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m-pax.net/log4pilot/">
+<meta property="og:title" content="Log4Pilot — Know you're current, at a glance">
+<meta property="og:description" content="Log a flight in seconds. See FAA + FCL currency from your own entries. Prove it with one-tap reports. On-device, no account.">
+<meta property="og:image" content="https://m-pax.net/log4pilot/images/branding/og-image.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Log4Pilot — Know you're current, at a glance">
+<meta name="twitter:description" content="One fast logbook for GA pilots. Log → Am I current? → Prove it. Offline-first, private by design.">
+<meta name="twitter:image" content="https://m-pax.net/log4pilot/images/branding/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --abyss:#051B23;
+  --deep:#0A3442;
+  --deep-2:#072833;
+  --deep-3:#0E4253;
+  --teal:#10707F;
+  --teal-soft:#E2F0F3;
+  --gold:#E8B33D;
+  --gold-strong:#C9962B;
+  --gold-soft:#F9E9BE;
+  --paper:#F5F3EC;
+  --paper-warm:#ECE8DB;
+  --paper-deep:#E2DDCC;
+  --surface:#FFFFFF;
+  --surface-2:#F2F4F2;
+  --ink:#0F222A;
+  --ink-2:#4B6470;
+  --ink-3:#7F99A3;
+  --border:#D9E3E1;
+  --border-strong:#BFCFCB;
+  --current:#15803D;
+  --current-bg:#E5F3E9;
+  --expiring:#B45309;
+  --expiring-bg:#FEF3C7;
+  --notcurrent:#B91C1C;
+  --notcurrent-bg:#FDECEC;
+  --radius-sm:12px;
+  --radius:20px;
+  --radius-lg:28px;
+  --radius-pill:999px;
+  --shadow-sm:0 1px 3px rgba(10,52,66,.08),0 1px 2px rgba(10,52,66,.06);
+  --shadow:0 8px 24px rgba(10,52,66,.08),0 4px 8px rgba(10,52,66,.06);
+  --shadow-lg:0 24px 48px rgba(5,27,35,.28),0 12px 24px rgba(5,27,35,.18);
+  --max:1160px;
+  --nav-h:68px;
+}
+html{scroll-behavior:smooth;scrollbar-gutter:stable}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit}
+img{max-width:100%;display:block}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--gold-strong);outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:12px;z-index:9999;background:var(--deep);color:#fff;padding:10px 16px;border-radius:8px;font-weight:600}
+.skip:focus{left:12px}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+.serif{font-family:"Instrument Serif",Georgia,serif}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+@media(min-width:768px){.wrap{padding:0 32px}}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--deep);background:rgba(10,52,66,.06);border:1px solid rgba(10,52,66,.12);padding:6px 11px;border-radius:999px}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold-strong)}
+.eyebrow.on-dark{color:var(--gold-soft);background:rgba(232,179,61,.12);border-color:rgba(232,179,61,.28)}
+.eyebrow.on-dark::before{background:var(--gold)}
+/* NAV */
+nav{position:fixed;inset:0 0 auto 0;z-index:50;height:var(--nav-h);background:rgba(245,243,236,.86);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2);border-bottom:1px solid rgba(217,227,225,.8);transition:height .2s,background .2s,box-shadow .2s}
+nav.scrolled{height:60px;background:rgba(255,255,255,.94);box-shadow:0 1px 0 rgba(10,52,66,.06),0 4px 16px rgba(10,52,66,.06)}
+.nav-inner{max-width:var(--max);margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+@media(min-width:768px){.nav-inner{padding:0 32px}}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.brand-mark{width:36px;height:36px;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(10,52,66,.22);flex-shrink:0;background:var(--deep);display:grid;place-items:center}
+.brand-mark img{width:100%;height:100%;object-fit:cover}
+.brand-wordmark{font-family:"Instrument Serif",Georgia,serif;font-size:19px;letter-spacing:-.02em;line-height:1;color:var(--deep);font-weight:400}
+.brand-wordmark span{font-style:italic;color:var(--teal)}
+.nav-links{display:none;align-items:center;gap:26px;list-style:none}
+@media(min-width:920px){.nav-links{display:flex}}
+.nav-links a{text-decoration:none;font-size:13.5px;font-weight:500;color:var(--ink-2);letter-spacing:.01em;position:relative;padding:4px 0}
+.nav-links a:hover{color:var(--deep)}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1.5px;background:var(--deep);transform:scaleX(0);transform-origin:left;transition:transform .2s}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{display:flex;align-items:center;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:.01em;padding:11px 18px;border-radius:999px;text-decoration:none;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:transform .15s,box-shadow .15s,background .15s,color .15s,border-color .15s}
+.btn:active{transform:scale(.98)}
+.btn-gold{background:var(--gold);color:#1A1405;box-shadow:0 4px 14px rgba(232,179,61,.38)}
+.btn-gold:hover{background:#D9A32E;box-shadow:0 6px 20px rgba(232,179,61,.42);transform:translateY(-1px)}
+.btn-deep{background:var(--deep);color:#fff;box-shadow:0 4px 14px rgba(10,52,66,.26)}
+.btn-deep:hover{background:var(--deep-2);transform:translateY(-1px)}
+.btn-secondary{background:var(--surface);color:var(--deep);border-color:var(--border);box-shadow:var(--shadow-sm)}
+.btn-secondary:hover{border-color:var(--border-strong);transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn-ghost-light{background:transparent;color:#fff;border-color:rgba(255,255,255,.28)}
+.btn-ghost-light:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4)}
+.btn-sm{padding:8px 14px;font-size:13px}
+.coming-pill{display:inline-flex;align-items:center;gap:8px;background:#000;color:#fff;border-radius:10px;padding:8px 14px 8px 12px;text-decoration:none;line-height:1;border:1px solid rgba(255,255,255,.18)}
+.coming-pill small{font-size:9px;letter-spacing:.06em;text-transform:uppercase;opacity:.75;font-weight:500;display:block}
+.coming-pill strong{font-size:15px;font-weight:600;letter-spacing:-.02em;display:block}
+.mobile-toggle{display:grid;place-items:center;width:40px;height:40px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--deep);cursor:pointer}
+@media(min-width:920px){.mobile-toggle{display:none}}
+.mobile-panel{display:none;position:fixed;inset:var(--nav-h) 0 auto 0;background:rgba(255,255,255,.98);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:16px 24px 24px;z-index:49}
+.mobile-panel.open{display:block}
+.mobile-panel a{display:block;padding:14px 0;text-decoration:none;color:var(--ink);font-weight:500;border-bottom:1px solid var(--border)}
+.mobile-panel a:last-child{border-bottom:0}
+/* HERO */
+.hero{position:relative;overflow:hidden;background:var(--abyss);color:#EAF0F0;padding:calc(var(--nav-h) + 40px) 0 56px}
+@media(min-width:960px){.hero{padding:calc(var(--nav-h) + 64px) 0 84px}}
+.hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.hero-bg svg{position:absolute;inset:0;width:100%;height:100%;opacity:.9}
+.hero-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 72% 18%,rgba(232,179,61,.14),transparent 60%),radial-gradient(700px 500px at 8% 85%,rgba(16,112,127,.22),transparent 60%),linear-gradient(180deg,rgba(5,27,35,.1),rgba(5,27,35,.55) 90%)}
+.hero-grid{position:relative;z-index:1;display:grid;gap:44px;align-items:center}
+@media(min-width:960px){.hero-grid{grid-template-columns:1.05fr .95fr;gap:48px}}
+.hero-copy{max-width:590px}
+.hero h1{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(40px,6vw,64px);font-weight:400;line-height:.94;letter-spacing:-.04em;color:#fff;margin:18px 0 16px}
+.hero h1 em{font-style:italic;color:var(--gold);font-weight:400}
+.hero-lead{font-size:clamp(16px,2.2vw,18.5px);line-height:1.6;color:rgba(234,240,240,.86);max-width:48ch;margin-bottom:12px}
+.hero-note{font-size:13.5px;line-height:1.65;color:rgba(234,240,240,.66);max-width:56ch;margin-bottom:24px}
+.hero-note strong{color:#fff}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:22px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:16px;align-items:center;font-size:12.5px;color:rgba(234,240,240,.68);border-top:1px solid rgba(255,255,255,.14);padding-top:18px;margin-top:4px}
+.hero-meta span{display:inline-flex;align-items:center;gap:7px}
+.hero-coord{display:none;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(234,240,240,.48);margin-top:18px;gap:16px}
+@media(min-width:960px){.hero-coord{display:flex}}
+.device-wrap{position:relative;display:grid;place-items:center;padding:12px}
+@media(min-width:960px){.device-wrap{padding:8px 0 8px 24px}}
+.device{position:relative;width:min(320px,86vw);aspect-ratio:308/632;background:#050F14;border-radius:48px;padding:11px;box-shadow:0 1px 0 rgba(255,255,255,.2) inset,0 0 0 1px rgba(255,255,255,.1),0 20px 60px rgba(0,0,0,.5),0 8px 24px rgba(0,0,0,.4);transform:rotate(-.6deg)}
+@media(min-width:960px){.device{width:340px}}
+.device-screen{width:100%;height:100%;background:#000;border-radius:38px;overflow:hidden;position:relative;display:flex;flex-direction:column;border:1px solid rgba(0,0,0,.06)}
+.device-screen img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.hero-card-float{position:absolute;right:-6px;bottom:22px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:12px 14px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:10px;font-size:12px;transform:rotate(1.2deg);max-width:240px;z-index:3;color:var(--ink)}
+@media(max-width:959px){.hero-card-float{display:none}}
+.hero-card-float strong{font-size:13px;color:var(--deep);display:block}
+.hero-card-float small{color:var(--ink-3);font-size:11px}
+.hero-card-float2{position:absolute;left:-8px;top:66px;background:rgba(255,255,255,.96);color:var(--deep);border-radius:14px;padding:10px 12px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;transform:rotate(-1.6deg);max-width:220px;z-index:3;border:1px solid rgba(255,255,255,.6)}
+@media(max-width:959px){.hero-card-float2{display:none}}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.02em;padding:5px 10px;border-radius:999px}
+.pill-current{background:var(--current-bg);color:var(--current)}
+.pill-not{background:var(--notcurrent-bg);color:var(--notcurrent)}
+@media(prefers-reduced-motion:no-preference){.device{animation:float 6s ease-in-out infinite}@keyframes float{0%,100%{transform:rotate(-.6deg) translateY(0)}50%{transform:rotate(-.2deg) translateY(-6px)}}}
+.trustbar{position:relative;z-index:1;margin-top:36px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);backdrop-filter:blur(10px);border-radius:16px;padding:14px 18px;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(234,240,240,.72)}
+.trustbar b{color:var(--gold)}
+/* SECTIONS */
+.section{padding:72px 0;position:relative}
+@media(min-width:768px){.section{padding:92px 0}}
+.section-paper{background:var(--paper)}
+.section-white{background:var(--surface)}
+.section-cream{background:var(--surface-2)}
+.section-deep{background:var(--deep);color:#DCE8E8}
+.section h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;line-height:.96;letter-spacing:-.03em}
+.section h2 em{font-style:italic;font-weight:400}
+.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--teal);margin-bottom:12px}
+.kicker.on-dark{color:var(--gold)}
+.prose{color:var(--ink-2);font-size:15.5px;line-height:1.7}
+.prose strong{color:var(--ink);font-weight:600}
+.on-dark-prose{color:rgba(220,232,232,.82)}
+.loop-grid{display:grid;gap:18px;margin-top:36px}
+@media(min-width:820px){.loop-grid{grid-template-columns:repeat(3,1fr);gap:20px}}
+.loop-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:26px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+.loop-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--deep),var(--gold))}
+.loop-num{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.loop-num i{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--deep);color:var(--gold-soft);font-style:normal;font-size:13px}
+.loop-card h3{font-family:"Instrument Serif",Georgia,serif;font-size:24px;font-weight:400;color:var(--deep);margin-bottom:8px;letter-spacing:-.02em}
+.loop-card p{font-size:14px;line-height:1.65;color:var(--ink-2)}
+.loop-card small{display:inline-flex;margin-top:14px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.split{display:grid;gap:40px;align-items:center}
+@media(min-width:900px){.split{grid-template-columns:1.02fr .98fr;gap:56px}}
+@media(min-width:900px){.split.reverse>*:first-child{order:2}.split.reverse>*:last-child{order:1}}
+.split-media{position:relative}
+.frame-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px;box-shadow:var(--shadow);overflow:hidden}
+.frame-card header{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:14px}
+.frame-card header strong{font-size:13px;letter-spacing:-.01em;color:var(--deep)}
+.frame-card header span{font-size:11px;color:var(--ink-3);font-family:"JetBrains Mono",monospace}
+.currency-mock{display:grid;gap:10px}
+.cur-card{border:1px solid var(--border);border-radius:14px;padding:14px;background:var(--surface-2)}
+.cur-card.top{background:var(--surface);border-color:var(--border-strong);box-shadow:var(--shadow-sm)}
+.cur-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:6px}
+.cur-head strong{font-size:13.5px;color:var(--deep)}
+.cur-card p{font-size:12.5px;line-height:1.55;color:var(--ink-2)}
+.cur-card .rule{font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--ink-3);margin-top:6px;display:block}
+.divergence{margin-top:14px;background:var(--deep);color:#EAF0F0;border-radius:14px;padding:14px;display:grid;gap:10px}
+.divergence strong{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold)}
+.div-row{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:start;font-size:12.5px;line-height:1.55}
+.div-row span:first-child{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);border-radius:8px;padding:4px 6px;text-align:center}
+.check-list{display:grid;gap:10px;margin-top:20px;list-style:none}
+.check-list li{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.6;color:var(--ink-2)}
+.check-list li strong{color:var(--deep)}
+.check-dot{width:28px;height:28px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0;color:var(--deep);font-weight:700}
+.dark-diagram{background:rgba(255,255,255,.06);color:#E6EFEC;border-radius:24px;padding:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+@media(min-width:768px){.dark-diagram{padding:36px}}
+.dark-diagram::before{content:"";position:absolute;inset:0;opacity:.07;background:linear-gradient(rgba(255,255,255,.4) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.4) 1px,transparent 1px);background-size:32px 32px}
+.dark-diagram>*{position:relative}
+.diagram-row{display:grid;gap:14px;align-items:center;margin-top:20px}
+@media(min-width:640px){.diagram-row{grid-template-columns:1fr auto 1fr auto 1fr}}
+.diagram-box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:16px;text-align:center;backdrop-filter:blur(8px)}
+.diagram-box strong{font-size:13px;display:block;margin-bottom:4px}
+.diagram-box span{font-size:12px;opacity:.72;line-height:1.5}
+.diagram-arrow{display:grid;place-items:center;color:var(--gold);font-size:18px;transform:rotate(90deg)}
+@media(min-width:640px){.diagram-arrow{transform:none}}
+.report-grid{display:grid;gap:14px;margin-top:28px}
+@media(min-width:760px){.report-grid{grid-template-columns:1fr 1fr;gap:16px}}
+.report-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px;box-shadow:var(--shadow-sm)}
+.report-card h3{font-size:15px;font-weight:700;color:var(--deep);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.report-card h3 span{font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;background:var(--deep);color:var(--gold-soft);padding:3px 7px;border-radius:999px}
+.report-card p{font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+.recon{margin-top:16px;background:var(--teal-soft);border-left:4px solid var(--teal);padding:14px 16px;border-radius:0 12px 12px 0;font-size:13.5px;color:var(--deep);line-height:1.6}
+.honest{margin-top:22px;background:var(--paper);border:1px solid var(--border);border-radius:16px;padding:18px}
+.honest strong{color:var(--deep);font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.honest ul{margin:10px 0 0 18px;font-size:13.5px;color:var(--ink-2);line-height:1.65}
+.privacy-visual{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:22px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+.privacy-visual::before{content:"";position:absolute;inset:0;opacity:.045;background:linear-gradient(var(--deep) 1px,transparent 1px),linear-gradient(90deg,var(--deep) 1px,transparent 1px);background-size:22px 22px}
+.privacy-grid{position:relative;display:grid;gap:14px}
+@media(min-width:560px){.privacy-grid{grid-template-columns:1fr auto 1fr}}
+.pv-col{display:grid;gap:10px;align-content:start}
+.pv-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink-3);text-align:center}
+.pv-card{background:var(--paper);border:1px solid var(--border);border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;color:var(--deep)}
+.pv-card i{width:32px;height:32px;border-radius:10px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0;font-style:normal}
+.pv-center{display:grid;place-items:center;gap:10px;padding:10px 0}
+.pv-phone{width:100%;background:var(--deep);color:#fff;border-radius:16px;padding:16px;text-align:center;box-shadow:0 8px 20px rgba(10,52,66,.24)}
+.pv-phone strong{font-family:"Instrument Serif",Georgia,serif;font-size:18px;font-weight:400;display:block}
+.pv-phone span{font-size:11px;opacity:.8}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px}
+@media(min-width:700px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px 16px;text-align:center}
+.stat strong{font-family:"JetBrains Mono",monospace;font-size:22px;font-weight:700;color:var(--deep);line-height:1}
+.stat strong.serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:28px}
+.stat span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--ink-3);display:block;margin-top:6px}
+.steps{display:grid;gap:16px;margin-top:32px;counter-reset:step}
+@media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr);gap:18px}}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px;position:relative;overflow:hidden;box-shadow:var(--shadow-sm)}
+.step::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--border)}
+.step:first-child::before{background:var(--gold)}
+.step:nth-child(2)::before{background:var(--deep)}
+.step:nth-child(3)::before{background:var(--teal)}
+.step-num{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:10px;margin-bottom:14px;font-weight:600}
+.step-num::before{counter-increment:step;content:"0" counter(step);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--paper);border:1px solid var(--border);font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;color:var(--deep)}
+.step h3{font-family:"Instrument Serif",Georgia,serif;font-size:22px;font-weight:400;color:var(--deep);margin-bottom:8px}
+.step p{font-size:14px;line-height:1.6;color:var(--ink-2)}
+.shots{display:grid;gap:14px;margin-top:28px}
+@media(min-width:760px){.shots{grid-template-columns:1fr 1fr;gap:18px}}
+.shot{background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.shot img{width:100%;height:auto;display:block;background:var(--deep)}
+.shot figcaption{padding:12px 16px;font-size:12px;color:var(--ink-3);border-top:1px solid var(--border);font-family:"JetBrains Mono",monospace}
+.shot figcaption strong{color:var(--deep)}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+.cta{background:var(--abyss);color:#E6EFEC;position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.06)}
+.cta::before{content:"";position:absolute;inset:0;opacity:.12;background:radial-gradient(600px 400px at 20% 0%,rgba(232,179,61,.4),transparent 60%),radial-gradient(800px 600px at 90% 100%,rgba(16,112,127,.4),transparent 60%)}
+.cta::after{content:"";position:absolute;inset:0;opacity:.06;background:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:40px 40px}
+.cta-inner{position:relative;text-align:center;max-width:740px;margin:0 auto;padding:24px 0}
+.cta h2{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(32px,5vw,52px);font-weight:400;line-height:.95;letter-spacing:-.03em;color:#fff;margin-bottom:14px}
+.cta h2 em{font-style:italic;color:var(--gold)}
+.cta p{font-size:15px;line-height:1.7;opacity:.82;max-width:58ch;margin:0 auto 10px}
+.cta-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:22px}
+.cta .btn-gold{background:#fff;color:var(--deep);box-shadow:0 8px 20px rgba(0,0,0,.22)}
+.cta-note{margin-top:18px;font-size:12px;opacity:.62;line-height:1.6}
+.cta-note a{color:var(--gold-soft);text-underline-offset:3px}
+footer{background:#041217;color:#8AA0A6;padding:48px 0 32px;border-top:1px solid rgba(255,255,255,.06)}
+.footer-grid{display:grid;gap:32px}
+@media(min-width:900px){.footer-grid{grid-template-columns:1.4fr .7fr .7fr .9fr}}
+.footer-brand{display:flex;gap:12px;align-items:flex-start}
+.footer-brand-mark{width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0;background:#fff;padding:0}
+.footer-brand-mark img{width:100%;height:100%;object-fit:cover}
+.footer-brand h3{font-family:"Instrument Serif",Georgia,serif;font-size:18px;font-weight:400;color:#fff;letter-spacing:-.02em}
+.footer-brand p{font-size:13px;line-height:1.6;opacity:.7;margin-top:6px;max-width:34ch}
+.footer-col h4{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#fff;opacity:.9;margin-bottom:14px}
+.footer-col a{display:block;font-size:13.5px;color:#8AA0A6;text-decoration:none;padding:5px 0}
+.footer-col a:hover{color:#fff}
+.footer-bottom{margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;font-size:12.5px;color:#5E767C}
+.footer-bottom a{color:#8AA0A6;text-decoration:none}
+.footer-bottom a:hover{color:#fff}
+.disclaimer-foot{font-size:11.5px;line-height:1.6;opacity:.6;margin-top:16px;max-width:90ch}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(80px);background:var(--deep);color:#fff;padding:12px 18px;border-radius:999px;font-size:13px;font-weight:600;box-shadow:var(--shadow-lg);opacity:0;transition:transform .3s,opacity .3s;z-index:60;pointer-events:none;max-width:calc(100vw - 48px);text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav id="nav" aria-label="Primary">
+  <div class="nav-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <a href="../index.html" aria-label="Back to M-PAX home" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--ink-3);text-decoration:none;border:1px solid var(--border);background:var(--surface);padding:6px 10px;border-radius:999px;white-space:nowrap">← M-PAX</a>
+      <a class="brand" href="index.html" aria-label="Log4Pilot home">
+        <span class="brand-mark" aria-hidden="true"><img src="images/branding/icon.png" alt="" width="36" height="36" loading="eager"></span>
+        <span class="brand-wordmark">Log4<span>Pilot</span></span>
+      </a>
+    </div>
+    <ul class="nav-links" role="list">
+      <li><a href="#loop">Loop</a></li>
+      <li><a href="#currency">Currency</a></li>
+      <li><a href="#log">Log</a></li>
+      <li><a href="#prove">Proof</a></li>
+      <li><a href="#privacy">Privacy</a></li>
+      <li><a href="#how">How it works</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn-deep btn-sm" href="mailto:contact@m-pax.net?subject=Log4Pilot">Contact</a>
+      <button class="mobile-toggle" id="menuBtn" aria-expanded="false" aria-controls="mobilePanel" aria-label="Open menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-panel" id="mobilePanel" hidden>
+  <a href="#loop">Loop</a>
+  <a href="#currency">Currency</a>
+  <a href="#log">Log</a>
+  <a href="#prove">Proof</a>
+  <a href="#privacy">Privacy</a>
+  <a href="#how">How it works</a>
+  <a href="mailto:contact@m-pax.net?subject=Log4Pilot" style="color:var(--deep);font-weight:700">Contact</a>
+</div>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-bg" aria-hidden="true">
+      <svg viewBox="0 0 1200 800" preserveAspectRatio="none" role="presentation">
+        <defs>
+          <pattern id="grid" width="120" height="120" patternUnits="userSpaceOnUse" patternTransform="rotate(4)">
+            <circle cx="30" cy="40" r="1.3" fill="#fff" opacity=".22"/>
+            <circle cx="70" cy="75" r="1" fill="#fff" opacity=".14"/>
+            <circle cx="98" cy="34" r="1" fill="#E8B33D" opacity=".5"/>
+          </pattern>
+        </defs>
+        <rect width="1200" height="800" fill="url(#grid)" opacity=".35"/>
+        <g fill="none" stroke="#fff" opacity=".16" stroke-width="1.2" stroke-dasharray="8 10">
+          <path d="M-40 180 Q300 120 560 170 T1240 140"/>
+          <path d="M-40 560 Q280 500 560 560 T1240 520" stroke="#E8B33D" opacity=".4"/>
+          <ellipse cx="620" cy="420" rx="360" ry="300" stroke-dasharray="6 12" opacity=".5"/>
+        </g>
+        <g font-family="JetBrains Mono, monospace" font-size="9" fill="#fff" opacity=".32">
+          <text x="48" y="30">KSQL → KPAO • N234LP • ASEL • VFR</text>
+          <text x="880" y="760">51.4775°N 0.4614°W • EGLL • 1013 HPA</text>
+          <text x="48" y="760">RAW FACTS IN — DERIVED ON SCREEN • UTC • WHOLE MINUTES</text>
+        </g>
+      </svg>
+    </div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow on-dark">FAA Part 61 • UK Part-FCL • iPhone</span>
+          <h1 id="hero-title">Know you’re current, <em>at a glance.</em></h1>
+          <p class="hero-lead">Log4Pilot is one fast, legally faithful logbook for student and GA pilots. Log a flight in seconds, see currency from <strong style="color:#fff">your own entries</strong>, and hand an examiner a proof pack — without reconstruction.</p>
+          <p class="hero-note"><strong>Local-first privacy:</strong> no account, no developer server, no tracking. Your logbook stays on your iPhone and in your own iCloud Drive. <strong>Formats designed to match</strong> FAA, EASA and UK CAA layouts — never “approved”. Informational computations, never “legal to fly”.</p>
+          <div class="hero-actions">
+            <a class="coming-pill" href="https://apps.apple.com/us/app/log4pilot/id6818815983" aria-label="Download on the App Store">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.7 17.3c-.4.6-.9 1.2-1.5 1.6-.5.4-1.1.6-1.9.6-.6 0-1.1-.1-1.6-.4-.4-.3-.8-.4-1.3-.4-.5 0-.9.1-1.3.4-.4.3-.9.4-1.5.4-.7 0-1.3-.2-1.9-.6-.6-.4-1.1-1-1.5-1.7-1-1.6-1.6-3.3-1.6-5 0-1 .3-1.9.8-2.7.5-.8 1.2-1.4 2-1.9.6-.4 1.3-.6 2-.6.6 0 1.1.2 1.6.5.4.3.7.4 1 .4.3 0 .7-.1 1.1-.4.6-.4 1.2-.6 1.9-.6.7 0 1.4.2 2 .6-.1.1-.2.2-.3.3-.6.6-1 1.3-1 2.1 0 .8.3 1.5.9 2.1.6.6 1.3.9 2.2 1 0 .4-.1.9-.2 1.3-.2.8-.6 1.6-1.2 2.4zM12.5 6.2c0-.6.2-1.2.6-1.7.4-.5 1-.9 1.7-1.1-.1.7-.4 1.3-.9 1.8-.4.5-1 .9-1.6 1.1 0-.1 0-.1.2-.1z"/></svg>
+              <span><small>Download on the</small><strong>App Store</strong></span>
+            </a>
+            <a class="btn btn-ghost-light" href="#loop">See how it works <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero-meta" aria-label="Highlights">
+            <span>✈︎ 30-second log, pre-filled</span>
+            <span>◉ FAA + FCL side-by-side</span>
+            <span>⎙ One-tap proof pack + CSV</span>
+          </div>
+          <div class="hero-coord" aria-hidden="true">
+            <span>— Block-off → block-on • UTC</span><span>Airplane-mode ready</span><span>iOS 17+ • iPhone-first</span>
+          </div>
+        </div>
+        <div class="device-wrap">
+          <div class="device">
+            <div class="device-screen">
+              <img src="images/screenshots/today.png" alt="Log4Pilot Today screen — logbook totals, UK Part-FCL currency cards for day and night passengers and SEP revalidation" loading="eager" fetchpriority="high">
+            </div>
+          </div>
+          <div class="hero-card-float2" role="note">◉ Current until 31 Dec 2026 • UK-FCL-2026.1</div>
+          <div class="hero-card-float" role="note">
+            <span style="width:36px;height:36px;border-radius:10px;background:var(--current-bg);border:1px solid #BFE3C8;display:grid;place-items:center;flex-shrink:0;color:var(--current);font-weight:800">✓</span>
+            <span><strong>Saved on this iPhone</strong><small>No account • works offline</small></span>
+          </div>
+        </div>
+      </div>
+      <div class="trustbar" aria-label="Authority coverage">
+        <span><b>US</b> FAA Part 61</span>
+        <span><b>EU</b> EASA Part-FCL</span>
+        <span><b>UK</b> UK Part-FCL (extends EASA)</span>
+        <span>Rule bundles versioned • e.g. uk-fcl-2026.1</span>
+        <span style="margin-left:auto">Pay once • Yours forever</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOOP -->
+  <section id="loop" class="section section-paper" aria-labelledby="loop-title">
+    <div class="wrap">
+      <div style="max-width:680px">
+        <p class="kicker">The core loop</p>
+        <h2 id="loop-title" style="font-size:clamp(32px,4.5vw,46px);color:var(--deep)">Log → <em>Am I current?</em> → Prove it.</h2>
+        <p class="prose" style="margin-top:14px">One person, one install, one primary device. No crew rostering, no back-office, no messaging. Just a quiet, exact record that shows its working — every figure drills to the entries that produced it, including near-misses excluded with reasons.</p>
+      </div>
+      <div class="loop-grid">
+        <article class="loop-card reveal">
+          <div class="loop-num"><i>01</i> Log in seconds</div>
+          <h3>Shutdown to saved in under 30 seconds</h3>
+          <p>Last aircraft, route and role pre-filled. Quick chips (Now −30m), day/night split suggested from instants + coordinates for you to confirm, four landing counts, approaches, signatures. Duplicate-last-flight in one tap.</p>
+          <small>— Raw facts only, never derived</small>
+        </article>
+        <article class="loop-card reveal">
+          <div class="loop-num"><i>02</i> Know at a glance</div>
+          <h3>Currency per profile, with evidence</h3>
+          <p>Today cards for §61.57 day / night / instrument / flight review, FCL.060 passengers + night, SEP revalidation progress, medical alerts. Each states rule + bundle version and the entries that prove it.</p>
+          <small>— Informational, never “legal to fly”</small>
+        </article>
+        <article class="loop-card reveal">
+          <div class="loop-num"><i>03</i> Prove without panic</div>
+          <h3>One tap, totals that reconcile</h3>
+          <p>FAA logbook, FCL.050 12-group logbook, UK CAA submission + signed certification page, 8710 worksheet, endorsements, raw CSV. Integer-minute reconciliation gate blocks export if a page fails to add up.</p>
+          <small>— Print-ready PDF + CSV bundle</small>
+        </article>
+      </div>
+      <div class="stats" aria-label="Key facts">
+        <div class="stat"><strong>30s</strong><span>Target log time</span></div>
+        <div class="stat"><strong>2</strong><span>Profiles at launch*</span></div>
+        <div class="stat"><strong>0</strong><span>Servers • accounts • trackers</span></div>
+        <div class="stat"><strong class="serif">100%</strong><span>Exportable, paid or not</span></div>
+      </div>
+      <p style="margin-top:12px;font-size:12px;color:var(--ink-3)">* Jurisdiction profiles at launch: FAA Part 61; UK Part-FCL extending EASA Part-FCL. Profiles form a lineage with overrides; bundles ship with app updates and stay reproducible.</p>
+    </div>
+  </section>
+
+  <!-- CURRENCY -->
+  <section id="currency" class="section section-white" aria-labelledby="currency-title">
+    <div class="wrap">
+      <div class="split">
+        <div class="split-media">
+          <div class="frame-card" role="img" aria-label="Currency evidence preview: day and night passenger cards current, SEP revalidation not current with missing items">
+            <header><strong style="font-family:Instrument Serif,serif;font-size:16px">Today — currency with proof</strong><span>uk-fcl-2026.1</span></header>
+            <div class="currency-mock">
+              <div class="cur-card top">
+                <div class="cur-head"><strong>Passengers (day) — ASEL</strong><span class="pill pill-current">✓ Current</span></div>
+                <p>On your entries, you meet the requirement for ASEL until 31 Dec 2026.</p>
+                <span class="rule">Rule bundle uk-fcl-2026.1 • 3 TO / APP / LDG • 90 days • same type/class</span>
+              </div>
+              <div class="cur-card top">
+                <div class="cur-head"><strong>Passengers (night) — ASEL</strong><span class="pill pill-current">✓ Current</span></div>
+                <p>On your entries, you meet the night requirement for ASEL until 18 Dec 2026.</p>
+                <span class="rule">1 night TO / APP / LDG or IR • drill to entries →</span>
+              </div>
+              <div class="cur-card" style="border-color:#F0C9C9">
+                <div class="cur-head"><strong>SEP revalidation by experience</strong><span class="pill pill-not">✕ Not current</span></div>
+                <p>On your entries, SEP experience is incomplete: 5.1 h more SEP time; 1 h refresher training with instructor (signed).</p>
+                <span class="rule">Unsigned PICUS = 0 PIC (FCL) • pending list + chase →</span>
+              </div>
+            </div>
+            <div class="divergence">
+              <strong>Same flight, two answers — labelled</strong>
+              <div class="div-row"><span>FAA</span><span>Rated sole-manipulator dual flight credits <b>PIC + dual</b> concurrently (§61.51(e)(1)(i)).</span></div>
+              <div class="div-row"><span>FCL</span><span>Same entry is <b>dual only</b> unless countersigned SPIC / PICUS or test flight. UI never merges profiles.</span></div>
+            </div>
+          </div>
+          <p style="text-align:center;margin-top:10px;font-size:11px;color:var(--ink-3);font-family:JetBrains Mono,monospace">Status is never colour-only: colour + icon + text • AX5-safe • VoiceOver-labelled</p>
+        </div>
+        <div>
+          <p class="kicker">Currency &amp; recency engine</p>
+          <h2 id="currency-title" style="font-size:clamp(28px,4vw,40px);color:var(--deep)">Every number <em>shows its working.</em></h2>
+          <p class="prose" style="margin-top:12px">Rules are <strong>versioned data bundles, not code</strong>. FAA §61.57(a) day, §61.57(b) night (full-stop, 1-hour-after-sunset window), §61.57(c) instrument (6 approaches + holding + intercept/track in 6 calendar months), §61.56 flight review — alongside FCL.060(b), SEP revalidation, LAPL recency and medical alerts.</p>
+          <ul class="check-list">
+            <li><span class="check-dot">✓</span><span><strong>Evidence on tap.</strong> Contributing entries with qualifying values; excluded near-misses with reasons (“PICUS unsigned”).</span></li>
+            <li><span class="check-dot">✓</span><span><strong>Gap check before the checkride.</strong> Missing types, unsigned records, expired signatory certificates, review/medical within the goal window — with pre-written chase text via share sheet.</span></li>
+            <li><span class="check-dot">✓</span><span><strong>Quiet and exact.</strong> Tabular numerals, no gamification, no streaks. Reduce Motion respected.</span></li>
+          </ul>
+          <p style="margin-top:16px;font-size:12.5px;color:var(--ink-3);background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:12px;line-height:1.6">Copy rule: “On your entries, you meet §61.57(a) for ASEL until 3 Dec 2026.” Never “you are legal to fly.” First engine use and every report footer carry the full disclaimer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOG -->
+  <section id="log" class="section section-deep" aria-labelledby="log-title">
+    <div class="wrap">
+      <div style="max-width:700px">
+        <p class="kicker on-dark">Flight entry • FSTD • Ground training</p>
+        <h2 id="log-title" style="font-size:clamp(28px,4.5vw,42px);color:#fff">Nothing typed <em style="color:var(--gold)">twice.</em></h2>
+        <p class="on-dark-prose" style="margin-top:12px;font-size:15.5px;line-height:1.7">Aircraft, aerodromes and instructors feed every form, endorsement and report. Aircraft classification snapshots onto the entry — later edits never rewrite history silently. All instants UTC; display renders local or decimal hours. Durations are whole minutes; there is no floating-point time math.</p>
+      </div>
+      <div class="dark-diagram" style="margin-top:28px">
+        <div class="mono" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.6">Offline-first • Airplane-mode ready • No backend</div>
+        <div class="diagram-row">
+          <div class="diagram-box"><div style="font-size:22px;margin-bottom:6px">◷</div><strong>Block → Takeoff → Landing → Block</strong><span>Quick chips + local/UTC entry; basis retained for audit</span></div>
+          <div class="diagram-arrow">→</div>
+          <div class="diagram-box" style="background:rgba(232,179,61,.14);border-color:rgba(232,179,61,.35)"><div style="font-size:22px;margin-bottom:6px">☾</div><strong>Day / night split</strong><span>Computed from instants + coordinates, confirmed by you</span></div>
+          <div class="diagram-arrow">→</div>
+          <div class="diagram-box"><div style="font-size:22px;margin-bottom:6px">✎</div><strong>Sign &amp; keep</strong><span>On-device draw or share-sheet request; stored as evidence</span></div>
+        </div>
+        <div style="display:grid;gap:12px;margin-top:22px">
+          <div style="display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px">
+            <span style="width:32px;height:32px;border-radius:10px;background:rgba(232,179,61,.18);border:1px solid rgba(232,179,61,.3);display:grid;place-items:center;flex-shrink:0">⚠</span>
+            <span style="font-size:13px;line-height:1.6;opacity:.86"><strong>Soft warnings, never silent:</strong> implausible duration for route/aircraft, computed vs confirmed night variance, future date, duplicate suspicion, simulated instrument without safety pilot where expected. Hard stops: block-on &gt; block-off, counts ≥ 0.</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px">
+            <span style="width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:grid;place-items:center;flex-shrink:0">⎘</span>
+            <span style="font-size:13px;line-height:1.6;opacity:.86"><strong>History you can defend:</strong> freely editable until first proof-pack inclusion — afterwards edits append a revision note. Soft-delete with Undo. Opening balances labelled <em>asserted</em>, lifetime totals only, never currency.</span>
+          </div>
+        </div>
+      </div>
+      <div class="shots">
+        <figure class="shot">
+          <img src="images/screenshots/compose.png" alt="Log4Pilot Log flight sheet — route and aircraft, block times with quick chips, day and night minutes steppers" loading="lazy">
+          <figcaption><strong>Log flight • light</strong> — route, block times, command, landings (sample data)</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="images/screenshots/today.png" alt="Log4Pilot Today screen — logbook summary and currency cards" loading="lazy">
+          <figcaption><strong>Today</strong> — totals + per-profile currency + next expiries</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROVE -->
+  <section id="prove" class="section section-paper" aria-labelledby="prove-title">
+    <div class="wrap">
+      <div style="max-width:700px">
+        <p class="kicker">Reports &amp; proof pack</p>
+        <h2 id="prove-title" style="font-size:clamp(28px,4vw,40px);color:var(--deep)">Reports <em>are the product.</em></h2>
+        <p class="prose" style="margin-top:12px">Generated on-device. Every figure carries profile + bundle version + window; every page is numbered with pilot name + licence number. Any element can be generated alone — or as a single proof pack (PDF + optional CSV bundle).</p>
+      </div>
+      <div class="report-grid">
+        <article class="report-card reveal"><h3><span>R1</span> FAA logbook</h3><p>§61.51(b) fields, profile totals with page + cumulative. Cross-country computed under the certificate’s own definition (>50 NM and friends are rule data, not code).</p></article>
+        <article class="report-card reveal"><h3><span>R2</span> FCL.050 logbook</h3><p>Front matter, landscape 12 groups, page-totals rows reconciling exactly in every time column, verbatim certification block on every page, countersignatures in remarks.</p></article>
+        <article class="report-card reveal"><h3><span>R3</span> UK CAA submission</h3><p>FCL.050 paginated for A4 + personal-details page + one certification page (date, full name, signature, CAA reference) — signed in-app or by hand after printing.</p></article>
+        <article class="report-card reveal"><h3><span>R4</span> FAA 8710 worksheet</h3><p>Form 8710-1 Section III-style grid for the selected certificate/rating, every cell drill-downable in-app. Labelled as a transfer worksheet; nothing is submitted.</p></article>
+        <article class="report-card reveal"><h3><span>R5</span> Endorsements + signatures</h3><p>AC 61-65-style versioned templates, pre-filled from linked entries, signature images where the profile accepts electronic signing. Gap check flags what an examiner will look for.</p></article>
+        <article class="report-card reveal"><h3><span>R6</span> Raw CSV — no lock-in</h3><p>One row per flight / FSTD / ground entry with every stored fact (UTC ISO-8601, integer minutes, four landing counts, countersignature states) + documented column dictionary. Export works paid or not.</p></article>
+      </div>
+      <div class="recon"><strong>Reconciliation gate (hard gate, not a warning):</strong> if any page total fails to reconcile in integer minutes, export blocks and names the failing column/page. FSTD appears in FCL group 11 and training-received totals — never in total time of flight. Generated files are stored, shareable, deletable, never silently regenerated.</div>
+      <div class="honest">
+        <strong>Honest labelling — what Log4Pilot is not</strong>
+        <ul>
+          <li>Not an EFB — no planning, weather, NOTAMs, navigation, ADS-B or weight &amp; balance. Record-keeping and proof aid only.</li>
+          <li>Not “approved by FAA / EASA / CAA” — authorities accept records; they do not approve apps. Copy says “formats designed to match …”.</li>
+          <li>No filing with any authority — the app prepares worksheets and evidence; submission happens elsewhere.</li>
+          <li>Not legal advice — responsibility remains with the pilot, instructor and examiner (see disclaimer below).</li>
+        </ul>
+      </div>
+      <div class="shots">
+        <figure class="shot">
+          <img src="images/screenshots/prove.png" alt="Log4Pilot Prove screen — proof pack card, authority profile picker and report layouts list" loading="lazy">
+          <figcaption><strong>Prove</strong> — builder, authority profile, layouts (sample data)</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="images/screenshots/more.png" alt="Log4Pilot More screen — pilot profile, directories and versioned rule profiles" loading="lazy">
+          <figcaption><strong>More</strong> — directories, rule bundles, backup health</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY -->
+  <section id="privacy" class="section section-white" aria-labelledby="privacy-title">
+    <div class="wrap">
+      <div class="split reverse">
+        <div class="split-media">
+          <div class="privacy-visual" role="img" aria-label="Privacy diagram: your entries stay on your iPhone and in your own iCloud Drive; developer collects nothing">
+            <div class="privacy-grid">
+              <div class="pv-col">
+                <div class="pv-label">Stays with you</div>
+                <div class="pv-card"><i>✈︎</i> Flights, FSTD, ground</div>
+                <div class="pv-card"><i>◉</i> Licences &amp; medicals</div>
+                <div class="pv-card"><i>✎</i> Signatures &amp; photos</div>
+              </div>
+              <div class="pv-center">
+                <div class="pv-phone"><strong>Your iPhone</strong><span>SwiftData • file protection</span></div>
+                <div class="mono" style="font-size:10px;color:var(--ink-3)">+ YOUR iCLOUD DRIVE BACKUP</div>
+                <div class="pv-phone" style="background:var(--surface);color:var(--deep);border:1px solid var(--border);box-shadow:none"><strong style="font-size:15px">M-PAX collects ∅</strong><span style="color:var(--ink-3)">No account • no analytics</span></div>
+              </div>
+              <div class="pv-col">
+                <div class="pv-label">Only when you tap</div>
+                <div class="pv-card"><i>⎙</i> Share PDF / CSV</div>
+                <div class="pv-card"><i>⤓</i> Full JSON backup</div>
+                <div class="pv-card"><i>✉︎</i> Signing request</div>
+              </div>
+            </div>
+          </div>
+          <p style="text-align:center;margin-top:10px;font-size:11px;color:var(--ink-3);font-family:JetBrains Mono,monospace">App Privacy: Data Not Collected • No tracking domains • No third-party SDKs</p>
+        </div>
+        <div>
+          <p class="kicker">Privacy &amp; data safety</p>
+          <h2 id="privacy-title" style="font-size:clamp(28px,4vw,40px);color:var(--deep)">Private by design. <em>Yours forever.</em></h2>
+          <p class="prose" style="margin-top:12px">No accounts, analytics, tracking or third-party network SDKs. Optional Face ID / Touch ID app lock. Signature and licence images live on-device and in <strong>your own iCloud backup only</strong>. Crash diagnostics via Apple opt-in mechanisms only.</p>
+          <ul class="check-list">
+            <li><span class="check-dot">✓</span><span><strong>Automatic backup, visible health.</strong> Versioned archive (JSON + blobs + manifest) to the app’s iCloud Drive container. Failure raises a local notification — silent backup failure is release-blocking.</span></li>
+            <li><span class="check-dot">✓</span><span><strong>Restore with a safety net.</strong> Pre-restore snapshot, manifest + totals reconciliation before commit. Manual export any time — regardless of entitlement.</span></li>
+            <li><span class="check-dot">✓</span><span><strong>Pay once, keep everything.</strong> Entitlement gates new entries beyond the free allowance only. Viewing, searching, exporting, reporting and restoring are never gated.</span></li>
+          </ul>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:22px">
+            <a class="btn btn-deep" href="privacy.html">Read Privacy Policy</a>
+            <a class="btn btn-secondary" href="mailto:contact@m-pax.net?subject=Log4Pilot%20privacy">Ask a privacy question</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section id="how" class="section section-cream" aria-labelledby="how-title">
+    <div class="wrap">
+      <div style="max-width:660px">
+        <p class="kicker">How it works</p>
+        <h2 id="how-title" style="font-size:clamp(28px,4vw,40px);color:var(--deep)">From shutdown <em>to proof pack.</em></h2>
+        <p class="prose" style="margin-top:12px">Built offline-first in SwiftUI for iOS 17+ (iPhone-first). Pure-function projection + currency engines over value-type snapshots — deterministic and fixture-tested. PDF via on-device renderer; CSV via hand-rolled, escape-tested writer.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><div class="step-num">Seed once</div><h3>Directories + balances</h3><p>Add aircraft, aerodromes (built-in GA gazetteer + your strips), instructors. Import past flying via generic CSV mapping or asserted opening balances — labelled, lifetime-only, never currency.</p></div>
+        <div class="step reveal"><div class="step-num">Fly + log</div><h3>30 seconds a flight</h3><p>Quick-log from Today. Local notifications for currency, medical, pending countersignatures and backup health — requested in context, never for marketing.</p></div>
+        <div class="step reveal"><div class="step-num">Hand over</div><h3>Proof, not promises</h3><p>Generate the pack an examiner expects — cover with profiles + rule versions + timestamp + disclaimer, evidence lists, signed pages. If it doesn’t reconcile, it doesn’t export.</p></div>
+      </div>
+      <div class="honest" style="background:var(--surface)">
+        <strong>Regulatory disclaimer (verbatim — also in-app and on every report footer)</strong>
+        <p style="margin-top:8px;font-size:13.5px;color:var(--ink-2);line-height:1.65">“Log4Pilot computes currency and totals from your own entries using published rules. It is not legal advice and does not replace your logbook responsibilities or an instructor’s or examiner’s judgement.”</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta" aria-labelledby="cta-title">
+    <div class="wrap">
+      <div class="cta-inner">
+        <p class="kicker on-dark" style="text-align:center">Now on the App Store • iPhone • iOS 17+</p>
+        <h2 id="cta-title">Your logbook, <em>ready for the examiner.</em></h2>
+        <p>Log4Pilot is live. Download for pilots, instructors and examiners — no marketing notifications, ever. Free allowance, then one-time unlock. <strong>Pay once. Your logbook is yours.</strong></p>
+        <div class="cta-actions">
+          <a class="btn btn-gold" href="https://apps.apple.com/us/app/log4pilot/id6818815983">Download on the App Store ✈︎</a>
+          <a class="btn btn-ghost-light" href="privacy.html">Privacy for App Store review</a>
+        </div>
+        <p class="cta-note">Questions? <a href="mailto:contact@m-pax.net">contact@m-pax.net</a> • Support page: <a href="https://m-pax.net/log4pilot/">m-pax.net/log4pilot/</a> • Bundle ID (working): <span class="mono">net.m-pax.log4pilot</span></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <span class="footer-brand-mark"><img src="images/branding/icon.png" alt="" width="40" height="40" loading="lazy"></span>
+          <div><h3>Log4Pilot</h3><p>One fast, legally faithful logbook for student and GA pilots. On-device, offline-first, no account.</p></div>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Log4Pilot</h4><a href="#loop">The loop</a><a href="#currency">Currency</a><a href="#prove">Proof pack</a><a href="#how">How it works</a><a href="privacy.html">Privacy Policy</a></div>
+      <div class="footer-col"><h4>M-PAX</h4><a href="../index.html">M-PAX Home</a><a href="../log4surg.html">Log4Surg</a><a href="../log4paw/index.html">Log4Paw</a><a href="../jaunt-log/index.html">Jaunt Log</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="mailto:contact@m-pax.net">contact@m-pax.net</a><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Apple Standard EULA</a><a href="#main">Back to top ↑</a></div>
+    </div>
+    <p class="disclaimer-foot">Log4Pilot is a record-keeping and proof aid. It is not an EFB and provides no flight planning, weather, navigation or filing capability. Formats are designed to match FAA, EASA Part-FCL and UK CAA layouts; the app is not approved or endorsed by any authority. Currency and totals are informational computations from your own entries against versioned rule data. “Log4Pilot computes currency and totals from your own entries using published rules. It is not legal advice and does not replace your logbook responsibilities or an instructor’s or examiner’s judgement.”</p>
+    <div class="footer-bottom"><p>© 2026 M-PAX Group. All rights reserved.</p><p class="mono" style="font-size:11px">m-pax.net/log4pilot/ • v1.0 draft • 10 Oct 2026</p></div>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const nav=document.getElementById('nav'),menuBtn=document.getElementById('menuBtn'),panel=document.getElementById('mobilePanel');
+function setMenu(open){panel.classList.toggle('open',open);panel.hidden=!open;menuBtn.setAttribute('aria-expanded',open);menuBtn.setAttribute('aria-label',open?'Close menu':'Open menu')}
+menuBtn.addEventListener('click',()=>setMenu(panel.hidden));
+panel.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.pageYOffset>24)},{passive:true});
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const h=a.getAttribute('href');if(h.length>1){const t=document.querySelector(h);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});history.replaceState(null,'',h)}}})});
+const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
