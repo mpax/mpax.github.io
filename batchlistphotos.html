@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BatchList Photos — Seller Listing Prep. Shoot once. Export for everywhere you sell — crop-safe, right-sized, renamed JPEGs for each marketplace in one batch, with a checked-clean receipt. On-device, no account, no tracking.">
+    <meta name="keywords" content="BatchList Photos, Seller Listing Prep, marketplace resizer, heic to jpg, exif remover, batch resize, product photo">
+    <title>BatchList Photos – Seller Listing Prep | iOS</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/icon/batchlistphotos-icon-72.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/icon/batchlistphotos-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="BatchList Photos – Seller Listing Prep">
+    <meta property="og:description" content="Shoot once. Export for everywhere you sell — crop-safe, right-sized, renamed JPEGs for each marketplace in one batch, with a checked-clean receipt.">
+    <meta property="og:image" content="https://m-pax.net/img/icon/batchlistphotos-icon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            /* Theme derived from the BatchList Photos app icon (deep navy photo cards + amber verified check) */
+            --brand-deep-start: #1E1B4B;
+            --brand-deep-end: #3B3678;
+            --brand: #2A2568;
+            --brand-pressed: #1E1B4B;
+            --accent: #D97706;
+            --accent-pressed: #B45309;
+            --accent-soft: #FEF3C7;
+            --paper: #FFFBEB;
+            --surface: #ffffff;
+            --ink: #1E1B4B;
+            --ink-2: #4A4670;
+            --text-dark: #1E1B4B;
+            --text-light: #65618A;
+            --bg-light: #F6F5FC;
+            --bg-white: #ffffff;
+            --border-color: #DDD9F0;
+            --success: #157347;
+            --warning: #9A6100;
+            --danger: #B42318;
+            --shadow-sm: 0 1px 2px 0 rgb(30 27 75 / 0.06);
+            --shadow-md: 0 4px 6px -1px rgb(30 27 75 / 0.1), 0 2px 4px -2px rgb(30 27 75 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(30 27 75 / 0.16), 0 4px 6px -4px rgb(30 27 75 / 0.1);
+            --radius: 16px;
+            --radius-sm: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+            display: flex; justify-content: space-between; align-items: center; height: 70px;
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--brand); text-decoration: none; letter-spacing: -0.5px; }
+        .logo span { color: var(--accent); }
+        .nav-menu { display: flex; list-style: none; gap: 2rem; }
+        .nav-menu a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 0.95rem; position: relative; }
+        .nav-menu a:hover { color: var(--accent-pressed); }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-dark); }
+
+        .hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--brand-deep-start) 0%, var(--brand-deep-end) 100%);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: ''; position: absolute; inset: 0; pointer-events: none;
+            background: radial-gradient(700px 420px at 85% 15%, rgba(217,119,6,.28), transparent 60%),
+                        radial-gradient(600px 500px at 5% 95%, rgba(255,251,235,.10), transparent 60%);
+        }
+        .hero-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; }
+        .hero-content h1 { font-size: 3rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; letter-spacing: -1px; }
+        .version-badge { display: inline-block; background: rgba(255,255,255,.14); color: #fff; border: 1px solid rgba(255,255,255,.25); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; font-weight: 600; margin-bottom: 1rem; }
+        .coming-soon-badge { display: inline-block; background: var(--accent); color: #fff; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; font-weight: 700; margin-bottom: 1rem; margin-left: 0.5rem; }
+        .hero-subtitle { font-size: 1.35rem; color: #fff; font-weight: 600; margin-bottom: 1rem; }
+        .hero-description { font-size: 1.05rem; color: rgba(255,255,255,.85); margin-bottom: 1.75rem; line-height: 1.7; }
+        .hero-description strong { color: #fff; }
+        .features-list { list-style: none; margin-bottom: 2rem; }
+        .features-list li { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem; color: #fff; font-size: 0.98rem; }
+        .features-list li span { color: rgba(255,255,255,.9); }
+        .features-list li strong { color: #fff; }
+        .features-list li::before {
+            content: '✓'; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+            width: 24px; height: 24px; background: var(--accent); color: #fff;
+            border-radius: 50%; font-size: 0.875rem; font-weight: 700; margin-top: 2px;
+        }
+        .download-section { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+        .app-badge { display: inline-flex; align-items: center; gap: 10px; background: #000; color: #fff; border-radius: 10px; padding: 8px 14px 8px 12px; text-decoration: none; line-height: 1; border: 1px solid rgba(255,255,255,.2); }
+        .app-badge small { font-size: 9px; letter-spacing: .06em; text-transform: uppercase; opacity: .8; font-weight: 500; display: block; }
+        .app-badge strong { font-size: 15px; font-weight: 600; letter-spacing: -.02em; display: block; }
+        .platform-note { width: 100%; margin-top: 1rem; padding: 0.75rem 1rem; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius-sm); font-size: 0.9rem; color: rgba(255,255,255,.85); }
+        .hero-image { display: flex; justify-content: center; align-items: center; }
+        .hero-image img { max-width: 280px; width: 100%; height: auto; border-radius: 28px; box-shadow: 0 24px 48px rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.2); }
+
+        section { padding: 4rem 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h2 { font-size: 2rem; font-weight: 700; color: var(--brand); margin-bottom: 0.5rem; }
+        .section-header p { font-size: 1rem; color: var(--text-light); max-width: 760px; margin: 0 auto; }
+
+        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .step-card { background: var(--surface); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem; position: relative; }
+        .step-card .step-num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: var(--brand); color: #fff; font-weight: 800; font-size: 0.95rem; margin-bottom: 0.75rem; }
+        .step-card h3 { color: var(--brand); font-size: 1.05rem; margin-bottom: 0.5rem; }
+        .step-card p { color: var(--text-light); font-size: 0.92rem; }
+        .step-card code { background: var(--bg-light); padding: 1px 6px; border-radius: 6px; font-size: 0.85em; color: var(--brand); }
+
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .feature-card { background: var(--surface); padding: 1.75rem; border-radius: var(--radius); border: 1px solid var(--border-color); border-top: 4px solid var(--accent); }
+        .feature-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--brand); margin-bottom: 0.6rem; }
+        .feature-card p { color: var(--text-light); font-size: 0.95rem; }
+        .feature-card code { background: var(--bg-light); padding: 1px 6px; border-radius: 6px; font-size: 0.85em; color: var(--brand); }
+
+        .presets-section { background: var(--bg-white); }
+        .presets-table-wrap { overflow-x: auto; border: 1px solid var(--border-color); border-radius: var(--radius); background: var(--surface); }
+        table.presets-table { width: 100%; border-collapse: collapse; font-size: 0.93rem; min-width: 640px; }
+        table.presets-table th, table.presets-table td { text-align: left; padding: 0.8rem 1rem; border-bottom: 1px solid var(--border-color); vertical-align: top; }
+        table.presets-table th { background: linear-gradient(135deg, var(--brand-deep-start), var(--brand-deep-end)); color: #fff; font-size: 0.85rem; letter-spacing: 0.02em; }
+        table.presets-table tr:last-child td { border-bottom: none; }
+        table.presets-table td:first-child { font-weight: 700; color: var(--brand); white-space: nowrap; }
+        .provenance { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 999px; margin-left: 0.5rem; vertical-align: middle; }
+        .provenance.official { background: #E3F2E9; color: #157347; }
+        .provenance.working { background: var(--accent-soft); color: var(--warning); }
+        .counting-note { margin-top: 1rem; background: var(--accent-soft); border-left: 4px solid var(--accent); padding: 1rem 1.25rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 0.93rem; color: var(--text-dark); }
+
+        .honest-box { background: var(--bg-light); border-left: 4px solid var(--accent); padding: 1.25rem 1.5rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-top: 2rem; }
+        .honest-box p { color: var(--text-dark); font-size: 0.95rem; }
+        .honest-box ul { margin-left: 1.2rem; margin-top: 0.5rem; color: var(--text-dark); font-size: 0.95rem; }
+        .honest-box li { margin-bottom: 0.35rem; }
+
+        .help-section { background: var(--bg-light); }
+        .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .help-card { background: var(--bg-white); padding: 2rem; border-radius: var(--radius); border: 1px solid var(--border-color); }
+        .help-card h3 { font-size: 1.25rem; font-weight: 700; color: var(--brand); margin-bottom: 1rem; }
+        .help-card p { color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: var(--accent); color: white; text-decoration: none; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem; border: none; cursor: pointer; }
+        .btn:hover { background: var(--accent-pressed); color: #fff; }
+        .btn-secondary { background: var(--brand); color: white; }
+        .btn-secondary:hover { background: var(--brand-pressed); }
+
+        footer { background: linear-gradient(135deg, var(--brand-deep-start), var(--brand-deep-end)); color: white; padding: 3rem 2rem 2rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { color: #D9D6F2; text-decoration: none; font-size: 0.9rem; }
+        .footer-links a:hover { color: white; }
+        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,.2); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .footer-bottom p { color: #D9D6F2; font-size: 0.875rem; }
+        .back-to-top { color: #D9D6F2; text-decoration: none; font-size: 0.875rem; }
+        .back-to-top:hover { color: white; }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; position: absolute; top: 70px; left: 0; right: 0; background: white; flex-direction: column; padding: 1rem 2rem; gap: 1rem; border-bottom: 1px solid var(--border-color); box-shadow: var(--shadow-md); }
+            .nav-menu.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .hero { padding: 6rem 1.5rem 3rem; }
+            .hero-container { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-content { order: 2; }
+            .hero-image { order: 1; }
+            .hero-content h1 { font-size: 2rem; }
+            section { padding: 3rem 1.5rem; }
+            .footer-content, .footer-bottom { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">M<span>-</span>PAX</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#how">How it works</a></li>
+                <li><a href="#presets">Presets</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#privacy">Privacy</a></li>
+                <li><a href="#support">Support</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">☰</button>
+        </div>
+    </nav>
+
+    <section class="hero" id="overview">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="version-badge">Version 1.0 · iOS 17+ · iPhone &amp; iPad</span><span class="coming-soon-badge">Coming soon to the App Store</span>
+                <h1>BatchList Photos</h1>
+                <p class="hero-subtitle">Seller Listing Prep — shoot once, export for everywhere you sell.</p>
+                <p class="hero-description">
+                    BatchList Photos turns one set of product photos into ready-to-upload export sets for
+                    every marketplace you sell on — in one batch, entirely on-device.
+                    <strong>Crop-safe, right-sized, renamed JPEGs</strong> for each marketplace,
+                    with a <strong>checked-clean receipt</strong> for the files you send buyers yourself.
+                    No account, no server — your originals are never changed.
+                </p>
+                <ul class="features-list">
+                    <li><span><strong>One batch, up to 4 marketplaces</strong> — pick up to 50 photos, tick up to 4 presets, export once (Pro)</span></li>
+                    <li><span><strong>Right size for every platform</strong> — 19 marketplace presets (Etsy, eBay, Poshmark, Vinted, Depop &amp; more) with Official / Working-target labels</span></li>
+                    <li><span><strong>Location &amp; metadata scrubbed</strong> — built-from-pixels JPEGs with a verified clean receipt, re-read from disk</span></li>
+                    <li><span><strong>Your file names, in your order</strong> — drag-to-reorder with clean <code>base-01.jpg</code> naming, folders per marketplace, ZIP for desktop</span></li>
+                    <li><span><strong>Private by design</strong> — offline, no analytics, App Store privacy label Data Not Collected</span></li>
+                </ul>
+                <div class="download-section">
+                    <span class="app-badge" aria-label="Coming soon on the App Store">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.7 17.3c-.4.6-.9 1.2-1.5 1.6-.5.4-1.1.6-1.9.6-.6 0-1.1-.1-1.6-.4-.4-.3-.8-.4-1.3-.4-.5 0-.9.1-1.3.4-.4.3-.9.4-1.5.4-.7 0-1.3-.2-1.9-.6-.6-.4-1.1-1-1.5-1.7-1-1.6-1.6-3.3-1.6-5 0-1 .3-1.9.8-2.7.5-.8 1.2-1.4 2-1.9.6-.4 1.3-.6 2-.6.6 0 1.1.2 1.6.5.4.3.7.4 1 .4.3 0 .7-.1 1.1-.4.6-.4 1.2-.6 1.9-.6.7 0 1.4.2 2 .6-.1.1-.2.2-.3.3-.6.6-1 1.3-1 2.1 0 .8.3 1.5.9 2.1.6.6 1.3.9 2.2 1 0 .4-.1.9-.2 1.3-.2.8-.6 1.6-1.2 2.4zM12.5 6.2c0-.6.2-1.2.6-1.7.4-.5 1-.9 1.7-1.1-.1.7-.4 1.3-.9 1.8-.4.5-1 .9-1.6 1.1 0-.1 0-.1.2-.1z"/></svg>
+                        <span><small>Coming soon on the</small><strong>App Store</strong></span>
+                    </span>
+                    <a href="support/privacy-policy-batchlistphotos.html" class="btn btn-secondary">Privacy Policy</a>
+                    <a href="mailto:contact@m-pax.net?subject=BatchList%20Photos%20Support" class="btn">Contact Support</a>
+                    <div class="platform-note">
+                        iPhone &amp; iPad · iOS 17+ · Free tier with full verified receipt; one-time Pro unlock, no subscription.
+                        Your originals are never modified — the app works on sandbox copies only.
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="./img/icon/batchlistphotos-icon.png" alt="BatchList Photos app icon — stacked photo cards with a verified check on deep navy">
+            </div>
+        </div>
+    </section>
+
+    <section id="how">
+        <div class="container">
+            <div class="section-header">
+                <h2>Prep once, list everywhere</h2>
+                <p>Three steps, one batch. Shoot your item once; BatchList Photos does the per-platform busywork.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h3>📸 Prep</h3>
+                    <p>Pick up to <code>50 photos</code> with the system picker — or from Files. Drag to reorder, see issue badges (<code>GPS found</code>, <code>HEIC</code>, <code>&lt;2000 px</code>) before you export.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h3>🏷️ Presets</h3>
+                    <p>Tick <code>1–4 marketplaces</code>, choose pad colour and framing (pad by default, Crop-to-fill per photo), pick a scrub policy and a rename base. Every preset shows its canvas and Specs-checked date.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h3>📦 Export</h3>
+                    <p>One tap builds every set: right-sized sRGB JPEGs, your file names in your order, one folder per marketplace — to Photos, Files, a ZIP for desktop listing, or straight to a buyer.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">✓</div>
+                    <h3>🧾 Verified receipt</h3>
+                    <p>The app re-reads every exported file from disk and shows the receipt: GPS / EXIF / TIFF / IPTC / XMP / maker notes as <code>Removed</code>, <code>Wasn't there</code> or <code>Still present</code>. A failed check blocks the Verified stamp — loudly. Free forever, even in the free tier.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="presets-section" id="presets">
+        <div class="container">
+            <div class="section-header">
+                <h2>Presets for the marketplaces you sell on</h2>
+                <p>19 presets with honest provenance: Official where the platform publishes values, Working target where we ship our best-checked canvas. Specs checked October 2026.</p>
+            </div>
+            <div class="presets-table-wrap">
+                <table class="presets-table">
+                    <tr><th>Marketplace</th><th>Canvas</th><th>Photos / listing</th><th>Provenance</th></tr>
+                    <tr><td>Etsy</td><td>2000 × 2000</td><td>20</td><td><span class="provenance official">Official</span></td></tr>
+                    <tr><td>eBay</td><td>1600 × 1600</td><td>24</td><td><span class="provenance official">Official</span></td></tr>
+                    <tr><td>Poshmark</td><td>1500 × 2000</td><td>16</td><td><span class="provenance official">Official</span></td></tr>
+                    <tr><td>Amazon</td><td>2000 × 2000</td><td>9 + variants</td><td><span class="provenance official">Official</span></td></tr>
+                    <tr><td>Shopify</td><td>2048 × 2048</td><td>—</td><td><span class="provenance official">Official</span></td></tr>
+                    <tr><td>Vinted</td><td>1600 × 2000</td><td>20</td><td><span class="provenance working">Working target</span></td></tr>
+                    <tr><td>Depop</td><td>1600 × 2000</td><td>4 app / 8 web</td><td><span class="provenance working">Working target</span></td></tr>
+                    <tr><td>Mercari</td><td>1440 × 1440</td><td>12 (US) / 10 (JP)</td><td><span class="provenance working">Working target</span></td></tr>
+                    <tr><td>Facebook Marketplace</td><td>1600 × 1600</td><td>10</td><td><span class="provenance working">Working target</span></td></tr>
+                    <tr><td>Grailed</td><td>1600 × 2000</td><td>3+</td><td><span class="provenance working">Working target</span></td></tr>
+                    <tr><td>Vestiaire Collective</td><td>1600 × 1600</td><td>3+</td><td><span class="provenance working">Working target</span></td></tr>
+                    <tr><td>Whatnot</td><td>1440 × 1440</td><td>8</td><td><span class="provenance working">Working target</span></td></tr>
+                    <tr><td>Wallapop</td><td>1500 × 2000</td><td>10</td><td><span class="provenance working">Working target</span></td></tr>
+                    <tr><td>Kleinanzeigen</td><td>1600 × 1200</td><td>—</td><td><span class="provenance working">Working target</span></td></tr>
+                    <tr><td>Leboncoin</td><td>1600 × 1200</td><td>up to 20</td><td><span class="provenance working">Working target</span></td></tr>
+                    <tr><td>Marktplaats</td><td>1600 × 1200</td><td>—</td><td><span class="provenance working">Working target</span></td></tr>
+                    <tr><td>Subito</td><td>1600 × 1200</td><td>6</td><td><span class="provenance working">Working target</span></td></tr>
+                    <tr><td>Gumtree</td><td>1600 × 1200</td><td>10</td><td><span class="provenance working">Working target</span></td></tr>
+                    <tr><td>Trade Me</td><td>1600 × 1200</td><td>20</td><td><span class="provenance working">Working target</span></td></tr>
+                </table>
+            </div>
+            <div class="counting-note">
+                <strong>Defaults follow your region:</strong> US sellers start with Poshmark, Mercari, eBay &amp; Etsy;
+                UK/EU with Vinted, eBay, Depop &amp; Etsy; CA/AU/JP with eBay, Etsy, Poshmark &amp; Facebook.
+                Change region anytime in Settings.
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Built for resellers who list in volume</h2>
+                <p>Everything is computed and verified on your device. Up to 50 photos and 4 marketplaces per batch — 200 files max.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🖼️ Framing that respects every canvas</h3>
+                    <p>Whole item inside the canvas by default (pad, never stretch). Small sources are centred at native size with a warning — never upscaled into mush. Optional per-photo Crop-to-fill when you want it.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🧹 Scrub, three ways</h3>
+                    <p><code>Location only</code>, <code>Everything</code> (default), or <code>Keep copyright</code> which stamps exactly <code>© year name</code> + creator + handle/website — nothing else. Every export is built from decoded pixels into a fresh file; nothing is “deleted” from a copy.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>✅ A receipt you can trust</h3>
+                    <p>Verification re-reads the written files from disk — never an in-memory buffer. Per file, per dictionary, plus a shareable receipt text. Warnings (e.g. under-size source) never block Verified; failures do.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔤 Names buyers (and you) can sort</h3>
+                    <p>One rename base + optional SKU becomes <code>nike-dunk-uk9-01.jpg</code> … in your grid order, one folder per marketplace. Free uses the default <code>item-01</code> pattern; Pro unlocks your own base + SKU.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📤 Destinations that fit your flow</h3>
+                    <p>Photos albums (<code>Listing Prep – Etsy</code>…), Files folders, a single <code>{base}-listing-prep.zip</code> for desktop listing tools, or direct share to a buyer. Exported files stay until you leave the receipt screen, then are cleaned up.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔒 Private by design</h3>
+                    <p>No accounts, no backend, no analytics SDKs. Photos import via the system picker (no library permission needed); Photos access is add-only, asked only at the first save to Photos. Originals are read-only — always.</p>
+                </div>
+            </div>
+            <div class="honest-box">
+                <p><strong>Honest labelling — what BatchList Photos does not claim:</strong></p>
+                <ul>
+                    <li>Never claims a marketplace leaks GPS/location, never labels a Working-target preset as Official, and never promises a platform will accept an export.</li>
+                    <li>Not a cross-lister — the app ends at “files ready to upload”. No marketplace accounts, no listing-form integrations.</li>
+                    <li>No retouching, no background removal, no AI scenes — exposure, filters and healing are not in this product.</li>
+                    <li>JPEG only (sRGB, orientation baked in). No PNG/WebP/HEIC export path in v1 — HEIC sources are converted, Live Photo video parts are stills-only.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="help-section" id="support">
+        <div class="container">
+            <div class="section-header" id="privacy">
+                <h2>Help &amp; Support</h2>
+                <p>Preset help links, region defaults and “how it works” are built into the app (Settings → How it works). For anything else, reach us below.</p>
+            </div>
+            <div class="help-grid">
+                <div class="help-card">
+                    <h3>🔒 Privacy Policy</h3>
+                    <p>No developer server, no accounts, no analytics. Your photos stay on your device; originals are never modified. Location scrubbing happens on-device.</p>
+                    <a href="support/privacy-policy-batchlistphotos.html" class="btn btn-secondary">View Privacy Policy</a>
+                </div>
+                <div class="help-card">
+                    <h3>📄 Terms of Use (EULA)</h3>
+                    <p>BatchList Photos uses Apple&rsquo;s Standard Licensed Application End User License Agreement.</p>
+                    <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" class="btn btn-secondary" target="_blank" rel="noopener">View Apple Standard EULA</a>
+                </div>
+                <div class="help-card">
+                    <h3>💬 Contact</h3>
+                    <p>Questions, a preset that looks out of date, or a marketplace we should add? We&rsquo;d love to hear from you.</p>
+                    <a href="mailto:contact@m-pax.net?subject=BatchList%20Photos%20Support" class="btn">contact@m-pax.net</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="log4surg.html">Log4Surg</a>
+                <a href="log4tutor.html">Log4Tutor</a>
+                <a href="pooldoc.html">Pool Doc</a>
+                <a href="wiresmith.html">WireSmith</a>
+                <a href="careknit.html">CareKnit</a>
+                <a href="this.html">This</a>
+                <a href="support/privacy-policy-batchlistphotos.html">Privacy Policy</a>
+                <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Terms (EULA)</a>
+                <a href="mailto:contact@m-pax.net">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 M-PAX Group. All rights reserved. · Not affiliated with or endorsed by Etsy, eBay, Vinted, Depop, Poshmark, Mercari, Meta or Shopify.</p>
+            <a href="#" class="back-to-top">Back to Top ↑</a>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+            });
+        });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.length > 1) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
