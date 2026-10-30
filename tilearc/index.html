@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>TileArc: Habit Book — Your year, arc by arc, tile by tile</title>
+<meta name="description" content="TileArc: Habit Book is an anime habit tracker for iPhone. Two themes — cosy Sakura Diary or power Shonen Quest — one gentle year grid, a free home-screen widget, and private on-device tracking. No account.">
+<meta name="keywords" content="TileArc, habit tracker, anime habit tracker, Sakura Diary, Shonen Quest, year grid, habit widget, iPhone app, M-PAX">
+<meta name="author" content="TileArc">
+<meta name="theme-color" content="#2E2230">
+<link rel="canonical" href="https://m-pax.net/tilearc/">
+<link rel="icon" type="image/png" sizes="32x32" href="images/branding/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/branding/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/branding/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m-pax.net/tilearc/">
+<meta property="og:title" content="TileArc: Habit Book — Your year, arc by arc, tile by tile">
+<meta property="og:description" content="An anime habit tracker for iPhone. Pick Sakura Diary or Shonen Quest, tap your tiles, watch the year fill in. Free widget, no account, on-device.">
+<meta property="og:image" content="https://m-pax.net/tilearc/images/branding/og-image.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TileArc: Habit Book — Your year, arc by arc, tile by tile">
+<meta name="twitter:description" content="Pick a style. Tap your tiles. Watch the year fill in. Free widget, no account, private by design.">
+<meta name="twitter:image" content="https://m-pax.net/tilearc/images/branding/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#FBF7F2;
+  --paper-warm:#F6EFE4;
+  --paper-deep:#EFE5D3;
+  --surface:#FFFFFF;
+  --surface-2:#F7F3EC;
+  --ink:#2E2A33;
+  --ink-2:#5F5866;
+  --ink-3:#948C99;
+  --border:#E7DCCB;
+  --border-strong:#D5C6AE;
+  --plum:#2E2230;
+  --plum-2:#241A26;
+  --sakura:#F27D9D;
+  --sakura-deep:#D8557E;
+  --sakura-soft:#FDE6EE;
+  --sakura-bg:#FFF8F0;
+  --shonen:#3D7BFF;
+  --shonen-deep:#2B5FD6;
+  --shonen-soft:#E2EBFF;
+  --shonen-bg:#F2F5FB;
+  --gold:#E9B44C;
+  --gold-soft:#FBF0D3;
+  --radius-sm:12px;
+  --radius:20px;
+  --radius-lg:28px;
+  --radius-pill:999px;
+  --shadow-sm:0 1px 3px rgba(46,34,48,.08),0 1px 2px rgba(46,34,48,.06);
+  --shadow:0 8px 24px rgba(46,34,48,.08),0 4px 8px rgba(46,34,48,.06);
+  --shadow-lg:0 24px 48px rgba(46,34,48,.22),0 12px 24px rgba(46,34,48,.14);
+  --max:1160px;
+  --nav-h:68px;
+  /* live theme tokens — flipped by the style switcher */
+  --t-bg:#FFF8F0;
+  --t-surface:#FFFFFF;
+  --t-surface-alt:#FFF1E6;
+  --t-ink:#3D2C33;
+  --t-ink-soft:#8A7280;
+  --t-primary:#F27D9D;
+  --t-accent:#E9B44C;
+  --t-empty:#F3E3DA;
+  --t-empty-line:#DEC4B8;
+  --t-radius:24px;
+  --t-cell-radius:6px;
+}
+html{scroll-behavior:smooth;scrollbar-gutter:stable}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit}
+img{max-width:100%;display:block}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--sakura-deep);outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:12px;z-index:9999;background:var(--plum);color:#fff;padding:10px 16px;border-radius:8px;font-weight:600}
+.skip:focus{left:12px}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+.serif{font-family:"Instrument Serif",Georgia,serif}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+@media(min-width:768px){.wrap{padding:0 32px}}
+/* ---------- nav ---------- */
+.navbar{position:fixed;top:0;left:0;right:0;background:rgba(251,247,242,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:1000}
+.nav-container{max-width:var(--max);margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;height:70px}
+@media(min-width:768px){.nav-container{padding:0 32px}}
+.logo{font-size:1.4rem;font-weight:800;color:var(--plum);text-decoration:none;letter-spacing:-.5px}
+.nav-menu{display:flex;list-style:none;gap:1.6rem;margin:0}
+.nav-menu a{text-decoration:none;color:var(--ink);font-weight:600;font-size:.92rem;position:relative}
+.nav-menu a:hover{color:var(--sakura-deep)}
+.mobile-menu-btn{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--plum)}
+@media(max-width:900px){
+  .nav-menu{display:none;position:absolute;top:70px;left:0;right:0;background:var(--paper);flex-direction:column;padding:1rem 24px 1.2rem;gap:1rem;border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+  .nav-menu.active{display:flex}
+  .mobile-menu-btn{display:block}
+}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;letter-spacing:-.02em;font-size:19px}
+.brand-mark{width:34px;height:34px;border-radius:11px;overflow:hidden;flex-shrink:0;border:1px solid var(--border-strong);background:#fff}
+.brand-mark img{width:100%;height:100%;object-fit:cover}
+.brand em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:14px;padding:11px 20px;border-radius:var(--radius-pill);border:1px solid var(--border-strong);background:var(--surface);transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+.btn-sm{padding:8px 14px;font-size:13px}
+.btn-plum{background:var(--plum);border-color:var(--plum);color:#fff}
+.btn-plum:hover{background:var(--plum-2)}
+.btn-sakura{background:var(--sakura);border-color:var(--sakura);color:#fff}
+.btn-sakura:hover{background:var(--sakura-deep)}
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;background:var(--plum);color:#fff;padding-top:70px}
+section[id]{scroll-margin-top:78px}
+.hero-bg{position:absolute;inset:0;pointer-events:none}
+.hero-bg svg{width:100%;height:100%}
+.hero-grid{position:relative;display:grid;gap:40px;padding:56px 0 40px}
+@media(min-width:960px){.hero-grid{grid-template-columns:1.05fr .95fr;align-items:center;padding:84px 0 64px;gap:48px}}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F7C9D8;background:rgba(242,125,157,.16);border:1px solid rgba(242,125,157,.45);padding:7px 14px;border-radius:var(--radius-pill)}
+.hero h1{font-size:clamp(38px,5.4vw,64px);line-height:1.02;letter-spacing:-.03em;font-weight:800;margin:20px 0 0}
+.hero h1 em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;background:linear-gradient(100deg,#F9A8C4,#F27D9D 55%,#E9B44C);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-lead{margin-top:18px;font-size:clamp(16px,1.8vw,19px);line-height:1.65;color:#EDE4EA;max-width:34rem}
+.hero-lead strong{color:#fff}
+.hero-note{margin-top:14px;font-size:13.5px;color:#C9B3C0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius-sm);padding:12px 14px;max-width:34rem}
+.hero-note strong{color:#F9D8E3}
+.hero-actions{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.coming-pill{display:inline-flex;align-items:center;gap:12px;text-decoration:none;background:#fff;color:var(--ink);border-radius:16px;padding:10px 18px 10px 12px;box-shadow:var(--shadow-lg);transition:transform .15s ease}
+.coming-pill:hover{transform:translateY(-2px)}
+.coming-pill .pill-icon{width:42px;height:42px;border-radius:12px;overflow:hidden;flex-shrink:0;border:1px solid var(--border)}
+.coming-pill .pill-icon img{width:100%;height:100%;object-fit:cover}
+.coming-pill small{display:block;font-size:11px;font-weight:600;color:var(--ink-2);letter-spacing:.04em;text-transform:uppercase}
+.coming-pill strong{display:block;font-size:17px;font-weight:800;letter-spacing:-.01em}
+.btn-ghost-light{border-color:rgba(255,255,255,.35);color:#fff;background:transparent}
+.btn-ghost-light:hover{background:rgba(255,255,255,.1);box-shadow:none}
+.hero-meta{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+.hero-meta span{font-size:12.5px;font-weight:600;color:#EFE3EA;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);padding:7px 12px;border-radius:var(--radius-pill)}
+.hero-coord{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px 16px;font-size:11.5px;color:#9A8496;font-family:"JetBrains Mono",monospace}
+/* device + demo */
+.device-wrap{position:relative;justify-self:center;width:min(360px,100%)}
+.device{background:#17111A;border:1px solid rgba(255,255,255,.14);border-radius:44px;padding:12px;box-shadow:var(--shadow-lg)}
+.device-screen{border-radius:34px;overflow:hidden;background:var(--t-bg);transition:background .3s ease;min-height:560px;display:flex;flex-direction:column}
+.demo-top{padding:18px 16px 10px}
+.demo-date{font-size:11px;font-weight:600;color:var(--t-ink-soft);letter-spacing:.02em}
+.demo-title{font-size:20px;font-weight:800;color:var(--t-ink);letter-spacing:-.02em}
+.demo-bubble{display:flex;gap:10px;align-items:flex-start;margin:10px 16px 0;background:var(--t-surface);border:1px solid var(--t-surface-alt);border-radius:16px;border-bottom-left-radius:6px;padding:10px 12px;box-shadow:var(--shadow-sm)}
+.demo-bubble .face{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;font-size:19px;background:var(--t-surface-alt)}
+.demo-bubble p{font-size:12.5px;color:var(--t-ink);line-height:1.5}
+.demo-bubble p b{color:var(--t-primary)}
+.demo-habit{margin:10px 16px 0;background:var(--t-surface);border:1px solid var(--t-surface-alt);border-radius:var(--t-radius);padding:12px;box-shadow:var(--shadow-sm)}
+.demo-habit-head{display:flex;align-items:center;gap:8px}
+.demo-habit-head .emo{font-size:18px}
+.demo-habit-head strong{font-size:14px;color:var(--t-ink)}
+.chip{margin-left:auto;font-size:10.5px;font-weight:700;color:#fff;background:var(--t-primary);padding:3px 9px;border-radius:var(--radius-pill)}
+.demo-tiles{display:grid;grid-template-columns:repeat(14,1fr);gap:4px;margin-top:10px}
+.demo-tiles i{aspect-ratio:1;border-radius:var(--t-cell-radius);background:var(--t-empty);border:1px solid var(--t-empty-line);display:block}
+.demo-tiles i.f1{background:color-mix(in srgb,var(--t-primary) 32%,#fff);border-color:transparent}
+.demo-tiles i.f2{background:color-mix(in srgb,var(--t-primary) 55%,#fff);border-color:transparent}
+.demo-tiles i.f3{background:var(--t-primary);border-color:transparent}
+.demo-tiles i.today{outline:2px solid var(--t-accent);outline-offset:1px}
+.demo-tags{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.demo-tags span{font-size:10.5px;font-weight:600;color:var(--t-ink-soft);background:var(--t-surface-alt);padding:3px 8px;border-radius:var(--radius-pill)}
+.demo-switch{margin:12px 16px 0;background:var(--t-surface);border:1px solid var(--t-surface-alt);border-radius:14px;padding:10px 12px}
+.demo-switch p{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t-ink-soft);margin-bottom:8px}
+.demo-switch .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.theme-btn{border:2px solid var(--t-surface-alt);background:var(--t-bg);border-radius:12px;padding:8px 6px;cursor:pointer;font-size:12px;font-weight:700;color:var(--t-ink);display:flex;align-items:center;justify-content:center;gap:6px;transition:border-color .15s ease,transform .15s ease}
+.theme-btn:hover{transform:translateY(-1px)}
+.theme-btn[aria-pressed="true"]{border-color:var(--t-primary)}
+.demo-foot{margin-top:auto;padding:12px 16px 16px;display:flex;gap:8px}
+.demo-foot span{flex:1;text-align:center;font-size:11px;font-weight:700;color:var(--t-ink-soft);background:var(--t-surface);border:1px solid var(--t-surface-alt);border-radius:10px;padding:8px 0}
+.hero-card-float{position:absolute;left:-24px;bottom:52px;background:#fff;color:var(--ink);border-radius:16px;box-shadow:var(--shadow-lg);padding:10px 14px 10px 10px;display:flex;gap:10px;align-items:center;font-size:13px;max-width:230px}
+.hero-card-float strong{display:block;font-size:13px}
+.hero-card-float small{display:block;font-size:11.5px;color:var(--ink-2)}
+@media(max-width:1100px){.hero-card-float{left:0}}
+@media(max-width:640px){.hero-card-float{display:none}}
+.hero-card-float2{position:absolute;right:-14px;top:64px;background:var(--gold);color:#3A2A10;font-size:11.5px;font-weight:800;padding:8px 12px;border-radius:var(--radius-pill);box-shadow:var(--shadow);font-family:"JetBrains Mono",monospace}
+@media(max-width:1100px){.hero-card-float2{right:0}}
+@media(max-width:640px){.hero-card-float2{display:none}}
+.trustbar{position:relative;border-top:1px solid rgba(255,255,255,.14);margin-top:8px;padding:18px 0 26px;display:flex;flex-wrap:wrap;gap:10px 26px;font-size:13px;color:#D9CBD6}
+.trustbar b{color:#fff}
+.trustbar span:last-child{margin-left:auto;color:#F2C66D;font-weight:700}
+/* ---------- sections ---------- */
+.section{padding:72px 0}
+@media(min-width:768px){.section{padding:96px 0}}
+.section-paper{background:var(--paper)}
+.section-white{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.section-cream{background:var(--paper-warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.section-plum{background:var(--plum);color:#fff}
+.kicker{font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--sakura-deep)}
+.section-plum .kicker{color:#F9A8C4}
+h2{font-size:clamp(28px,4vw,42px);letter-spacing:-.025em;line-height:1.08;font-weight:800;margin-top:12px;max-width:20em}
+h2 em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400}
+.section-plum h2{color:#fff}
+.lede{margin-top:14px;font-size:16.5px;color:var(--ink-2);max-width:42rem}
+.section-plum .lede{color:#D9CBD6}
+/* loop */
+.steps{display:grid;gap:14px;margin-top:36px}
+@media(min-width:860px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);position:relative}
+.step-num{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;color:var(--sakura-deep);letter-spacing:.1em}
+.step h3{font-size:19px;letter-spacing:-.01em;margin:8px 0 6px}
+.step p{font-size:14.5px;color:var(--ink-2)}
+.step .tile-mini{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:14px}
+.step .tile-mini i{aspect-ratio:1;border-radius:5px;background:#F3E3DA;border:1px solid #DEC4B8}
+.step .tile-mini i.on{background:var(--sakura);border-color:transparent}
+/* grid section */
+.split{display:grid;gap:36px;margin-top:36px;align-items:start}
+@media(min-width:960px){.split{grid-template-columns:1fr 1fr;gap:56px}}
+.feat-list{display:grid;gap:12px;margin-top:24px}
+.feat{display:flex;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow-sm)}
+.feat-ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:19px;flex-shrink:0}
+.feat h3{font-size:15.5px;letter-spacing:-.01em}
+.feat p{font-size:13.5px;color:var(--ink-2);margin-top:2px}
+.year-card{background:var(--plum);color:#fff;border-radius:var(--radius-lg);padding:28px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.year-card h3{font-size:17px;letter-spacing:-.01em}
+.year-card .sub{font-size:12.5px;color:#C9B3C0;margin-top:2px}
+.year-grid{display:grid;grid-template-columns:repeat(26,1fr);gap:3px;margin-top:18px}
+.year-grid i{aspect-ratio:1;border-radius:2.5px;background:rgba(255,255,255,.12);display:block}
+.year-grid i.l1{background:#F9A8C4;opacity:.55}
+.year-grid i.l2{background:#F27D9D;opacity:.8}
+.year-grid i.l3{background:#F27D9D}
+.year-grid i.g1{background:#8AC2EF;opacity:.55}
+.year-grid i.g2{background:#5B93FF;opacity:.8}
+.year-grid i.g3{background:#5B93FF}
+.year-legend{display:flex;gap:14px;margin-top:14px;font-size:11.5px;color:#C9B3C0;font-family:"JetBrains Mono",monospace;flex-wrap:wrap}
+/* themes */
+.theme-cards{display:grid;gap:16px;margin-top:36px}
+@media(min-width:860px){.theme-cards{grid-template-columns:1fr 1fr}}
+.theme-card{border-radius:var(--radius-lg);padding:28px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .15s ease}
+.theme-card:hover{transform:translateY(-3px)}
+.theme-card.sakura{background:var(--sakura-bg);border:1px solid #F6D3DE}
+.theme-card.shonen{background:var(--shonen-bg);border:1px solid #C9D8F8}
+.theme-card .vibe{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.sakura .vibe{color:var(--sakura-deep)}
+.shonen .vibe{color:var(--shonen-deep)}
+.theme-card h3{font-size:26px;letter-spacing:-.02em;margin:8px 0 4px}
+.sakura h3{color:#3D2C33;font-weight:800}
+.shonen h3{color:#1C2333;font-weight:800}
+.theme-card .line{font-size:15px;font-style:italic}
+.sakura .line{color:#8A7280;font-family:Georgia,serif}
+.shonen .line{color:#5A6480;font-weight:700;font-style:normal}
+.theme-preview{margin-top:18px;background:#fff;border-radius:18px;padding:16px;box-shadow:var(--shadow-sm)}
+.sakura .theme-preview{border:1px solid #F6D3DE;border-radius:24px}
+.shonen .theme-preview{border:1px solid #C9D8F8;border-radius:12px}
+.mini-row{display:flex;align-items:center;gap:10px}
+.mini-face{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:21px;flex-shrink:0}
+.sakura .mini-face{background:#FFF1E6}
+.shonen .mini-face{background:#E6ECFA}
+.mini-tiles{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;flex:1}
+.mini-tiles i{aspect-ratio:1.4;border-radius:4px;display:block}
+.sakura .mini-tiles i{background:#F3E3DA;border:1px solid #DEC4B8}
+.sakura .mini-tiles i.on{background:#F27D9D;border-color:transparent}
+.shonen .mini-tiles i{background:#DDE4F2;border:1px solid #B9C6E4;border-radius:2px}
+.shonen .mini-tiles i.on{background:#3D7BFF;border-color:transparent}
+.mini-cap{font-size:12px;font-weight:700;margin-top:10px}
+.sakura .mini-cap{color:#3D2C33}
+.shonen .mini-cap{color:#1C2333}
+.switch-note{margin-top:20px;background:var(--surface);border:1px dashed var(--border-strong);border-radius:16px;padding:16px 20px;font-size:14px;color:var(--ink-2);text-align:center}
+.switch-note strong{color:var(--ink)}
+/* widget / reminders */
+.dark-grid{display:grid;gap:14px;margin-top:36px}
+@media(min-width:860px){.dark-grid{grid-template-columns:repeat(3,1fr)}}
+.dark-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:24px}
+.dark-card .big{font-size:30px}
+.dark-card h3{font-size:17px;margin:10px 0 6px;color:#fff}
+.dark-card p{font-size:13.5px;color:#CFC2CE}
+.dark-card .mono-tag{display:inline-block;margin-top:12px;font-family:"JetBrains Mono",monospace;font-size:11px;color:#F2C66D;background:rgba(242,198,102,.12);border:1px solid rgba(242,198,102,.35);padding:4px 10px;border-radius:var(--radius-pill)}
+.widget-mock{margin-top:36px;background:#fff;color:var(--ink);border-radius:22px;padding:20px;display:grid;gap:12px;box-shadow:var(--shadow-lg)}
+@media(min-width:760px){.widget-mock{grid-template-columns:1fr 1fr;align-items:center}}
+.widget-mock .copy h3{font-size:21px;letter-spacing:-.02em;color:var(--plum)}
+.widget-mock .copy p{font-size:14px;color:var(--ink-2);margin-top:6px}
+.widget-phones{display:flex;gap:12px;justify-content:center}
+.widget-box{background:var(--paper);border:1px solid var(--border);border-radius:18px;padding:14px;flex:1;max-width:200px;box-shadow:var(--shadow-sm)}
+.widget-box .wlabel{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.widget-row{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:7px 0;border-top:1px dashed var(--border)}
+.widget-row:first-of-type{border-top:0}
+.widget-tap{margin-left:auto;width:26px;height:26px;border-radius:50%;border:2px solid var(--sakura);display:grid;place-items:center;font-size:13px;color:var(--sakura);font-weight:800}
+.widget-tap.done{background:var(--sakura);color:#fff}
+/* pro table */
+.plan-table{margin-top:36px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)}
+.plan-row{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:8px;padding:14px 20px;font-size:14px;border-top:1px solid var(--border);align-items:center}
+.plan-row:first-child{border-top:0}
+.plan-row.head{background:var(--plum);color:#fff;font-weight:800;font-size:13px}
+.plan-row.head span:last-child,.plan-row.head span:nth-child(2){text-align:center}
+.plan-row span:nth-child(2),.plan-row span:nth-child(3){text-align:center}
+.plan-row .yes{color:#1E7B44;font-weight:800}
+.plan-row .no{color:var(--ink-3)}
+.pro-note{margin-top:16px;font-size:13px;color:var(--ink-2);background:var(--gold-soft);border:1px solid #EBD9A8;border-radius:14px;padding:14px 18px}
+.pro-note .mono{font-size:12px}
+/* privacy teaser */
+.priv-grid{display:grid;gap:14px;margin-top:36px}
+@media(min-width:860px){.priv-grid{grid-template-columns:repeat(3,1fr)}}
+.priv{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:24px;text-align:left}
+.priv .big{font-size:28px}
+.priv h3{color:#fff;font-size:16.5px;margin:10px 0 6px}
+.priv p{font-size:13.5px;color:#CFC2CE}
+/* how */
+.how-list{margin-top:36px;display:grid;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+.how-step{display:grid;grid-template-columns:52px 1fr;gap:16px;padding:22px 24px;border-top:1px solid var(--border)}
+.how-step:first-child{border-top:0}
+.how-n{width:40px;height:40px;border-radius:50%;background:var(--plum);color:#fff;display:grid;place-items:center;font-weight:800;font-size:16px}
+.how-step h3{font-size:16.5px}
+.how-step p{font-size:14px;color:var(--ink-2);margin-top:4px}
+/* cta */
+.cta{background:linear-gradient(135deg,var(--plum) 0%,#4A2E4D 55%,#7A3B5C 100%);border-radius:var(--radius-lg);padding:56px 32px;text-align:center;color:#fff;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+@media(min-width:768px){.cta{padding:72px 48px}}
+.cta h2{color:#fff;max-width:100%}
+.cta h2 em{background:linear-gradient(100deg,#F9A8C4,#E9B44C);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cta p{color:#E4D5DE;max-width:36rem;margin:14px auto 0;font-size:16px}
+.cta-actions{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.cta-note{margin-top:20px;font-size:12.5px;color:#B89FAE}
+.cta-note a{color:#F9D8E3;font-weight:700}
+.cta-note .mono{font-size:11.5px}
+/* footer */
+footer.site{padding:48px 0 40px;background:var(--paper)}
+.footer-grid{display:grid;gap:28px}
+@media(min-width:860px){.footer-grid{grid-template-columns:1.2fr 1fr 1fr 1fr}}
+.footer-col h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
+.footer-col a{display:block;text-decoration:none;font-size:14px;color:var(--ink-2);padding:4px 0}
+.footer-col a:hover{color:var(--plum)}
+.footer-bottom{margin-top:32px;padding-top:20px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;font-size:12.5px;color:var(--ink-3)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,80px);background:var(--plum);color:#fff;font-size:13.5px;font-weight:600;padding:12px 20px;border-radius:var(--radius-pill);box-shadow:var(--shadow-lg);opacity:0;transition:all .25s ease;z-index:99;max-width:calc(100vw - 48px);text-align:center}
+.toast.show{transform:translate(-50%,0);opacity:1}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="logo">M-PAX</a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#loop">How it works</a></li>
+      <li><a href="#grid">Year grid</a></li>
+      <li><a href="#themes">Styles</a></li>
+      <li><a href="#widget">Widget</a></li>
+      <li><a href="#pro">Pro</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<main id="main">
+<!-- ================= HERO ================= -->
+<section class="hero" id="overview" aria-labelledby="hero-title">
+  <div class="hero-bg" aria-hidden="true">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="none" role="presentation">
+      <defs>
+        <pattern id="tgrid" width="96" height="96" patternUnits="userSpaceOnUse" patternTransform="rotate(4)">
+          <rect x="30" y="30" width="14" height="14" rx="4" fill="#fff" opacity=".10"/>
+          <rect x="52" y="30" width="14" height="14" rx="4" fill="#F27D9D" opacity=".35"/>
+          <rect x="30" y="52" width="14" height="14" rx="4" fill="#fff" opacity=".06"/>
+          <rect x="52" y="52" width="14" height="14" rx="7" fill="#E9B44C" opacity=".35"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="800" fill="url(#tgrid)" opacity=".5"/>
+      <g fill="none" stroke="#fff" opacity=".14" stroke-width="1.4" stroke-dasharray="10 12">
+        <path d="M-40 640 Q300 560 620 600 T1240 560"/>
+        <ellipse cx="980" cy="180" rx="180" ry="140" stroke="#F27D9D" opacity=".35"/>
+      </g>
+      <g font-family="JetBrains Mono, monospace" font-size="10" fill="#fff" opacity=".35">
+        <text x="48" y="36">EPISODE 214 — TODAY'S PAGE • 6 OF 6 PETALS</text>
+        <text x="830" y="764">ARC 214 — ALL QUESTS CLEARED • DON!</text>
+        <text x="48" y="764">TAP THE TILE • FILL THE DAY • NO ACCOUNT</text>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Anime habit tracker • iPhone • iOS 17+</span>
+        <h1 id="hero-title">Your year, arc by arc, <em>tile by tile.</em></h1>
+        <p class="hero-lead">TileArc: Habit Book turns small daily wins into a year you can see. Pick a style — cosy <strong>Sakura Diary</strong> or power <strong>Shonen Quest</strong> — tap your tiles, and watch petals fill and combos grow.</p>
+        <p class="hero-note"><strong>Private by design:</strong> no account, no developer server, no tracking. Your habits stay on your iPhone. The home-screen widget is <strong>free forever</strong> — never a Pro gate.</p>
+        <div class="hero-actions">
+          <a class="coming-pill" href="mailto:contact@m-pax.net?subject=TileArc%20launch%20list" aria-label="Join the TileArc launch list">
+            <span class="pill-icon"><img src="images/branding/icon.png" alt="" width="42" height="42" loading="eager"></span>
+            <span><small>Coming soon to the</small><strong>App Store</strong></span>
+          </a>
+          <a class="btn btn-ghost-light" href="#loop">See how it works <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hero-meta" aria-label="Highlights">
+          <span>🌸 2 themes, 1 engine</span>
+          <span>◉ Year grid + 12-week view</span>
+          <span>▦ Free tap-to-fill widget</span>
+        </div>
+        <div class="hero-coord" aria-hidden="true">
+          <span>— 6 habits free • unlimited with Pro</span><span>Works offline</span><span>Bundle: net.m-pax.Tilearc</span>
+        </div>
+      </div>
+      <div class="device-wrap">
+        <div class="device" role="img" aria-label="TileArc dashboard preview — Today's Page with a companion greeting, a Read habit with a week of filled tiles, and a 6-day lantern streak">
+          <div class="device-screen" id="demoScreen">
+            <div class="demo-top">
+              <div class="demo-date" id="demoDate">Episode 214 — 30 Oct</div>
+              <div class="demo-title" id="demoTitle">Today's Page</div>
+            </div>
+            <div class="demo-bubble">
+              <span class="face" id="demoFace">🌸</span>
+              <p id="demoBubble"><b>Mochi</b> says: “A fresh page. Shall we fill a petal?”</p>
+            </div>
+            <div class="demo-habit">
+              <div class="demo-habit-head">
+                <span class="emo">📖</span><strong>Read</strong>
+                <span class="chip" id="demoChip">6 day lantern</span>
+              </div>
+              <div class="demo-tiles" aria-hidden="true">
+                <i class="f2"></i><i class="f3"></i><i></i><i class="f2"></i><i class="f2"></i><i class="f1"></i><i></i>
+                <i class="f3"></i><i class="f2"></i><i class="f3"></i><i class="f1"></i><i class="f2"></i><i class="f3 today"></i><i></i>
+              </div>
+              <div class="demo-tags"><span>Diary Entries</span><span>Reminder 8:00</span></div>
+            </div>
+            <div class="demo-habit">
+              <div class="demo-habit-head">
+                <span class="emo">👟</span><strong id="demoHabit2">Morning Run</strong>
+                <span class="chip" id="demoChip2">4 day lantern</span>
+              </div>
+              <div class="demo-tiles" aria-hidden="true">
+                <i class="f1"></i><i class="f2"></i><i class="f2"></i><i></i><i class="f3"></i><i class="f2"></i><i></i>
+                <i class="f2"></i><i class="f3"></i><i class="f2"></i><i class="f2"></i><i class="f1 today"></i><i></i><i></i>
+              </div>
+            </div>
+            <div class="demo-switch">
+              <p>Try the styles — same habits, new skin</p>
+              <div class="row">
+                <button class="theme-btn" id="btnSakura" aria-pressed="true">🌸 Sakura Diary</button>
+                <button class="theme-btn" id="btnShonen" aria-pressed="false">⚡ Shonen Quest</button>
+              </div>
+            </div>
+            <div class="demo-foot" aria-hidden="true"><span>Today</span><span>Create</span><span>Settings</span></div>
+          </div>
+        </div>
+        <div class="hero-card-float2" role="note">◉ 6 / 6 TODAY • DON!</div>
+        <div class="hero-card-float" role="note">
+          <span style="width:36px;height:36px;border-radius:10px;background:#E5F3E9;border:1px solid #BFE3C8;display:grid;place-items:center;flex-shrink:0;color:#15803D;font-weight:800">✓</span>
+          <span><strong>Saved on this iPhone</strong><small>No account • works offline</small></span>
+        </div>
+      </div>
+    </div>
+    <div class="trustbar" aria-label="Key facts">
+      <span><b>Free</b> 6 habits + widget</span>
+      <span><b>Pro</b> Monthly / Yearly / Lifetime</span>
+      <span><b>Private</b> no account, no tracking</span>
+      <span>Prices from the App Store at purchase time</span>
+      <span style="margin-left:auto">Your habits move with your style ♡</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOOP ================= -->
+<section id="loop" class="section section-paper" aria-labelledby="loop-title">
+  <div class="wrap">
+    <span class="kicker">The loop</span>
+    <h2 id="loop-title">Tap → <em>your garden grows</em> → look back.</h2>
+    <p class="lede">TileArc is built around one tiny daily ritual. Everything else — streaks, stats, companions — grows out of your own taps. Nothing is reconstructed, nothing is imported from somewhere else.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01 — TAP</span>
+        <h3>One tap fills the day</h3>
+        <p>Open Today's Page, or tap right on the home-screen widget. Each habit is a tile; filling it takes a second. Miss a day and the tile simply stays empty — no guilt trips, no broken chains held against you.</p>
+        <div class="tile-mini" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+      </div>
+      <div class="step">
+        <span class="step-num">02 — GROW</span>
+        <h3>Streaks with a soft voice</h3>
+        <p>Days in a row become a glowing lantern — or a rising combo, if you picked the quest life. Your companion notices: Mochi celebrates petals, Kaito hypes panels. Gentle reminders nudge only the habits you choose.</p>
+        <div class="tile-mini" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+      </div>
+      <div class="step">
+        <span class="step-num">03 — LOOK BACK</span>
+        <h3>A year you can hold</h3>
+        <p>Every tap lands on a year grid — 365 tiles of evidence. Add a diary line about the day, zoom into the 12-week mini-grid, and export it all as JSON whenever you like. Your history is yours, portable forever.</p>
+        <div class="tile-mini" aria-hidden="true"><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= YEAR GRID ================= -->
+<section id="grid" class="section section-white" aria-labelledby="grid-title">
+  <div class="wrap">
+    <span class="kicker">The year grid</span>
+    <h2 id="grid-title">Every day, <em>a tile.</em> Every year, a story.</h2>
+    <p class="lede">The grid is the heart of TileArc. One cell per day, coloured deeper the more complete the day — with per-habit detail underneath, streak lists, and space for a line of diary.</p>
+    <div class="split">
+      <div>
+        <div class="feat-list">
+          <div class="feat">
+            <span class="feat-ic" style="background:var(--sakura-soft)">🗓️</span>
+            <div><h3>Full-year view + 12-week mini-grid</h3><p>See the whole arc at a glance, then zoom into the last twelve weeks for texture. Deeper colour means a fuller day — computed from your entries, never guessed.</p></div>
+          </div>
+          <div class="feat">
+            <span class="feat-ic" style="background:var(--gold-soft)">🔥</span>
+            <div><h3>Streaks, current and best</h3><p>“Current glow: 6 days. Longest glow: 21 days.” Full streak lists per habit, plus trend views that show whether this month is beating last month.</p></div>
+          </div>
+          <div class="feat">
+            <span class="feat-ic" style="background:#EAF3FF">📖</span>
+            <div><h3>Diary Entries &amp; Battle Log</h3><p>A line about today, attached to the date — a diary page in Sakura, a battle report in Shonen. Notes travel with exports, so your words are never locked in.</p></div>
+          </div>
+          <div class="feat">
+            <span class="feat-ic" style="background:#E5F3E9">📦</span>
+            <div><h3>Export &amp; import that respects you</h3><p>One JSON file holds habits, entries, notes and settings. Export anytime, import on a new device — the same open format works across platforms.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="year-card" role="img" aria-label="Illustration of a TileArc year grid — rows of small tiles in pink and blue, some filled deep, some empty">
+        <h3>2026 — the year so far</h3>
+        <p class="sub">26 weeks × 7 days • deeper = fuller day</p>
+        <div class="year-grid" id="yearGrid" aria-hidden="true"></div>
+        <div class="year-legend"><span>🌸 Sakura row</span><span>⚡ Shonen row</span><span>▦ empty = unwritten</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THEMES ================= -->
+<section id="themes" class="section section-cream" aria-labelledby="themes-title">
+  <div class="wrap">
+    <span class="kicker">Two styles, one engine</span>
+    <h2 id="themes-title">Cosy diary <em>or</em> power quest. Same habits.</h2>
+    <p class="lede">Choosing your style is the first thing TileArc asks — never pre-selected, never skipped. And it is never final: switch anytime in Settings and your habits, history and streaks move with you. Light and dark moods included for both.</p>
+    <div class="theme-cards">
+      <article class="theme-card sakura">
+        <span class="vibe">Cozy diary</span>
+        <h3>Sakura Diary</h3>
+        <p class="line">“A fresh page. Shall we fill a petal?”</p>
+        <div class="theme-preview">
+          <div class="mini-row">
+            <span class="mini-face">🌸</span>
+            <div class="mini-tiles" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+          </div>
+          <p class="mini-cap">Mochi • 6 day lantern • Today's Page</p>
+        </div>
+        <p style="margin-top:14px;font-size:13.5px;color:#6E5A64">Rounded cards, handwritten accents, petals and lanterns. Plant habits, fill petals, tend your garden.</p>
+      </article>
+      <article class="theme-card shonen">
+        <span class="vibe">Power quest</span>
+        <h3>Shonen Quest</h3>
+        <p class="line">New day, hero. Ready when you are.</p>
+        <div class="theme-preview">
+          <div class="mini-row">
+            <span class="mini-face">⚡</span>
+            <div class="mini-tiles" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+          </div>
+          <p class="mini-cap">Kaito • 6 combo • Today's Quests • DON!</p>
+        </div>
+        <p style="margin-top:14px;font-size:13.5px;color:#4A5470">Sharp panels, impact stamps, combos and arcs. Start quests, clear panels, awaken your power.</p>
+      </article>
+    </div>
+    <p class="switch-note"><strong>Meet Mochi &amp; Kaito.</strong> A companion cheers from every screen — with extra outfits to unlock in Pro. Your data never cares which style you wear: the engine underneath is identical.</p>
+  </div>
+</section>
+
+<!-- ================= WIDGET ================= -->
+<section id="widget" class="section section-plum" aria-labelledby="widget-title">
+  <div class="wrap">
+    <span class="kicker">Home-screen widget</span>
+    <h2 id="widget-title">Free forever. <em>Tap to fill, from home.</em></h2>
+    <p class="lede">The widget is part of the free TileArc — deliberately never a Pro gate. Put one habit (small) or up to three (medium) on your Home Screen or StandBy, and fill today's tile without opening the app.</p>
+    <div class="dark-grid">
+      <div class="dark-card">
+        <div class="big">▦</div>
+        <h3>Small = 1 habit, Medium = 3</h3>
+        <p>Pick which habits ride along in the Widget Habits screen. Small shows your most important tile; medium keeps your top three in sight.</p>
+        <span class="mono-tag">iOS 17 interactive widget</span>
+      </div>
+      <div class="dark-card">
+        <div class="big">👆</div>
+        <h3>Tap-to-fill, honestly instant</h3>
+        <p>Tapping a widget habit runs the same engine as the app — app and widget can never disagree. The timeline refreshes at midnight, and foregrounding the app keeps everything in sync.</p>
+        <span class="mono-tag">same engine, both sides</span>
+      </div>
+      <div class="dark-card">
+        <div class="big">🎁</div>
+        <h3>Offered once, yours always</h3>
+        <p>Onboarding offers the widget a single time — add it or skip, either way you are in. Add it later anytime from Settings with plain iOS instructions.</p>
+        <span class="mono-tag">shown at most once</span>
+      </div>
+    </div>
+    <div class="widget-mock">
+      <div class="copy">
+        <h3>Try it: tap a circle</h3>
+        <p>This is how the medium widget feels — tap ○ and it fills. (The real one lives on your Home Screen and syncs with the app.)</p>
+      </div>
+      <div class="widget-phones">
+        <div class="widget-box">
+          <p class="wlabel">TileArc • Small</p>
+          <div class="widget-row"><span>📖 Read</span><button class="widget-tap" aria-label="Toggle Read habit">○</button></div>
+        </div>
+        <div class="widget-box">
+          <p class="wlabel">TileArc • Medium</p>
+          <div class="widget-row"><span>📖 Read</span><button class="widget-tap" aria-label="Toggle Read habit">○</button></div>
+          <div class="widget-row"><span style="font-size:12.5px">あ Study Japanese</span><button class="widget-tap done" aria-label="Toggle Study Japanese habit">✓</button></div>
+          <div class="widget-row"><span>👟 Run</span><button class="widget-tap" aria-label="Toggle Run habit">○</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REMINDERS + STATS ================= -->
+<section id="reminders" class="section section-paper" aria-labelledby="rem-title">
+  <div class="wrap">
+    <span class="kicker">Gentle by default</span>
+    <h2 id="rem-title">Nudges you asked for. <em>Nothing you didn't.</em></h2>
+    <p class="lede">Reminders are per-habit, optional, and local to your iPhone. Pick weekdays and a time — “a gentle nudge, if you'd like one” — and days you already logged stay silent.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">A — CHOOSE</span>
+        <h3>Weekdays + a time</h3>
+        <p>Set reminders while planting a habit or later in Settings. Each habit keeps its own schedule; turn any of them off without touching the rest.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">B — LOCAL ONLY</span>
+        <h3>Your iPhone reminds you</h3>
+        <p>Notifications are scheduled on-device. There is no server watching your streaks, no push campaign, no “we miss you” email — because TileArc has no idea who you are.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">C — SMART QUIET</span>
+        <h3>Done days stay silent</h3>
+        <p>If you already filled a habit, its reminder for that day is skipped. The nudge only speaks when there is still a petal — or panel — left to fill.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRO ================= -->
+<section id="pro" class="section section-white" aria-labelledby="pro-title">
+  <div class="wrap">
+    <span class="kicker">Free &amp; Pro</span>
+    <h2 id="pro-title">Generous free. <em>Honest Pro.</em></h2>
+    <p class="lede">Six active habits plus the widget, free forever — enough for a real practice. Pro is for people whose garden outgrows the free bed: unlimited habits, deeper stats, and extra outfits for Mochi and Kaito.</p>
+    <div class="plan-table" role="table" aria-label="Free versus Pro comparison">
+      <div class="plan-row head" role="row"><span role="columnheader">What's inside</span><span role="columnheader">Free</span><span role="columnheader">Pro</span></div>
+      <div class="plan-row" role="row"><span>Active habits</span><span>6</span><span class="yes">Unlimited</span></div>
+      <div class="plan-row" role="row"><span>Home-screen widget (tap-to-fill)</span><span class="yes">✓ Free forever</span><span class="yes">✓</span></div>
+      <div class="plan-row" role="row"><span>Year grid, streaks, diary notes</span><span class="yes">✓</span><span class="yes">✓</span></div>
+      <div class="plan-row" role="row"><span>Reminders &amp; export / import</span><span class="yes">✓</span><span class="yes">✓</span></div>
+      <div class="plan-row" role="row"><span>Deeper stats — trends, best days, full streak lists</span><span class="no">—</span><span class="yes">✓</span></div>
+      <div class="plan-row" role="row"><span>Extra outfits for Mochi &amp; Kaito + extra widget styles</span><span class="no">—</span><span class="yes">✓</span></div>
+    </div>
+    <p class="pro-note"><strong>Three ways to go Pro:</strong> <span class="mono">Monthly</span> · <span class="mono">Yearly</span> · <span class="mono">Lifetime</span> (one-time payment, never renews). Prices always come from the App Store at purchase time — never hard-coded. Subscriptions auto-renew until cancelled; cancel anytime in Settings → Apple Account → Subscriptions.</p>
+  </div>
+</section>
+
+<!-- ================= PRIVACY ================= -->
+<section id="privacy" class="section section-plum" aria-labelledby="privacy-title">
+  <div class="wrap">
+    <span class="kicker">Privacy</span>
+    <h2 id="privacy-title">Yours. <em>On your iPhone.</em></h2>
+    <p class="lede">TileArc has no account, no backend, and no analytics. The only network use in the app is the App Store itself, at purchase time. Read the full policy — written for humans and for App Review.</p>
+    <div class="priv-grid">
+      <div class="priv">
+        <div class="big">🔒</div>
+        <h3>No account, no server</h3>
+        <p>Habits, entries, notes and settings live in a JSON file on your device. There is nowhere for them to leak to, because there is no TileArc server.</p>
+      </div>
+      <div class="priv">
+        <div class="big">📡</div>
+        <h3>No analytics, no tracking</h3>
+        <p>TileArc phones home to nobody. No event logging, no identifiers for ads, nothing that follows you between apps. StoreKit talks to Apple only when you buy or restore Pro.</p>
+      </div>
+      <div class="priv">
+        <div class="big">🗑️</div>
+        <h3>Delete means delete</h3>
+        <p>Remove a habit, clear an entry, or delete the app — your data goes with it. Exports are files you create, kept wherever you put them.</p>
+      </div>
+    </div>
+    <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn" style="background:#fff;border-color:#fff;color:var(--plum)" href="privacy.html">Read the Privacy Policy <span aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost-light" href="mailto:contact@m-pax.net?subject=TileArc%20privacy">Ask a privacy question</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW ================= -->
+<section id="how" class="section section-cream" aria-labelledby="how-title">
+  <div class="wrap">
+    <span class="kicker">First run</span>
+    <h2 id="how-title">From install <em>to first tile in a minute.</em></h2>
+    <div class="how-list">
+      <div class="how-step">
+        <span class="how-n">1</span>
+        <div><h3>Begin — one screen, one button</h3><p>A neutral welcome: the TileArc mark, “Your year, arc by arc, tile by tile,” and Begin. No sign-in, no permissions ambush.</p></div>
+      </div>
+      <div class="how-step">
+        <span class="how-n">2</span>
+        <div><h3>Choose your style — no default, no skip</h3><p>Sakura Diary or Shonen Quest, by vibe — never pre-selected. Tap a card and the live preview re-skins so you can feel it before you commit.</p></div>
+      </div>
+      <div class="how-step">
+        <span class="how-n">3</span>
+        <div><h3>Plant your first habit</h3><p>Name it, pick an emoji and a colour, choose scheduled days, add a gentle reminder if you like. “Plant this habit” — or “Start this quest.”</p></div>
+      </div>
+      <div class="how-step">
+        <span class="how-n">4</span>
+        <div><h3>Optionally, add the widget — free, always</h3><p>One offer, shown once: put your habits on the Home Screen, or tap Later. Either way, onboarding is done and your first tile is waiting.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="section section-paper" aria-labelledby="cta-title">
+  <div class="wrap">
+    <div class="cta">
+      <h2 id="cta-title">A year from now, <em>you'll wish you started today.</em></h2>
+      <p>TileArc: Habit Book is coming soon to the App Store for iPhone (iOS 17+). Join the launch list and we'll write to you exactly once — when it ships.</p>
+      <div class="cta-actions">
+        <a class="coming-pill" href="mailto:contact@m-pax.net?subject=TileArc%20launch%20list" aria-label="Join the TileArc launch list">
+          <span class="pill-icon"><img src="images/branding/icon.png" alt="" width="42" height="42" loading="lazy"></span>
+          <span><small>Notify me at launch</small><strong>Join the list</strong></span>
+        </a>
+        <a class="btn btn-ghost-light" href="privacy.html">Privacy Policy</a>
+      </div>
+      <p class="cta-note">Questions? <a href="mailto:contact@m-pax.net">contact@m-pax.net</a> • Support page: <a href="https://m-pax.net/tilearc/">m-pax.net/tilearc/</a> • Bundle ID (working): <span class="mono">net.m-pax.Tilearc</span></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a class="brand" href="#" style="margin-bottom:10px">
+          <span class="brand-mark"><img src="images/branding/icon.png" alt="TileArc app icon" width="34" height="34" loading="lazy"></span>
+          <span>TileArc <em>: Habit Book</em></span>
+        </a>
+        <p style="font-size:13.5px;color:var(--ink-2);max-width:26rem">An anime habit tracker for iPhone. Your year, arc by arc, tile by tile. By M-PAX Group.</p>
+      </div>
+      <div class="footer-col"><h4>TileArc</h4><a href="#loop">How it works</a><a href="#grid">Year grid</a><a href="#themes">Styles</a><a href="#widget">Widget</a><a href="#pro">Pro</a></div>
+      <div class="footer-col"><h4>Trust</h4><a href="privacy.html">Privacy Policy</a><a href="mailto:contact@m-pax.net?subject=TileArc%20privacy">Ask a privacy question</a><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Apple Standard EULA</a><a href="#main">Back to top ↑</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="mailto:contact@m-pax.net">contact@m-pax.net</a><a href="../index.html">← M-PAX Home</a></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 M-PAX Group. All rights reserved.</p><p class="mono" style="font-size:11px">m-pax.net/tilearc/ • v1.0 • 30 Oct 2026</p></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+  /* mobile menu (BatchList pattern) */
+  var mobileMenuBtn=document.getElementById('mobileMenuBtn'),navMenu=document.getElementById('navMenu');
+  if(mobileMenuBtn&&navMenu){mobileMenuBtn.addEventListener('click',function(){navMenu.classList.toggle('active');mobileMenuBtn.textContent=navMenu.classList.contains('active')?'✕':'☰';});navMenu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){navMenu.classList.remove('active');mobileMenuBtn.textContent='☰';});});}
+
+  /* year-grid illustration: 2 rows x 26 weeks, seeded pseudo-random */
+  var yg=document.getElementById('yearGrid');
+  if(yg){
+    var seed=214006;function rnd(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;};
+    for(var r=0;r<2;r++){
+      for(var w=0;w<26;w++){
+        var i=document.createElement('i');var v=rnd();
+        var base=r===0?'l':'g';
+        if(v>0.82)i.className=base+'3';else if(v>0.6)i.className=base+'2';else if(v>0.38)i.className=base+'1';
+        yg.appendChild(i);
+      }
+    }
+  }
+
+  /* style switcher demo: Sakura <-> Shonen */
+  var themes={
+    sakura:{bg:'#FFF8F0',surface:'#FFFFFF',alt:'#FFF1E6',ink:'#3D2C33',soft:'#8A7280',primary:'#F27D9D',accent:'#E9B44C',empty:'#F3E3DA',line:'#DEC4B8',radius:'24px',cell:'6px',
+      date:'Episode 214 — 30 Oct',title:"Today's Page",face:'🌸',bubble:'<b>Mochi</b> says: “A fresh page. Shall we fill a petal?”',habit2:'Morning Run',chip:'6 day lantern',chip2:'4 day lantern'},
+    shonen:{bg:'#F2F5FB',surface:'#FFFFFF',alt:'#E6ECFA',ink:'#1C2333',soft:'#5A6480',primary:'#3D7BFF',accent:'#FF5A3C',empty:'#DDE4F2',line:'#B9C6E4',radius:'12px',cell:'2px',
+      date:'Arc 214 — 30 Oct',title:"Today's Quests",face:'⚡',bubble:'<b>Kaito</b> says: “New day, hero. Ready when you are.”',habit2:'Morning Training',chip:'6 combo',chip2:'4 combo'}
+  };
+  var screen=document.getElementById('demoScreen');
+  var bS=document.getElementById('btnSakura'),bH=document.getElementById('btnShonen');
+  function apply(name){
+    var t=themes[name];if(!t||!screen)return;
+    var s=screen.style;
+    s.setProperty('--t-bg',t.bg);s.setProperty('--t-surface',t.surface);s.setProperty('--t-surface-alt',t.alt);
+    s.setProperty('--t-ink',t.ink);s.setProperty('--t-ink-soft',t.soft);s.setProperty('--t-primary',t.primary);
+    s.setProperty('--t-accent',t.accent);s.setProperty('--t-empty',t.empty);s.setProperty('--t-empty-line',t.line);
+    s.setProperty('--t-radius',t.radius);s.setProperty('--t-cell-radius',t.cell);
+    document.getElementById('demoDate').textContent=t.date;
+    document.getElementById('demoTitle').textContent=t.title;
+    document.getElementById('demoFace').textContent=t.face;
+    document.getElementById('demoBubble').innerHTML=t.bubble;
+    document.getElementById('demoHabit2').textContent=t.habit2;
+    document.getElementById('demoChip').textContent=t.chip;
+    document.getElementById('demoChip2').textContent=t.chip2;
+    bS.setAttribute('aria-pressed',String(name==='sakura'));
+    bH.setAttribute('aria-pressed',String(name==='shonen'));
+  }
+  if(bS&&bH){bS.addEventListener('click',function(){apply('sakura');});bH.addEventListener('click',function(){apply('shonen');});}
+
+  /* widget tap-to-fill demo */
+  var toast=document.getElementById('toast');var toastT=null;
+  function say(msg){if(!toast)return;toast.textContent=msg;toast.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){toast.classList.remove('show');},2200);}
+  document.querySelectorAll('.widget-tap').forEach(function(el){
+    el.addEventListener('click',function(){
+      var done=el.classList.toggle('done');
+      el.textContent=done?'✓':'○';
+      el.setAttribute('aria-label',el.getAttribute('aria-label')+(done?' — filled':' — empty'));
+      say(done?'Nice — tile filled. Your garden grows.':'Tile cleared for today.');
+    });
+  });
+})();
+</script>
+</body>
+</html>
