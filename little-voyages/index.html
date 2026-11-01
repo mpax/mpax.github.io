@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Little Voyages — Save together, stop by stop</title>
+<meta name="description" content="Little Voyages is a family saving app for iPhone and iPad. Kids pick a story — Pirate, Space or Magic — set one treasure goal, and save stop by stop. Parents approve every entry. No account, no tracking, on-device.">
+<meta name="keywords" content="Little Voyages, kids saving app, family money app, pocket money, saving goal, pirate, iPhone app, iPad app, M-PAX">
+<meta name="author" content="Little Voyages">
+<meta name="theme-color" content="#0B2440">
+<link rel="canonical" href="https://m-pax.net/little-voyages/">
+<link rel="icon" type="image/png" sizes="32x32" href="images/branding/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/branding/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/branding/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m-pax.net/little-voyages/">
+<meta property="og:title" content="Little Voyages — Save together, stop by stop">
+<meta property="og:description" content="A family saving app. One treasure, one number, three stories. Kids save, parents approve — everything stays on your device.">
+<meta property="og:image" content="https://m-pax.net/little-voyages/images/branding/og-image.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Little Voyages — Save together, stop by stop">
+<meta name="twitter:description" content="Pick a story. Set one treasure. Save stop by stop — with a parent approving every step. No account, no tracking.">
+<meta name="twitter:image" content="https://m-pax.net/little-voyages/images/branding/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#FAF6EE;
+  --paper-warm:#F3EDDF;
+  --paper-deep:#E9DFC9;
+  --surface:#FFFFFF;
+  --surface-2:#F5F0E4;
+  --ink:#1B2A3A;
+  --ink-2:#55677C;
+  --ink-3:#8A99AB;
+  --border:#E4DAC4;
+  --border-strong:#CFC0A1;
+  --navy:#0B2440;
+  --navy-2:#081B31;
+  --navy-ink:#0E2A47;
+  --sea:#14918F;
+  --sea-deep:#0E6E6C;
+  --sea-soft:#DDF2F0;
+  --gold:#E9B44C;
+  --gold-deep:#B57A25;
+  --gold-soft:#FBF0D3;
+  --violet:#5B54D6;
+  --violet-soft:#E4E2FA;
+  --plum:#7A3B5C;
+  --plum-soft:#F6E2EC;
+  --leaf:#2E7D46;
+  --radius-sm:12px;
+  --radius:20px;
+  --radius-lg:28px;
+  --radius-pill:999px;
+  --shadow-sm:0 1px 3px rgba(11,36,64,.10),0 1px 2px rgba(11,36,64,.08);
+  --shadow:0 8px 24px rgba(11,36,64,.10),0 4px 8px rgba(11,36,64,.08);
+  --shadow-lg:0 24px 48px rgba(8,27,49,.35),0 12px 24px rgba(8,27,49,.22);
+  --max:1160px;
+  --nav-h:68px;
+}
+html{scroll-behavior:smooth;scrollbar-gutter:stable}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit}
+img{max-width:100%;display:block}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--sea-deep);outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:12px;z-index:9999;background:var(--navy);color:#fff;padding:10px 16px;border-radius:8px;font-weight:600}
+.skip:focus{left:12px}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+.serif{font-family:"Instrument Serif",Georgia,serif}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+@media(min-width:768px){.wrap{padding:0 32px}}
+/* ---------- nav ---------- */
+.navbar{position:fixed;top:0;left:0;right:0;background:rgba(250,246,238,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:1000}
+.nav-container{max-width:var(--max);margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;height:70px}
+@media(min-width:768px){.nav-container{padding:0 32px}}
+.logo{font-size:1.4rem;font-weight:800;color:var(--navy);text-decoration:none;letter-spacing:-.5px}
+.nav-menu{display:flex;list-style:none;gap:1.6rem;margin:0}
+.nav-menu a{text-decoration:none;color:var(--ink);font-weight:600;font-size:.92rem;position:relative}
+.nav-menu a:hover{color:var(--sea-deep)}
+.mobile-menu-btn{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--navy)}
+@media(max-width:900px){
+  .nav-menu{display:none;position:absolute;top:70px;left:0;right:0;background:var(--paper);flex-direction:column;padding:1rem 24px 1.2rem;gap:1rem;border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+  .nav-menu.active{display:flex}
+  .mobile-menu-btn{display:block}
+}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;letter-spacing:-.02em;font-size:19px;color:var(--navy)}
+.brand-mark{width:34px;height:34px;border-radius:11px;overflow:hidden;flex-shrink:0;border:1px solid var(--border-strong);background:#fff}
+.brand-mark img{width:100%;height:100%;object-fit:cover}
+.brand em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:14px;padding:11px 20px;border-radius:var(--radius-pill);border:1px solid var(--border-strong);background:var(--surface);transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+.btn-sm{padding:8px 14px;font-size:13px}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:#3A2A10}
+.btn-gold:hover{background:#DFA83A}
+.btn-navy{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--navy-2)}
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;background:var(--navy-2);color:#fff;padding-top:70px}
+section[id]{scroll-margin-top:78px}
+.hero-bg{position:absolute;inset:0;pointer-events:none}
+.hero-bg svg{width:100%;height:100%}
+.hero-grid{position:relative;display:grid;gap:40px;padding:56px 0 40px}
+@media(min-width:960px){.hero-grid{grid-template-columns:1.05fr .95fr;align-items:center;padding:84px 0 64px;gap:48px}}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F7DC9A;background:rgba(233,180,76,.14);border:1px solid rgba(233,180,76,.45);padding:7px 14px;border-radius:var(--radius-pill)}
+.hero h1{font-size:clamp(38px,5.4vw,64px);line-height:1.02;letter-spacing:-.03em;font-weight:800;margin:20px 0 0}
+.hero h1 em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;background:linear-gradient(100deg,#F9D68A,#E9B44C 55%,#7BD8D6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-lead{margin-top:18px;font-size:clamp(16px,1.8vw,19px);line-height:1.65;color:#D8E2EE;max-width:34rem}
+.hero-lead strong{color:#fff}
+.hero-note{margin-top:14px;font-size:13.5px;color:#B9C8DC;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius-sm);padding:12px 14px;max-width:34rem}
+.hero-note strong{color:#F9E3B0}
+.hero-actions{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.coming-pill{display:inline-flex;align-items:center;gap:12px;text-decoration:none;background:#fff;color:var(--ink);border-radius:16px;padding:10px 18px 10px 12px;box-shadow:var(--shadow-lg);transition:transform .15s ease}
+.coming-pill:hover{transform:translateY(-2px)}
+.coming-pill .pill-icon{width:42px;height:42px;border-radius:12px;overflow:hidden;flex-shrink:0;border:1px solid var(--border)}
+.coming-pill .pill-icon img{width:100%;height:100%;object-fit:cover}
+.coming-pill small{display:block;font-size:11px;font-weight:600;color:var(--ink-2);letter-spacing:.04em;text-transform:uppercase}
+.coming-pill strong{display:block;font-size:17px;font-weight:800;letter-spacing:-.01em}
+.btn-ghost-light{border-color:rgba(255,255,255,.35);color:#fff;background:transparent}
+.btn-ghost-light:hover{background:rgba(255,255,255,.1);box-shadow:none}
+.hero-meta{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+.hero-meta span{font-size:12.5px;font-weight:600;color:#E8EEF6;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);padding:7px 12px;border-radius:var(--radius-pill)}
+.hero-coord{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px 16px;font-size:11.5px;color:#7E93AD;font-family:"JetBrains Mono",monospace}
+/* hero visual */
+.shot-wrap{position:relative;justify-self:center;width:min(400px,100%)}
+.shot{border-radius:24px;box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.2);overflow:hidden}
+.shot img{width:100%;height:auto}
+.shot-float{position:absolute;left:-24px;bottom:52px;background:#fff;color:var(--ink);border-radius:16px;box-shadow:var(--shadow-lg);padding:10px 14px 10px 10px;display:flex;gap:10px;align-items:center;font-size:13px;max-width:240px}
+.shot-float strong{display:block;font-size:13px}
+.shot-float small{display:block;font-size:11.5px;color:var(--ink-2)}
+@media(max-width:1100px){.shot-float{left:0}}
+@media(max-width:640px){.shot-float{display:none}}
+.shot-float2{position:absolute;right:-14px;top:48px;background:var(--gold);color:#3A2A10;font-size:11.5px;font-weight:800;padding:8px 12px;border-radius:var(--radius-pill);box-shadow:var(--shadow);font-family:"JetBrains Mono",monospace}
+@media(max-width:1100px){.shot-float2{right:0}}
+@media(max-width:640px){.shot-float2{display:none}}
+.trustbar{position:relative;border-top:1px solid rgba(255,255,255,.14);margin-top:8px;padding:18px 0 26px;display:flex;flex-wrap:wrap;gap:10px 26px;font-size:13px;color:#B9C8DC}
+.trustbar b{color:#fff}
+.trustbar span:last-child{margin-left:auto;color:#F2C66D;font-weight:700}
+/* ---------- sections ---------- */
+.section{padding:72px 0}
+@media(min-width:768px){.section{padding:96px 0}}
+.section-paper{background:var(--paper)}
+.section-white{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.section-cream{background:var(--paper-warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.section-navy{background:var(--navy);color:#fff}
+.kicker{font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--sea-deep)}
+.section-navy .kicker{color:#7BD8D6}
+h2{font-size:clamp(28px,4vw,42px);letter-spacing:-.025em;line-height:1.08;font-weight:800;margin-top:12px;max-width:22em}
+h2 em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400}
+.section-navy h2{color:#fff}
+.lede{margin-top:14px;font-size:16.5px;color:var(--ink-2);max-width:44rem}
+.section-navy .lede{color:#B9C8DC}
+/* steps */
+.steps{display:grid;gap:14px;margin-top:36px}
+@media(min-width:860px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);position:relative}
+.step-num{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;color:var(--sea-deep);letter-spacing:.1em}
+.step h3{font-size:19px;letter-spacing:-.01em;margin:8px 0 6px}
+.step p{font-size:14.5px;color:var(--ink-2)}
+.step .step-shot{margin-top:14px;border-radius:14px;overflow:hidden;border:1px solid var(--border)}
+.step .step-shot img{width:100%;height:auto}
+/* stories */
+.story-cards{display:grid;gap:16px;margin-top:36px}
+@media(min-width:860px){.story-cards{grid-template-columns:repeat(3,1fr)}}
+.story-card{border-radius:var(--radius-lg);padding:28px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .15s ease;background:var(--surface);border:1px solid var(--border)}
+.story-card:hover{transform:translateY(-3px)}
+.story-card .vibe{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.story-card.pirate .vibe{color:var(--sea-deep)}
+.story-card.space .vibe{color:var(--violet)}
+.story-card.magic .vibe{color:var(--plum)}
+.story-card h3{font-size:24px;letter-spacing:-.02em;margin:8px 0 4px;font-weight:800}
+.story-card .line{font-size:14.5px;color:var(--ink-2)}
+.story-card .crew{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.story-card .crew span{font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:var(--radius-pill);background:var(--surface-2);border:1px solid var(--border);color:var(--ink-2)}
+.story-card .presets{margin-top:16px;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:12px 14px;font-size:13px;color:var(--ink-2)}
+.story-card .presets strong{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.story-card .presets ul{list-style:none;margin:0;display:grid;gap:4px}
+.story-card .presets li{display:flex;justify-content:space-between;gap:8px}
+.story-card .presets li b{color:var(--ink)}
+.story-note{margin-top:20px;background:var(--surface);border:1px dashed var(--border-strong);border-radius:16px;padding:16px 20px;font-size:14px;color:var(--ink-2);text-align:center}
+.story-note strong{color:var(--ink)}
+/* gallery */
+.gallery{display:grid;gap:16px;margin-top:36px}
+@media(min-width:640px){.gallery{grid-template-columns:1fr 1fr}}
+.gallery figure{border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);background:var(--navy-2)}
+.gallery img{width:100%;height:auto}
+.gallery figcaption{padding:14px 18px;font-size:13.5px;color:var(--ink-2);background:var(--surface)}
+.gallery figcaption strong{color:var(--ink)}
+/* parent section */
+.dark-grid{display:grid;gap:14px;margin-top:36px}
+@media(min-width:860px){.dark-grid{grid-template-columns:repeat(3,1fr)}}
+.dark-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:24px}
+.dark-card .big{font-size:30px}
+.dark-card h3{font-size:17px;margin:10px 0 6px;color:#fff}
+.dark-card p{font-size:13.5px;color:#C4D2E4}
+.dark-card .mono-tag{display:inline-block;margin-top:12px;font-family:"JetBrains Mono",monospace;font-size:11px;color:#F2C66D;background:rgba(242,198,102,.12);border:1px solid rgba(242,198,102,.35);padding:4px 10px;border-radius:var(--radius-pill)}
+.parent-strip{margin-top:36px;background:#fff;color:var(--ink);border-radius:22px;padding:20px;display:grid;gap:16px;box-shadow:var(--shadow-lg)}
+@media(min-width:760px){.parent-strip{grid-template-columns:1fr 1fr;align-items:center;padding:28px}}
+.parent-strip .copy h3{font-size:21px;letter-spacing:-.02em;color:var(--navy)}
+.parent-strip .copy p{font-size:14px;color:var(--ink-2);margin-top:6px}
+.parent-strip .copy ul{margin:12px 0 0 18px;font-size:13.5px;color:var(--ink-2)}
+.gate-mock{background:var(--paper);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:var(--shadow-sm);max-width:340px;margin:0 auto;width:100%}
+.gate-mock .g-title{font-size:13px;font-weight:800;color:var(--navy)}
+.gate-mock .g-row{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:13.5px;font-weight:600;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px 12px}
+.gate-mock .g-badge{margin-left:auto;font-size:11px;font-weight:800;padding:3px 10px;border-radius:var(--radius-pill);background:var(--sea-soft);color:var(--sea-deep);border:1px solid #BDE3E1}
+/* privacy teaser */
+.priv-grid{display:grid;gap:14px;margin-top:36px}
+@media(min-width:860px){.priv-grid{grid-template-columns:repeat(3,1fr)}}
+.priv{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:24px;text-align:left}
+.priv .big{font-size:28px}
+.priv h3{color:#fff;font-size:16.5px;margin:10px 0 6px}
+.priv p{font-size:13.5px;color:#C4D2E4}
+.priv-link{margin-top:24px;text-align:center}
+/* faq */
+.how-list{margin-top:36px;display:grid;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+.how-step{display:grid;grid-template-columns:52px 1fr;gap:16px;padding:22px 24px;border-top:1px solid var(--border)}
+.how-step:first-child{border-top:0}
+.how-n{width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:800;font-size:16px}
+.how-step h3{font-size:16.5px}
+.how-step p{font-size:14px;color:var(--ink-2);margin-top:4px}
+/* cta */
+.cta{background:linear-gradient(135deg,var(--navy) 0%,#123B63 55%,#0E6E6C 100%);border-radius:var(--radius-lg);padding:56px 32px;text-align:center;color:#fff;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+@media(min-width:768px){.cta{padding:72px 48px}}
+.cta h2{color:#fff;max-width:100%}
+.cta h2 em{background:linear-gradient(100deg,#F9D68A,#E9B44C);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cta p{color:#C4D2E4;max-width:38rem;margin:14px auto 0;font-size:16px}
+.cta-actions{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.cta-note{margin-top:20px;font-size:12.5px;color:#8FA4BE}
+.cta-note a{color:#F9E3B0;font-weight:700}
+/* footer */
+footer.site{padding:48px 0 40px;background:var(--paper)}
+.footer-grid{display:grid;gap:28px}
+@media(min-width:860px){.footer-grid{grid-template-columns:1.2fr 1fr 1fr 1fr}}
+.footer-col h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
+.footer-col a{display:block;text-decoration:none;font-size:14px;color:var(--ink-2);padding:4px 0}
+.footer-col a:hover{color:var(--navy)}
+.footer-bottom{margin-top:32px;padding-top:20px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;font-size:12.5px;color:var(--ink-3)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,80px);background:var(--navy);color:#fff;font-size:13.5px;font-weight:600;padding:12px 20px;border-radius:var(--radius-pill);box-shadow:var(--shadow-lg);opacity:0;transition:all .25s ease;z-index:99;max-width:calc(100vw - 48px);text-align:center}
+.toast.show{transform:translate(-50%,0);opacity:1}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="brand"><span class="brand-mark"><img src="images/branding/icon.png" alt="" width="34" height="34" loading="eager"></span>Little <em>Voyages</em></a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#stories">Stories</a></li>
+      <li><a href="#screens">Screenshots</a></li>
+      <li><a href="#parents">For parents</a></li>
+      <li><a href="#faq">Questions</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<main id="main">
+<!-- ================= HERO ================= -->
+<section class="hero" id="overview" aria-labelledby="hero-title">
+  <div class="hero-bg" aria-hidden="true">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="none" role="presentation">
+      <defs>
+        <pattern id="routegrid" width="120" height="120" patternUnits="userSpaceOnUse" patternTransform="rotate(-4)">
+          <circle cx="20" cy="20" r="3" fill="#fff" opacity=".10"/>
+          <circle cx="50" cy="20" r="3" fill="#fff" opacity=".10"/>
+          <circle cx="80" cy="20" r="3" fill="#E9B44C" opacity=".4"/>
+          <circle cx="20" cy="50" r="3" fill="#fff" opacity=".06"/>
+          <circle cx="50" cy="50" r="3" fill="#7BD8D6" opacity=".35"/>
+          <circle cx="80" cy="50" r="3" fill="#fff" opacity=".06"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="800" fill="url(#routegrid)" opacity=".5"/>
+      <g fill="none" stroke="#fff" opacity=".16" stroke-width="1.6" stroke-dasharray="10 12">
+        <path d="M-40 620 Q300 540 620 580 T1240 540"/>
+      </g>
+      <g font-family="JetBrains Mono, monospace" font-size="10" fill="#fff" opacity=".35">
+        <text x="48" y="36">PICK A STORY • SET ONE TREASURE • SAVE STOP BY STOP</text>
+        <text x="830" y="764">NO ACCOUNT • NO TRACKING • ON YOUR DEVICE</text>
+        <text x="48" y="764">SAVED £32 OF £50 — 64% • NEXT STOP £5 AWAY</text>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Family saving app • iPhone &amp; iPad • iOS 17+</span>
+        <h1 id="hero-title">Save together, <em>stop by stop.</em></h1>
+        <p class="hero-lead">Little Voyages turns pocket money into an adventure. Your child picks a story — <strong>Pirate, Space or Magic</strong> — sets <strong>one treasure</strong>, and saves towards it stop by stop. Every entry waits for <strong>a parent's approval</strong>.</p>
+        <p class="hero-note"><strong>Private by design:</strong> no account, no developer server, no tracking, no network use. Your family's savings stay on your device. The App Store nutrition label is <strong>Data Not Collected</strong>.</p>
+        <div class="hero-actions">
+          <a class="coming-pill" href="mailto:contact@m-pax.net?subject=Little%20Voyages%20launch%20list" aria-label="Join the Little Voyages launch list">
+            <span class="pill-icon"><img src="images/branding/icon.png" alt="" width="42" height="42" loading="eager"></span>
+            <span><small>Coming soon to the</small><strong>App Store</strong></span>
+          </a>
+          <a class="btn btn-ghost-light" href="#how">See how it works <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hero-meta" aria-label="Highlights">
+          <span>🏴‍☠️ 3 stories, 1 treasure at a time</span>
+          <span>🪙 Save &amp; Spend — two big buttons</span>
+          <span>🛡️ Parent approves everything</span>
+        </div>
+        <div class="hero-coord" aria-hidden="true">
+          <span>— whole pounds (£1–£10,000)</span><span>works offline</span><span>iPhone + iPad</span>
+        </div>
+      </div>
+      <div class="shot-wrap">
+        <div class="shot">
+          <img src="images/screenshots/journey.png" alt="Little Voyages journey screen: a pirate island map with five stops, the ship sailing along the route, companion Pip celebrating, progress reading Saved £32 of £50 — 64% with Next stop £5 away, and two big SAVE! and SPEND! buttons" loading="eager" width="800" height="1734">
+        </div>
+        <div class="shot-float" aria-hidden="true"><span style="font-size:26px">🪙</span><span><strong>Saved £32 of £50 — 64%</strong><small>The ship sails as savings grow</small></span></div>
+        <div class="shot-float2" aria-hidden="true">NEXT STOP £5 AWAY</div>
+      </div>
+    </div>
+    <div class="trustbar" aria-label="Assurances">
+      <span><b>No account</b> — open and play</span>
+      <span><b>No ads</b> — nothing to buy inside</span>
+      <span><b>No tracking</b> — Data Not Collected</span>
+      <span>Parent gate: Face ID / Touch ID / passcode</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="section section-paper" id="how" aria-labelledby="how-title">
+  <div class="wrap">
+    <p class="kicker">How it works</p>
+    <h2 id="how-title">One treasure, one number. <em>That's it.</em></h2>
+    <p class="lede">Little Voyages is deliberately small. There is one active goal at a time — no categories to manage, no budgets to balance. The whole loop is three steps, and the kid's screen never has more than two buttons.</p>
+    <div class="steps">
+      <article class="step">
+        <p class="step-num">STEP 1 — PICK</p>
+        <h3>Choose a cover, then a treasure</h3>
+        <p>Your child picks one of three stories, then a treasure preset — a scooter, a rocket toy, a potion set — or just types an amount. Nothing else to set up. One tap starts the voyage.</p>
+        <div class="step-shot"><img src="images/screenshots/setup.png" alt="Setup screen: Pick your story, Pirate Voyage selected with Pip, treasure presets Scooter £50, Treasure toy £30 and Seaside trip £60" loading="lazy" width="629" height="1363"></div>
+      </article>
+      <article class="step">
+        <p class="step-num">STEP 2 — SAVE</p>
+        <h3>Two big buttons, one route</h3>
+        <p><strong>SAVE!</strong> logs money put towards the treasure. <strong>SPEND!</strong> logs money taken out. The ship sails further with every approved save, and stops light up along the way. Spend never travels backwards past a lit stop.</p>
+        <div class="step-shot"><img src="images/screenshots/journey.png" alt="Journey screen for the Scooter goal with island map, Pip celebrating, and Saved £32 of £50 progress" loading="lazy" width="805" height="1746"></div>
+      </article>
+      <article class="step">
+        <p class="step-num">STEP 3 — FINISH</p>
+        <h3>Confirm it in real life, earn the trophy</h3>
+        <p>When the route is complete, a parent confirms the treasure was really got — then the trophy lands on the Trophy Shelf. One voyage ends, and any story can be picked for the next.</p>
+        <div class="step-shot"><img src="images/screenshots/trophy.png" alt="Trophy Shelf showing a Scooter trophy, Finished £50, Pirate Voyage, dated 1 Nov 2026" loading="lazy" width="400" height="867"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STORIES ================= -->
+<section class="section section-white" id="stories" aria-labelledby="stories-title">
+  <div class="wrap">
+    <p class="kicker">Three stories</p>
+    <h2 id="stories-title">Pick your story. <em>Meet your crew.</em></h2>
+    <p class="lede">Each story is a full voyage with its own map, companion and five stops — but the rules never change. Same two buttons, same parent approvals, same trophy shelf. Finish one voyage to choose the next.</p>
+    <div class="story-cards">
+      <article class="story-card pirate">
+        <p class="vibe">Vol. 1 — The original</p>
+        <h3>🏴‍☠️ Pirate Voyage</h3>
+        <p class="line"><em class="serif">Sail for treasure, stop by stop.</em></p>
+        <div class="crew"><span>Captain (you)</span><span>🦜 Pip</span><span>Harbour Master (parent)</span></div>
+        <div class="presets"><strong>Treasure presets</strong>
+          <ul>
+            <li><span>Scooter</span><b>£50</b></li>
+            <li><span>Treasure toy</span><b>£30</b></li>
+            <li><span>Seaside trip</span><b>£60</b></li>
+          </ul>
+        </div>
+      </article>
+      <article class="story-card space">
+        <p class="vibe">Vol. 2 — New worlds</p>
+        <h3>🚀 Space Voyage</h3>
+        <p class="line"><em class="serif">Fly to a new planet, stop by stop.</em></p>
+        <div class="crew"><span>Pilot (you)</span><span>✨ Nova</span><span>Mission Control (parent)</span></div>
+        <div class="presets"><strong>Treasure presets</strong>
+          <ul>
+            <li><span>Rocket toy</span><b>£50</b></li>
+            <li><span>Moon base kit</span><b>£40</b></li>
+            <li><span>Planetarium trip</span><b>£60</b></li>
+          </ul>
+        </div>
+      </article>
+      <article class="story-card magic">
+        <p class="vibe">Vol. 3 — Climb the tower</p>
+        <h3>🪄 Magic Academy</h3>
+        <p class="line"><em class="serif">Climb the tower, floor by floor.</em></p>
+        <div class="crew"><span>Mage (you)</span><span>🔥 Familiar</span><span>Headteacher (parent)</span></div>
+        <div class="presets"><strong>Treasure presets</strong>
+          <ul>
+            <li><span>Potion set</span><b>£50</b></li>
+            <li><span>Spell book</span><b>£30</b></li>
+            <li><span>Magic show trip</span><b>£60</b></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+    <p class="story-note"><strong>One voyage at a time:</strong> while a goal is active, the other stories wait patiently — <em>“Finish your current voyage to choose a new story.”</em> No switching mid-voyage, no half-finished goals.</p>
+    <div class="gallery" style="margin-top:24px">
+      <figure>
+        <img src="images/screenshots/picker.png" alt="Story picker showing Pirate Voyage volume 1 and Space Voyage volume 2 covers side by side" loading="lazy" width="986" height="2137">
+        <figcaption><strong>Pick your story</strong> — Pirate, Space or Magic. Each cover opens its own treasures.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/screenshots/trophy.png" alt="Trophy Shelf with the finished Scooter trophy from the Pirate Voyage" loading="lazy" width="400" height="867">
+        <figcaption><strong>Finish it, choose again</strong> — collect the trophy, then pick any story for the next goal.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SCREENSHOTS ================= -->
+<section class="section section-cream" id="screens" aria-labelledby="screens-title">
+  <div class="wrap">
+    <p class="kicker">Screenshots</p>
+    <h2 id="screens-title">The whole app, <em>in four screens.</em></h2>
+    <p class="lede">Setup, stories, the journey and the Trophy Shelf. Real captures from the app — iPhone, with iPad supported too.</p>
+    <div class="gallery">
+      <figure>
+        <img src="images/screenshots/setup.png" alt="Setup: one treasure, one number — pick a preset or type an amount like £50" loading="lazy" width="629" height="1363">
+        <figcaption><strong>One treasure, one number</strong> — pick a preset or type an amount, and start.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/screenshots/picker.png" alt="Story picker: Pirate, Space or Magic covers to choose from" loading="lazy" width="986" height="2137">
+        <figcaption><strong>Pick your story</strong> — finish one voyage to choose the next.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/screenshots/journey.png" alt="Journey: save and spend with the route, stops, companion and progress line" loading="lazy" width="805" height="1746">
+        <figcaption><strong>Save. Spend. Watch it move.</strong> — saved so far and the next stop, right on the route.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/screenshots/trophy.png" alt="Trophy Shelf: finished goals become trophies with story and date" loading="lazy" width="400" height="867">
+        <figcaption><strong>Finish it, choose again</strong> — every finished voyage becomes a trophy.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOR PARENTS ================= -->
+<section class="section section-navy" id="parents" aria-labelledby="parents-title">
+  <div class="wrap">
+    <p class="kicker">For parents</p>
+    <h2 id="parents-title">Kids tap. <em>Parents approve.</em></h2>
+    <p class="lede">Nothing counts until you say so. Every Save and Spend your child logs waits in Parent View for your decision — approve it, or reject it with a note. The full approved history lives there too, so the money trail is always visible.</p>
+    <div class="dark-grid">
+      <div class="dark-card">
+        <div class="big" aria-hidden="true">🔐</div>
+        <h3>Device-lock gate, no passwords to manage</h3>
+        <p>Parent View opens with Face ID, Touch ID or your device passcode — freshly, every time. Nothing secret is stored in the app, there is no grace period, and a failed check simply stays closed.</p>
+        <span class="mono-tag">fail-closed • nothing stored</span>
+      </div>
+      <div class="dark-card">
+        <div class="big" aria-hidden="true">✅</div>
+        <h3>Approve or reject — with a reason</h3>
+        <p>Each waiting entry shows what, how much and why. Approve it in one tap, or reject it with a note your child can read. Overspending is impossible: a spend can't exceed what's saved.</p>
+        <span class="mono-tag">note required to reject</span>
+      </div>
+      <div class="dark-card">
+        <div class="big" aria-hidden="true">📦</div>
+        <h3>Your data, in your hands</h3>
+        <p>Export creates an open JSON file with every goal, entry, star and trophy — import reads one back. Both are free, both are yours to keep, and both start only when you tap them.</p>
+        <span class="mono-tag">open JSON • share-sheet</span>
+      </div>
+    </div>
+    <div class="parent-strip">
+      <div class="copy">
+        <h3>Parent View, at a glance</h3>
+        <p>Plain and small on purpose. One screen holds:</p>
+        <ul>
+          <li>Entries <strong>waiting for approval</strong>, oldest first</li>
+          <li>The full <strong>saved-and-spent history</strong></li>
+          <li>Goal price, export &amp; import</li>
+          <li>Sound preference (off by default)</li>
+        </ul>
+      </div>
+      <div class="gate-mock" role="img" aria-label="Illustration of the parent gate: Parent View shows a badge with pending approvals, and opening it asks for Face ID or passcode">
+        <p class="g-title">Parent View</p>
+        <div class="g-row"><span aria-hidden="true">🛡️</span> Waiting for approval <span class="g-badge">3</span></div>
+        <div class="g-row"><span aria-hidden="true">📜</span> Saved and spent <span class="g-badge" style="background:var(--surface-2);color:var(--ink-2);border-color:var(--border)">history</span></div>
+        <div class="g-row"><span aria-hidden="true">🔐</span> Opens with Face ID <span class="g-badge">no password</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRIVACY ================= -->
+<section class="section section-navy" id="privacy" aria-labelledby="privacy-title" style="border-top:1px solid rgba(255,255,255,.14)">
+  <div class="wrap">
+    <p class="kicker">Privacy</p>
+    <h2 id="privacy-title">Your family's savings <em>stay in the family.</em></h2>
+    <p class="lede">Little Voyages is an offline-first app for children, built so there is nothing to leak in the first place. The short version:</p>
+    <div class="priv-grid">
+      <div class="priv">
+        <div class="big" aria-hidden="true">📴</div>
+        <h3>No account, no network</h3>
+        <p>Every feature works without signing in, because there is no server to sign in to. The app makes no network requests of its own.</p>
+      </div>
+      <div class="priv">
+        <div class="big" aria-hidden="true">🚫</div>
+        <h3>No analytics, no ads</h3>
+        <p>No analytics SDK, no crash reporter phoning home, no advertising identifiers. Nothing measures your child.</p>
+      </div>
+      <div class="priv">
+        <div class="big" aria-hidden="true">🏠</div>
+        <h3>On-device, deletable</h3>
+        <p>Goals and entries live in the app's on-device store. Delete the app and they go with it. Exports only ever go where you send them.</p>
+      </div>
+    </div>
+    <p class="priv-link"><a class="btn btn-gold" href="privacy.html">Read the full Privacy Policy <span aria-hidden="true">→</span></a></p>
+  </div>
+</section>
+
+<!-- ================= QUESTIONS ================= -->
+<section class="section section-paper" id="faq" aria-labelledby="faq-title">
+  <div class="wrap">
+    <p class="kicker">Questions</p>
+    <h2 id="faq-title">Asked by <em>families.</em></h2>
+    <div class="how-list">
+      <div class="how-step">
+        <div class="how-n" aria-hidden="true">1</div>
+        <div><h3>Who is Little Voyages for?</h3><p>Children saving towards something real — a scooter, a trip, a toy — with a parent alongside. Kids get the adventure; parents get the approvals, the history and the final say.</p></div>
+      </div>
+      <div class="how-step">
+        <div class="how-n" aria-hidden="true">2</div>
+        <div><h3>Does my child need an account? Does it need the internet?</h3><p>No to both. Open the app and pick a story — everything works offline on your device, and there is no account to create or password to remember.</p></div>
+      </div>
+      <div class="how-step">
+        <div class="how-n" aria-hidden="true">3</div>
+        <div><h3>Can my child spend more than they've saved?</h3><p>No. A spend is validated against what's saved before a parent can approve it, and the journey never travels backwards past a stop that's already lit.</p></div>
+      </div>
+      <div class="how-step">
+        <div class="how-n" aria-hidden="true">4</div>
+        <div><h3>What does the parent gate use?</h3><p>Your device's own lock — Face ID, Touch ID or passcode — asked fresh every time a parent area opens. The app stores no PIN and no secret, so there is nothing to forget and nothing to steal.</p></div>
+      </div>
+      <div class="how-step">
+        <div class="how-n" aria-hidden="true">5</div>
+        <div><h3>What if we get a new device?</h3><p>Parent View can export everything to an open JSON file — goals, entries, stars and trophies — and import it back. Send it to the new device however you like; the format is documented and inspectable.</p></div>
+      </div>
+      <div class="how-step">
+        <div class="how-n" aria-hidden="true">6</div>
+        <div><h3>Which devices are supported?</h3><p>iPhone and iPad running iOS 17 / iPadOS 17 or later. Amounts are in whole pounds (£1–£10,000 per goal).</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="section section-paper" id="launch" aria-labelledby="launch-title" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta">
+      <p class="kicker" style="color:#F9D68A">Coming soon</p>
+      <h2 id="launch-title">Ready to sail? <em>Get the launch note.</em></h2>
+      <p>Little Voyages is on its way to the App Store. Leave us your email and we'll write once — when it's ready to download.</p>
+      <div class="cta-actions">
+        <a class="coming-pill" href="mailto:contact@m-pax.net?subject=Little%20Voyages%20launch%20list&body=Please%20let%20me%20know%20when%20Little%20Voyages%20is%20on%20the%20App%20Store." aria-label="Email us to join the Little Voyages launch list">
+          <span class="pill-icon"><img src="images/branding/icon.png" alt="" width="42" height="42" loading="lazy"></span>
+          <span><small>Email us to join the</small><strong>Launch list</strong></span>
+        </a>
+        <a class="btn btn-ghost-light" href="privacy.html">Privacy Policy</a>
+      </div>
+      <p class="cta-note">One email, when the app ships. Contact anytime at <a href="mailto:contact@m-pax.net">contact@m-pax.net</a>.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="../index.html" class="brand" style="margin-bottom:12px"><span class="brand-mark"><img src="images/branding/icon.png" alt="" width="34" height="34" loading="lazy"></span>Little <em>Voyages</em></a>
+        <p style="font-size:13.5px;color:var(--ink-2);max-width:26rem">A family saving app by M-PAX Group. One treasure, one number, three stories — kids save, parents approve, everything stays on your device.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="#how">How it works</a>
+        <a href="#stories">Stories</a>
+        <a href="#screens">Screenshots</a>
+        <a href="#parents">For parents</a>
+        <a href="#faq">Questions</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="../index.html">M-PAX home</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:contact@m-pax.net">contact@m-pax.net</a>
+        <a href="mailto:contact@m-pax.net?subject=Little%20Voyages%20launch%20list">Join the launch list</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 M-PAX Group · Little Voyages</span>
+      <span class="mono">iPhone &amp; iPad · iOS 17+ · on-device · Data Not Collected</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var btn=document.getElementById('mobileMenuBtn'),menu=document.getElementById('navMenu');
+  if(btn&&menu){btn.addEventListener('click',function(){menu.classList.toggle('active');});menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('active');});});}
+  var toast=document.getElementById('toast'),t;
+  window.showToast=function(msg){if(!toast)return;toast.textContent=msg;toast.classList.add('show');clearTimeout(t);t=setTimeout(function(){toast.classList.remove('show');},2600);};
+})();
+</script>
+</body>
+</html>
